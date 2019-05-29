@@ -6,8 +6,8 @@ import (
 )
 
 type AdjListNode struct {
-	Dest int
-	Next *AdjListNode
+	Vertex int
+	Next   *AdjListNode
 }
 
 func NewAdjListNode(dest int) *AdjListNode {
@@ -44,7 +44,7 @@ func (g *Graph) String() string {
 		pCrawl := g.Array[v].Head
 		str.WriteString(fmt.Sprintf("\n Ajacency list of vertex %d\n head ", v))
 		for pCrawl != nil {
-			str.WriteString(fmt.Sprintf("-> %d", pCrawl.Dest))
+			str.WriteString(fmt.Sprintf("-> %d", pCrawl.Vertex))
 			pCrawl = pCrawl.Next
 		}
 		str.WriteString("\n")
