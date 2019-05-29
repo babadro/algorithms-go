@@ -32,6 +32,7 @@ func (g *Graph) AddEdge(src int, dst int) {
 	g.Data[dst] = node
 }
 
+// Doesn't work. Infinitive loop
 func (g *Graph) String() string {
 	var str strings.Builder
 
