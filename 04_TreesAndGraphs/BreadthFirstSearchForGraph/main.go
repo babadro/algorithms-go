@@ -14,31 +14,27 @@ func NewAdjListNode(dest int) *AdjListNode {
 	return &AdjListNode{dest, nil}
 }
 
-type AdjList struct {
-	Head *AdjListNode
-}
-
 type Graph struct {
 	V     int
-	Array []AdjList
+	Array []*AdjListNode
 }
 
 func CreateGraph(V int) *Graph {
-	return &Graph{V, make([]AdjList, V)}
+	return &Graph{V, make([]*AdjListNode, V)}
 }
 
 // Direction graph
 func (g *Graph) AddEdge(src, dest int) {
 	newNode := NewAdjListNode(dest)
-	newNode.Next = g.Array[src].Head
-	g.Array[src].Head = newNode
+	newNode.Next = g.Array[src]
+	g.Array[src] = newNode
 }
 
 func (g *Graph) String() string {
 	var str strings.Builder
 	var v int
 	for v = 0; v < g.V; v++ {
-		pCrawl := g.Array[v].Head
+		pCrawl := g.Array[v]
 		str.WriteString(fmt.Sprintf("\n Ajacency list of vertex %d\n head ", v))
 		for pCrawl != nil {
 			str.WriteString(fmt.Sprintf("-> %d", pCrawl.Vertex))
@@ -49,27 +45,17 @@ func (g *Graph) String() string {
 	return str.String()
 }
 
-func (g *Graph) dFSUtil(vertex int, visited []bool) {
-	visited[vertex] = true
-	fmt.Println(vertex)
-
-	node := g.Array[vertex].Head
-
-	for node != nil {
-		if !visited[node.Vertex] {
-			g.dFSUtil(node.Vertex, visited)
-		}
-		node = node.Next
-	}
-}
-
-func (g *Graph) DFS() {
+func (g *Graph) BFS(s int) {
 	visited := make([]bool, g.V)
 
-	for i := 0; i < g.V; i++ {
-		if !visited[i] {
-			g.dFSUtil(i, visited)
-		}
+	var queue []int
+
+	queue = append(queue, s)
+	visited[s] = true
+
+	for len(queue) > 0 {
+		s = queue[len(queue)-1]
+		queue = queue[:(len(queue) - 1)]
 	}
 }
 
@@ -83,9 +69,5 @@ func main() {
 	g.AddEdge(2, 3)
 	g.AddEdge(3, 3)
 
-	//fmt.Println(g)
-
-	fmt.Println("Following is Depth First Traversal")
-
-	g.DFS()
+	fmt.Println(g)
 }
