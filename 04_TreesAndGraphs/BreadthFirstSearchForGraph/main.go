@@ -49,13 +49,23 @@ func (g *Graph) BFS(s int) {
 	visited := make([]bool, g.V)
 
 	var queue []int
-
 	queue = append(queue, s)
-	visited[s] = true
 
 	for len(queue) > 0 {
 		s = queue[len(queue)-1]
 		queue = queue[:(len(queue) - 1)]
+
+		fmt.Println(s)
+		visited[s] = true
+
+		node := g.Array[s]
+		for node != nil {
+			if !visited[node.Vertex] {
+				queue = append(queue, node.Vertex)
+				visited[node.Vertex] = true
+			}
+			node = node.Next
+		}
 	}
 }
 
@@ -69,5 +79,7 @@ func main() {
 	g.AddEdge(2, 3)
 	g.AddEdge(3, 3)
 
-	fmt.Println(g)
+	fmt.Println("Following is Breadth First Traversal \n (starting from vertex 2")
+
+	g.BFS(2)
 }
