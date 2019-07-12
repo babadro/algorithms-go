@@ -38,6 +38,38 @@ func (t *Tree) Insert(z *Node) {
 	}
 }
 
+func (t *Tree) transplant(u, v *Node) {
+	if u.Parent == nil {
+		t.Root = v
+	} else if u == u.Parent.Left {
+		u.Parent.Left = v
+	} else {
+		u.Parent.Right = v
+	}
+	if v != nil {
+		v.Parent = u.Parent
+	}
+}
+
+func (t *Tree) Delete(z *Node) {
+	if z.Left == nil {
+		t.transplant(z, z.Right)
+	} else if z.Right == nil {
+		t.transplant(z, z.Left)
+	} else {
+		y := Min(z.Right)
+		if y != z.Right {
+			t.transplant(y, y.Right)
+			y.Right = z.Right
+			y.Right.Parent = y
+		}
+		t.transplant(z, y)
+		y.Left = z.Left
+		y.Left.Parent = y
+	}
+}
+
+/* // Recursive Search
 func Search(x *Node, k int) *Node {
 	if x == nil || k == x.Key {
 		return x
@@ -47,98 +79,41 @@ func Search(x *Node, k int) *Node {
 	}
 	return Search(x.Right, k)
 }
+*/
 
-func IterativeSearch(x *Node, k int) *Node {
+func Search(x *Node, k int) *Node {
 	for x != nil && k != x.Key {
-
+		if k < x.Key {
+			x = x.Left
+		} else {
+			x = x.Right
+		}
 	}
-
+	return x
 }
 
-/* pseudocode
-
-InorderTreeWalk(x)
-	if x != NIL
-		InorderTreeWalk(x.left)
-		print x.key
-		InorderTreeWalk(x.right)
-
-TreeSearch(x, k) // x - root дерева
-	if x == NIL or k == x.key
-		return x
-	if k < x.key
-		return TreeSearch(x.left, k)
-	return TreeSearch(x.right, k)
-
-
-IterativeTreeSearch(x, k)
-	while x != NIL and k != x.key
-		if k < x.key
-			x = x.left
-		else
-			x = x.right
+func Min(x *Node) *Node {
+	for x.Left != nil {
+		x = x.Left
+	}
 	return x
+}
 
-TreeMinimum(x)
-	while x.left != NIL
-		x = x.left
+func Max(x *Node) *Node {
+	for x.Right != nil {
+		x = x.Right
+	}
 	return x
+}
 
-
-TreeMaximum(x)
-	while x.right != NIL
-		x = x.right
-	return x
-
-TreeSuccessor(x)
-	if x.right != NIL
-		return TreeMinimum(x.right)
-	y = x.p
-	while y != NIL and x == y.right // тут именно сравнение указателей, а не ключей. Т.е. х должен быть правым листом y, чтобы цикл продолжался.
+func Successor(x *Node) *Node {
+	if x.Right != nil {
+		return Min(x.Right)
+	}
+	y := x.Parent
+	for y != nil && x == y.Right {
 		x = y
-		y = y.p
+		y = y.Parent
+	}
 	return y
-
-TreeInsert(T, z)
-	y = NIL
-	x = T.root
-	while x != NIL
-		y = x
-		if z.key < x.key
-			x = x.left
-		else
-			x = x.right
-	z.p = y
-	if y == NIL
-		T.root = z
-	else if z.key < y.key
-		y.left = z
-	else
-		y.right = z
-
-Transplant(T, u, v)
-	if u.p == NIL
-		T.root = v
-	elseif u == u.p.left
-		u.p.left = v
-	else
-		u.p.right = v
-	if v != NIL
-		v.p = u.p
-
-
-TreeDelete(T, z)
-	if z.left == NIL
-		Transplant(T, z, z.right)
-	else if z.right == NIL
-		Transplant(T, z, z.left)
-	else
-		y = TreeMinimum(z.right)
-		if y.p != z
-			Transplant(T, y, y.right)
-			y.right = z.right
-			y.right.p = y
-		Transplant(T, z, y)
-		y.left = z.left
-		y.left.p = y
-*/
+}
