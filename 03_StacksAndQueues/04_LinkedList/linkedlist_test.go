@@ -25,11 +25,11 @@ func TestLinkedList(t *testing.T) {
 
 	head := l.Head
 	if head == nil {
-		t.Error("Head must be non nil")
+		t.Error("head must be non nil")
 	}
 
 	if head.Key != 25 {
-		t.Errorf("Head is %v, want %v", head.Key, 25)
+		t.Errorf("head is %v, want %v", head.Key, 25)
 	}
 
 	nodeToDelete := l.Search(4)

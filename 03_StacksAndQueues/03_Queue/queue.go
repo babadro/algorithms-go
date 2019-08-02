@@ -1,26 +1,50 @@
 package queue
 
 type Queue struct {
-	array [12]int
-	Head  int
-	Tail  int
+	array  []int
+	head   int
+	tail   int
+	length int
 }
 
-func (q *Queue) Enqueue(x int) {
-	q.array[q.Tail] = x
-	if q.Tail == len(q.array)-1 {
-		q.Tail = 0
-	} else {
-		q.Tail++
-	}
+func New(capacity int) *Queue {
+	return &Queue{array: make([]int, capacity)}
 }
 
-func (q *Queue) Dequeue() int {
-	x := q.array[q.Head]
-	if q.Head == len(q.array)-1 {
-		q.Head = 1
-	} else {
-		q.Head++
+func (q *Queue) Enqueue(x int) bool {
+	if q.length == len(q.array) {
+		return false
 	}
-	return x
+
+	q.array[q.tail] = x
+	if q.tail == len(q.array)-1 {
+		q.tail = 0
+	} else {
+		q.tail++
+	}
+
+	q.length++
+	return true
+}
+
+func (q *Queue) Dequeue() (int, bool) {
+	if q.length == 0 {
+		return 0, false
+	}
+
+	x := q.array[q.head]
+	if q.head != q.tail {
+		if q.head == len(q.array)-1 {
+			q.head = 1
+		} else {
+			q.head++
+		}
+	}
+
+	q.length--
+	return x, true
+}
+
+func (q *Queue) Len() int {
+	return q.length
 }

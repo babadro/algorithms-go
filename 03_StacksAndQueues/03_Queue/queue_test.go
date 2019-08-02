@@ -6,10 +6,10 @@ import (
 )
 
 func TestQueue(t *testing.T) {
-	var queue queue.Queue
+	queue := queue.New(12)
 
-	queue.Head = 6
-	queue.Tail = 6
+	queue.head = 6
+	queue.tail = 6
 
 	queue.Enqueue(15)
 	queue.Enqueue(16)
@@ -21,7 +21,7 @@ func TestQueue(t *testing.T) {
 	queue.Enqueue(3)
 	queue.Enqueue(5)
 
-	dequeueRes := queue.Dequeue()
+	dequeueRes, _ := queue.Dequeue()
 	if dequeueRes != 15 {
 		t.Errorf("Dequeue(). got %v, want %v", dequeueRes, 15)
 	}
