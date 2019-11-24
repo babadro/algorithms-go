@@ -1,7 +1,7 @@
 package bst_test
 
 import (
-	"algorithms-go/04_TreesAndGraphs/BST"
+	"github.com/babadro/algorithms-go/04_TreesAndGraphs/BST"
 	"testing"
 )
 
