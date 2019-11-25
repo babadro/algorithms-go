@@ -38,22 +38,12 @@ func sortedArrayToBST(nums []int) *TreeNode {
 	if len(nums) == 0 {
 		return nil
 	}
-	var tree Tree
 	middle := len(nums) / 2
 	left := nums[:middle]
 	right := nums[middle:]
-	tree.Insert(&TreeNode{Val: right[0]})
+	root := TreeNode{Val: right[0]}
 	right = right[1:]
-	i := middle - 1
-	for _, rNum := range right {
-		tree.Insert(&TreeNode{Val: rNum})
-		if i >= 0 {
-			tree.Insert(&TreeNode{Val: left[i]})
-			i--
-		}
-	}
-	if i == 0 {
-		tree.Insert(&TreeNode{Val: left[0]})
-	}
-	return tree.Root
+	root.Left = sortedArrayToBST(left)
+	root.Right = sortedArrayToBST(right)
+	return &root
 }
