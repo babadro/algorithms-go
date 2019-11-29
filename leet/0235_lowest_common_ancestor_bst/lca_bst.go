@@ -1,25 +1,22 @@
-package main
+package _235_lowest_common_ancestor_bst
 
-type TreeNode struct {
-	Val         int
-	Left, Right *TreeNode
-}
-
-func main() {
-
-}
+import (
+	bst "algorithms-go/leet/0108_sorted_array_to_BST"
+	"fmt"
+)
 
 // naive
-func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
-	var res *TreeNode
+func LowestCommonAncestor(root, p, q *bst.TreeNode) *bst.TreeNode {
+	var res *bst.TreeNode
 	recurseTree(root, res, p.Val, q.Val)
 	return res
 }
 
-func recurseTree(current, res *TreeNode, p, q int) bool {
+func recurseTree(current, res *bst.TreeNode, p, q int) bool {
 	if current == nil {
 		return false
 	}
+	fmt.Println(current.Val)
 
 	var left, right, mid int
 	if recurseTree(current.Left, res, p, q) {
@@ -33,6 +30,7 @@ func recurseTree(current, res *TreeNode, p, q int) bool {
 	}
 
 	if (left + right + mid) >= 2 {
+		fmt.Println("bingo")
 		res = current
 	}
 

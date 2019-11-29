@@ -1,4 +1,4 @@
-package main
+package _0108_sorted_array_to_BST
 
 type TreeNode struct {
 	Val   int
@@ -30,8 +30,37 @@ func (t *Tree) Insert(z *TreeNode) {
 	}
 }
 
-func main() {
-	sortedArrayToBST([]int{1, 3})
+func PreOrder(x *TreeNode, list *[]int) {
+	if x != nil {
+		*list = append(*list, x.Val)
+		PreOrder(x.Left, list)
+		PreOrder(x.Right, list)
+	}
+}
+
+func LevelOrder(x *TreeNode) []int {
+	list := make([]int, 0)
+	level := 1
+	for traversalLevel(x, level, &list) {
+		level++
+	}
+	return list
+}
+
+func traversalLevel(x *TreeNode, level int, list *[]int) bool {
+	if x == nil {
+		return false
+	}
+
+	if level == 1 {
+		*list = append(*list, x.Val)
+		return true
+	}
+
+	left := traversalLevel(x.Left, level-1, list)
+	right := traversalLevel(x.Right, level-1, list)
+
+	return left || right
 }
 
 func sortedArrayToBST(nums []int) *TreeNode {
