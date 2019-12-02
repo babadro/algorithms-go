@@ -2,37 +2,41 @@ package _235_lowest_common_ancestor_bst
 
 import (
 	bst "algorithms-go/leet/0108_sorted_array_to_BST"
-	"fmt"
 )
 
-// naive
-func LowestCommonAncestor(root, p, q *bst.TreeNode) *bst.TreeNode {
-	var res *bst.TreeNode
-	recurseTree(root, res, p.Val, q.Val)
-	return res
+// recursive
+func lowestCommonAncestor(root, p, q *bst.TreeNode) *bst.TreeNode {
+	if root == nil {
+		return nil
+	}
+	parentVal := root.Val
+	pVal := p.Val
+	qVal := q.Val
+
+	if pVal > parentVal && qVal > parentVal {
+		return lowestCommonAncestor(root.Right, p, q)
+	} else if pVal < parentVal && qVal < parentVal {
+		return lowestCommonAncestor(root.Left, p, q)
+	} else {
+		return root
+	}
 }
 
-func recurseTree(current, res *bst.TreeNode, p, q int) bool {
-	if current == nil {
-		return false
-	}
-	fmt.Println(current.Val)
+// iterative
+func lowestCommonAncestorIterative(root, p, q *bst.TreeNode) *bst.TreeNode {
+	pVal := p.Val
+	qVal := q.Val
+	node := root
 
-	var left, right, mid int
-	if recurseTree(current.Left, res, p, q) {
-		left = 1
+	for node != nil {
+		nodeVal := node.Val
+		if pVal > nodeVal && qVal > nodeVal {
+			return lowestCommonAncestorIterative(node.Right, p, q)
+		} else if pVal < nodeVal && qVal < nodeVal {
+			return lowestCommonAncestorIterative(node.Left, p, q)
+		} else {
+			return node
+		}
 	}
-	if recurseTree(current.Right, res, p, q) {
-		right = 1
-	}
-	if current.Val == p || current.Val == q {
-		mid = 1
-	}
-
-	if (left + right + mid) >= 2 {
-		fmt.Println("bingo")
-		res = current
-	}
-
-	return (left + right + mid) > 1
+	return node
 }

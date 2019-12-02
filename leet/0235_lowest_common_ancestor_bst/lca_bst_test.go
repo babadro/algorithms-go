@@ -13,7 +13,7 @@ func TestLowestCommonAncestor(t *testing.T) {
 		tree.Insert(&bst.TreeNode{Val: n})
 	}
 	expected := 6
-	lca := LowestCommonAncestor(tree.Root, &bst.TreeNode{Val: 2}, &bst.TreeNode{Val: 8})
+	lca := lowestCommonAncestor(tree.Root, &bst.TreeNode{Val: 2}, &bst.TreeNode{Val: 8})
 	if lca == nil {
 		log.Fatalf("lca = nil, expected %d", 6)
 	}
