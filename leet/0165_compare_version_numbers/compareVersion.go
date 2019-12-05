@@ -48,11 +48,11 @@ func CompareVersion(version1 string, version2 string) int {
 				return -1
 			}
 			if (i == len(version1) || version1[i] == 46) && (j == len(version2) || version2[j] == 46) {
-				if version1[i] == 46 {
+				if i < len(version1) {
 					i++
 					segment1++
 				}
-				if version2[j] == 46 {
+				if j < len(version2) {
 					j++
 					segment2++
 				}
