@@ -12,6 +12,7 @@ package _165_compare_version_numbers
 // "0" = 48, "." = 46
 func CompareVersion(version1 string, version2 string) int {
 	i, j := 0, 0
+	segment1, segment2 := 0, 0
 	for {
 		for i < len(version1) && version1[i] == 48 {
 			i++
@@ -23,28 +24,39 @@ func CompareVersion(version1 string, version2 string) int {
 			return 0
 		}
 
+		val1, val2 := uint8(0), uint8(0)
 		flag1, flag2 := false, false
 		for {
 			if i < len(version1) && version1[i] != 46 {
+				val1 = version1[i]
 				i++
-			} else if !flag1 && version1[i-1] > 0 {
+
+			} else if version1[i-1] > 48 {
 				flag1 = true
 			}
 			if j < len(version2) && version2[j] != 46 {
+				val2 = version2[j]
 				j++
-			} else if !flag2 && version2[j-1] > 0 {
+
+			} else if version2[j-1] > 48 {
 				flag2 = true
 			}
 
-			if (i == len(version1) && j == len(version2)) || (version1[i] == 46 && version2[j] == 46) {
-				i++
-				j++
-				break
-			}
-			if (!flag1 && flag2) || (version1[i] > version2[j]) {
+			if (!flag1 && flag2) || (val1 > val2) {
 				return 1
-			} else if (flag1 && !flag2) || (version1[i] < version2[j]) {
+			} else if (flag1 && !flag2) || (val1 < val2) {
 				return -1
+			}
+			if (i == len(version1) || version1[i] == 46) && (j == len(version2) || version2[j] == 46) {
+				if version1[i] == 46 {
+					i++
+					segment1++
+				}
+				if version2[j] == 46 {
+					j++
+					segment2++
+				}
+				break
 			}
 		}
 
