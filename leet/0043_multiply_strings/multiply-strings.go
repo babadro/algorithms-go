@@ -1,25 +1,45 @@
 package _043_multiply_strings
 
-func multiply(num1 string, num2 string) string {
-	// some checks...
+import (
+	"strconv"
+	"strings"
+)
 
-	l1, l2 := len(num1), len(num2)
-	s, l := num1, num2
-	if l2 < l1 {
-		s, l = num2, num1
+func multiply(num1 string, num2 string) string {
+	if len(num1) == 0 || len(num2) == 0 {
+		return ""
 	}
 
-	ld := make([]int, len(l))
+	if num1 == "0" || num2 == "0" {
+		return "0"
+	}
+
+	l1, l2 := len(num1), len(num2)
+	shortNum, longNum := num1, num2
+	if l2 < l1 {
+		shortNum, longNum = num2, num1
+	}
+
+	ld := make([]int, len(longNum))
 	for j := 0; j < len(ld); j++ {
-		ld[j] = int(l[j] - '0')
+		ld[j] = int(longNum[j] - '0')
 	}
 
 	result := make([]int, (l1+l2)*2)
 	lastDigit := 0
 
-	for j, start := len(s)-1, 0; j >= 0; j, start = j-1, start+1 {
-		lastDigit = multiply(ld)
+	for j, start := len(shortNum)-1, 0; j >= 0; j, start = j-1, start+1 {
+		lastDigit = mult(ld, int(shortNum[j]-'0'), result, start)
 	}
+
+	var sb strings.Builder
+
+	// reverse
+	for j := lastDigit; j >= 0; j-- {
+		sb.WriteString(strconv.Itoa(result[j]))
+	}
+
+	return sb.String()
 }
 
 func mult(a []int, n int, result []int, start int) int {
