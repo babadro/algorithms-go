@@ -1,6 +1,9 @@
 package _461_hamming_distance
 
-import "testing"
+import (
+	"log"
+	"testing"
+)
 
 func BenchmarkHammingDistance(b *testing.B) {
 	var res int
@@ -24,4 +27,8 @@ func BenchmarkHammingDistance3(b *testing.B) {
 		res = hammingDistance3(34123414, 987993)
 	}
 	_ = res
+}
+
+func TestExample(t *testing.T) {
+	log.Println(bitCount(3))
 }
