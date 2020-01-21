@@ -1,7 +1,7 @@
 package _235_lowest_common_ancestor_bst
 
 import (
-	bst "algorithms-go/leet/0108_sorted_array_to_BST"
+	bst "github.com/babadro/algorithms-go/leet/0108_sorted_array_to_BST"
 )
 
 // recursive
