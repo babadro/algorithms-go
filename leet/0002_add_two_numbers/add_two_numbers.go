@@ -18,25 +18,23 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 		str1 = append(str1, strconv.Itoa(node.Val)...)
 		node = node.Next
 	}
-
-	//for i := 0; i < len(str1)/2; i++ {
-	//	str1[i], str1[len(str1)-1-i] = str1[len(str1)-1-i], str1[i]
-	//}
+	for i := 0; i < len(str1)/2; i++ {
+		str1[i], str1[len(str1)-1-i] = str1[len(str1)-1-i], str1[i]
+	}
 	node = l2
 	for node != nil {
 		str2 = append(str2, strconv.Itoa(node.Val)...)
 		node = node.Next
 	}
-
+	for i := 0; i < len(str2)/2; i++ {
+		str2[i], str2[len(str2)-1-i] = str2[len(str2)-1-i], str2[i]
+	}
 	var int1, int2 int
 
 	int1, _ = strconv.Atoi(string(str1))
 	int2, _ = strconv.Atoi(string(str2))
 	sum := int1 + int2
 	sumStr := []byte(strconv.Itoa(sum))
-	//for i := 0; i < len(sumStr)/2; i++ {
-	//	sumStr[i], sumStr[len(str1)-1-i] = sumStr[len(str1)-1-i], sumStr[i]
-	//}
 	firstDigit, _ := strconv.Atoi(string(sumStr[0]))
 	node = &ListNode{Val: firstDigit}
 	for i := 1; i < len(sumStr); i++ {
