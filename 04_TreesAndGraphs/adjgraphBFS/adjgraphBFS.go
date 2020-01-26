@@ -1,8 +1,8 @@
 package adjgraphBFS
 
 import (
-	"algorithms-go/03_StacksAndQueues/03_Queue"
 	"fmt"
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/03_Queue"
 	"math"
 	"strings"
 )
