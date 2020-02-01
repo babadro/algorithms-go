@@ -1,36 +1,54 @@
 package _1334_find_city_with_smallest_number_neighbors_and_distance
 
-func findTheCity(n int, edges [][]int, distanceThreshold int) int {
-	// create graph
+import (
+	"math"
+)
+
+func findTheCity(n int, edges [][3]int, distanceThreshold int) int {
 	graph := CreateGraph(n)
 	for _, edge := range edges {
 		graph.AddEdge(edge[0], edge[1], edge[2])
 	}
+	minNumReachableCities := math.MaxInt32
+	maxVertex := -1
+	for vertex := range graph.Array {
+		numReachableCities := graph.checkVertex(vertex, distanceThreshold)
 
-	var res *AdjListNode
-	visited := make(map[*AdjListNode]bool)
-	for i, list := range graph.Array {
-		node := list.Head
-		for node != nil {
-			for k := range visited {
-				delete(visited, k)
-			}
-			graph.visit(node, visited, distanceThreshold)
-			node = node.Next
+		if numReachableCities < minNumReachableCities || (numReachableCities == minNumReachableCities && vertex > maxVertex) {
+			minNumReachableCities, maxVertex = numReachableCities, vertex
 		}
 	}
+	return maxVertex
 }
 
-func (g *Graph) visit(node *AdjListNode, visited map[*AdjListNode]bool, budget int) {
-	if node.Weight > budget || visited[node] {
+func (g *Graph) checkVertex(vertex, threshold int) int {
+	node := g.Array[vertex].Head
+	visited := make(map[int]bool)
+	for node != nil {
+		g.visit(node, visited, threshold, vertex)
+		node = node.Next
+	}
+	return len(visited)
+}
+
+func (g *Graph) visit(node *AdjListNode, visited map[int]bool, threshold int, startFrom int) {
+	if node.Vertex == startFrom {
 		return
 	}
-	visited[node] = true
-	budget -= node.Weight
-	node := g.Array[node.Vertex].Head
-	for node != nil {
-		if !visited[node]
+	if visited[node.Vertex] {
+		return
 	}
+	threshold = threshold - node.Weight
+	if threshold < 0 {
+		return
+	}
+	visited[node.Vertex] = true
+	node = g.Array[node.Vertex].Head
+	for node != nil {
+		g.visit(node, visited, threshold, startFrom)
+		node = node.Next
+	}
+	return
 }
 
 type AdjListNode struct {
@@ -65,5 +83,3 @@ func (g *Graph) AddEdge(src, dest, weight int) {
 	newNode.Next = g.Array[dest].Head
 	g.Array[dest].Head = newNode
 }
-
-func
