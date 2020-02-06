@@ -1,4 +1,4 @@
-package _1343_maximum_product_of_splitted_binary_tree
+package _1339_maximum_product_of_splitted_binary_tree
 
 type TreeNode struct {
 	Val   int
