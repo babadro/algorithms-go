@@ -21,33 +21,42 @@ func ArrayToBinaryTree(arr []int) (root *TreeNode) {
 		return nil
 	}
 	root = &TreeNode{Val: arr[0]}
-	levels := make([]level, 2)
+	levels := make([]level, 1)
 	levels[0] = level{nodes: []*TreeNode{root}, length: 1}
-	i, currLevel := 0, 1
-	for i < len(arr) {
+	i, currLevel := 1, 1
+	for {
+		levels = append(levels, level{})
 		levelLen := levels[currLevel-1].length * 2
-		for i < levelLen && i < len(arr) {
+		endLevel := i + levelLen
+		for i < endLevel && i < len(arr) {
 			var newNode *TreeNode
 			if arr[i] != null {
 				newNode = &TreeNode{Val: arr[i]}
 				levels[currLevel].length++
-			} else {
-				newNode = nil
 			}
 			levels[currLevel].nodes = append(levels[currLevel].nodes, newNode)
 			i++
 		}
-		levels = append(levels, level{})
 		currLevel++
+		if i == len(arr) {
+			break
+		}
 	}
 
 	for k, level := range levels[:len(levels)-1] {
 		j := 0
+		nextLevelNodes := levels[k+1].nodes
 		for _, node := range level.nodes {
 			if node != nil {
-				node.Left = levels[k+1].nodes[j]
+				if j == len(nextLevelNodes) {
+					break
+				}
+				node.Left = nextLevelNodes[j]
 				j++
-				node.Right = levels[k+1].nodes[j]
+				if j == len(nextLevelNodes) {
+					break
+				}
+				node.Right = nextLevelNodes[j]
 				j++
 			}
 		}
