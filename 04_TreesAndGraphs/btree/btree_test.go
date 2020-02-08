@@ -11,6 +11,7 @@ func TestArrayToBinaryTree(t *testing.T) {
 		{[]int{1, 5, 2, 7, null, 3, 4, null, null, null, null, 5, 6}},
 		{[]int{1, null, 2, 3, 4, null, null, 5, 6}},
 		{[]int{1, 5, 2, 3, 4, null, null, null, null, 6, 7}},
+		{[]int{2, 3, 9, 10, 7, 8, 6, 5, 4, 11, 1}},
 	}
 
 	for _, c := range cases {
