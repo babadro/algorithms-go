@@ -31,5 +31,10 @@ func TestPerfectSquareNums(t *testing.T) {
 			t.Errorf("case#%d got %v, want %v", i+1, fact, c.expectedSquareNums)
 		}
 	}
+}
 
+func TestCoinChanging(t *testing.T) {
+	arr := []int{1, 4, 9}
+	amount := 12
+	t.Log(dynamicCoinChanging(arr, amount))
 }
