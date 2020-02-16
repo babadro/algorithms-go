@@ -13,3 +13,11 @@ func InOrder(node *Node, list *[]int) {
 		InOrder(node.Right, list)
 	}
 }
+
+func InOrderFunc(node *Node, f func(node *Node)) {
+	if node != nil {
+		InOrderFunc(node.Left, f)
+		f(node)
+		InOrderFunc(node.Right, f)
+	}
+}
