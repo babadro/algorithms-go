@@ -3,7 +3,7 @@ package btree
 import "math"
 
 const (
-	null = math.MaxInt64
+	Null = math.MaxInt64
 )
 
 type level struct {
@@ -30,7 +30,7 @@ func ArrayToBinaryTree(arr []int) (root *TreeNode) {
 		endLevel := i + levelLen
 		for i < endLevel && i < len(arr) {
 			var newNode *TreeNode
-			if arr[i] != null {
+			if arr[i] != Null {
 				newNode = &TreeNode{Val: arr[i]}
 				levels[currLevel].length++
 			}

@@ -5,12 +5,8 @@ import (
 )
 
 func numSquares(n int) int {
-	sqrt := math.Sqrt(float64(n))
-	if sqrt == float64(int(sqrt)) {
-		return 1
-	}
-
-	return 0
+	nums := perfectSquareNums(n)
+	return DynamicCoinChanging(nums, n)
 }
 
 func perfectSquareNums(upperBound int) (seq []int) {
@@ -26,7 +22,8 @@ func perfectSquareNums(upperBound int) (seq []int) {
 	return seq
 }
 
-func dynamicCoinChanging(coins []int, V int) int {
+// DynamicCoinChanging returns min number of coins for amount V
+func DynamicCoinChanging(coins []int, V int) int {
 	m := len(coins)
 	table := make([]int, V+1)
 	table[0] = 0

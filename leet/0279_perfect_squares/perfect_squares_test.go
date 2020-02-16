@@ -1,9 +1,31 @@
 package _279_perfect_squares
 
 import (
-	"algorithms-go/slices"
+	"github.com/babadro/algorithms-go/slices"
 	"testing"
 )
+
+func TestNumSquares(t *testing.T) {
+	cases := []struct {
+		num      int
+		expected int
+	}{
+		{0, 0},
+		{1, 1},
+		{2, 2},
+		{3, 3},
+		{4, 1},
+		{5, 2},
+		{12, 3},
+		{13, 2},
+	}
+
+	for i, c := range cases {
+		if fact := numSquares(c.num); fact != c.expected {
+			t.Errorf("case#%d: want %d, got %d", i+1, c.expected, fact)
+		}
+	}
+}
 
 func TestPerfectSquareNums(t *testing.T) {
 	cases := []struct {
@@ -36,5 +58,5 @@ func TestPerfectSquareNums(t *testing.T) {
 func TestCoinChanging(t *testing.T) {
 	arr := []int{1, 4, 9}
 	amount := 12
-	t.Log(dynamicCoinChanging(arr, amount))
+	t.Log(DynamicCoinChanging(arr, amount))
 }
