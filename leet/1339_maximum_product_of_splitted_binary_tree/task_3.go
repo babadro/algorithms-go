@@ -1,12 +1,8 @@
 package _1339_maximum_product_of_splitted_binary_tree
 
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
+import "github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
 
-func InorderSplit(x, root *TreeNode, product *int) {
+func InorderSplit(x, root *btree.Node, product *int) {
 	if x != nil {
 		InorderSplit(x.Left, root, product)
 		if x.Left != nil {
@@ -29,7 +25,7 @@ func InorderSplit(x, root *TreeNode, product *int) {
 	}
 }
 
-func calcProduct(root1, root2 *TreeNode) int {
+func calcProduct(root1, root2 *btree.Node) int {
 	sum1 := 0
 	InorderSum(root1, &sum1)
 
@@ -43,7 +39,7 @@ func calcProduct(root1, root2 *TreeNode) int {
 	return i
 }
 
-func InorderSum(x *TreeNode, sum *int) {
+func InorderSum(x *btree.Node, sum *int) {
 	if x != nil {
 		InorderSum(x.Left, sum)
 		*sum = *sum + x.Val
@@ -51,7 +47,7 @@ func InorderSum(x *TreeNode, sum *int) {
 	}
 }
 
-func maxProduct(root *TreeNode) int {
+func maxProduct(root *btree.Node) int {
 	product := 0
 	InorderSplit(root, root, &product)
 	return product

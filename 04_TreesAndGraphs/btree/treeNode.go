@@ -1,12 +1,12 @@
 package btree
 
-type TreeNode struct {
+type Node struct {
 	Val   int
-	Left  *TreeNode
-	Right *TreeNode
+	Left  *Node
+	Right *Node
 }
 
-func InOrder(node *TreeNode, list *[]int) {
+func InOrder(node *Node, list *[]int) {
 	if node != nil {
 		InOrder(node.Left, list)
 		*list = append(*list, node.Val)

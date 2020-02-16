@@ -1,65 +1,28 @@
 package _1339_maximum_product_of_splitted_binary_tree
 
-import "testing"
+import (
+	"github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+	"testing"
+)
 
 func TestMaxProduct(t *testing.T) {
-	var n1 *TreeNode
-	var n2 *TreeNode
-	var n3 *TreeNode
-	var n4 *TreeNode
-	var n5 *TreeNode
-	var n6 *TreeNode
+	cases := []struct {
+		breeInput []int
+		expected  int
+	}{
+		{[]int{1, 2, 3, 4, 5, 6}, 110},
+		{[]int{1, btree.Null, 2, 3, 4, btree.Null, btree.Null, 5, 6}, 90},
+		{[]int{1, 1}, 1},
+		{[]int{2, 3, 9, 10, 7, 8, 6, 5, 4, 11, 1}, 1025},
+		{bigInput1, 763478770},
+	}
 
-	n1 = &TreeNode{1, nil, nil}
-	n4 = &TreeNode{4, nil, nil}
-	n5 = &TreeNode{5, nil, nil}
-	n6 = &TreeNode{6, nil, nil}
-	n2 = &TreeNode{2, nil, nil}
-	n3 = &TreeNode{3, nil, nil}
-	n1.Left, n1.Right = n2, n3
-	n2.Left, n2.Right = n4, n5
-	n3.Left = n6
-	t.Log(maxProduct(n1))
-
-	n1 = &TreeNode{1, nil, nil}
-	n4 = &TreeNode{4, nil, nil}
-	n5 = &TreeNode{5, nil, nil}
-	n6 = &TreeNode{6, nil, nil}
-	n2 = &TreeNode{2, nil, nil}
-	n3 = &TreeNode{3, nil, nil}
-
-	n1.Right = n2
-	n2.Left, n2.Right = n3, n4
-	n4.Left, n4.Right = n5, n6
-
-	t.Log(maxProduct(n1))
-
-	n1 = &TreeNode{1, nil, nil}
-	n2 = &TreeNode{1, nil, nil}
-	n1.Left = n2
-
-	t.Log(maxProduct(n1))
-
-	n1 = &TreeNode{1, nil, nil}
-	n4 = &TreeNode{4, nil, nil}
-	n5 = &TreeNode{5, nil, nil}
-	n6 = &TreeNode{6, nil, nil}
-	n2 = &TreeNode{2, nil, nil}
-	n3 = &TreeNode{3, nil, nil}
-	n7 := &TreeNode{7, nil, nil}
-	n8 := &TreeNode{8, nil, nil}
-	n9 := &TreeNode{9, nil, nil}
-	n10 := &TreeNode{10, nil, nil}
-	n11 := &TreeNode{11, nil, nil}
-
-	n2.Left, n2.Right = n3, n9
-	n3.Left, n3.Right = n10, n7
-	n9.Left, n9.Right = n8, n6
-	n10.Left, n10.Right = n5, n4
-	n7.Left, n7.Right = n11, n1
-
-	t.Log(maxProduct(n2))
-
+	for i, c := range cases {
+		treeRoot := btree.ArrayToBinaryTree(c.breeInput)
+		if fact := maxProduct(treeRoot); fact != c.expected {
+			t.Errorf("case#%d: want %d, got %d", i+1, c.expected, fact)
+		}
+	}
 }
 
 /*

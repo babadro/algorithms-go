@@ -7,7 +7,7 @@ const (
 )
 
 type level struct {
-	nodes  []*TreeNode
+	nodes  []*Node
 	length int
 }
 
@@ -16,22 +16,22 @@ type level struct {
 //[2,3,9,10,7,8,6,5,4,11,1]
 //[1,null,2,3,4,null,null,5,6]
 
-func ArrayToBinaryTree(arr []int) (root *TreeNode) {
+func ArrayToBinaryTree(arr []int) (root *Node) {
 	if len(arr) == 0 {
 		return nil
 	}
-	root = &TreeNode{Val: arr[0]}
+	root = &Node{Val: arr[0]}
 	levels := make([]level, 1)
-	levels[0] = level{nodes: []*TreeNode{root}, length: 1}
+	levels[0] = level{nodes: []*Node{root}, length: 1}
 	i, currLevel := 1, 1
 	for {
 		levels = append(levels, level{})
 		levelLen := levels[currLevel-1].length * 2
 		endLevel := i + levelLen
 		for i < endLevel && i < len(arr) {
-			var newNode *TreeNode
+			var newNode *Node
 			if arr[i] != Null {
-				newNode = &TreeNode{Val: arr[i]}
+				newNode = &Node{Val: arr[i]}
 				levels[currLevel].length++
 			}
 			levels[currLevel].nodes = append(levels[currLevel].nodes, newNode)
