@@ -19,7 +19,7 @@ func TestMaxProduct(t *testing.T) {
 
 	for i, c := range cases {
 		treeRoot := btree.ArrayToBinaryTree(c.breeInput)
-		if fact := maxProduct(treeRoot); fact != c.expected {
+		if fact := maxProduct2(treeRoot); fact != c.expected {
 			t.Errorf("case#%d: want %d, got %d", i+1, c.expected, fact)
 		}
 	}
