@@ -1,5 +1,6 @@
 package _1339_maximum_product_of_splitted_binary_tree
 
+/*
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
@@ -49,3 +50,4 @@ func InOrderFunc(node *TreeNode, f func(node *TreeNode)) {
 		InOrderFunc(node.Right, f)
 	}
 }
+*/

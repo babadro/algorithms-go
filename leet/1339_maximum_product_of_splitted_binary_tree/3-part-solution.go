@@ -7,7 +7,7 @@ import (
 
 var total, product int
 
-func maxProduct(root *btree.Node) int {
+func maxProduct2(root *btree.Node) int {
 	total, product = 0, 0
 	total = nodeSum(root)
 	total = nodeSum(root)
