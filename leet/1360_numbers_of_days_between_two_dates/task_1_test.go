@@ -1,4 +1,4 @@
-package contest
+package _1360_numbers_of_days_between_two_dates
 
 import "testing"
 

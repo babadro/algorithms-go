@@ -1,4 +1,4 @@
-package contest
+package _1361_validate_btree_nodes
 
 type node struct {
 	val   int
