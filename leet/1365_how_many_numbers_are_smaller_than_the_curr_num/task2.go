@@ -55,36 +55,3 @@ func smallerNumbersThanCurrent(nums []int) []int {
 	}
 	return res
 }
-
-/*
-import "sort"
-
-var myNums []int
-
-type indexes struct {
-	arr []int
-}
-
-func (ind *indexes) Less(i, j int) bool {
-	return myNums[ind.arr[i]] < myNums[ind.arr[j]]
-}
-
-func (ind *indexes) Len() int {
-	return len(myNums)
-}
-
-func (ind *indexes) Swap(i, j int) {
-	ind.arr[i], ind.arr[j] = ind.arr[j], ind.arr[i]
-}
-
-func smallerNumbersThanCurrent(nums []int) []int {
-	myNums = nums
-	idxs := indexes{arr: make([]int, len(myNums)) }
-	for i := 0; i < len(myNums); i++ {
-		idxs.arr[i] = i
-	}
-	sort.Sort(&idxs)
-	return idxs.arr
-}
-
-*/
