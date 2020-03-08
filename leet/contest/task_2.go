@@ -5,6 +5,20 @@ const on = 1
 const blue = 2
 
 func numTimesAllBlue(light []int) int {
+	m, counter := 0, 0
+	for idx, bulbIdx := range light {
+		i := idx + 1
+		if bulbIdx > m {
+			m = bulbIdx
+		}
+		if m == i {
+			counter++
+		}
+	}
+	return counter
+}
+
+func numTimesAllBlueNaive(light []int) int {
 	blueCounter := 0
 	bulbStates := make([]int, len(light))
 	for _, no := range light {
