@@ -1,17 +1,17 @@
-package contest
+package _1375_Bulb_switcher_3
 
 const off = 0
 const on = 1
 const blue = 2
 
 func numTimesAllBlue(light []int) int {
-	m, counter := 0, 0
-	for idx, bulbIdx := range light {
-		i := idx + 1
-		if bulbIdx > m {
-			m = bulbIdx
+	maxBulbId, counter := 0, 0
+	for idx, bulbId := range light {
+		momentId := idx + 1
+		if bulbId > maxBulbId {
+			maxBulbId = bulbId
 		}
-		if m == i {
+		if maxBulbId == momentId {
 			counter++
 		}
 	}

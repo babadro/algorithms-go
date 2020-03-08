@@ -1,4 +1,4 @@
-package contest
+package _1375_Bulb_switcher_3
 
 import "testing"
 
@@ -13,6 +13,7 @@ func TestNumTimesAllBlue(t *testing.T) {
 		{[]int{4, 1, 2, 3}, 1},
 		{[]int{2, 1, 4, 3, 6, 5}, 3},
 		{[]int{1, 2, 3, 4, 5, 6}, 6},
+		{[]int{1, 2, 4, 5, 3}, 4},
 	}
 
 	for i, c := range cases {
