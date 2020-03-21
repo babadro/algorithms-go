@@ -7,7 +7,7 @@ func TestRomanToInt(t *testing.T) {
 		romanNum string
 		expected int
 	}{
-		{"", 0},
+		//{"", 0},
 		{"III", 3},
 		{"IV", 4},
 		{"IX", 9},

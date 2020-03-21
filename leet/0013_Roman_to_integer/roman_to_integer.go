@@ -53,6 +53,44 @@ func romanToInt(s string) int {
 	return sum
 }
 
+// Best solution
+func romanToInt2(s string) int {
+
+	tableRTI := map[rune]int{
+		73: 1,
+		86: 5,
+		88: 10,
+		76: 50,
+		67: 100,
+		68: 500,
+		77: 1000,
+	}
+	sIntSlice := make([]int, len(s))
+
+	for k, v := range s {
+		sIntSlice[k] = tableRTI[v]
+	}
+
+	var output int
+	var i int
+
+	//The last elem of sIntSlice definitely is plus. So we don't need to judge on it.
+	for ; i < len(s)-1; i++ {
+		switch sIntSlice[i] {
+		case 100, 10, 1:
+			if sIntSlice[i] < sIntSlice[i+1] {
+				output -= sIntSlice[i]
+			} else {
+				output += sIntSlice[i]
+			}
+		default:
+			output += sIntSlice[i]
+		}
+	}
+	output += sIntSlice[i]
+	return output
+}
+
 func charToInt(b byte) int {
 	switch b {
 	case 'I':
