@@ -4,6 +4,7 @@ type point struct {
 	i, j int
 }
 
+/*
 func hasValidPath(grid [][]int) bool {
 	roadMap := make(map[int][3]int)
 	roadMap[1] = [3]int{1, 3, 5}
@@ -39,3 +40,4 @@ func match(in, out int) bool {
 		return out ==
 	}
 }
+*/
