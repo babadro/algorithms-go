@@ -9,25 +9,35 @@ import (
 	"strings"
 )
 
-func insertionSort2(n int32, arr []int32) {
+// Complete the runningTime function below.
+func runningTime(arr []int32) int32 {
+	n := len(arr)
 	if n == 1 {
-		return
+		return 0
 	}
-
-	for i := int32(1); i < n; i++ {
+	shift := int32(0)
+	for i := int32(1); i < int32(n); i++ {
 		for k := i; k > 0; k-- {
 			if arr[k] < arr[k-1] {
+				shift++
 				arr[k], arr[k-1] = arr[k-1], arr[k]
 			} else {
 				break
 			}
 		}
-		writeArr(arr)
 	}
+	return shift
 }
 
 func main() {
 	reader := bufio.NewReaderSize(os.Stdin, 1024*1024)
+
+	stdout, err := os.Create(os.Getenv("OUTPUT_PATH"))
+	checkError(err)
+
+	defer stdout.Close()
+
+	writer := bufio.NewWriterSize(stdout, 1024*1024)
 
 	nTemp, err := strconv.ParseInt(readLine(reader), 10, 64)
 	checkError(err)
@@ -44,7 +54,11 @@ func main() {
 		arr = append(arr, arrItem)
 	}
 
-	insertionSort2(n, arr)
+	result := runningTime(arr)
+
+	fmt.Fprintf(writer, "%d\n", result)
+
+	writer.Flush()
 }
 
 func readLine(reader *bufio.Reader) string {
@@ -60,14 +74,4 @@ func checkError(err error) {
 	if err != nil {
 		panic(err)
 	}
-}
-
-func writeArr(arr []int32) {
-	for i, v := range arr {
-		if i > 0 {
-			fmt.Print(" ")
-		}
-		fmt.Print(v)
-	}
-	fmt.Println()
 }
