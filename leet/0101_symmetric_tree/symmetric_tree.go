@@ -10,6 +10,23 @@ type item struct {
 }
 
 func isSymmetric(root *btree.Node) bool {
+	if root == nil {
+		return true
+	}
+	return check(root.Left, root.Right)
+}
+
+func check(left, right *btree.Node) bool {
+	if left == nil && right == nil {
+		return true
+	}
+	if (left == nil && right != nil) || (left != nil && right == nil) || (left.Val != right.Val) {
+		return false
+	}
+	return check(left.Left, right.Right) && check(left.Right, right.Left)
+}
+
+func isSymmetric2(root *btree.Node) bool {
 	leftBranch := make([]item, 0)
 	rootAchieved := false
 	var idx int
