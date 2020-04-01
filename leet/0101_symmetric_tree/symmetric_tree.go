@@ -1,6 +1,8 @@
 package _101_symmetric_tree
 
-import "github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+import (
+	"github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+)
 
 type item struct {
 	val   int
@@ -8,27 +10,35 @@ type item struct {
 }
 
 func isSymmetric(root *btree.Node) bool {
-	arr := make([]item, 0)
+	leftBranch := make([]item, 0)
 	rootAchieved := false
 	var idx int
-	res := true
+	flag := true
+	lenRightBranch := 0
 	f := func(level int, n *btree.Node) {
 		if n == root {
 			rootAchieved = true
-			idx = len(arr) - 1
+			idx = len(leftBranch) - 1
 			return
 		}
 		if rootAchieved {
-			if idx < 0 || arr[idx].val != n.Val || arr[idx].level != level {
-				res = false
+			if idx < 0 || leftBranch[idx].val != n.Val || leftBranch[idx].level != level {
+				flag = false
 			}
+			lenRightBranch++
 			idx--
 		} else {
-			arr = append(arr, item{n.Val, level})
+			leftBranch = append(leftBranch, item{n.Val, level})
 		}
 	}
 	inOrder(0, root, f)
-	return res
+	if len(leftBranch) != lenRightBranch {
+		return false
+	}
+	if len(leftBranch) == 0 {
+		return true
+	}
+	return flag
 }
 
 func inOrder(level int, root *btree.Node, f func(level int, n *btree.Node)) {

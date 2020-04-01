@@ -11,11 +11,14 @@ func TestIsSymmetric(t *testing.T) {
 		expected bool
 	}{
 		{[]int{}, true},
+		{[]int{1}, true},
 		{[]int{1, 2, 2, btree.Null, 3, btree.Null, 3}, false},
 		{[]int{1, 2, 2, btree.Null, 3, 3}, true},
 		{[]int{1, 2, 2}, true},
 		{[]int{1, 2, 2, 2, btree.Null, 2}, false},
-		{[]int{1, 0}, false}, // TODO
+		{[]int{1, 0}, false},
+		{[]int{1, btree.Null, 2}, false},
+		{[]int{2, 3, 3, 4, 5, 5}, false},
 	}
 
 	for i, c := range cases {
