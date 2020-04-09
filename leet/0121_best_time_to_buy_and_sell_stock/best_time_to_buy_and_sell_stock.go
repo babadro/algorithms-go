@@ -5,18 +5,12 @@ import (
 )
 
 func maxProfit(prices []int) int {
-	max, min, maxProfit := 0, math.MaxInt32, 0
+	min, maxProfit := math.MaxInt32, 0
 	for _, price := range prices {
 		if price < min {
 			min = price
-			max = 0
-			continue
-		}
-		if price > max {
-			max = price
-			if profit := max - min; profit > maxProfit {
-				maxProfit = profit
-			}
+		} else if profit := price - min; profit > maxProfit {
+			maxProfit = profit
 		}
 	}
 	return maxProfit
