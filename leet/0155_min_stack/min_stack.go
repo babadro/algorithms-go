@@ -1,47 +1,41 @@
 package _155_min_stack
 
-import "sort"
-
 type MinStack struct {
-	items   []item
-	sortIdx int
-	sorted  []int
-	length  int
+	items, mins []int
 }
 
-/** initialize your data structure here. */
 func Constructor() MinStack {
 	return MinStack{}
 }
 
 func (this *MinStack) Push(x int) {
-	ind := sort.Search(this.length, func(i int) bool {
-		return this.sorted[i] <= x
-	})
-	this.sorted = append(this.sorted, x)
-	this.length++
-	copy(this.sorted[ind+1:this.length], this.sorted[ind:this.length-1])
-	this.sorted[ind] = x
-	this.items = append(this.items, item{x, ind})
+	this.items = append(this.items, x)
+	if len(this.mins) == 0 {
+		this.mins = append(this.mins, x)
+	} else {
+		min := this.mins[len(this.mins)-1]
+		if x <= min {
+			this.mins = append(this.mins, x)
+		}
+	}
 }
 
 func (this *MinStack) Pop() {
-	ind := this.items[this.length-1].sortIdx
-	copy(this.sorted[ind:this.length-1], this.sorted[ind+1:this.length])
-	this.sorted = this.sorted[:this.length-1]
-	this.items = this.items[:this.length-1]
-	this.length--
+	if len(this.items) == 0 {
+		return
+	}
+	x := this.items[len(this.items)-1]
+	this.items = this.items[:len(this.items)-1]
+	min := this.mins[len(this.mins)-1]
+	if min == x {
+		this.mins = this.mins[:len(this.mins)-1]
+	}
 }
 
 func (this *MinStack) Top() int {
-	return this.items[len(this.items)-1].value
+	return this.items[len(this.items)-1]
 }
 
 func (this *MinStack) GetMin() int {
-	return this.sorted[len(this.sorted)-1]
-}
-
-type item struct {
-	value   int
-	sortIdx int
+	return this.mins[len(this.mins)-1]
 }

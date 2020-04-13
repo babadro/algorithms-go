@@ -6,7 +6,7 @@ func TestStack(t *testing.T) {
 	minStack := Constructor()
 	minStack.Push(-2)
 	minStack.Push(-2)
-	minStack.Push(-3)
+	minStack.Push(-2)
 	t.Log(minStack.GetMin())
 	minStack.Pop()
 	t.Log(minStack.Top())
