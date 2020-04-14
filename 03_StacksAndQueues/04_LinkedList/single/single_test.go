@@ -14,7 +14,7 @@ func TestArrToLinkedList(t *testing.T) {
 	}
 
 	for i, arr := range arrays {
-		head := arrToLinkedList(arr)
+		head := ArrToLinkedList(arr)
 		node := head
 		fmt.Printf("\nList %d: ", i+1)
 		for node != nil {
