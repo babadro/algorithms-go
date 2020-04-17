@@ -13,7 +13,6 @@ func TestTitleToNumber(t *testing.T) {
 		{"AA", 27},
 		{"AB", 28},
 		{"ZY", 701},
-		//{"XYZ", 1300},
 		{"AAA", 703},
 	}
 
