@@ -1,6 +1,9 @@
 package _189_rotate_array_go
 
-func rotate(nums []int, k int) {
+// TODO read and implement solution https://leetcode.com/problems/rotate-array/solution/
+
+// Doesn't work
+func rotate2(nums []int, k int) {
 	l := len(nums)
 	if l == 0 {
 		return

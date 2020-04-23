@@ -1,5 +1,6 @@
 package _172_factorial_trailing_zeroes
 
+// TODO I don't understand
 func trailingZeroes(n int) int {
 	res := 0
 	for n != 0 {
