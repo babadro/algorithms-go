@@ -13,3 +13,12 @@ func ArrToLinkedList(arr []int) *ListNode {
 	}
 	return node
 }
+
+func LinkedListToArr(head *ListNode) (arr []int) {
+	node := head
+	for node != nil {
+		arr = append(arr, node.Val)
+		node = node.Next
+	}
+	return arr
+}

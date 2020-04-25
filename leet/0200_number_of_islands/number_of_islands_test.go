@@ -31,7 +31,6 @@ func TestNumOfIslands(t *testing.T) {
 		{'0', '0', '0', '1', '1'},
 	}
 
-	// TODO failed test case
 	input5 := [][]byte{
 		{'1', '1', '1'},
 		{'0', '1', '0'},
