@@ -2,20 +2,45 @@ package _204_count_primes
 
 import "math"
 
-// TODO
 func countPrimes(n int) int {
-
+	var counter int
 	arr := make([]bool, n)
-	for {
-		break
-	}
-	counter := 0
-	for _, notPrime := range arr {
-		if !notPrime {
-			counter++
+	for i := 2; i < n; i++ {
+		if arr[i] {
+			continue
+		}
+		counter++
+		for j := i * i; j < n; j += i {
+			arr[j] = true
 		}
 	}
 	return counter
+}
+
+func countPrimes1(n int) int {
+	if n <= 2 {
+		return 0
+	}
+	arr := make([]bool, n)
+	i, counter := 1, 0
+	for {
+		i++
+		if arr[i] || !isPrime(i) {
+			continue
+		}
+		num := i * i
+		if num >= n {
+			break
+		}
+		for num < n {
+			if !arr[num] {
+				arr[num] = true
+				counter++
+			}
+			num = num + i
+		}
+	}
+	return n - counter - 2
 }
 
 func countPrimesNaive(n int) int {

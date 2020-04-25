@@ -5,3 +5,5 @@ import "testing"
 func TestCountPrimes(t *testing.T) {
 	t.Log(countPrimes(3572))
 }
+
+// countPrimes(3572) = 500
