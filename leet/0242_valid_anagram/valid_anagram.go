@@ -4,16 +4,21 @@ import (
 	"sort"
 )
 
-// TODO доделать подсмотренное решение
 func isAnagram(s string, t string) bool {
 	if len(s) != len(t) {
 		return false
 	}
-
 	arr := [26]int{}
 	for i := 0; i < len(s); i++ {
 		arr[s[i]-'a']++
+		arr[t[i]-'a']--
 	}
+	for _, count := range arr {
+		if count != 0 {
+			return false
+		}
+	}
+	return true
 }
 
 func isAnagram2(s string, t string) bool {
