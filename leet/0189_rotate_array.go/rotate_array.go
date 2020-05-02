@@ -1,6 +1,6 @@
 package _189_rotate_array_go
 
-// TODO read and implement solution https://leetcode.com/problems/rotate-array/solution/
+// TODO 2 read and implement solution https://leetcode.com/problems/rotate-array/solution/
 
 // Doesn't work
 func rotate2(nums []int, k int) {

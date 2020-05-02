@@ -45,7 +45,7 @@ func reverse(head *single.ListNode) *single.ListNode {
 	return prev
 }
 
-// TODO need to understand
+// TODO 3 need to understand
 func isPalindromeTheBest(head *single.ListNode) bool {
 	head, slow, fast := nil, head, head
 	for fast != nil && fast.Next != nil {

@@ -56,7 +56,7 @@ func numOfMinutes4(n int, headID int, managers []int, informTime []int) int {
 	return maxTime
 }
 
-// TODO понять
+// TODO 3 понять
 func numOfMinutes3(n int, headID int, manager []int, informTime []int) int {
 	graph := make(map[int][]int)
 	for i, m := range manager {

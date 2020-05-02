@@ -1,6 +1,6 @@
 package _201_Bitwise_And_of_Numbers_Range
 
-// TODO need to understand
+// TODO 3 need to understand
 // https://leetcode.com/problems/bitwise-and-of-numbers-range/discuss/56808/Share-my-C%2B%2B-solution-with-explanationeasy-to-understand
 func rangeBitwiseAnd(m int, n int) int {
 	i := 0
