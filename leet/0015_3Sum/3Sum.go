@@ -2,31 +2,41 @@ package _015_3Sum
 
 import "sort"
 
-//TODO 1
+//TODO 2 this is brute force. See hint 3 and if needed solution
 func threeSum(nums []int) [][]int {
+	length := len(nums)
+	if length < 3 {
+		return nil
+	}
 	sort.Ints(nums)
-	length := removeDuplicates(nums)
-	nums = nums[:length]
-	next := tripletGenerator(nums)
+	resMap := make(map[struct{ a, b, c int }]bool)
 	res := make([][]int, 0)
-	for {
-		a, b, c, ok := next()
-		if !ok {
-			break
-		}
-		if a+b+c == 0 {
-			res = append(res, []int{a, b, c})
-		}
-	}
-	return res
-}
+	//length := removeDuplicates(nums)
+	//nums = nums[:length]
+	//if length < 3 {
+	//	return nil
+	//}
+	tmp := make([]int, 3)
+	for i := 0; i < len(nums)-1; i++ {
+		for j := i + 1; j < len(nums); j++ {
+			idx := sort.Search(length, func(k int) bool {
+				return nums[k] >= -(nums[i] + nums[j])
+			})
 
-func tripletGenerator(nums []int) func() (a, b, c int, ok bool) {
-	idxA, idxB, idxC, ok := 0, 0, 0, true
-	if len(nums) < 3 {
-		return 0, 0, 0, false
+			if idx < length && idx != j && idx != i && nums[idx] == -(nums[i]+nums[j]) {
+				tmp = tmp[:0]
+				tmp = append(tmp, []int{nums[i], nums[j], nums[idx]}...)
+				sort.Ints(tmp)
+				key := struct{ a, b, c int }{tmp[0], tmp[1], tmp[2]}
+				if !resMap[key] {
+					res = append(res, []int{nums[i], nums[j], nums[idx]})
+					resMap[key] = true
+				}
+			}
+		}
 	}
-	return nil
+
+	return res
 }
 
 func removeDuplicates(nums []int) int {
