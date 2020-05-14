@@ -6,6 +6,7 @@ import "sort"
 // Runtime: 8 ms, faster than 79.40% Memory Usage: 4.1 MB, less than 50.00%
 // Еще проблема может быть в том, что дается очень длинный кусок повторяющихся значений - и простой
 // перебор по ним дает плохой результат - нужно бинарным поиском найти и конец сегмента
+// Хотя все равно заменил на поиск и второго конца - результат тот же 8 мс и 4.1 мб
 func searchRange(nums []int, target int) []int {
 	l := len(nums)
 	start := sort.Search(l, func(i int) bool {
@@ -14,11 +15,10 @@ func searchRange(nums []int, target int) []int {
 	if start >= l || nums[start] != target {
 		return []int{-1, -1}
 	}
-	end := start + 1
-	for ; end < l; end++ {
-		if nums[end] != target {
-			break
-		}
-	}
-	return []int{start, end - 1}
+	nums = nums[start:]
+	end := sort.Search(len(nums), func(i int) bool {
+		return nums[i] != target
+	})
+	end += start - 1
+	return []int{start, end}
 }
