@@ -1,7 +1,8 @@
 package _022_generate_parentheses
 
-// TODO 1
-// брутфорс может быть таким - перебор всех возможных комбинаций - с проверкой на валидность.
-func generateParenthesis(n int) []string {
+import "testing"
 
+func TestGenerateParentheses(t *testing.T) {
+	t.Log(getMax(1))
+	t.Log(bitCount(56))
 }
