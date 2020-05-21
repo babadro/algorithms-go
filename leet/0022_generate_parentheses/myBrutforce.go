@@ -4,10 +4,10 @@ import "math"
 
 // Runtime: 4 ms, faster than 16.75% of Go online submissions for Generate Parentheses.
 // Memory Usage: 2.8 MB, less than 100.00% of Go online submissions for Generate Parentheses.
-func generateParenthesis(n int) []string {
+func generateParenthesis1(n int) []string {
 	var res []string
 	for i := 0; i <= int(math.Pow(2, 2*float64(n))-1); i++ {
-		if !valid(i, 2*n) {
+		if !valid1(i, 2*n) {
 			continue
 		}
 		res = append(res, makeParenthesis(i, 2*n))
@@ -15,7 +15,7 @@ func generateParenthesis(n int) []string {
 	return res
 }
 
-func valid(num, parenthesisCount int) bool {
+func valid1(num, parenthesisCount int) bool {
 	stack := make([]bool, 0)
 	for i := 0; i < parenthesisCount; i++ {
 		if num&1 == 1 {

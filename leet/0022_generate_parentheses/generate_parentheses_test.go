@@ -5,7 +5,7 @@ import "testing"
 func TestGenerateParentheses(t *testing.T) {
 	//t.Log(getMax(1))
 	//t.Log(bitCount(56))
-	for _, str := range generateParenthesis(2) {
+	for _, str := range generateParenthesis2(2) {
 		t.Log(str)
 	}
 }
