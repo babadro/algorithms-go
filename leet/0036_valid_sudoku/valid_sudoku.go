@@ -1,8 +1,8 @@
 package _036_valid_sudoku
 
-// TODO 1
+// It's really fast
 func isValidSudoku(board [][]byte) bool {
-	arr := [9]bool{}
+	arr := make([]bool, 9)
 	for _, row := range board {
 		for k := range arr {
 			arr[k] = false
@@ -19,7 +19,7 @@ func isValidSudoku(board [][]byte) bool {
 			arr[k] = false
 		}
 		for j := 0; j < 9; j++ {
-			if !valid(arr, board[i][j]) {
+			if !valid(arr, board[j][i]) {
 				return false
 			}
 		}
@@ -29,8 +29,8 @@ func isValidSudoku(board [][]byte) bool {
 		for k := range arr {
 			arr[k] = false
 		}
-		for j := 0; j < 0; j++ {
-			x, y := (i*3)%3+j%3, i*3+j/3
+		for j := 0; j < 9; j++ {
+			x, y := (i*3)%9+j%3, ((i/3)*3)+j/3
 			if !valid(arr, board[y][x]) {
 				return false
 			}
@@ -39,9 +39,9 @@ func isValidSudoku(board [][]byte) bool {
 	return true
 }
 
-func valid(arr [9]bool, v byte) bool {
+func valid(arr []bool, v byte) bool {
 	if v != '.' {
-		if idx := v - '0'; idx < 0 || idx > 8 || arr[idx] == true {
+		if idx := v - '1'; idx < 0 || idx > 8 || arr[idx] == true {
 			return false
 		} else {
 			arr[idx] = true
