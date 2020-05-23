@@ -1,6 +1,7 @@
 package _036_valid_sudoku
 
 // It's really fast
+// TODO 3 можно попробовать сразу сделать 27 массивов для проверки (даже не слайсов, а массивов) и за один проход через матрицу свалидировать.
 func isValidSudoku(board [][]byte) bool {
 	arr := make([]bool, 9)
 	for _, row := range board {
