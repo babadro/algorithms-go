@@ -2,7 +2,6 @@ package _048_rotate_image
 
 import "testing"
 
-// TODO 1
 func TestRotate(t *testing.T) {
 	_ = [][]int{
 		{1, 2, 3},
