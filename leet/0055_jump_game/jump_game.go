@@ -68,7 +68,7 @@ func min(a, b int) int {
 	return b
 }
 
-// TODO 1 - doesn't work. infinitive loop
+// doesn't work. infinitive loop
 func canJumpOld(nums []int) bool {
 	i := 0
 	last := len(nums) - 1
