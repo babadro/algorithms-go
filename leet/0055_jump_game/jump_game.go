@@ -1,18 +1,55 @@
 package _055_jump_game
 
+// 92%, 85%
+func canJumpGreedy(nums []int) bool {
+	lastPos := len(nums) - 1
+	for i := len(nums) - 2; i >= 0; i-- {
+		if i+nums[i] >= lastPos {
+			lastPos = i
+		}
+	}
+	return lastPos == 0
+}
+
 const (
 	Unknown = iota
 	Good
 	Bad
 )
 
+func canJumpIterative(nums []int) bool {
+	memo := make([]int, len(nums))
+	memo[len(nums)-1] = Good
+
+	lastIdx := len(nums) - 1
+	for i := len(nums) - 2; i >= 0; i-- {
+		furthestJump := i + nums[i]
+		if lastIdx < furthestJump {
+			furthestJump = lastIdx
+		}
+		for j := i + 1; j <= furthestJump; j++ {
+			if memo[j] == Good {
+				memo[i] = Good
+				break
+			}
+		}
+	}
+	return memo[0] == Good
+}
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
+
 var memo []int
 
 // Approach 3: Dynamic Programming Bottom-up
 // 5.17%, 14.29%
 func canJumpMemo(nums []int) bool {
-	memo = make([]int, len(nums))
-	memo[len(nums)-1] = Good
+
 	return canJumpFromPositionMemo(0, nums)
 }
 
@@ -59,13 +96,6 @@ func canJumpFromPositionBacktracing(position int, nums []int) bool {
 	}
 
 	return false
-}
-
-func min(a, b int) int {
-	if a < b {
-		return a
-	}
-	return b
 }
 
 // doesn't work. infinitive loop

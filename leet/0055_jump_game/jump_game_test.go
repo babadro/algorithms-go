@@ -23,14 +23,26 @@ func TestCanJump(t *testing.T) {
 	}
 
 	for i, c := range cases {
-		if fact := canJump(c.nums); fact != c.expected {
+		if fact := canJumpGreedy(c.nums); fact != c.expected {
 			t.Errorf("case#%d, want %t, got %t", i+1, c.expected, fact)
 		}
 	}
 }
 
-func BenchmarkCanJump(b *testing.B) {
+func BenchmarkCanJumpMemo(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		_ = canJump(bigInput)
+		_ = canJumpMemo(bigInput)
+	}
+}
+
+func BenchmarkCanJumpIterative(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		_ = canJumpIterative(bigInput)
+	}
+}
+
+func BenchmarkCanJumpGreedy(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		_ = canJumpGreedy(bigInput)
 	}
 }
