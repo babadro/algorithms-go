@@ -18,16 +18,19 @@ func sortColors(nums []int) {
 			break
 		}
 	}
-	i := j
-	for i <= k {
-		if nums[i] == 1 {
-			i++
-		} else if nums[i] == 0 {
+	for i := j; i <= k; i++ {
+		if nums[i] == 0 {
 			nums[i], nums[j] = nums[j], nums[i]
 			j++
 		} else if nums[i] == 2 {
-			nums[i], nums[k] = nums[k], nums[i]
-			k--
+			if nums[k] == 0 {
+				nums[i], nums[k], nums[j] = nums[j], nums[i], nums[k]
+				j++
+				k--
+			} else {
+				nums[i], nums[k] = nums[i], nums[k]
+				k--
+			}
 		}
 	}
 }
