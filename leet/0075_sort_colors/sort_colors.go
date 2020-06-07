@@ -1,36 +1,21 @@
 package _075_sort_colors
 
-// TODO 1
 func sortColors(nums []int) {
 	if len(nums) == 0 {
 		return
 	}
-	j, k := 0, 0
-	for i, v := range nums {
-		if v != 0 {
-			j = i
-			break
-		}
-	}
-	for i := len(nums) - 1; i > j; i-- {
-		if nums[i] != 2 {
-			k = i
-			break
-		}
-	}
-	for i := j; i <= k; i++ {
+	j, k := 0, len(nums)-1
+	i := 0
+	for i <= k {
 		if nums[i] == 0 {
 			nums[i], nums[j] = nums[j], nums[i]
 			j++
+			i++
 		} else if nums[i] == 2 {
-			if nums[k] == 0 {
-				nums[i], nums[k], nums[j] = nums[j], nums[i], nums[k]
-				j++
-				k--
-			} else {
-				nums[i], nums[k] = nums[i], nums[k]
-				k--
-			}
+			nums[i], nums[k] = nums[k], nums[i]
+			k--
+		} else {
+			i++
 		}
 	}
 }
