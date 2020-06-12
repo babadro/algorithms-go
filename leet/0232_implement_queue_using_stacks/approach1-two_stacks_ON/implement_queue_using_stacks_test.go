@@ -1,4 +1,4 @@
-package _232_implement_queue_using_stacks
+package approach1_two_stacks_ON
 
 import "testing"
 

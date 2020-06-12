@@ -1,6 +1,5 @@
-package _232_implement_queue_using_stacks
+package memoryLeak
 
-// TODO 1 - implement with two stacks - read the solution and discuss exmples
 type MyQueue struct {
 	arr []int
 }
