@@ -42,7 +42,7 @@ func exceptIterator(combination, nums []int) func() (int, bool) {
 	combIdx, numsIdx := 0, 0
 	return func() (int, bool) {
 		for numsIdx < len(nums) {
-			if nums[numsIdx] == combination[combIdx] {
+			if combIdx < len(combination) && nums[numsIdx] == combination[combIdx] {
 				numsIdx++
 				combIdx++
 				continue
@@ -51,5 +51,6 @@ func exceptIterator(combination, nums []int) func() (int, bool) {
 			numsIdx++
 			return res, true
 		}
+		return 0, false
 	}
 }
