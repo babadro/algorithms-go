@@ -1,5 +1,7 @@
 package _078_subsets
 
+import "sort"
+
 // TODO 1
 func subsets(nums []int) [][]int {
 	n := len(nums)
@@ -9,6 +11,7 @@ func subsets(nums []int) [][]int {
 	if n == 1 {
 		return [][]int{{}, nums}
 	}
+	sort.Ints(nums)
 	totalCount := n * n
 	combinations := make([][]int, 0, totalCount)
 	combinations = append(combinations, []int{})
@@ -32,8 +35,7 @@ func subsets(nums []int) [][]int {
 		if len(combinations) == totalCount {
 			break
 		}
-		start = end + 1
-		end = start + counter - 1
+		start, end = end+1, end+counter
 	}
 	return combinations
 }
@@ -42,10 +44,16 @@ func exceptIterator(combination, nums []int) func() (int, bool) {
 	combIdx, numsIdx := 0, 0
 	return func() (int, bool) {
 		for numsIdx < len(nums) {
-			if combIdx < len(combination) && nums[numsIdx] == combination[combIdx] {
-				numsIdx++
-				combIdx++
-				continue
+			if combIdx < len(combination) {
+				if nums[numsIdx] < combination[combIdx] {
+					numsIdx++
+					continue
+				}
+				if nums[numsIdx] == combination[combIdx] {
+					numsIdx++
+					combIdx++
+					continue
+				}
 			}
 			res := nums[numsIdx]
 			numsIdx++
