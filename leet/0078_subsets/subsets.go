@@ -1,6 +1,10 @@
 package _078_subsets
 
-import "sort"
+import (
+	"fmt"
+	"sort"
+	"time"
+)
 
 // TODO 1
 func subsets(nums []int) [][]int {
@@ -17,6 +21,7 @@ func subsets(nums []int) [][]int {
 	combinations = append(combinations, []int{})
 	start, end := 0, 0
 	var next func() (int, bool)
+	counterIterations := 0
 	for i := start; i <= end; i++ {
 		next = exceptIterator(combinations[i], nums)
 		counter := 0
@@ -34,6 +39,11 @@ func subsets(nums []int) [][]int {
 		}
 		if len(combinations) == totalCount {
 			break
+		}
+		counterIterations++
+		if counterIterations%10_000_000 == 0 {
+			time.Sleep(100 * time.Millisecond)
+			fmt.Println("sleep")
 		}
 		start, end = end+1, end+counter
 	}
