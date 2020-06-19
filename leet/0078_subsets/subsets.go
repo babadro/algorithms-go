@@ -42,8 +42,11 @@ func subsets(nums []int) [][]int {
 		}
 		counterIterations++
 		if counterIterations%10_000_000 == 0 {
+			time.Sleep(10000 * time.Millisecond)
+			fmt.Println("sleep for 10 seconds")
+		} else if counterIterations%1_000_000 == 0 {
 			time.Sleep(100 * time.Millisecond)
-			fmt.Println("sleep")
+			fmt.Println("sleep for 0.1 second")
 		}
 		start, end = end+1, end+counter
 	}
