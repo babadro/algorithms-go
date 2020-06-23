@@ -1,24 +1,23 @@
 package _127_word_ladder
 
-// TODO 1
+import "log"
+
+var iteration int
+
+// TODO 1 look solution
 func ladderLength(beginWord string, endWord string, wordList []string) int {
-	//found := false
-	//for _, str := range wordList {
-	//	if endWord == str {}
-	//	found = true
-	//}
-	//if !found {
-	//	return 0
-	//}
-	//if haveOneDifferentChar(beginWord, endWord) {
-	//	return 1
-	//}
 	res := 0
 	search(wordList, beginWord, endWord, &res, 0)
-	return res
+	if res == 0 {
+		return 0
+	}
+	return res + 1
 }
 
 func haveOneDifferentChar(str1, str2 string) bool {
+	if len(str1) != len(str2) {
+		return false
+	}
 	diffFound := false
 	for i := 0; i < len(str1); i++ {
 		if str1[i] != str2[i] {
@@ -35,6 +34,11 @@ func search(wordlist []string, word, endWord string, res *int, counter int) {
 	if word == "" {
 		return
 	}
+	iteration++
+	if iteration >= 10000000 {
+		log.Fatal("Time limit exceed")
+	}
+	counter++
 	for i, w := range wordlist {
 		if haveOneDifferentChar(word, w) {
 			if w == endWord {
@@ -43,8 +47,11 @@ func search(wordlist []string, word, endWord string, res *int, counter int) {
 				}
 				return
 			}
+			if *res != 0 && counter >= *res {
+				return
+			}
 			wordlist[i] = ""
-			search(wordlist, w, endWord, res, counter+1)
+			search(wordlist, w, endWord, res, counter)
 			wordlist[i] = w
 		}
 	}
