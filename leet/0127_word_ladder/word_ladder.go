@@ -4,8 +4,8 @@ import "log"
 
 var iteration int
 
-// TODO 1 look solution
-func ladderLength(beginWord string, endWord string, wordList []string) int {
+// TODO 1 look solution. This can't solve long input - time limit exceed
+func ladderLengthOld(beginWord string, endWord string, wordList []string) int {
 	res := 0
 	search(wordList, beginWord, endWord, &res, 0)
 	if res == 0 {
