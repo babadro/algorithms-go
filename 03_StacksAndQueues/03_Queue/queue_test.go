@@ -37,6 +37,19 @@ func TestQueue2(t *testing.T) {
 }
 
 func TestQueue3(t *testing.T) {
-	a := make([]int, 0) // TODO 1
-	t.Log(a)
+	q := New(0)
+	q.Enqueue(1)
+	t.Log(q.Dequeue())
+	q.Enqueue(2)
+	q.Enqueue(3)
+	t.Log(q.Dequeue())
+	t.Log(q.Dequeue())
+	q.Enqueue(4)
+	q.Enqueue(5)
+	q.Enqueue(6)
+	q.Dequeue()
+	q.Enqueue(7)
+	q.Enqueue(8)
+	q.Enqueue(9)
+	t.Log(q.Dequeue())
 }

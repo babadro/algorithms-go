@@ -14,7 +14,9 @@ func New(capacity int) *Queue {
 func (q *Queue) Enqueue(x int) bool {
 	if q.length == len(q.array) {
 		var newCapacity int
-		if len(q.array) < 1024 {
+		if len(q.array) == 0 {
+			newCapacity = 1
+		} else if len(q.array) < 1024 {
 			newCapacity = len(q.array) * 2
 		} else {
 			newCapacity += len(q.array) / 4
@@ -22,14 +24,12 @@ func (q *Queue) Enqueue(x int) bool {
 		newArr := make([]int, newCapacity)
 		if q.tail == 0 {
 			copy(newArr, q.array)
-			q.head = 0
-			q.tail = q.length
 		} else {
-			copy(newArr, q.array[:q.tail])
-			newHead := len(q.array) - q.head
-			copy(newArr[newHead:], q.array[q.head:])
-			q.head = newHead
+			copy(newArr, q.array[q.head:])
+			copy(newArr[len(q.array)-q.head:], q.array[:q.tail])
 		}
+		q.head = 0
+		q.tail = q.length
 		q.array = newArr
 	}
 
