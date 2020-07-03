@@ -1,5 +1,6 @@
 package _127_word_ladder
 
+// TODO 1 need to understand
 func ladderLengthCopy(beginWord string, endWord string, wordList []string) int {
 	all := make(map[string]bool)
 	for _, w := range wordList {
@@ -21,11 +22,34 @@ func ladderLengthCopy(beginWord string, endWord string, wordList []string) int {
 			delete(all, w)
 		}
 		next := make(map[string]bool)
-
+		for w, _ := range bs {
+			chars := []byte(w)
+			for i, v := range chars {
+				for j := byte('a'); j <= 'z'; j++ {
+					if v == j {
+						continue
+					}
+					chars[i] = j
+					candi := string(chars)
+					if es[candi] {
+						return steps + 1
+					}
+					if !bs[candi] && all[candi] {
+						next[candi] = true
+					}
+					chars[i] = v
+				}
+			}
+		}
+		bs = next
+		steps++
 	}
+
+	return 0
 }
 
 // Not mine. Best speed solution
+// 100% 85%
 func ladderLength(beginWord string, endWord string, wordList []string) int {
 	all := make(map[string]bool)
 	// begineWord may not be in wordList while endWord must be in wordList
