@@ -11,7 +11,7 @@ func New(capacity int) *Queue {
 	return &Queue{array: make([]int, capacity)}
 }
 
-func (q *Queue) Enqueue(x int) bool {
+func (q *Queue) Enqueue(x int) {
 	if q.length == len(q.array) {
 		var newCapacity int
 		if len(q.array) == 0 {
@@ -41,7 +41,7 @@ func (q *Queue) Enqueue(x int) bool {
 	}
 
 	q.length++
-	return true
+	return
 }
 
 func (q *Queue) Dequeue() (int, bool) {

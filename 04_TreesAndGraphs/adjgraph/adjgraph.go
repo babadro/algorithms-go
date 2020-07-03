@@ -2,6 +2,7 @@ package adjgraph
 
 import (
 	"fmt"
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/03_Queue"
 	"strings"
 )
 
@@ -19,7 +20,7 @@ type Graph struct {
 	Array []*AdjListNode
 }
 
-func CreateGraph(V int) *Graph {
+func New(V int) *Graph {
 	return &Graph{V, make([]*AdjListNode, V)}
 }
 
@@ -28,6 +29,30 @@ func (g *Graph) AddEdge(src, dest int) {
 	newNode := NewAdjListNode(dest)
 	newNode.Next = g.Array[src]
 	g.Array[src] = newNode
+}
+
+func (g *Graph) BFS(s int) {
+	visited := make(map[int]bool, g.V)
+
+	q := queue.New(g.V)
+
+	visited[s] = true
+	q.Enqueue(s)
+
+	for q.Len() != 0 {
+		s, _ = q.Dequeue()
+		fmt.Print(s, " ")
+
+		node := g.Array[s]
+		for node != nil {
+			n := node.Vertex
+			if !visited[n] {
+				visited[n] = true
+				q.Enqueue(n)
+			}
+			node = node.Next
+		}
+	}
 }
 
 func (g *Graph) String() string {
