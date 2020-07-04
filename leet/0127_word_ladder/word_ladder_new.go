@@ -1,6 +1,6 @@
 package _127_word_ladder
 
-// TODO 1 need to understand
+// TODO 3 need to understand
 func ladderLengthCopy(beginWord string, endWord string, wordList []string) int {
 	all := make(map[string]bool)
 	for _, w := range wordList {
@@ -9,33 +9,35 @@ func ladderLengthCopy(beginWord string, endWord string, wordList []string) int {
 	if !all[endWord] {
 		return 0
 	}
+
 	bs, es := make(map[string]bool), make(map[string]bool)
 	bs[beginWord] = true
 	es[endWord] = true
 
 	steps := 1
+
 	for len(bs) > 0 && len(es) > 0 {
 		if len(bs) > len(es) {
 			bs, es = es, bs
 		}
-		for w, _ := range bs {
+		for w := range bs {
 			delete(all, w)
 		}
 		next := make(map[string]bool)
-		for w, _ := range bs {
+		for w := range bs {
 			chars := []byte(w)
 			for i, v := range chars {
 				for j := byte('a'); j <= 'z'; j++ {
-					if v == j {
+					if j == v {
 						continue
 					}
 					chars[i] = j
-					candi := string(chars)
-					if es[candi] {
+					candy := string(chars)
+					if es[candy] {
 						return steps + 1
 					}
-					if !bs[candi] && all[candi] {
-						next[candi] = true
+					if !bs[candy] && all[candy] {
+						next[candy] = true
 					}
 					chars[i] = v
 				}
@@ -44,7 +46,6 @@ func ladderLengthCopy(beginWord string, endWord string, wordList []string) int {
 		bs = next
 		steps++
 	}
-
 	return 0
 }
 
@@ -102,6 +103,7 @@ func ladderLength(beginWord string, endWord string, wordList []string) int {
 	return 0
 }
 
+// TODO 2 neet to repeat understand and remember
 // Not mine. 58%, 57%
 func ladderLength2(beginWord string, endWord string, wordList []string) int {
 	words := make(map[string]bool)
