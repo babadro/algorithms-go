@@ -4,10 +4,29 @@ import (
 	"github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
 )
 
-var res []int
-
-// TODO 1 - iterative
+// TODO 2 - need to understand. Not mine
 func inorderTraversal(root *btree.Node) []int {
+	if root == nil {
+		return nil
+	}
+	stack, res := make([]*btree.Node, 0), make([]int, 0)
+	node := root
+	for node != nil || len(stack) > 0 { // TODO 2: interesting. Need to understand
+		for node != nil {
+			stack = append(stack, node)
+			node = node.Left
+		}
+		last := len(stack) - 1
+		node = stack[last]
+		stack = stack[:last]
+		res = append(res, node.Val)
+		node = node.Right
+	}
+	return res
+}
+
+// Doesn't work
+func inorderTraversal2(root *btree.Node) []int {
 	queue, res := make([]*btree.Node, 0), make([]int, 0)
 	if root != nil {
 		queue = append(queue, root)

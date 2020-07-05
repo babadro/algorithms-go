@@ -43,4 +43,5 @@ func TestInorderTraversal2(t *testing.T) {
 	var res []int
 	inorderTraversalRecursive(n1, &res)
 	fmt.Println(res)
+	fmt.Println(inorderTraversal(n1))
 }
