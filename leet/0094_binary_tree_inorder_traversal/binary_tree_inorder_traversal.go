@@ -46,11 +46,10 @@ func inorderTraversal(root *btree.Node) []int {
 	return res
 }
 
-func inorderTraversalRecursive(root *btree.Node) []int {
+func inorderTraversalRecursive(root *btree.Node, res *[]int) {
 	if root != nil {
-		inorderTraversalRecursive(root.Left)
-		res = append(res, root.Val)
-		inorderTraversalRecursive(root.Right)
+		inorderTraversalRecursive(root.Left, res)
+		*res = append(*res, root.Val)
+		inorderTraversalRecursive(root.Right, res)
 	}
-	return res
 }
