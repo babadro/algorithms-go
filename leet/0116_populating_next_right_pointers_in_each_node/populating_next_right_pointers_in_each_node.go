@@ -7,41 +7,37 @@ type Node struct {
 	Next  *Node
 }
 
-var Node1 *Node
-var Node2 *Node
-var Counter = 0
-var Sequence = 1
-
-// TODO 1 cannot allocate stack error
+// 94% 26%
 func connect(root *Node) *Node {
 	level := 1
-
-	for traversalLevel(root, level) {
+	nodePair := []*Node{&Node{}, &Node{}}
+	counter, sequence := 0, 1
+	for traversalLevel(root, nodePair, level, &counter, &sequence) {
 		level++
 	}
 	return root
 }
 
 // TODO 2 need to understand
-func traversalLevel(node *Node, level int) bool {
+func traversalLevel(node *Node, nodePair []*Node, level int, counter, sequence *int) bool {
 	if node == nil {
 		return false
 	}
 
 	if level == 1 {
-		Node2 = Node1
-		Node1 = node
-		Counter++
-		if Counter != Sequence {
-			Node1.Next = Node2
+		nodePair[1] = nodePair[0]
+		nodePair[0] = node
+		*counter++
+		if *counter != *sequence {
+			nodePair[0].Next = nodePair[1]
 		} else {
-			Sequence *= 2
+			*sequence *= 2
 		}
 		return true
 	}
 
-	right := traversalLevel(node.Right, level-1)
-	left := traversalLevel(node.Left, level-1)
+	right := traversalLevel(node.Right, nodePair, level-1, counter, sequence)
+	left := traversalLevel(node.Left, nodePair, level-1, counter, sequence)
 
 	return left || right
 }
