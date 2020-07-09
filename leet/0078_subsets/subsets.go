@@ -6,8 +6,8 @@ import (
 	"time"
 )
 
-// TODO 1
-func subsets(nums []int) [][]int {
+// doesn't work
+func subsets2(nums []int) [][]int {
 	n := len(nums)
 	if n == 0 {
 		return [][]int{{}}
