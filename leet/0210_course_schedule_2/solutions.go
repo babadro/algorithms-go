@@ -48,6 +48,7 @@ func dfs(node int, adjList [][]int, isPossible *bool, topologicalOrder *[]int, c
 			dfs(neighbor, adjList, isPossible, topologicalOrder, color)
 		} else if color[neighbor] == gray {
 			*isPossible = false
+			return
 		}
 	}
 
