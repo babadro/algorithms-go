@@ -4,7 +4,7 @@ package _210_course_schedule_2
 // input 3, [[0,1],[0,2],[1,2]]
 // output [2, 0, 1]
 // expected [2, 1, 0]
-func findOrder(numCourses int, prerequisites [][]int) []int {
+func findOrder1(numCourses int, prerequisites [][]int) []int {
 	set := make(map[int]int, numCourses)
 	for _, arr := range prerequisites {
 		set[arr[0]] = arr[1]

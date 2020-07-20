@@ -18,4 +18,5 @@ func TestFindOrder(t *testing.T) {
 
 func TestFindOrder2(t *testing.T) {
 	t.Log(findOrder(4, [][]int{{1, 0}, {2, 0}, {3, 1}, {3, 2}}))
+	t.Log(findOrder(3, [][]int{}))
 }
