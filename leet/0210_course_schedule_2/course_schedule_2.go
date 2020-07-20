@@ -1,6 +1,6 @@
 package _210_course_schedule_2
 
-// TODO 1 doesn't work
+// doesn't work
 // input 3, [[0,1],[0,2],[1,2]]
 // output [2, 0, 1]
 // expected [2, 1, 0]
