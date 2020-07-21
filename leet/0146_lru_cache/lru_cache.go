@@ -1,7 +1,5 @@
 package _146_lru_cache
 
-import "fmt"
-
 // TODO 1
 
 type item struct {
@@ -18,7 +16,7 @@ type LRUCache struct {
 }
 
 func Constructor(capacity int) LRUCache {
-	return LRUCache{counterToKey: make(map[int]int, capacity), storage: make(map[int]item, capacity)}
+	return LRUCache{counterToKey: make(map[int]int, capacity), storage: make(map[int]item, capacity), capacity: capacity}
 }
 
 func (this *LRUCache) Get(key int) int {
@@ -40,6 +38,7 @@ func (this *LRUCache) Put(key int, value int) {
 		return
 	}
 
+	deleted := false
 	if this.size < this.capacity {
 		if this.size == 0 {
 			this.oldest = 1
@@ -50,17 +49,19 @@ func (this *LRUCache) Put(key int, value int) {
 		keyToDelete := this.counterToKey[this.oldest]
 		delete(this.storage, keyToDelete)
 		delete(this.counterToKey, this.oldest)
-		this.findNextOldest()
+		deleted = true
 	}
 	this.newest++
 	this.storage[key] = item{payload: value, lastUsage: this.newest}
 	this.counterToKey[this.newest] = key
+	if deleted {
+		this.findNextOldest()
+	}
 }
 
 func (this *LRUCache) findNextOldest() {
 	for {
 		this.oldest++
-		fmt.Println(this.oldest)
 		if _, ok := this.counterToKey[this.oldest]; ok {
 			break
 		}
