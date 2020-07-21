@@ -7,6 +7,7 @@ type ListNode struct {
 	Next *ListNode
 }
 
+// TODO 2 implement two pointers algorithm (look solutions)
 func hasCycle(head *single.ListNode) bool {
 	nodeMap := make(map[*single.ListNode]bool)
 	node := head
