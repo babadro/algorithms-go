@@ -1,6 +1,6 @@
 package _146_lru_cache
 
-// TODO 1
+// Doesn't work
 
 type item struct {
 	payload, lastUsage int
@@ -34,27 +34,29 @@ func (this *LRUCache) Get(key int) int {
 }
 
 func (this *LRUCache) Put(key int, value int) {
-	if _, ok := this.storage[key]; ok {
-		return
-	}
-
-	deleted := false
-	if this.size < this.capacity {
+	flag := false
+	if oldValue, ok := this.storage[key]; ok {
+		if oldValue.lastUsage == this.oldest {
+			delete(this.counterToKey, this.oldest)
+			flag = true
+		}
+	} else if this.size == this.capacity {
+		keyToDelete := this.counterToKey[this.oldest]
+		delete(this.storage, keyToDelete)
+		delete(this.counterToKey, this.oldest)
+		flag = true
+	} else {
 		if this.size == 0 {
 			this.oldest = 1
 			this.counterToKey[1] = key
 		}
 		this.size++
-	} else {
-		keyToDelete := this.counterToKey[this.oldest]
-		delete(this.storage, keyToDelete)
-		delete(this.counterToKey, this.oldest)
-		deleted = true
 	}
+
 	this.newest++
 	this.storage[key] = item{payload: value, lastUsage: this.newest}
 	this.counterToKey[this.newest] = key
-	if deleted {
+	if flag {
 		this.findNextOldest()
 	}
 }
