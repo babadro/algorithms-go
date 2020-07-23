@@ -1,12 +1,12 @@
 package _146_lru_cache
 
 // Doesn't work
-
+// TODO 2 try to find out what's wrong. Find the fail submission and that test case
 type item struct {
 	payload, lastUsage int
 }
 
-type LRUCache struct {
+type LRUCache2 struct {
 	newest       int
 	counterToKey map[int]int
 	storage      map[int]item
@@ -15,11 +15,11 @@ type LRUCache struct {
 	capacity     int
 }
 
-func Constructor(capacity int) LRUCache {
-	return LRUCache{counterToKey: make(map[int]int, capacity), storage: make(map[int]item, capacity), capacity: capacity}
+func Constructor2(capacity int) LRUCache2 {
+	return LRUCache2{counterToKey: make(map[int]int, capacity), storage: make(map[int]item, capacity), capacity: capacity}
 }
 
-func (this *LRUCache) Get(key int) int {
+func (this *LRUCache2) Get(key int) int {
 	if it, ok := this.storage[key]; ok {
 		delete(this.counterToKey, it.lastUsage)
 		this.newest++
@@ -33,7 +33,7 @@ func (this *LRUCache) Get(key int) int {
 	return -1
 }
 
-func (this *LRUCache) Put(key int, value int) {
+func (this *LRUCache2) Put(key int, value int) {
 	flag := false
 	if oldValue, ok := this.storage[key]; ok {
 		if oldValue.lastUsage == this.oldest {
@@ -61,7 +61,7 @@ func (this *LRUCache) Put(key int, value int) {
 	}
 }
 
-func (this *LRUCache) findNextOldest() {
+func (this *LRUCache2) findNextOldest() {
 	for {
 		this.oldest++
 		if _, ok := this.counterToKey[this.oldest]; ok {
@@ -71,8 +71,8 @@ func (this *LRUCache) findNextOldest() {
 }
 
 /**
- * Your LRUCache object will be instantiated and called as such:
- * obj := Constructor(capacity);
+ * Your LRUCache2 object will be instantiated and called as such:
+ * obj := Constructor2(capacity);
  * param_1 := obj.Get(key);
  * obj.Put(key,item);
  */
