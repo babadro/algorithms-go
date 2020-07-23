@@ -47,7 +47,7 @@ func TestLruCache4(t *testing.T) {
 	t.Log(cache.Get(2)) // 6
 }
 
-// TODO 1
+// TODO 3
 //Input
 //["LRUCache2","put","put","get","put","put","get"]
 //[[2],[2,1],[2,2],[2],[1,1],[4,1],[2]]

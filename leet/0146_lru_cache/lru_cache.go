@@ -1,7 +1,7 @@
 package _146_lru_cache
 
 // Doesn't work
-// TODO 2 try to find out what's wrong. Find the fail submission and that test case
+// TODO 3 try to find out what's wrong. Find the fail submission and that test case
 type item struct {
 	payload, lastUsage int
 }
