@@ -17,7 +17,7 @@ func Test(t *testing.T) {
 	for i, c := range cases {
 		root := btree.ArrayToBinaryTree(c.arr)
 		if fact := isValidBST(root); fact != c.expected {
-			t.Errorf("case#%d, want %d, got %d", i+1, c.expected, fact)
+			t.Errorf("case#%d, want %t, got %t", i+1, c.expected, fact)
 		}
 	}
 }
