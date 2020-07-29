@@ -38,3 +38,9 @@ func TestPartition(t *testing.T) {
 	}
 
 }
+
+func TestQuickSort(t *testing.T) {
+	arr := []int{2, 1, 0, 4, -1}
+	quickSort(arr, 0, 4)
+	t.Log(arr)
+}
