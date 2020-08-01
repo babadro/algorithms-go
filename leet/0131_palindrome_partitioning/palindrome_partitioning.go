@@ -1,26 +1,36 @@
 package _131_palindrome_partitioning
 
-import "strings"
-
-// TODO 1
+// 18 % 20%
 func partition(s string) [][]string {
 	if len(s) == 0 {
 		return nil
 	}
 
 	runes := []rune(s)
-	n := len(runes)
-	for i := 0; i < n; i++ {
+	res := make([][][]string, len(runes))
 
+	last := len(runes) - 1
+
+	res[last] = [][]string{{string(runes[last])}}
+
+	for i := len(runes) - 2; i >= 0; i-- {
+		for end := len(runes); end > i; end-- {
+			candidate := runes[i:end]
+			if isPalindrome(candidate) {
+				if end == len(runes) {
+					res[i] = append(res[i], [][]string{{string(candidate)}}...)
+				} else {
+					for _, arr := range res[end] {
+						newArr := append([]string{string(candidate)}, arr...)
+						res[i] = append(res[i], newArr)
+					}
+				}
+
+			}
+		}
 	}
 
-}
-
-func recursive(r []rune) []rune {
-	if len(r) == 0 {
-		return r
-	}
-	return append([]rune{r[0]}, recursive(r[1:])...)
+	return res[0]
 }
 
 func isPalindrome(r []rune) bool {
