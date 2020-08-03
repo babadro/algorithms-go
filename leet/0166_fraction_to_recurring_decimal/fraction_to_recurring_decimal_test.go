@@ -6,5 +6,27 @@ import (
 
 // TODO 1 1/6 = 0.1(6) fails
 func TestFractionToDecimal(t *testing.T) {
-	t.Log(fractionToDecimal(2, 1))
+	cases := []struct {
+		numerator, denominator int
+		expected               string
+	}{
+		{1, 2, "0.5"},
+		{0, 2, "0"},
+		{0, -2, "0"},
+		{2, 1, "2"},
+		{1000, 333, "3.(003)"},
+		{-1000, -333, "3.(003)"},
+		{4, 9, "0.(4)"},
+		{4, -9, "-0.(4)"},
+		{-50, 8, "-6.25"},
+		{7, -12, "-0.58(3)"},
+	}
+
+	for i, c := range cases {
+		if fact := fractionToDecimal(c.numerator, c.denominator); fact != c.expected {
+			t.Errorf("case#%d, want %s, got %s", i+1, c.expected, fact)
+		}
+	}
 }
+
+// Good test cases 1/2, 2/1, 1000/333, 4/9, 4/333, -50/8, 7/-12

@@ -4,8 +4,62 @@ import (
 	"strconv"
 )
 
-// TODO 1
+// 100% 100%
 func fractionToDecimal(numerator int, denominator int) string {
+	b := make([]byte, 0, 18)
+	if (numerator > 0 && denominator < 0) || (numerator < 0 && denominator > 0) {
+		b = append(b, '-')
+	}
+	if numerator < 0 {
+		numerator = -numerator
+	}
+	if denominator < 0 {
+		denominator = -denominator
+	}
+
+	leftPart := numerator / denominator
+	b = strconv.AppendInt(b, int64(leftPart), 10)
+
+	remainder := numerator % denominator
+	if remainder == 0 {
+		return string(b)
+	}
+
+	b = append(b, '.')
+
+	m := make(map[int]int, 10)
+	idx, ok := 0, false
+	numerator = remainder
+	for {
+		if numerator == 0 {
+			return string(b)
+		}
+		if idx, ok = m[numerator]; ok {
+			break
+		}
+		m[numerator] = len(b)
+		numerator = numerator * 10
+		for numerator < denominator {
+			b = append(b, '0')
+			numerator *= 10
+		}
+		num := numerator / denominator
+		b = strconv.AppendInt(b, int64(num), 10)
+		numerator = numerator % denominator
+	}
+	periodLen := len(b) - idx
+	period := make([]byte, periodLen)
+	copy(period, b[idx:])
+	b = b[:idx]
+	b = append(b, '(')
+	b = append(b, period...)
+	b = append(b, ')')
+
+	return string(b)
+}
+
+// doesn't work
+func fractionToDecimal2(numerator int, denominator int) string {
 	b := make([]byte, 0, 18)
 	leftPart := numerator / denominator
 	b = strconv.AppendInt(b, int64(leftPart), 10)
