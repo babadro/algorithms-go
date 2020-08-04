@@ -4,7 +4,6 @@ import (
 	"testing"
 )
 
-// TODO 1 1/6 = 0.1(6) fails
 func TestFractionToDecimal(t *testing.T) {
 	cases := []struct {
 		numerator, denominator int
@@ -28,5 +27,3 @@ func TestFractionToDecimal(t *testing.T) {
 		}
 	}
 }
-
-// Good test cases 1/2, 2/1, 1000/333, 4/9, 4/333, -50/8, 7/-12
