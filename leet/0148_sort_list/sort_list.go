@@ -19,7 +19,7 @@ func sortList(head *single.ListNode) *single.ListNode {
 	return merge(sortList(head), sortList(rightHead))
 }
 
-func merge(list1, list2 *single.ListNode) *single.ListNode {
+func merge(list1 *single.ListNode, list2 *single.ListNode) *single.ListNode {
 	result := &single.ListNode{Val: 0}
 	current := result
 	for list1 != nil && list2 != nil {
@@ -30,8 +30,8 @@ func merge(list1, list2 *single.ListNode) *single.ListNode {
 			current.Next = list2
 			list2 = list2.Next
 		}
+		current = current.Next
 	}
-	current = current.Next
 
 	if list1 != nil {
 		current.Next = list1

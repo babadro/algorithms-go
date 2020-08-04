@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-// TODO 1 something wrong with listLen
+// TODO 1 something wrong with listLen after sorting. It's became shorter
 // TODO send submission
 func TestSortList(t *testing.T) {
 	seed := time.Now().UnixNano()
@@ -34,6 +34,8 @@ func TestSortList(t *testing.T) {
 				node = node.Next
 			}
 		}
+		fmt.Println("before sorting")
+		fmt.Println(single.LinkedListToArr(head))
 		sortList(head)
 		sortedArr := single.LinkedListToArr(head)
 		t.Log(sortedArr)
