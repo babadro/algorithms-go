@@ -2,13 +2,14 @@ package _148_sort_list
 
 import "github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
 
-// TODO 1
+// Not mine. Good solution. 83% 100%
 func sortList(head *single.ListNode) *single.ListNode {
 	if head == nil || head.Next == nil {
 		return head
 	}
 
-	slow, fast := head, head.Next
+	slow := head
+	fast := head.Next
 	for fast.Next != nil && fast.Next.Next != nil {
 		slow = slow.Next
 		fast = fast.Next.Next
