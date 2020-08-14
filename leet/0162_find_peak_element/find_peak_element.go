@@ -2,7 +2,6 @@ package _162_find_peak_element
 
 import "math"
 
-// TODO 1 rewrite clean bruteforce from solution and then look O(log2N) solution
 // Bruteforce
 func findPeakElement2(nums []int) int {
 	n := len(nums)
