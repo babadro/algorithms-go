@@ -1,32 +1,36 @@
 package _138_copy_list_with_random_pointer
 
-type arrElem struct {
-	node *Node
-	idx int
-	randIdx int
-}
-
-type Node struct {
-	    Val int
-	    Next *Node
-	    Random *Node
-	}
+import "github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
 
 // TODO 1
-// maybe use node.val as randIdx...
-func copyRandomList(head *Node) *Node {
-	var arr []arrElem
+func copyRandomList(head *single.ListNodeRandom) *single.ListNodeRandom {
+	if head == nil {
+		return nil
+	}
+	var copyNodes []*single.ListNodeRandom
 
 	node := head
 	idx := 0
 	for node != nil {
-		arr = append(arr, arrElem{node: node, idx: idx})
+		copyNodes = append(copyNodes, &single.ListNodeRandom{Val: node.Val})
+		node.Val = idx
 		idx++
+		node = node.Next
 	}
-	for i := range arr {
-		random := arr[i].node.Random
-		if random != nil {
-			arr[i].randIdx =
+
+	node = head
+	idx = 0
+	for node != nil {
+		if node.Random != nil {
+			randomIdx := node.Random.Val
+			copyNodes[idx].Random = copyNodes[randomIdx]
 		}
+		if node.Next != nil {
+			copyNodes[idx].Next = copyNodes[idx+1]
+		}
+		idx++
+		node = node.Next
 	}
+
+	return copyNodes[0]
 }
