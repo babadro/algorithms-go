@@ -4,7 +4,7 @@ package _227_basic_calculator_II
 func calculate(s string) int {
 	n := len(s)
 	left, right, add := 0, 0, false
-	for i := 0; i < n; i++ {
+	for i := 0; i < n; {
 		i, add = parsePlusOrMinus(i, s)
 		if i == n {
 			return left
@@ -19,12 +19,12 @@ func calculate(s string) int {
 func calcOperand(i int, s string) (int, int) {
 	n := len(s)
 	left, right, mult := 0, 0, false
-	for ; i < len(s) && !(s[i] == '+' || s[i] == '-'); i++ {
-		i, left = parseNum(i, s)
+	i, left = parseNum(i, s)
+	for i < len(s) && !(s[i] == '+' || s[i] == '-') {
 		if i == n || s[i] == '+' || s[i] == '-' {
 			return i, left
 		}
-		i, mult = parseDivOrMult(i, s)
+		i, mult = parseMultOrDiv(i, s)
 		if i == n {
 			return i, left
 		}
@@ -36,7 +36,7 @@ func calcOperand(i int, s string) (int, int) {
 }
 
 func parseNum(i int, s string) (int, int) {
-	for s[i] == ' ' {
+	for i < len(s) && s[i] == ' ' {
 		i++
 	}
 	res := 0
@@ -53,29 +53,32 @@ func parseNum(i int, s string) (int, int) {
 }
 
 func parsePlusOrMinus(i int, s string) (int, bool) {
-	for s[i] == ' ' {
+	for i < len(s) && s[i] == ' ' {
 		i++
 	}
 	if i == len(s) {
 		return i, false
 	}
 	if s[i] == '-' {
-		return i, false
+		return i + 1, false
+	}
+	if s[i] == '+' {
+		return i + 1, true
 	}
 	return i, true
 }
 
-func parseDivOrMult(i int, s string) (int, bool) {
-	for s[i] == ' ' {
+func parseMultOrDiv(i int, s string) (int, bool) {
+	for i < len(s) && s[i] == ' ' {
 		i++
 	}
 	if i == len(s) {
 		return i, false
 	}
 	if s[i] == '/' {
-		return i, false
+		return i + 1, false
 	}
-	return i, true
+	return i + 1, true
 }
 
 func evalAddOrSub(left, right int, add bool) int {
