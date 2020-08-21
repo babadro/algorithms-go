@@ -1,6 +1,6 @@
 package _227_basic_calculator_II
 
-// TODO 1
+// 84% 94%
 func calculate(s string) int {
 	n := len(s)
 	left, right, add := 0, 0, false
@@ -10,7 +10,12 @@ func calculate(s string) int {
 			return left
 		}
 		i, right = calcOperand(i, s)
-		left = evalAddOrSub(left, right, add)
+
+		if add {
+			left += right
+		} else {
+			left -= right
+		}
 	}
 
 	return left
@@ -18,18 +23,20 @@ func calculate(s string) int {
 
 func calcOperand(i int, s string) (int, int) {
 	n := len(s)
-	left, right, mult := 0, 0, false
+	left, right, mult, ok := 0, 0, false, false
 	i, left = parseNum(i, s)
-	for i < len(s) && !(s[i] == '+' || s[i] == '-') {
-		if i == n || s[i] == '+' || s[i] == '-' {
-			return i, left
-		}
-		i, mult = parseMultOrDiv(i, s)
-		if i == n {
+	for i < n {
+		i, mult, ok = parseMultOrDiv(i, s)
+		if !ok {
 			return i, left
 		}
 		i, right = parseNum(i, s)
-		left = evalMultOrDiv(left, right, mult)
+
+		if mult {
+			left *= right
+		} else {
+			left /= right
+		}
 	}
 
 	return i, left
@@ -68,29 +75,19 @@ func parsePlusOrMinus(i int, s string) (int, bool) {
 	return i, true
 }
 
-func parseMultOrDiv(i int, s string) (int, bool) {
+func parseMultOrDiv(i int, s string) (int, bool, bool) {
 	for i < len(s) && s[i] == ' ' {
 		i++
 	}
 	if i == len(s) {
-		return i, false
+		return i, false, false
 	}
 	if s[i] == '/' {
-		return i + 1, false
+		return i + 1, false, true
 	}
-	return i + 1, true
-}
+	if s[i] == '*' {
+		return i + 1, true, true
+	}
 
-func evalAddOrSub(left, right int, add bool) int {
-	if add {
-		return left + right
-	}
-	return left - right
-}
-
-func evalMultOrDiv(left, right int, mult bool) int {
-	if mult {
-		return left * right
-	}
-	return left / right
+	return i, false, false
 }
