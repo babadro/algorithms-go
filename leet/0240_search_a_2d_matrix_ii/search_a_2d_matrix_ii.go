@@ -1,5 +1,63 @@
 package _240_search_a_2d_matrix_ii
 
+// todo 1 look for solution in discuss
+func searchMatrix(matrix [][]int, target int) bool {
+
+}
+
+func seach(xLeft, yLeft, xRight, yRight int, matrix [][]int, target int) bool {
+	m, n := len(matrix), len(matrix[0])
+
+	if yLeft == yRight {
+		return rowBinarySearch(matrix[yLeft][xLeft:xRight], target)
+	}
+	if xLeft == xRight {
+		return columnBinarySearch(matrix, xLeft, yLeft, yRight, target)
+	}
+
+	for yLeft < m && xLeft < n && matrix[yLeft][xLeft] < target {
+		yLeft++
+		xLeft++
+	}
+
+	for yRight >= 0 && xRight >= 0 {
+		yRight--
+		xRight--
+	}
+}
+
+func rowBinarySearch(nums []int, target int) bool {
+	left, right := 0, len(nums)
+	for left < right {
+		middle := (right + left) / 2
+		if nums[middle] > target {
+			right = middle
+			continue
+		} else if nums[middle] < target {
+			left = middle + 1
+			continue
+		}
+		return true
+	}
+	return false
+}
+
+func columnBinarySearch(matrix [][]int, x, yFrom, yTo, target int) bool {
+	for yFrom < yTo {
+		middle := (yFrom + yTo) / 2
+		if matrix[middle][x] > target {
+			yTo = middle
+			continue
+		} else if matrix[middle][x] < target {
+			yFrom = middle + 1
+			continue
+		}
+		return true
+	}
+	return false
+}
+
+/*
 func searchMatrix(matrix [][]int, target int) bool {
 	if len(matrix) == 0 || len(matrix[0]) == 0 {
 		return false
@@ -20,6 +78,7 @@ func searchMatrix(matrix [][]int, target int) bool {
 	}
 
 }
+*/
 
 // brutforce. status: accepted
 func searchMatrixBrutforce(matrix [][]int, target int) bool {
