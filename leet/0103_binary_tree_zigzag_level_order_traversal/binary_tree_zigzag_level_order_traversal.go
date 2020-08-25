@@ -2,7 +2,60 @@ package _103_binary_tree_zigzag_level_order_traversal
 
 import "github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
 
-// TODO 1
+// 100% 72%
 func zigzagLevelOrder(root *btree.Node) [][]int {
+	var res [][]int
 
+	addValueToLevel(root, 0, &res)
+
+	for i := range res {
+		if i%2 != 0 {
+			n := len(res[i])
+			for j := 0; j < n/2; j++ {
+				res[i][j], res[i][n-1-j] = res[i][n-1-j], res[i][j]
+			}
+		}
+	}
+
+	return res
+}
+
+func addValueToLevel(node *btree.Node, level int, levels *[][]int) {
+	if node == nil {
+		return
+	}
+	if level == len(*levels) {
+		*levels = append(*levels, []int{node.Val})
+	} else {
+		(*levels)[level] = append((*levels)[level], node.Val)
+	}
+	addValueToLevel(node.Left, level+1, levels)
+	addValueToLevel(node.Right, level+1, levels)
+}
+
+// Clear, single pass, but waste of memory. 100% 27%
+func zigzagLevelOrder2(root *btree.Node) [][]int {
+	var res [][]int
+
+	addValueToLevel(root, 0, &res)
+
+	return res
+}
+
+func addValueToLevel2(node *btree.Node, level int, levels *[][]int) {
+	if node == nil {
+		return
+	}
+	if level == len(*levels) {
+		*levels = append(*levels, []int{node.Val})
+	} else {
+		if level%2 == 0 {
+			(*levels)[level] = append((*levels)[level], node.Val)
+		} else {
+			(*levels)[level] = append([]int{node.Val}, (*levels)[level]...)
+		}
+
+	}
+	addValueToLevel2(node.Left, level+1, levels)
+	addValueToLevel2(node.Right, level+1, levels)
 }
