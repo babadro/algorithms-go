@@ -57,8 +57,8 @@ func columnBinarySearch(matrix [][]int, x, yFrom, yTo, target int) bool {
 	return false
 }
 
-/*
-func searchMatrix(matrix [][]int, target int) bool {
+/* todo 2 this is not bad idea mabye...
+func searchMatrix(matrix [][]int, target, lY, lX, rY, rX int) bool {
 	if len(matrix) == 0 || len(matrix[0]) == 0 {
 		return false
 	}
