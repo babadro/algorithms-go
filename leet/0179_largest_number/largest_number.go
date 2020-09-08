@@ -5,7 +5,7 @@ import (
 	"strconv"
 )
 
-// Doesn't work. Look in testcase#10
+// Doesn't work. Look testcase#10
 func largestNumberFails(nums []int) string {
 	if len(nums) == 0 {
 		return ""
