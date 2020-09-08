@@ -5,8 +5,8 @@ import (
 	"strconv"
 )
 
-// TODO 1
-func largestNumber(nums []int) string {
+// Doesn't work. Look testcase#10
+func largestNumberFails(nums []int) string {
 	if len(nums) == 0 {
 		return ""
 	}
@@ -29,11 +29,11 @@ func largestNumber(nums []int) string {
 			}
 		}
 
-		if len(strI) > len(strJ) {
-			return strI[k] > strJ[k-1]
+		if len(strI) < len(strJ) {
+			return less(strI, strJ[k])
 		}
 
-		return strI[k-1] > strJ[k]
+		return !less(strJ, strI[k])
 	})
 
 	if arr[0][0] == '0' {
@@ -46,4 +46,13 @@ func largestNumber(nums []int) string {
 	}
 
 	return string(res)
+}
+
+func less(str string, char byte) bool {
+	for i := 0; i < len(str); i++ {
+		if str[i] != char {
+			return str[i] > char
+		}
+	}
+	return false
 }
