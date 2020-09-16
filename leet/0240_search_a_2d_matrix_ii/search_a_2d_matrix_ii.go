@@ -1,6 +1,5 @@
 package _240_search_a_2d_matrix_ii
 
-// todo 1 look for solution in discuss
 func searchMatrix(matrix [][]int, target int) bool {
 
 }
