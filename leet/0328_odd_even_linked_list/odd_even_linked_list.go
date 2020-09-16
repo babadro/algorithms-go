@@ -8,8 +8,8 @@ func oddEvenList(head *single.ListNode) *single.ListNode {
 		return nil
 	}
 
-	oddStart, oddCurr := head, head
-	evenStart, evenCurr := oddStart.Next, oddStart.Next
+	oddCurr := head
+	evenStart, evenCurr := head.Next, head.Next
 	for evenCurr != nil && evenCurr.Next != nil {
 		oddCurr.Next = oddCurr.Next.Next
 		oddCurr = oddCurr.Next
@@ -20,5 +20,5 @@ func oddEvenList(head *single.ListNode) *single.ListNode {
 
 	oddCurr.Next = evenStart
 
-	return oddStart
+	return head
 }
