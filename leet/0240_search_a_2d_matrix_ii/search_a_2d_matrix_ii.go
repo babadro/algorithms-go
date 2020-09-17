@@ -1,7 +1,7 @@
 package _240_search_a_2d_matrix_ii
 
 func searchMatrix(matrix [][]int, target int) bool {
-
+	return false
 }
 
 func seach(xLeft, yLeft, xRight, yRight int, matrix [][]int, target int) bool {
@@ -23,6 +23,8 @@ func seach(xLeft, yLeft, xRight, yRight int, matrix [][]int, target int) bool {
 		yRight--
 		xRight--
 	}
+
+	return false
 }
 
 func rowBinarySearch(nums []int, target int) bool {
