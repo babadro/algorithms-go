@@ -1,7 +1,7 @@
 package _334_increasing_triplet_subsequence
 
-// TODO 1
-func increasingTriplet(nums []int) bool {
+// Doesn't work
+func increasingTripletFail(nums []int) bool {
 	i := 0
 
 Loop:
