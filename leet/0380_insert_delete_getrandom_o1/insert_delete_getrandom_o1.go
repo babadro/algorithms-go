@@ -3,6 +3,7 @@ package _380_insert_delete_getrandom_o1
 import "math/rand"
 
 // 88% 8%
+// 8% memory result is ok, because better variant less by 0.5 mb only (7.5 vs 7 mb)
 type RandomizedSet struct {
 	arr        []int
 	valueToIDx map[int]int
