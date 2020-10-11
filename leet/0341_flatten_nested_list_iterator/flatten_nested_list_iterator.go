@@ -12,43 +12,72 @@ func Constructor(nestedList []*NestedInteger) *NestedIterator {
 }
 
 func (this *NestedIterator) Next() int {
-	if this.list[this.i].IsInteger() {
-		res := this.list[this.i].GetInteger()
-		this.i++
-		return res
-	}
+	res := this.list[this.i].GetInteger()
+	this.i++
+	return res
+	/*
+		if this.list[this.i].IsInteger() {
+			res := this.list[this.i].GetInteger()
+			this.i++
+			return res
+		}
 
-	if this.curr == nil {
-		this.curr = Constructor(this.list[this.i].GetList())
-	}
+		//if this.curr == nil {
+		//	this.curr = Constructor(this.list[this.i].GetList())
+		//}
 
-	if !this.curr.HasNext() {
-		this.i++
-		this.curr = nil
-		return this.Next()
-	}
+		if !this.curr.HasNext() {
+			this.i++
+			this.curr = nil
+			return this.Next()
+		}
 
-	return this.curr.Next()
+		return this.curr.Next()
+	*/
+
 }
 
+// todo 1 fix infinitive loop
 func (this *NestedIterator) HasNext() bool {
-	if this.i == len(this.list) {
-		return false
-	}
-
-	if this.i == len(this.list)-1 {
+	for this.i < len(this.list) {
 		if this.list[this.i].IsInteger() {
 			return true
 		}
 
 		if this.curr == nil {
-			this.curr = Constructor(this.list[this.i].GetList())
+			list := this.list[this.i].GetList()
+			if len(list) == 0 {
+				this.i++
+				continue
+			}
+
+			this.curr = Constructor(list)
 		}
 
-		return this.curr.HasNext()
+		if !this.curr.HasNext() {
+			this.i++
+			continue
+		}
 	}
 
-	return true
+	return false
+	//if this.i == len(this.list) {
+	//	return false
+	//}
+	//
+	//if this.i == len(this.list)-1 {
+	//	if this.list[this.i].IsInteger() {
+	//		return true
+	//	}
+	//
+	//	if this.curr == nil {
+	//		this.curr = Constructor(this.list[this.i].GetList())
+	//	}
+	//
+	//	return this.curr.HasNext()
+	//}
+	//
+	//return true
 }
 
 // This is the interface that allows for creating nested lists.
