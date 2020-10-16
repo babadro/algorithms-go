@@ -1,6 +1,6 @@
 package _341_flatten_nested_list_iterator
 
-// todo 1
+// 96% 10% - it's ok. Best solution only takes only 0.2 mb less
 type NestedIterator struct {
 	list []*NestedInteger
 	i    int
@@ -12,72 +12,45 @@ func Constructor(nestedList []*NestedInteger) *NestedIterator {
 }
 
 func (this *NestedIterator) Next() int {
+	if this.curr != nil {
+		return this.curr.Next()
+	}
+
 	res := this.list[this.i].GetInteger()
 	this.i++
 	return res
-	/*
-		if this.list[this.i].IsInteger() {
-			res := this.list[this.i].GetInteger()
-			this.i++
-			return res
-		}
-
-		//if this.curr == nil {
-		//	this.curr = Constructor(this.list[this.i].GetList())
-		//}
-
-		if !this.curr.HasNext() {
-			this.i++
-			this.curr = nil
-			return this.Next()
-		}
-
-		return this.curr.Next()
-	*/
-
 }
 
-// todo 1 fix infinitive loop
 func (this *NestedIterator) HasNext() bool {
-	for this.i < len(this.list) {
+	for ; this.i < len(this.list); this.i++ {
 		if this.list[this.i].IsInteger() {
+			this.curr = nil
 			return true
 		}
 
-		if this.curr == nil {
-			list := this.list[this.i].GetList()
-			if len(list) == 0 {
-				this.i++
-				continue
+		if this.curr != nil {
+			if this.curr.HasNext() {
+				return true
 			}
 
-			this.curr = Constructor(list)
+			this.curr = nil
+			continue
 		}
 
-		if !this.curr.HasNext() {
-			this.i++
+		list := this.list[this.i].GetList()
+		if len(list) == 0 {
 			continue
+		}
+
+		iterator := Constructor(list)
+
+		if iterator.HasNext() {
+			this.curr = iterator
+			return true
 		}
 	}
 
 	return false
-	//if this.i == len(this.list) {
-	//	return false
-	//}
-	//
-	//if this.i == len(this.list)-1 {
-	//	if this.list[this.i].IsInteger() {
-	//		return true
-	//	}
-	//
-	//	if this.curr == nil {
-	//		this.curr = Constructor(this.list[this.i].GetList())
-	//	}
-	//
-	//	return this.curr.HasNext()
-	//}
-	//
-	//return true
 }
 
 // This is the interface that allows for creating nested lists.
@@ -115,18 +88,18 @@ func (this *NestedInteger) Add(elem NestedInteger) {}
 // You can access NestedInteger's List element directly if you want to modify it
 func (this NestedInteger) GetList() []*NestedInteger {
 	var arr []*NestedInteger
-	val, ok := this.val.([]int)
-	if !ok {
-		interfaces, ok := this.val.([]interface{})
-		if !ok {
-			panic("cannot parse list as []interfaces")
-		}
-		for i := range val {
-			arr = append(arr, &NestedInteger{val: interfaces[i]})
-		}
-
-		return arr
-	}
+	val, _ := this.val.([]interface{})
+	//if !ok {
+	//	interfaces, ok := this.val.([]interface{})
+	//	if !ok {
+	//		panic("cannot parse list as []interfaces")
+	//	}
+	//	for i := range val {
+	//		arr = append(arr, &NestedInteger{val: interfaces[i]})
+	//	}
+	//
+	//	return arr
+	//}
 
 	for i := range val {
 		arr = append(arr, &NestedInteger{val: val[i]})

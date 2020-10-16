@@ -28,9 +28,21 @@ func TestConstructor(t *testing.T) {
 		{
 			name: "3",
 			nestedIntegers: []*NestedInteger{
-				{[]interface{}{[]interface{}{1, 2, []int{3, 4}}, 5}},
+				{[]interface{}{[]interface{}{1, 2, []interface{}{3, 4}}, 5}},
 				{6},
-				{[]int{7, 8}},
+				{[]interface{}{7, 8}},
+			},
+		},
+		{
+			name: "4",
+			nestedIntegers: []*NestedInteger{
+				{[]interface{}{[]interface{}{}, 1}},
+			},
+		},
+		{
+			name: "5",
+			nestedIntegers: []*NestedInteger{
+				{[]interface{}{[]interface{}{}, []interface{}{[]interface{}{}, 1}, []interface{}{}, 1}},
 			},
 		},
 	}
