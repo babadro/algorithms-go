@@ -17,10 +17,11 @@ func Test_maxProfit(t *testing.T) {
 		{"7", []int{1, 2, 3}, 2},
 		{"8", []int{3, 2, 2}, 0},
 		{"9", []int{3, 2, 1}, 0},
+		{"10", []int{1, 7, 2, 3, 6, 7, 6, 7}, 12},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := maxProfit2(tt.prices); got != tt.want {
+			if got := maxProfit(tt.prices); got != tt.want {
 				t.Errorf("maxProfit2() = %v, want %v", got, tt.want)
 			}
 		})
