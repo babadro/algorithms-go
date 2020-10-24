@@ -30,3 +30,16 @@ func kthSmallest2(matrix [][]int, k int) int {
 
 	return arr[k-n*n-1]
 }
+
+// it works
+func kthSmallestBruteForce(matrix [][]int, k int) int {
+	arr := make([]int, 0, len(matrix)*len(matrix[0]))
+	for y := 0; y < len(matrix); y++ {
+		for x := 0; x < len(matrix[0]); x++ {
+			arr = append(arr, matrix[y][x])
+		}
+	}
+
+	sort.Ints(arr)
+	return arr[k-1]
+}
