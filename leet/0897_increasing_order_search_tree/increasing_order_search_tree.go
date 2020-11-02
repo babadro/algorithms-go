@@ -2,7 +2,7 @@ package _897_increasing_order_search_tree
 
 import "github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
 
-// tptl. Simple but not in place (O(N))
+// Simple but not in place (O(N))
 func increasingBST(root *btree.Node) *btree.Node {
 	var arr []*btree.Node
 
