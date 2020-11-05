@@ -1,6 +1,6 @@
 package _703_kth_largest_element_in_stream
 
-// todo 1
+// very bad description. can't understand examples.
 type KthLargest struct {
 }
 
