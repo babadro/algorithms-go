@@ -1,5 +1,6 @@
 package _198_house_robber
 
+// tptl. passed. array.
 func rob(nums []int) int {
 	l := len(nums)
 	if l == 0 {
