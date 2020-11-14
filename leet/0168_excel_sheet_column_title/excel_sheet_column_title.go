@@ -4,15 +4,8 @@ package _168_excel_sheet_column_title
 func convertToTitle(n int) string {
 	var res []byte
 	for n > 0 {
-		remainder := n % 26
-		n /= 26
-
-		if remainder == 0 {
-			remainder = 26
-			n--
-		}
-
-		res = append(res, 'A'-1+byte(remainder))
+		res = append(res, 'A'+byte((n-1)%26))
+		n = (n - 1) / 26
 	}
 
 	for i := 0; i < len(res)/2; i++ {
