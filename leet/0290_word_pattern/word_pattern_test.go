@@ -17,7 +17,7 @@ func Test_wordPattern(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := wordPattern(tt.pattern, tt.s); got != tt.want {
+			if got := wordPattern2(tt.pattern, tt.s); got != tt.want {
 				t.Errorf("wordPattern() = %v, want %v", got, tt.want)
 			}
 		})

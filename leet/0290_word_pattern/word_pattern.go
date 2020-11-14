@@ -2,7 +2,34 @@ package _290_word_pattern
 
 import "strings"
 
-// todo 1
+// todo 1 look for solution without len(map)
+func wordPattern2(pattern string, s string) bool {
+	words := strings.Split(s, " ")
+	if len(words) != len(pattern) {
+		return false
+	}
+
+	m1, m2 := make(map[byte]int), make(map[string]int)
+	idx1, idx2, ok := 0, 0, false
+	for i := 0; i < len(pattern); i++ {
+		if idx1, ok = m1[pattern[i]]; !ok {
+			idx1 = len(m1)
+			m1[pattern[i]] = idx1
+		}
+
+		if idx2, ok = m2[words[i]]; !ok {
+			idx2 = len(m2)
+			m2[words[i]] = idx2
+		}
+
+		if idx1 != idx2 {
+			return false
+		}
+	}
+
+	return true
+}
+
 // bruteforce
 func wordPattern(pattern string, s string) bool {
 	pattern1 := make([]int, len(pattern))
