@@ -40,7 +40,7 @@ func TestHashMap2(t *testing.T) {
 	t.Log(h.Get(2))
 }
 
-func Call(commands []string, args [][]int, expected [][]int)
+//func Call(commands []string, args [][]int, expected [][]int)
 
 func TestHashMap3(t *testing.T) {
 	tests := []struct {

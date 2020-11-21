@@ -2,7 +2,7 @@ package _706_design_hashmap
 
 const capacity = 10000
 
-// todo 1. doesnt' work
+// passed. tptl
 type MyHashMap struct {
 	storage [][]int
 }
@@ -44,15 +44,10 @@ func (this *MyHashMap) Remove(key int) {
 	idx := hash(key)
 	n := len(this.storage[idx])
 
-	if n <= 2 {
-		this.storage[idx] = this.storage[idx][:0]
-		return
-	}
-
 	for i := 0; i < n; i += 2 {
 		if this.storage[idx][i] == key {
-			this.storage[idx][i], this.storage[idx][n-2] = this.storage[idx][n-2], this.storage[idx][i]
-			this.storage[idx][i+1], this.storage[idx][n-1] = this.storage[idx][n-1], this.storage[idx][i+1]
+			this.storage[idx][i] = this.storage[idx][n-2]
+			this.storage[idx][i+1] = this.storage[idx][n-1]
 			this.storage[idx] = this.storage[idx][:n-2]
 
 			return
