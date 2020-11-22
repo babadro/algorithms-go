@@ -16,7 +16,7 @@ func Test_longestWord(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := longestWord(tt.words); got != tt.want {
+			if got := longestWord2(tt.words); got != tt.want {
 				t.Errorf("longestWord() = %v, want %v", got, tt.want)
 			}
 		})
