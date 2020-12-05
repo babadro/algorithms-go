@@ -2,7 +2,7 @@ package _914_x_of_a_kind_in_a_deck_of_cards
 
 import "sort"
 
-// todo 1
+// todo 1. I don't understand right this task. Solution should be easier.
 func hasGroupsSizeX(deck []int) bool {
 	n := len(deck)
 	if n%2 != 0 {
@@ -30,6 +30,8 @@ func hasGroupsSizeX(deck []int) bool {
 
 			minLen = currLen
 
+			currLen = 1
+
 			continue
 		}
 
@@ -37,7 +39,7 @@ func hasGroupsSizeX(deck []int) bool {
 			return false
 		}
 
-		currLen = 0
+		currLen = 1
 	}
 
 	return true

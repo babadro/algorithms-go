@@ -2,7 +2,7 @@ package _792_number_of_matching_subsequences
 
 import "sort"
 
-// todo 2. not fastest, but interesting. need to understand.
+// passed. not fastest, but interesting.
 func numMatchingSubseq4(S string, words []string) int {
 	pos := make([][]int, 26)
 	for i := 0; i < len(S); i++ {
@@ -80,6 +80,7 @@ Loop:
 }
 
 // best speed. tptl. passed. easy.
+// I think, this is the best solution.
 func numMatchingSubseq2(S string, words []string) int {
 	ans := 0
 
