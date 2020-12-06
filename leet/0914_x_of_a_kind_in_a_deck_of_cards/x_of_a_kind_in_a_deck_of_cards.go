@@ -60,55 +60,22 @@ func gcd(x, y int) int {
 	return gcd(y%x, x)
 }
 
-// doesnt' work
+// passed
 func hasGroupsSizeX(deck []int) bool {
 	n := len(deck)
-
 	sort.Ints(deck)
+	currLen := 1
 
-	minLen, currLen := 0, 1
-
-	divisor := 2
+	var divisor int
 	for i := 1; i <= n; i++ {
 		if i < n && deck[i] == deck[i-1] {
 			currLen++
 			continue
 		}
 
-		if currLen == 1 {
+		if divisor = gcd(divisor, currLen); divisor < 2 {
 			return false
 		}
-
-		if minLen == 0 {
-			minLen = currLen
-
-			currLen = 1
-
-			continue
-		}
-
-		if currLen < minLen {
-			d := gcd(minLen, currLen)
-			if d < divisor {
-				return false
-			}
-
-			divisor = d
-
-			minLen = currLen
-
-			currLen = 1
-
-			continue
-		}
-
-		d := gcd(minLen, currLen)
-		if d < divisor {
-			return false
-		}
-
-		divisor = d
-
 		currLen = 1
 	}
 

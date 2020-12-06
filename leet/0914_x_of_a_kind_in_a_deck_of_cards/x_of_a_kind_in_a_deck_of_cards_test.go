@@ -21,7 +21,7 @@ func Test_hasGgoroupsSizeX(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := hasGroupsSizeGCD(tt.deck); got != tt.want {
+			if got := hasGroupsSizeX(tt.deck); got != tt.want {
 				t.Errorf("hasGroupsSizeX() = %v, want %v", got, tt.want)
 			}
 		})
