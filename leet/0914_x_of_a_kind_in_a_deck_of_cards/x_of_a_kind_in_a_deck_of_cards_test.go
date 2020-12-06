@@ -16,12 +16,16 @@ func Test_hasGgoroupsSizeX(t *testing.T) {
 		{"5", []int{1, 1, 2, 2, 2, 2}, true},
 		{"5", []int{1, 1, 2, 3, 3, 4}, false},
 		{"6", []int{1, 1, 1, 1, 2, 2, 2, 2, 2, 2}, true}, // failed.
+		{"7", []int{1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3}, false},
+		{"8", []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 5, 5, 5, 5, 6, 6, 7, 7, 8, 8}, true},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := hasGroupsSizeX(tt.deck); got != tt.want {
+			if got := hasGroupsSizeGCD(tt.deck); got != tt.want {
 				t.Errorf("hasGroupsSizeX() = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
+
+//14, 6, 6, 12, 2, 4, 2, 2, 2
