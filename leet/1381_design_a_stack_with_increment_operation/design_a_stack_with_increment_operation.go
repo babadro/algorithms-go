@@ -1,6 +1,6 @@
 package _1381_design_a_stack_with_increment_operation
 
-// todo 1
+// passed. tptl
 type CustomStack []int
 
 func Constructor(maxSize int) CustomStack {
