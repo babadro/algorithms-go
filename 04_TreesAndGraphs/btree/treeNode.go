@@ -21,3 +21,24 @@ func InOrderFunc(node *Node, f func(node *Node)) {
 		InOrderFunc(node.Right, f)
 	}
 }
+
+func PreOrderFunc(node *Node, f func(node *Node)) {
+	if node != nil {
+		f(node)
+		PreOrderFunc(node.Left, f)
+		PreOrderFunc(node.Right, f)
+	}
+}
+
+// tptl
+func Clone(root *Node) *Node {
+	if root != nil {
+		n := &Node{Val: root.Val}
+		n.Left = Clone(root.Left)
+		n.Right = Clone(root.Right)
+
+		return root
+	}
+
+	return nil
+}
