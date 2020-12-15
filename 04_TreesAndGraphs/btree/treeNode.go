@@ -42,3 +42,32 @@ func Clone(root *Node) *Node {
 
 	return nil
 }
+
+func Delete(root *Node, key int) *Node {
+	if root == nil {
+		return nil
+	}
+
+	if key < root.Val {
+		root.Left = Delete(root.Left, key)
+	} else if key > root.Val {
+		root.Right = Delete(root.Right, key)
+	} else {
+		if root.Right == nil {
+			return root.Left
+		} else if root.Left == nil {
+			return root.Right
+		}
+
+		rightSmallest := root.Right
+		for rightSmallest.Left != nil {
+			rightSmallest = rightSmallest.Left
+		}
+
+		rightSmallest.Left = root.Left
+
+		return root.Right
+	}
+
+	return root
+}
