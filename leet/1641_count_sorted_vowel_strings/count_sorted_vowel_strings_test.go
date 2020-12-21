@@ -14,9 +14,25 @@ func Test_countVowelStrings(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(strconv.Itoa(tt.n), func(t *testing.T) {
-			if got := countVowelStrings(tt.n); got != tt.want {
+			if got := countVowelStrings2(tt.n); got != tt.want {
 				t.Errorf("countVowelStrings() = %v, want %v", got, tt.want)
 			}
 		})
 	}
+}
+
+func Benchmark_countVowelStrings2(b *testing.B) {
+	var res int
+	for i := 0; i < b.N; i++ {
+		res = countVowelStrings2(33)
+	}
+	_ = res
+}
+
+func Benchmark_countVowelStrings3(b *testing.B) {
+	var res int
+	for i := 0; i < b.N; i++ {
+		res = countVowelStrings3(33)
+	}
+	_ = res
 }
