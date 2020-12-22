@@ -1,23 +1,17 @@
 package _1668_maximum_repeatin_substring
 
-// todo 1
+// passed. tptl
 func maxRepeating(sequence string, word string) int {
 	n := len(word)
 	max := 0
-	for i := 0; i+n <= len(sequence); {
-		if sequence[i:i+n] == word {
-			counter, j := 1, i+n
-			for ; j+n <= len(sequence) && sequence[j:j+n] == word; j += n {
-				counter++
-			}
+	for k := 0; k+n <= len(sequence); k++ {
+		counter := 0
+		for i := k; i+n <= len(sequence) && sequence[i:i+n] == word; i += n {
+			counter++
+		}
 
-			if counter > max {
-				max = counter
-			}
-
-			i = j + 1
-		} else {
-			i++
+		if counter > max {
+			max = counter
 		}
 	}
 
