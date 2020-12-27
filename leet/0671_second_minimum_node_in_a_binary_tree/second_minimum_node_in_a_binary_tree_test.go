@@ -11,13 +11,21 @@ func Test_findSecondMinimumValue(t *testing.T) {
 		treeBuilder func() *btree.Node
 		want        int
 	}{
-		{
-			name: "1",
-			treeBuilder: func() *btree.Node {
-				return nil
-			},
-			want: -1,
-		},
+		//{
+		//	name: "1",
+		//	treeBuilder: func() *btree.Node {
+		//		n1_1 := n(1)
+		//		n1_2, n3_2 := n(1), n(3)
+		//		n1_3_1, n1_3_2, n3_3, n4_3 := n(1), n(1), n(3), n(4)
+		//		n3_4, n1_4_1, n1_4_2, n1_4_3 := n(3), n(1), n(1), n(1)
+		//		n3_5_1, n3_5_2, n1_5_1, n6_5, n2_5, n1_5_2 := n(3), n(3), n(1), n(6), n(2), n(1)
+		//
+		//		n1_1.Left, n1_1.Right = n1_2, n3_2
+		//		n1_2.Left, n1_2.Right = n1_3_1, n1_3_2
+		//		n1_3_1.Left, n1_3_1.Right = n3_4, n1_4_1
+		//	},
+		//	want: -1,
+		//},
 		{
 			name: "2",
 			treeBuilder: func() *btree.Node {
@@ -57,9 +65,13 @@ func Test_findSecondMinimumValue(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := findSecondMinimumValue(tt.treeBuilder()); got != tt.want {
+			if got := findSecondMinimumValue2(tt.treeBuilder()); got != tt.want {
 				t.Errorf("isBalanced() = %v, want %v", got, tt.want)
 			}
 		})
 	}
+}
+
+func n(val int) *btree.Node {
+	return &btree.Node{Val: val}
 }

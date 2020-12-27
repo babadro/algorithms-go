@@ -19,7 +19,7 @@ func Test_maxRepeating(t *testing.T) {
 		{"ab", "ab", 1},
 		{"abb", "ab", 1},
 		{"abb", "ab", 1},
-		{"aaabaaaabaaabaaaabaaaabaaaabaaaaba", "aaaba", 5}, // todo 1 fails.
+		{"aaabaaaabaaabaaaabaaaabaaaabaaaaba", "aaaba", 5},
 	}
 	for _, tt := range tests {
 		t.Run(tt.sequence+"_"+tt.word, func(t *testing.T) {

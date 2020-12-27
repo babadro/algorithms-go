@@ -2,11 +2,40 @@ package _671_second_minimum_node_in_a_binary_tree
 
 import (
 	"github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+	"math"
 	"sort"
 )
 
+// passed. best solution. tptl
+func findSecondMinimumValue2(root *btree.Node) int {
+	res := visit2(root, root.Val)
+
+	if res == math.MaxInt64 {
+		return -1
+	}
+
+	return res
+}
+
+func visit2(root *btree.Node, val int) int {
+	if root == nil {
+		return math.MaxInt64
+	}
+
+	if root.Val > val {
+		return root.Val
+	}
+
+	left, right := visit2(root.Left, val), visit2(root.Right, val)
+
+	if left < right {
+		return left
+	}
+
+	return right
+}
+
 // passed bruteforce
-// todo 1 make more effective solution
 func findSecondMinimumValue(root *btree.Node) int {
 	m := make(map[int]bool)
 	visit(root, m)
