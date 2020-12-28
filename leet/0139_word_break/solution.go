@@ -1,7 +1,7 @@
 package _139_word_break
 
 // https://leetcode.com/problems/word-break/discuss/448646/Go-golang-0ms-solution
-// TODO 1 learn by heart
+// passed. tptl
 func wordBreak(s string, wordDict []string) bool {
 	dict := make(map[string]bool)
 	for _, v := range wordDict {
