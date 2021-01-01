@@ -48,7 +48,7 @@ func Test_robotSim(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := robotSim(tt.commands, tt.obstacles); got != tt.want {
+			if got := robotSim2(tt.commands, tt.obstacles); got != tt.want {
 				t.Errorf("robotSim() = %v, want %v", got, tt.want)
 			}
 		})

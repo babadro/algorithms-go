@@ -10,7 +10,7 @@ const (
 	right = -1
 )
 
-// passed. todo 1: look for shorter solution
+// passed.
 func robotSim(commands []int, obstacles [][]int) int {
 	m := make(map[[2]int]bool)
 
