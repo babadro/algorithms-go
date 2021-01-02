@@ -55,11 +55,6 @@ func matrixBlockSum2(mat [][]int, K int) [][]int {
 func helper(mat [][]int) {
 	m, n := len(mat), len(mat[0])
 
-	answer := make([][]int, m)
-	for i := range answer {
-		answer[i] = make([]int, n)
-	}
-
 	rowSum := make([]int, n)
 	for y := 0; y < m; y++ {
 		for x := 0; x < n; x++ {
