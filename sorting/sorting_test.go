@@ -1,4 +1,4 @@
-package mergeSort
+package sorting
 
 import (
 	"math/rand"
@@ -7,21 +7,7 @@ import (
 	"time"
 )
 
-func TestMerge(t *testing.T) {
-	standardCases := [][]int{
-		{4, 5, 6, 1, 2, 3},
-	}
-	for i := range standardCases {
-		mid := (len(standardCases[i]) - 1) / 2
-		merge(standardCases[i], 0, mid, len(standardCases[i])-1)
-		if !sort.IntsAreSorted(standardCases[i]) {
-			t.Errorf("not sorted: %v", standardCases[i])
-		}
-		t.Log(standardCases[i])
-	}
-}
-
-func TestMergeSort(t *testing.T) {
+func testFunc(t *testing.T, sortFunc func(nums []int)) {
 	seed := time.Now().UnixNano()
 	t.Log(seed)
 	source := rand.NewSource(seed)
@@ -30,12 +16,13 @@ func TestMergeSort(t *testing.T) {
 		length := rnd.Intn(100)
 		input := make([]int, length)
 		for j := 0; j < length; j++ {
-			input[j] = rnd.Intn(1000)
+			min, max := -1000, 1000
+			input[j] = rnd.Intn(max-min) + min
 			if rnd.Intn(2) == 1 {
 				input[j] *= -1
 			}
 		}
-		mergeSort(input, 0, length-1)
+		sortFunc(input)
 		if !sort.IntsAreSorted(input) {
 			t.Errorf("not sorted: %v", input)
 		}
@@ -45,11 +32,10 @@ func TestMergeSort(t *testing.T) {
 		nil, {}, {0}, {1}, {-1}, {2, 1}, {1, 2},
 	}
 	for i := range standardCases {
-		mergeSort(standardCases[i], 0, len(standardCases[i])-1)
+		sortFunc(standardCases[i])
 		if !sort.IntsAreSorted(standardCases[i]) {
 			t.Errorf("not sorted: %v", standardCases[i])
 		}
 		t.Log(standardCases[i])
 	}
-
 }

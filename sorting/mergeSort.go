@@ -1,5 +1,6 @@
-package mergeSort
+package sorting
 
+// stability and usefulness in parallel algorithms, distributed algorithms, and databases (ie. Merge join)
 func merge(arr []int, l, m, r int) {
 	n1 := m - l + 1
 	n2 := r - m
