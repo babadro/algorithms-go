@@ -2,6 +2,7 @@ package sorting
 
 import (
 	"math/rand"
+	"reflect"
 	"sort"
 	"testing"
 	"time"
@@ -18,24 +19,29 @@ func testFunc(t *testing.T, sortFunc func(nums []int)) {
 		for j := 0; j < length; j++ {
 			min, max := -1000, 1000
 			input[j] = rnd.Intn(max-min) + min
-			if rnd.Intn(2) == 1 {
-				input[j] *= -1
-			}
 		}
-		sortFunc(input)
-		if !sort.IntsAreSorted(input) {
-			t.Errorf("not sorted: %v", input)
-		}
+
+		makeInputCopyThenSortBothOfThemAndCompare(t, input, sortFunc)
 	}
 
 	standardCases := [][]int{
-		nil, {}, {0}, {1}, {-1}, {2, 1}, {1, 2},
+		{}, {0}, {1}, {-1}, {2, 1}, {1, 2},
 	}
 	for i := range standardCases {
-		sortFunc(standardCases[i])
-		if !sort.IntsAreSorted(standardCases[i]) {
-			t.Errorf("not sorted: %v", standardCases[i])
-		}
-		t.Log(standardCases[i])
+		makeInputCopyThenSortBothOfThemAndCompare(t, standardCases[i], sortFunc)
+	}
+}
+
+func makeInputCopyThenSortBothOfThemAndCompare(t *testing.T, input []int, sortFunc func(nums []int)) {
+	copyArr := make([]int, len(input))
+	copy(copyArr, input)
+	sort.Slice(copyArr, func(i, j int) bool {
+		return copyArr[i] < copyArr[j]
+	})
+
+	sortFunc(input)
+
+	if !reflect.DeepEqual(input, copyArr) {
+		t.Errorf("got = %v, want %v", input, copyArr)
 	}
 }
