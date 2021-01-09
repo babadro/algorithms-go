@@ -1,5 +1,7 @@
 package btree
 
+import "container/list"
+
 type Node struct {
 	Val   int
 	Left  *Node
@@ -28,6 +30,67 @@ func PreOrderFunc(node *Node, f func(node *Node)) {
 		PreOrderFunc(node.Left, f)
 		PreOrderFunc(node.Right, f)
 	}
+}
+
+// dyx
+func LevelOrderFuncRecursive(node *Node, f func(node *Node)) {
+	h := Height(node)
+
+	for i := 1; i <= h; i++ {
+		levelOrderFuncHelper(node, i, f)
+	}
+}
+
+func levelOrderFuncHelper(node *Node, level int, f func(node *Node)) {
+	if node == nil {
+		return
+	}
+
+	if level == 1 {
+		f(node)
+	} else if level > 1 {
+		levelOrderFuncHelper(node.Left, level-1, f)
+		levelOrderFuncHelper(node.Right, level-1, f)
+	}
+}
+
+// dyx
+func LevelOrderFuncIterative(node *Node, f func(node *Node)) {
+	if node == nil {
+		return
+	}
+
+	q := list.New()
+	q.PushBack(node)
+
+	for q.Front() != nil {
+		tempNode := q.Front().Value.(*Node)
+		q.Remove(q.Front())
+
+		f(tempNode)
+
+		if tempNode.Left != nil {
+			q.PushBack(tempNode.Left)
+		}
+
+		if tempNode.Right != nil {
+			q.PushBack(tempNode.Right)
+		}
+	}
+}
+
+// dyx
+func Height(node *Node) int {
+	if node == nil {
+		return 0
+	}
+
+	l, r := Height(node.Left), Height(node.Right)
+	if l > r {
+		return l + 1
+	}
+
+	return r + 1
 }
 
 // tptl
