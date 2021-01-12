@@ -1,6 +1,6 @@
 package _674_longest_continuous_increasing_subsequence
 
-// ok
+// ok.
 func findLengthOfLCIS(nums []int) int {
 	maxLen, currLen := 0, 0
 	for i, num := range nums {

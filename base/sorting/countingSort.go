@@ -1,6 +1,6 @@
 package sorting
 
-// todo 1 understand it
+// tptl
 func Counting(arr []byte) {
 	n := len(arr)
 

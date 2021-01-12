@@ -1,6 +1,6 @@
 package _1108_defanging_IP_address
 
-// passed. easy.
+// passed. easy. tptl
 func defangIPaddre(address string) string {
 	res := make([]byte, 0, len(address))
 
