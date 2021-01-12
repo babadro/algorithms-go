@@ -1,6 +1,6 @@
 package _1089_duplicate_zeroes
 
-// tptl. passed
+// tptl. passed best solution
 func duplicateZeros2(arr []int) {
 	zeroCount := 0
 	for _, num := range arr {
