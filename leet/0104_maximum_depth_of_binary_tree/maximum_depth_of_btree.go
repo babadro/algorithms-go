@@ -1,6 +1,6 @@
 package _104_maximum_depth_of_binary_tree
 
-import "github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
+import "github.com/babadro/algorithms-go/base/binaryTree"
 
 func maxDepth(root *binaryTree.Node) int {
 	maxD := 0

@@ -1,6 +1,6 @@
 package _230_kth_smallest_element_in_bst
 
-import "github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
+import "github.com/babadro/algorithms-go/base/binaryTree"
 
 // 54% 51%
 func kthSmallest(root *binaryTree.Node, k int) int {

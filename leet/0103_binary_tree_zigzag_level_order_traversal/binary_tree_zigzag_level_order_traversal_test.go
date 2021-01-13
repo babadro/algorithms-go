@@ -1,7 +1,7 @@
 package _103_binary_tree_zigzag_level_order_traversal
 
 import (
-	"github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
+	"github.com/babadro/algorithms-go/base/binaryTree"
 	"reflect"
 	"testing"
 )

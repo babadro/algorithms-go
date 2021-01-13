@@ -1,7 +1,7 @@
 package _563_binary_tree_tilt
 
 import (
-	"github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
+	"github.com/babadro/algorithms-go/base/binaryTree"
 	"testing"
 )
 

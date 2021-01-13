@@ -1,7 +1,7 @@
 package _230_kth_smallest_element_in_bst
 
 import (
-	"github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
+	"github.com/babadro/algorithms-go/base/binaryTree"
 	"testing"
 )
 

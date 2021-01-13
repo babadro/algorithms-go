@@ -1,7 +1,7 @@
 package _450_delete_node_in_a_bst
 
 import (
-	"github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
+	"github.com/babadro/algorithms-go/base/binaryTree"
 	"log"
 	"reflect"
 	"testing"

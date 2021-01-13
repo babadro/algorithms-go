@@ -1,6 +1,6 @@
 package _450_delete_node_in_a_bst
 
-import "github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
+import "github.com/babadro/algorithms-go/base/binaryTree"
 
 // passed. tptl
 func deleteNode(root *binaryTree.Node, key int) *binaryTree.Node {

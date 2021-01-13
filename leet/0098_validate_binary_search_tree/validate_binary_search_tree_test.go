@@ -1,7 +1,7 @@
 package _098_validate_binary_search_tree
 
 import (
-	"github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
+	"github.com/babadro/algorithms-go/base/binaryTree"
 	"testing"
 )
 

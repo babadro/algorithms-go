@@ -2,7 +2,7 @@ package _897_increasing_order_search_tree
 
 import (
 	"fmt"
-	"github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
+	"github.com/babadro/algorithms-go/base/binaryTree"
 	"testing"
 )
 

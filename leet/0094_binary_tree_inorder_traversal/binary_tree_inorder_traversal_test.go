@@ -2,7 +2,7 @@ package _094_binary_tree_inorder_traversal
 
 import (
 	"fmt"
-	"github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
+	"github.com/babadro/algorithms-go/base/binaryTree"
 	"testing"
 )
 

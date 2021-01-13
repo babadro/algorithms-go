@@ -1,6 +1,6 @@
 package _993_cousins_in_binary_tree
 
-import "github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
+import "github.com/babadro/algorithms-go/base/binaryTree"
 
 type data struct {
 	x, y             int

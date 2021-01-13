@@ -1,7 +1,7 @@
 package _101_symmetric_tree
 
 import (
-	"github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
+	"github.com/babadro/algorithms-go/base/binaryTree"
 )
 
 type item struct {

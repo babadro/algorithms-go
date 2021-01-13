@@ -1,7 +1,7 @@
 package _1339_maximum_product_of_splitted_binary_tree
 
 import (
-	"github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
+	"github.com/babadro/algorithms-go/base/binaryTree"
 	"testing"
 )
 

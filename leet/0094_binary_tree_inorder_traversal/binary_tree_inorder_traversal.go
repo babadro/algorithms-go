@@ -1,7 +1,7 @@
 package _094_binary_tree_inorder_traversal
 
 import (
-	"github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
+	"github.com/babadro/algorithms-go/base/binaryTree"
 )
 
 // TODO 2 - need to understand. Not mine

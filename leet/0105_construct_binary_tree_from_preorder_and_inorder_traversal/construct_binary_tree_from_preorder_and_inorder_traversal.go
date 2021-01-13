@@ -1,7 +1,7 @@
 package _105_construct_binary_tree_from_preorder_and_inorder_traversal
 
 import (
-	"github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
+	"github.com/babadro/algorithms-go/base/binaryTree"
 )
 
 // best recursive solution.

@@ -1,6 +1,6 @@
 package _112_path_sum
 
-import "github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
+import "github.com/babadro/algorithms-go/base/binaryTree"
 
 /**
  * Definition for a binary tree node.
