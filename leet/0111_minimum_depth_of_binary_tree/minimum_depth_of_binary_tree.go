@@ -1,6 +1,6 @@
 package _111_minimum_depth_of_binary_tree
 
-import "github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+import "github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
 
 /**
  * Definition for a binary tree node.
@@ -13,7 +13,7 @@ import "github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
 
 // tptl? passed.
 // todo 2 look for iterative solution
-func minDepth(root *btree.Node) int {
+func minDepth(root *binaryTree.Node) int {
 	if root != nil {
 		left := minDepth(root.Left)
 		right := minDepth(root.Right)

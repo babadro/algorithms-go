@@ -1,15 +1,15 @@
 package _094_binary_tree_inorder_traversal
 
 import (
-	"github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+	"github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
 )
 
 // TODO 2 - need to understand. Not mine
-func inorderTraversal(root *btree.Node) []int {
+func inorderTraversal(root *binaryTree.Node) []int {
 	if root == nil {
 		return nil
 	}
-	stack, res := make([]*btree.Node, 0), make([]int, 0)
+	stack, res := make([]*binaryTree.Node, 0), make([]int, 0)
 	node := root
 	for node != nil || len(stack) > 0 { // TODO 2: interesting. Need to understand
 		for node != nil {
@@ -26,8 +26,8 @@ func inorderTraversal(root *btree.Node) []int {
 }
 
 // Doesn't work
-func inorderTraversal2(root *btree.Node) []int {
-	queue, res := make([]*btree.Node, 0), make([]int, 0)
+func inorderTraversal2(root *binaryTree.Node) []int {
+	queue, res := make([]*binaryTree.Node, 0), make([]int, 0)
 	if root != nil {
 		queue = append(queue, root)
 	}
@@ -65,7 +65,7 @@ func inorderTraversal2(root *btree.Node) []int {
 	return res
 }
 
-func inorderTraversalRecursive(root *btree.Node, res *[]int) {
+func inorderTraversalRecursive(root *binaryTree.Node, res *[]int) {
 	if root != nil {
 		inorderTraversalRecursive(root.Left, res)
 		*res = append(*res, root.Val)

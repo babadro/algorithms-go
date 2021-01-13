@@ -1,16 +1,16 @@
 package _098_validate_binary_search_tree
 
 import (
-	"github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+	"github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
 	"math"
 )
 
 // 97% 80%
-func isValidBST(root *btree.Node) bool {
+func isValidBST(root *binaryTree.Node) bool {
 	return recursive(root, math.MinInt64, math.MaxInt64)
 }
 
-func recursive(node *btree.Node, min, max int) bool {
+func recursive(node *binaryTree.Node, min, max int) bool {
 	if node == nil {
 		return true
 	}

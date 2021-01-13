@@ -1,19 +1,19 @@
 package _105_construct_binary_tree_from_preorder_and_inorder_traversal
 
 import (
-	"github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+	"github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
 )
 
 // best recursive solution.
 // todo 3 look at iterative solution
-func recursiveHelper(preorder []int, preorderStart, preorderEnd, inorderStart int, m map[int]int) *btree.Node {
+func recursiveHelper(preorder []int, preorderStart, preorderEnd, inorderStart int, m map[int]int) *binaryTree.Node {
 	if preorderStart > preorderEnd {
 		return nil
 	}
 
 	rootIdx := m[preorder[preorderStart]]
 	leftLen := rootIdx - inorderStart
-	root := &btree.Node{Val: preorder[preorderStart]}
+	root := &binaryTree.Node{Val: preorder[preorderStart]}
 
 	root.Left = recursiveHelper(preorder, preorderStart+1, preorderStart+leftLen, inorderStart, m)
 	root.Right = recursiveHelper(preorder, preorderStart+leftLen+1, preorderEnd, rootIdx+1, m)
@@ -21,7 +21,7 @@ func recursiveHelper(preorder []int, preorderStart, preorderEnd, inorderStart in
 	return root
 }
 
-func buildTree2(preorder []int, inorder []int) *btree.Node {
+func buildTree2(preorder []int, inorder []int) *binaryTree.Node {
 	m := make(map[int]int, len(preorder))
 
 	for i, v := range inorder {
@@ -32,12 +32,12 @@ func buildTree2(preorder []int, inorder []int) *btree.Node {
 }
 
 // 96% 74%
-func buildTree(preorder []int, inorder []int) *btree.Node {
+func buildTree(preorder []int, inorder []int) *binaryTree.Node {
 	if len(preorder) == 0 {
 		return nil
 	}
 
-	root := &btree.Node{Val: preorder[0]}
+	root := &binaryTree.Node{Val: preorder[0]}
 
 	leftLen := 0
 	for i, v := range inorder {

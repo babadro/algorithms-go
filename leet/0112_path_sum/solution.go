@@ -1,9 +1,9 @@
 package _112_path_sum
 
-import "github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+import "github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
 
 // best solution. tptl
-func hasPathSum2(root *btree.Node, sum int) bool {
+func hasPathSum2(root *binaryTree.Node, sum int) bool {
 	if root == nil {
 		return false
 	}

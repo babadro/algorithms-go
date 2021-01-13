@@ -1,16 +1,16 @@
 package _563_binary_tree_tilt
 
 import (
-	"github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+	"github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
 )
 
-func findTilt(root *btree.Node) int {
+func findTilt(root *binaryTree.Node) int {
 	tiltSum := 0
 	postOrder(root, &tiltSum)
 	return tiltSum
 }
 
-func postOrder(node *btree.Node, tiltSum *int) (sumValues int) {
+func postOrder(node *binaryTree.Node, tiltSum *int) (sumValues int) {
 	if node != nil {
 		leftSumValues := postOrder(node.Left, tiltSum)
 		rightSumValues := postOrder(node.Right, tiltSum)

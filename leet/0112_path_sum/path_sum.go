@@ -1,6 +1,6 @@
 package _112_path_sum
 
-import "github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+import "github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
 
 /**
  * Definition for a binary tree node.
@@ -12,14 +12,14 @@ import "github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
  */
 // passed.
 // todo 3 look for iterative solution
-func hasPathSum(root *btree.Node, sum int) bool {
+func hasPathSum(root *binaryTree.Node, sum int) bool {
 	found := false
 	helper(root, 0, sum, &found)
 
 	return found
 }
 
-func helper(node *btree.Node, curSum, target int, found *bool) {
+func helper(node *binaryTree.Node, curSum, target int, found *bool) {
 	if *found || node == nil {
 		return
 	}

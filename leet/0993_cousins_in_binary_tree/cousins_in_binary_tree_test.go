@@ -1,21 +1,21 @@
 package _993_cousins_in_binary_tree
 
 import (
-	"github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+	"github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
 	"testing"
 )
 
 func Test_isCousins(t *testing.T) {
 	tests := []struct {
 		name        string
-		treeBuilder func() *btree.Node
+		treeBuilder func() *binaryTree.Node
 		x           int
 		y           int
 		want        bool
 	}{
 		{
 			name: "1",
-			treeBuilder: func() *btree.Node {
+			treeBuilder: func() *binaryTree.Node {
 				n1, n2, n3, n4 := n(1), n(2), n(3), n(4)
 				n1.Left, n1.Right = n2, n3
 				n2.Left = n4
@@ -28,7 +28,7 @@ func Test_isCousins(t *testing.T) {
 		},
 		{
 			name: "2",
-			treeBuilder: func() *btree.Node {
+			treeBuilder: func() *binaryTree.Node {
 				n1, n2, n3, n4, n5 := n(1), n(2), n(3), n(4), n(5)
 				n1.Left, n1.Right = n2, n3
 				n2.Right = n4
@@ -42,7 +42,7 @@ func Test_isCousins(t *testing.T) {
 		},
 		{
 			name: "3",
-			treeBuilder: func() *btree.Node {
+			treeBuilder: func() *binaryTree.Node {
 				n1, n2, n3, n4 := n(1), n(2), n(3), n(4)
 				n1.Left, n1.Right = n2, n3
 				n2.Right = n4
@@ -55,7 +55,7 @@ func Test_isCousins(t *testing.T) {
 		},
 		{
 			name: "two nodes",
-			treeBuilder: func() *btree.Node {
+			treeBuilder: func() *binaryTree.Node {
 				n1, n2 := n(1), n(2)
 				n1.Left = n2
 
@@ -75,6 +75,6 @@ func Test_isCousins(t *testing.T) {
 	}
 }
 
-func n(val int) *btree.Node {
-	return &btree.Node{Val: val}
+func n(val int) *binaryTree.Node {
+	return &binaryTree.Node{Val: val}
 }

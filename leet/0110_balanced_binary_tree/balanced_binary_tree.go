@@ -1,13 +1,13 @@
 package _110_balanced_binary_tree
 
-import "github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+import "github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
 
 // passed. tptl. best solution
-func isBalanced2(root *btree.Node) bool {
+func isBalanced2(root *binaryTree.Node) bool {
 	return postOrder2(root) != -1
 }
 
-func postOrder2(root *btree.Node) int {
+func postOrder2(root *binaryTree.Node) int {
 	if root == nil {
 		return 0
 	}
@@ -34,14 +34,14 @@ func postOrder2(root *btree.Node) int {
 }
 
 // passed.
-func isBalanced(root *btree.Node) bool {
+func isBalanced(root *binaryTree.Node) bool {
 	balanced := true
 	postOrder(root, &balanced)
 
 	return balanced
 }
 
-func postOrder(root *btree.Node, balanced *bool) int {
+func postOrder(root *binaryTree.Node, balanced *bool) int {
 	if !*balanced || root == nil {
 		return 0
 	}

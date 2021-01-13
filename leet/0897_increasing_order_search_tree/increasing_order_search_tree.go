@@ -1,10 +1,10 @@
 package _897_increasing_order_search_tree
 
-import "github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+import "github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
 
 // Simple but not in place (O(N))
-func increasingBST(root *btree.Node) *btree.Node {
-	var arr []*btree.Node
+func increasingBST(root *binaryTree.Node) *binaryTree.Node {
+	var arr []*binaryTree.Node
 
 	inOrder(root, &arr)
 
@@ -23,7 +23,7 @@ func increasingBST(root *btree.Node) *btree.Node {
 	return res
 }
 
-func inOrder(root *btree.Node, arr *[]*btree.Node) {
+func inOrder(root *binaryTree.Node, arr *[]*binaryTree.Node) {
 	if root != nil {
 		inOrder(root.Left, arr)
 		*arr = append(*arr, root)

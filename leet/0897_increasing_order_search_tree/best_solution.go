@@ -1,18 +1,18 @@
 package _897_increasing_order_search_tree
 
-import "github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+import "github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
 
-var curr *btree.Node
+var curr *binaryTree.Node
 
 // passed. in place. tptl
-func increasingBST2(root *btree.Node) *btree.Node {
-	res := &btree.Node{}
+func increasingBST2(root *binaryTree.Node) *binaryTree.Node {
+	res := &binaryTree.Node{}
 	curr = res
 	inOrder2(root)
 	return res.Right
 }
 
-func inOrder2(root *btree.Node) {
+func inOrder2(root *binaryTree.Node) {
 	if root != nil {
 		inOrder2(root.Left)
 		curr.Right = root

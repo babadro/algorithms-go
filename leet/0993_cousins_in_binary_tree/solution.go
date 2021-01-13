@@ -1,16 +1,16 @@
 package _993_cousins_in_binary_tree
 
-import "github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+import "github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
 
 // best solution. passed. tptl
-func isCousins2(root *btree.Node, x, y int) bool {
+func isCousins2(root *binaryTree.Node, x, y int) bool {
 	xDepth, yDepth, xParent, yParent := 0, 0, 0, 0
 	walker(root, x, y, 0, 0, &xDepth, &yDepth, &xParent, &yParent)
 
 	return xDepth == yDepth && xParent != yParent
 }
 
-func walker(node *btree.Node, x, y, p, depth int, xDepth, yDepth, xParent, yParent *int) {
+func walker(node *binaryTree.Node, x, y, p, depth int, xDepth, yDepth, xParent, yParent *int) {
 	if node == nil {
 		return
 	}

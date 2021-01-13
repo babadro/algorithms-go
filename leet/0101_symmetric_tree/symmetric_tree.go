@@ -1,7 +1,7 @@
 package _101_symmetric_tree
 
 import (
-	"github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+	"github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
 )
 
 type item struct {
@@ -9,14 +9,14 @@ type item struct {
 	level int
 }
 
-func isSymmetric(root *btree.Node) bool {
+func isSymmetric(root *binaryTree.Node) bool {
 	if root == nil {
 		return true
 	}
 	return check(root.Left, root.Right)
 }
 
-func check(left, right *btree.Node) bool {
+func check(left, right *binaryTree.Node) bool {
 	if left == nil && right == nil {
 		return true
 	}
@@ -26,13 +26,13 @@ func check(left, right *btree.Node) bool {
 	return check(left.Left, right.Right) && check(left.Right, right.Left)
 }
 
-func isSymmetric2(root *btree.Node) bool {
+func isSymmetric2(root *binaryTree.Node) bool {
 	leftBranch := make([]item, 0)
 	rootAchieved := false
 	var idx int
 	flag := true
 	lenRightBranch := 0
-	f := func(level int, n *btree.Node) {
+	f := func(level int, n *binaryTree.Node) {
 		if n == root {
 			rootAchieved = true
 			idx = len(leftBranch) - 1
@@ -58,7 +58,7 @@ func isSymmetric2(root *btree.Node) bool {
 	return flag
 }
 
-func inOrder(level int, root *btree.Node, f func(level int, n *btree.Node)) {
+func inOrder(level int, root *binaryTree.Node, f func(level int, n *binaryTree.Node)) {
 	if root != nil {
 		inOrder(level+1, root.Left, f)
 		f(level, root)

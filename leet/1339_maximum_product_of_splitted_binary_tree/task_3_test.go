@@ -1,7 +1,7 @@
 package _1339_maximum_product_of_splitted_binary_tree
 
 import (
-	"github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+	"github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
 	"testing"
 )
 
@@ -11,14 +11,14 @@ func TestMaxProduct(t *testing.T) {
 		expected  int
 	}{
 		{[]int{1, 2, 3, 4, 5, 6}, 110},
-		{[]int{1, btree.Null, 2, 3, 4, btree.Null, btree.Null, 5, 6}, 90},
+		{[]int{1, binaryTree.Null, 2, 3, 4, binaryTree.Null, binaryTree.Null, 5, 6}, 90},
 		{[]int{1, 1}, 1},
 		{[]int{2, 3, 9, 10, 7, 8, 6, 5, 4, 11, 1}, 1025},
 		{bigInput1, 763478770},
 	}
 
 	for i, c := range cases {
-		treeRoot := btree.ArrayToBinaryTree(c.breeInput)
+		treeRoot := binaryTree.ArrayToBinaryTree(c.breeInput)
 		if fact := maxProduct2(treeRoot); fact != c.expected {
 			t.Errorf("case#%d: want %d, got %d", i+1, c.expected, fact)
 		}

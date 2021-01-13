@@ -1,4 +1,4 @@
-package btree
+package binaryTree
 
 import "math"
 
@@ -15,7 +15,7 @@ type level struct {
 //[1,2,3,4,5,6]
 //[2,3,9,10,7,8,6,5,4,11,1]
 //[1,null,2,3,4,null,null,5,6]
-// TODO 2 infinitive loop with []int{1, 2, 3, 4, 5, 6, 7, btree.Null, btree.Null, 8, 9, btree.Null, btree.Null, btree.Null, btree.Null, btree.Null, btree.Null, btree.Null, btree.Null, btree.Null, btree.Null, btree.Null, 10}
+// TODO 2 infinitive loop with []int{1, 2, 3, 4, 5, 6, 7, binaryTree.Null, binaryTree.Null, 8, 9, binaryTree.Null, binaryTree.Null, binaryTree.Null, binaryTree.Null, binaryTree.Null, binaryTree.Null, binaryTree.Null, binaryTree.Null, binaryTree.Null, binaryTree.Null, binaryTree.Null, 10}
 func ArrayToBinaryTree(arr []int) (root *Node) {
 	if len(arr) == 0 {
 		return nil

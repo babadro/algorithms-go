@@ -1,9 +1,9 @@
 package _103_binary_tree_zigzag_level_order_traversal
 
-import "github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+import "github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
 
 // 100% 72%
-func zigzagLevelOrder(root *btree.Node) [][]int {
+func zigzagLevelOrder(root *binaryTree.Node) [][]int {
 	var res [][]int
 
 	addValueToLevel(root, 0, &res)
@@ -20,7 +20,7 @@ func zigzagLevelOrder(root *btree.Node) [][]int {
 	return res
 }
 
-func addValueToLevel(node *btree.Node, level int, levels *[][]int) {
+func addValueToLevel(node *binaryTree.Node, level int, levels *[][]int) {
 	if node == nil {
 		return
 	}
@@ -34,7 +34,7 @@ func addValueToLevel(node *btree.Node, level int, levels *[][]int) {
 }
 
 // Clear, single pass, but waste of memory. 100% 27%
-func zigzagLevelOrder2(root *btree.Node) [][]int {
+func zigzagLevelOrder2(root *binaryTree.Node) [][]int {
 	var res [][]int
 
 	addValueToLevel(root, 0, &res)
@@ -42,7 +42,7 @@ func zigzagLevelOrder2(root *btree.Node) [][]int {
 	return res
 }
 
-func addValueToLevel2(node *btree.Node, level int, levels *[][]int) {
+func addValueToLevel2(node *binaryTree.Node, level int, levels *[][]int) {
 	if node == nil {
 		return
 	}

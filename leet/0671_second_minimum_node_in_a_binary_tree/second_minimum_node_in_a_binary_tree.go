@@ -1,13 +1,13 @@
 package _671_second_minimum_node_in_a_binary_tree
 
 import (
-	"github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+	"github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
 	"math"
 	"sort"
 )
 
 // passed. best solution. tptl
-func findSecondMinimumValue2(root *btree.Node) int {
+func findSecondMinimumValue2(root *binaryTree.Node) int {
 	res := visit2(root, root.Val)
 
 	if res == math.MaxInt64 {
@@ -17,7 +17,7 @@ func findSecondMinimumValue2(root *btree.Node) int {
 	return res
 }
 
-func visit2(root *btree.Node, val int) int {
+func visit2(root *binaryTree.Node, val int) int {
 	if root == nil {
 		return math.MaxInt64
 	}
@@ -36,7 +36,7 @@ func visit2(root *btree.Node, val int) int {
 }
 
 // passed bruteforce
-func findSecondMinimumValue(root *btree.Node) int {
+func findSecondMinimumValue(root *binaryTree.Node) int {
 	m := make(map[int]bool)
 	visit(root, m)
 	arr := make([]int, 0, len(m))
@@ -51,7 +51,7 @@ func findSecondMinimumValue(root *btree.Node) int {
 	return arr[1]
 }
 
-func visit(root *btree.Node, m map[int]bool) {
+func visit(root *binaryTree.Node, m map[int]bool) {
 	if root != nil {
 		visit(root.Left, m)
 		m[root.Val] = true

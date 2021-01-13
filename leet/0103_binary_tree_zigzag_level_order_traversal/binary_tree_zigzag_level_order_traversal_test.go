@@ -1,7 +1,7 @@
 package _103_binary_tree_zigzag_level_order_traversal
 
 import (
-	"github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+	"github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
 	"reflect"
 	"testing"
 )
@@ -36,7 +36,7 @@ func Test_zigzagLevelOrder(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			root := btree.ArrayToBinaryTree(tt.arr)
+			root := binaryTree.ArrayToBinaryTree(tt.arr)
 			if got := zigzagLevelOrder(root); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("zigzagLevelOrder() = %v, want %v", got, tt.want)
 			}

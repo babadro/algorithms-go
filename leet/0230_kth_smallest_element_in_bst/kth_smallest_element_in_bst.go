@@ -1,15 +1,15 @@
 package _230_kth_smallest_element_in_bst
 
-import "github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+import "github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
 
 // 54% 51%
-func kthSmallest(root *btree.Node, k int) int {
+func kthSmallest(root *binaryTree.Node, k int) int {
 	res, counter := 0, 0
 	inOrder(root, &counter, &res, k)
 	return res
 }
 
-func inOrder(root *btree.Node, counter, res *int, k int) {
+func inOrder(root *binaryTree.Node, counter, res *int, k int) {
 	if root != nil {
 		inOrder(root.Left, counter, res, k)
 		if *counter >= k {
@@ -22,8 +22,8 @@ func inOrder(root *btree.Node, counter, res *int, k int) {
 }
 
 // todo 2 doesn't work. fix it. look at solution.
-func kthSmallestIterative(root *btree.Node, k int) int {
-	var stack []*btree.Node
+func kthSmallestIterative(root *binaryTree.Node, k int) int {
+	var stack []*binaryTree.Node
 
 	for {
 		for root != nil {

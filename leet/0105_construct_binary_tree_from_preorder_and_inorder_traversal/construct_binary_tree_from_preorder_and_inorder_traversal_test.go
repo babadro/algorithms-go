@@ -1,7 +1,7 @@
 package _105_construct_binary_tree_from_preorder_and_inorder_traversal
 
 import (
-	"github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+	"github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
 	"testing"
 )
 
@@ -12,7 +12,7 @@ func Test_buildTree(t *testing.T) {
 	root := buildTree2(preorder, inorder)
 
 	var res []int
-	btree.InOrder(root, &res)
+	binaryTree.InOrder(root, &res)
 
 	t.Log(res)
 }

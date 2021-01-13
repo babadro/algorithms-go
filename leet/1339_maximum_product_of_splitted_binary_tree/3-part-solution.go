@@ -2,19 +2,19 @@
 package _1339_maximum_product_of_splitted_binary_tree
 
 import (
-	"github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+	"github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
 )
 
 var total, product int
 
-func maxProduct2(root *btree.Node) int {
+func maxProduct2(root *binaryTree.Node) int {
 	total, product = 0, 0
 	total = nodeSum(root)
 	total = nodeSum(root)
 	return product % (int(1e9) + 7)
 }
 
-func nodeSum(root *btree.Node) int {
+func nodeSum(root *binaryTree.Node) int {
 	if root == nil {
 		return 0
 	}

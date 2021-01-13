@@ -1,6 +1,6 @@
 package _993_cousins_in_binary_tree
 
-import "github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+import "github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
 
 type data struct {
 	x, y             int
@@ -11,7 +11,7 @@ type data struct {
 
 // passed
 // todo 2 look for iterative solution
-func isCousins(root *btree.Node, x int, y int) bool {
+func isCousins(root *binaryTree.Node, x int, y int) bool {
 	d := data{x: x, y: y, xDepth: -1, yDepth: -1}
 
 	preOrder(root, nil, 0, &d)
@@ -19,7 +19,7 @@ func isCousins(root *btree.Node, x int, y int) bool {
 	return d.isCousins
 }
 
-func preOrder(root, parent *btree.Node, depth int, data *data) {
+func preOrder(root, parent *binaryTree.Node, depth int, data *data) {
 	if root == nil {
 		return
 	}

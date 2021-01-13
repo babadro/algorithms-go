@@ -1,13 +1,13 @@
 package _1339_maximum_product_of_splitted_binary_tree
 
 import (
-	"github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+	"github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
 )
 
 var maxProduction int
 var sumAllNodes int
 
-func maxProduct(root *btree.Node) int {
+func maxProduct(root *binaryTree.Node) int {
 	maxProduction, sumAllNodes = 0, 0
 	// Get sum all nodes in tree
 	sumAllNodes = treeTraversal(root)
@@ -17,7 +17,7 @@ func maxProduct(root *btree.Node) int {
 	return maxProduction % (int(1e9) + 7)
 }
 
-func treeTraversal(node *btree.Node) int {
+func treeTraversal(node *binaryTree.Node) int {
 	if node == nil {
 		return 0
 	}

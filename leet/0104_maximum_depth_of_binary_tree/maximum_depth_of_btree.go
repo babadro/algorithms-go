@@ -1,14 +1,14 @@
 package _104_maximum_depth_of_binary_tree
 
-import "github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+import "github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
 
-func maxDepth(root *btree.Node) int {
+func maxDepth(root *binaryTree.Node) int {
 	maxD := 0
 	preOrder(root, 0, &maxD)
 	return maxD
 }
 
-func preOrder(node *btree.Node, level int, maxD *int) {
+func preOrder(node *binaryTree.Node, level int, maxD *int) {
 	if node != nil {
 		level++
 		if level > *maxD {

@@ -1,17 +1,17 @@
 package _102_binary_tree_level_order_traversal
 
-import "github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+import "github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
 
 // 100% 66%
 // TODO 2 find better solution in discuss
-func levelOrder(root *btree.Node) [][]int {
+func levelOrder(root *binaryTree.Node) [][]int {
 	if root == nil {
 		return nil
 	}
-	nodeArrays := [][]*btree.Node{{root}}
+	nodeArrays := [][]*binaryTree.Node{{root}}
 	for {
 		last := len(nodeArrays) - 1
-		var arr []*btree.Node
+		var arr []*binaryTree.Node
 		for _, node := range nodeArrays[last] {
 			if node.Left != nil {
 				arr = append(arr, node.Left)

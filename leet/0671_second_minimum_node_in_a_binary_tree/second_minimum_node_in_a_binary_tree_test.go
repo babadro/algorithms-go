@@ -1,19 +1,19 @@
 package _671_second_minimum_node_in_a_binary_tree
 
 import (
-	"github.com/babadro/algorithms-go/04_TreesAndGraphs/btree"
+	"github.com/babadro/algorithms-go/04_TreesAndGraphs/binaryTree"
 	"testing"
 )
 
 func Test_findSecondMinimumValue(t *testing.T) {
 	tests := []struct {
 		name        string
-		treeBuilder func() *btree.Node
+		treeBuilder func() *binaryTree.Node
 		want        int
 	}{
 		//{
 		//	name: "1",
-		//	treeBuilder: func() *btree.Node {
+		//	treeBuilder: func() *binaryTree.Node {
 		//		n1_1 := n(1)
 		//		n1_2, n3_2 := n(1), n(3)
 		//		n1_3_1, n1_3_2, n3_3, n4_3 := n(1), n(1), n(3), n(4)
@@ -28,17 +28,17 @@ func Test_findSecondMinimumValue(t *testing.T) {
 		//},
 		{
 			name: "2",
-			treeBuilder: func() *btree.Node {
-				return &btree.Node{Val: 0}
+			treeBuilder: func() *binaryTree.Node {
+				return &binaryTree.Node{Val: 0}
 			},
 			want: -1,
 		},
 		{
 			name: "3",
-			treeBuilder: func() *btree.Node {
-				node1 := &btree.Node{Val: 2}
-				node2 := &btree.Node{Val: 2}
-				node3 := &btree.Node{Val: 2}
+			treeBuilder: func() *binaryTree.Node {
+				node1 := &binaryTree.Node{Val: 2}
+				node2 := &binaryTree.Node{Val: 2}
+				node3 := &binaryTree.Node{Val: 2}
 
 				node1.Left, node1.Right = node2, node3
 
@@ -48,12 +48,12 @@ func Test_findSecondMinimumValue(t *testing.T) {
 		},
 		{
 			name: "4",
-			treeBuilder: func() *btree.Node {
-				n2 := &btree.Node{Val: 2}
-				n2_ := &btree.Node{Val: 2}
-				n5 := &btree.Node{Val: 5}
-				n5_ := &btree.Node{Val: 5}
-				n7 := &btree.Node{Val: 7}
+			treeBuilder: func() *binaryTree.Node {
+				n2 := &binaryTree.Node{Val: 2}
+				n2_ := &binaryTree.Node{Val: 2}
+				n5 := &binaryTree.Node{Val: 5}
+				n5_ := &binaryTree.Node{Val: 5}
+				n7 := &binaryTree.Node{Val: 7}
 
 				n2.Left, n2.Right = n2_, n5
 				n5.Left, n5.Right = n5_, n7
@@ -72,6 +72,6 @@ func Test_findSecondMinimumValue(t *testing.T) {
 	}
 }
 
-func n(val int) *btree.Node {
-	return &btree.Node{Val: val}
+func n(val int) *binaryTree.Node {
+	return &binaryTree.Node{Val: val}
 }
