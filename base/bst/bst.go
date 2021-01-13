@@ -9,14 +9,15 @@ type Tree struct {
 	Root *Node
 }
 
-func Inorder(x *Node, list *[]int) {
+func Inorder(x *Node, f func(node *Node)) {
 	if x != nil {
-		Inorder(x.Left, list)
-		*list = append(*list, x.Key)
-		Inorder(x.Right, list)
+		Inorder(x.Left, f)
+		f(x)
+		Inorder(x.Right, f)
 	}
 }
 
+// todo 1
 func (t *Tree) Insert(z *Node) {
 	var parent *Node = nil
 	child := t.Root
@@ -51,6 +52,7 @@ func (t *Tree) transplant(u, v *Node) {
 	}
 }
 
+// todo 1
 func (t *Tree) Delete(z *Node) {
 	if z.Left == nil {
 		t.transplant(z, z.Right)
@@ -81,6 +83,7 @@ func Search(x *Node, k int) *Node {
 }
 */
 
+// dyx
 func Search(x *Node, k int) *Node {
 	for x != nil && k != x.Key {
 		if k < x.Key {
@@ -92,6 +95,7 @@ func Search(x *Node, k int) *Node {
 	return x
 }
 
+// dyx
 func Min(x *Node) *Node {
 	for x.Left != nil {
 		x = x.Left
@@ -99,6 +103,7 @@ func Min(x *Node) *Node {
 	return x
 }
 
+// dyx
 func Max(x *Node) *Node {
 	for x.Right != nil {
 		x = x.Right
