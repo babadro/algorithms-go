@@ -1,6 +1,6 @@
 package _172_factorial_trailing_zeroes
 
-// TODO 3 I don't understand
+// TODO 2 I don't understand. read the explanation
 func trailingZeroes(n int) int {
 	res := 0
 	for n != 0 {

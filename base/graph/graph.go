@@ -1,7 +1,9 @@
 // dyx
 package graph
 
-import "container/list"
+import (
+	"container/list"
+)
 
 type Graph struct {
 	adj [][]int
@@ -9,6 +11,10 @@ type Graph struct {
 
 func New(V int) *Graph {
 	return &Graph{make([][]int, V)}
+}
+
+func Constructor(g [][]int) *Graph {
+	return &Graph{g}
 }
 
 func (g *Graph) AddEdge(src, dst int) {
