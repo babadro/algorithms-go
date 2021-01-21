@@ -51,5 +51,4 @@ func TestMergeSort(t *testing.T) {
 		}
 		t.Log(standardCases[i])
 	}
-
 }
