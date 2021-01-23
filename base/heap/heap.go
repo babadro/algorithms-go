@@ -5,9 +5,10 @@ type MaxHeap struct {
 	list []int
 }
 
+// tptl
 func (m *MaxHeap) Build(source []int) {
 	m.list = source
-	for i := m.Size() / 2; i >= 0; i-- {
+	for i := (len(m.list) / 2) - 1; i >= 0; i-- {
 		m.Heapify(i)
 	}
 }
@@ -35,8 +36,9 @@ func (m *MaxHeap) Delete(key int) {
 	m.list[key] = m.list[last]
 	m.list = m.list[:last]
 
-	// todo 1 fix for len(m.list) == 0
-	m.Heapify(key)
+	if len(m.list) > 0 {
+		m.Heapify(key)
+	}
 }
 
 // tptl
@@ -52,7 +54,7 @@ func (m *MaxHeap) Heapify(i int) {
 			largest = left
 		}
 
-		if right < m.Size() && m.list[right] > m.list[largest] {
+		if right < len(m.list) && m.list[right] > m.list[largest] {
 			largest = right
 		}
 
