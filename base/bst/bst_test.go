@@ -1,6 +1,7 @@
 package bst
 
 import (
+	"reflect"
 	"testing"
 )
 
@@ -109,4 +110,100 @@ func makeTree() *Tree {
 	tree.Insert(&Node{Key: 10})
 
 	return tree
+}
+
+func Test_Insert(t *testing.T) {
+	tests := []struct {
+		name        string
+		key         int
+		treeBuilder func() *Tree
+		want        []int
+	}{
+		{
+			"1",
+			40,
+			func() *Tree {
+				n10, n20, n30, n100, n500 := n(10), n(20), n(30), n(100), n(500)
+				n100.Left, n100.Right = n20, n500
+				n20.Parent, n500.Parent = n100, n100
+
+				n20.Left, n20.Right = n10, n30
+
+				return &Tree{Root: n100}
+			},
+			[]int{10, 20, 30, 40, 100, 500},
+		},
+		{
+			"2",
+			1,
+			func() *Tree {
+				return &Tree{}
+			},
+			[]int{1},
+		},
+		{
+			"3",
+			19,
+			func() *Tree {
+				n10, n20, n30, n100, n500 := n(10), n(20), n(30), n(100), n(500)
+				n100.Left, n100.Right = n20, n500
+				n20.Parent, n500.Parent = n100, n100
+
+				n20.Left, n20.Right = n10, n30
+
+				return &Tree{Root: n100}
+			},
+			[]int{10, 19, 20, 30, 100, 500},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			var arr []int
+			f := func(node *Node) {
+				arr = append(arr, node.Key)
+			}
+			tree, node := tt.treeBuilder(), &Node{Key: tt.key}
+			tree.Insert(node)
+			Inorder(tree.Root, f)
+			if !reflect.DeepEqual(arr, tt.want) {
+				t.Errorf("got = %v, want %v", arr, tt.want)
+			}
+		})
+	}
+}
+
+func n(key int) *Node {
+	return &Node{Key: key}
+}
+
+func Test_Insert2(t *testing.T) {
+	tests := []struct {
+		name  string
+		input []int
+		want  []int
+	}{
+		{
+			"1",
+			[]int{50, 30, 20, 40, 70, 60, 80},
+			[]int{20, 30, 40, 50, 60, 70, 80},
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			var arr []int
+			f := func(node *Node) {
+				arr = append(arr, node.Key)
+			}
+			tree := &Tree{Root: nil}
+			for _, key := range tt.input {
+				node := &Node{Key: key}
+				tree.Insert(node)
+			}
+			Inorder(tree.Root, f)
+			if !reflect.DeepEqual(arr, tt.want) {
+				t.Errorf("got = %v, want %v", arr, tt.want)
+			}
+		})
+	}
 }

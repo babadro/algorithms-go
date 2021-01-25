@@ -17,7 +17,7 @@ func Inorder(x *Node, f func(node *Node)) {
 	}
 }
 
-// todo 1
+// dyx
 func (t *Tree) Insert(z *Node) {
 	var parent *Node = nil
 	child := t.Root
