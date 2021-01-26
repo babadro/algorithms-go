@@ -8,6 +8,7 @@ func minCharacters(a string, b string) int {
 
 	//	aTemp, bTemp := []byte(a), []byte(b)
 	mA, mB := [26]int{}, [26]int{}
+	sumA, sumB := [26][2]int{}, [26][2]int{}
 
 	maxA, minA := byte('a'), byte('z')
 	for i := range a {
@@ -21,6 +22,18 @@ func minCharacters(a string, b string) int {
 		if a[i] > maxA {
 			maxA = a[i]
 		}
+	}
+
+	sumA[1][0], sumB[1][0] = mA[1], mB[1]
+	for i := 2; i < 26; i++ {
+		sumA[i][0] += sumA[i-1][0]
+		sumB[i][0] += sumB[i-1][0]
+	}
+
+	sumA[24][1], sumB[24][1] = mA[24], mB[24]
+	for i := 23; i >= 0; i-- {
+		sumA[i][1] += sumA[i+1][1]
+		sumB[i][1] += sumB[i+1][1]
 	}
 
 	maxB, minB := byte('a'), byte('z')

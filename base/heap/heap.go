@@ -31,14 +31,24 @@ func (m *MaxHeap) Add(value int) {
 	}
 }
 
+// todo 1 heapify + move up. make move up as separate function
 func (m *MaxHeap) Delete(key int) {
 	last := len(m.list) - 1
 	m.list[key] = m.list[last]
 	m.list = m.list[:last]
 
-	if len(m.list) > 0 {
-		m.Heapify(key)
-	}
+	m.Build(m.list)
+
+	//m.Heapify(key)
+	//
+	//parent := Parent(key)
+	//
+	//for key > 0 && key < len(m.list) && parent < len(m.list) && m.list[parent] < m.list[key] {
+	//	m.list[key], m.list[parent] = m.list[parent], m.list[key]
+	//
+	//	key = parent
+	//	parent = Parent(parent)
+	//}
 }
 
 // tptl

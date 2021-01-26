@@ -141,7 +141,6 @@ func TestMaxHeap_Add2(t *testing.T) {
 	testHelper(t, f)
 }
 
-// todo 1 fails.
 func TestMaxHeap_Delete(t *testing.T) {
 	f := func(t *testing.T, arr []int) {
 		heap := MaxHeap{}
