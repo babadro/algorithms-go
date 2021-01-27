@@ -1,6 +1,5 @@
 package heap
 
-// todo 1 unit tests
 type MaxHeap struct {
 	list []int
 }
@@ -20,35 +19,34 @@ func (m *MaxHeap) Size() int {
 // tptl
 func (m *MaxHeap) Add(value int) {
 	m.list = append(m.list, value)
-	i := len(m.list) - 1
-	parent := Parent(i)
+	last := len(m.list) - 1
 
-	for i > 0 && m.list[parent] < m.list[i] {
-		m.list[i], m.list[parent] = m.list[parent], m.list[i]
-
-		i = parent
-		parent = Parent(parent)
-	}
+	m.HeapifyUp(last)
 }
 
-// todo 1 heapify + move up. make move up as separate function
+// tptl
 func (m *MaxHeap) Delete(key int) {
 	last := len(m.list) - 1
 	m.list[key] = m.list[last]
 	m.list = m.list[:last]
 
-	m.Build(m.list)
+	if key == last {
+		return
+	}
+	m.Heapify(key)
+	m.HeapifyUp(key)
+}
 
-	//m.Heapify(key)
-	//
-	//parent := Parent(key)
-	//
-	//for key > 0 && key < len(m.list) && parent < len(m.list) && m.list[parent] < m.list[key] {
-	//	m.list[key], m.list[parent] = m.list[parent], m.list[key]
-	//
-	//	key = parent
-	//	parent = Parent(parent)
-	//}
+// tptl
+func (m *MaxHeap) HeapifyUp(key int) {
+	parent := Parent(key)
+
+	for key > 0 && m.list[parent] < m.list[key] {
+		m.list[key], m.list[parent] = m.list[parent], m.list[key]
+
+		key = parent
+		parent = Parent(parent)
+	}
 }
 
 // tptl
@@ -82,11 +80,7 @@ func (m *MaxHeap) Heapify(i int) {
 func (m *MaxHeap) IncreaseKey(key, newVal int) {
 	m.list[key] = newVal
 
-	for key != 0 && m.list[key] < m.list[Parent(key)] {
-		m.list[key], m.list[Parent(key)] = m.list[Parent(key)], m.list[key]
-
-		key = Parent(key)
-	}
+	m.HeapifyUp(key)
 }
 
 // tptl

@@ -81,7 +81,7 @@ func TestMaxHeap_Add(t *testing.T) {
 	}
 }
 
-func testHelper(t *testing.T, f func(t *testing.T, arr []int)) {
+func testHelper(t *testing.T, f func(t *testing.T, rnd *rand.Rand, arr []int)) {
 	seed := time.Now().UnixNano()
 	t.Log(seed)
 	source := rand.NewSource(seed)
@@ -94,19 +94,19 @@ func testHelper(t *testing.T, f func(t *testing.T, arr []int)) {
 			input[j] = rnd.Intn(max-min) + min
 		}
 
-		f(t, input)
+		f(t, rnd, input)
 	}
 
 	standardCases := [][]int{
 		{}, {0}, {1}, {-1}, {2, 1}, {1, 2}, {1, 2, 3}, {3, 2, 1},
 	}
 	for i := range standardCases {
-		f(t, standardCases[i])
+		f(t, rnd, standardCases[i])
 	}
 }
 
 func TestMaxHeap_Build2(t *testing.T) {
-	f := func(t *testing.T, arr []int) {
+	f := func(t *testing.T, rnd *rand.Rand, arr []int) {
 		heap := MaxHeap{}
 		heap.Build(arr)
 		sorted := getSortedArr(&heap)
@@ -122,7 +122,7 @@ func TestMaxHeap_Build2(t *testing.T) {
 }
 
 func TestMaxHeap_Add2(t *testing.T) {
-	f := func(t *testing.T, arr []int) {
+	f := func(t *testing.T, rnd *rand.Rand, arr []int) {
 		heap := MaxHeap{}
 		for _, num := range arr {
 			heap.Add(num)
@@ -142,12 +142,12 @@ func TestMaxHeap_Add2(t *testing.T) {
 }
 
 func TestMaxHeap_Delete(t *testing.T) {
-	f := func(t *testing.T, arr []int) {
+	f := func(t *testing.T, rnd *rand.Rand, arr []int) {
 		heap := MaxHeap{}
 		heap.Build(arr)
 
 		if len(arr) > 0 {
-			idx := rand.Intn(len(arr))
+			idx := rnd.Intn(len(arr))
 			heap.Delete(idx)
 
 			sorted := getSortedArr(&heap)
@@ -160,6 +160,60 @@ func TestMaxHeap_Delete(t *testing.T) {
 
 			if len(sorted) != len(arr)-1 {
 				t.Error("len should be decreased by one")
+			}
+		}
+	}
+
+	testHelper(t, f)
+}
+
+func TestMaxHeap_IncreaseKey(t *testing.T) {
+	f := func(t *testing.T, rnd *rand.Rand, arr []int) {
+		heap := MaxHeap{}
+		heap.Build(arr)
+
+		if len(arr) > 0 {
+			idx := rnd.Intn(len(arr))
+			newVal := rnd.Intn(1000) + heap.list[idx]
+			heap.IncreaseKey(idx, newVal)
+
+			sorted := getSortedArr(&heap)
+
+			if !sort.SliceIsSorted(sorted, func(i, j int) bool {
+				return sorted[i] > sorted[j]
+			}) {
+				t.Errorf("slice is not sorted %v", sorted)
+			}
+
+			if len(sorted) != len(arr) {
+				t.Error("len sorted arrays should be equal")
+			}
+		}
+	}
+
+	testHelper(t, f)
+}
+
+func TestMaxHeap_DecreaseKey(t *testing.T) {
+	f := func(t *testing.T, rnd *rand.Rand, arr []int) {
+		heap := MaxHeap{}
+		heap.Build(arr)
+
+		if len(arr) > 0 {
+			idx := rnd.Intn(len(arr))
+			newVal := heap.list[idx] - rnd.Intn(1000)
+			heap.DecreaseKey(idx, newVal)
+
+			sorted := getSortedArr(&heap)
+
+			if !sort.SliceIsSorted(sorted, func(i, j int) bool {
+				return sorted[i] > sorted[j]
+			}) {
+				t.Errorf("slice is not sorted %v", sorted)
+			}
+
+			if len(sorted) != len(arr) {
+				t.Error("len sorted arrays should be equal")
 			}
 		}
 	}
