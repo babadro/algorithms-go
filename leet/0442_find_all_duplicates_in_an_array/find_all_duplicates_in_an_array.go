@@ -1,6 +1,6 @@
 package _442_find_all_duplicates_in_an_array
 
-// todo 1
+// tptl. passed
 func findDuplicates(nums []int) []int {
 	var res []int
 
