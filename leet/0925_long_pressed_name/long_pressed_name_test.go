@@ -1,4 +1,4 @@
-package _0925_long_pressed_name
+package _925_long_pressed_name
 
 import "testing"
 

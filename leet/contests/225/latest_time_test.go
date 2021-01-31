@@ -1,4 +1,4 @@
-package contest
+package _225
 
 import "testing"
 

@@ -1,4 +1,4 @@
-package _0925_long_pressed_name
+package _925_long_pressed_name
 
 // past best solution. tptl not mine.
 func isLongPressedName2(name string, typed string) bool {

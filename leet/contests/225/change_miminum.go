@@ -1,4 +1,4 @@
-package contest
+package _225
 
 // todo 1 comp
 //https://leetcode.com/contest/weekly-contest-225

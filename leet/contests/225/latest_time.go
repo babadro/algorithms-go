@@ -1,4 +1,4 @@
-package contest
+package _225
 
 func maximumTime(time string) string {
 	arr := [5]byte{'2', '3', ':', '5', '9'}
