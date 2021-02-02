@@ -23,9 +23,15 @@ func Test_canEat(t *testing.T) {
 			[]bool{false, true, true, false, false},
 		},
 		{
-			"3", // todo 1 fails
+			"3",
 			[]int{3, 4},
 			[][]int{{1, 0, 7}},
+			[]bool{true},
+		},
+		{
+			"4",
+			[]int{7},
+			[][]int{{0, 0, 3}},
 			[]bool{true},
 		},
 	}
