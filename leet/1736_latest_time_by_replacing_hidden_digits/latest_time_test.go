@@ -1,4 +1,4 @@
-package _225
+package _1736_latest_time_by_replacing_hidden_digits
 
 import "testing"
 

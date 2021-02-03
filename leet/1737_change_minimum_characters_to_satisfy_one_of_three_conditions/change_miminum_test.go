@@ -1,19 +1,20 @@
-package _225
+package _1737_change_minimum_characters_to_satisfy_one_of_three_conditions
 
-import "testing"
+import (
+	"testing"
+)
 
 func Test_minCharacters(t *testing.T) {
-	type args struct {
-	}
 	tests := []struct {
 		a    string
 		b    string
 		want int
 	}{
-		//{"aba", "caa", 2},
-		//{"dabadd", "cda", 3},
-		//{"aaaabc", "aaad", 3},
-		{"aaaabc", "az", 1}, // todo 1 fails
+		{"aba", "caa", 2},
+		{"dabadd", "cda", 3},
+		{"aaaabc", "aaad", 3},
+		{"aaaabc", "az", 1},
+		{"a", "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz", 2},
 	}
 	for _, tt := range tests {
 		t.Run(tt.a+"_"+tt.b, func(t *testing.T) {

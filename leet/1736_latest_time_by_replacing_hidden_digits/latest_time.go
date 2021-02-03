@@ -1,5 +1,7 @@
-package _225
+package _1736_latest_time_by_replacing_hidden_digits
 
+//https://leetcode.com/contest/weekly-contest-225
+//passed. tptl
 func maximumTime(time string) string {
 	arr := [5]byte{'2', '3', ':', '5', '9'}
 
