@@ -3,52 +3,47 @@ package _1737_change_minimum_characters_to_satisfy_one_of_three_conditions
 import "math"
 
 //https://leetcode.com/contest/weekly-contest-225
-// passed but not fast.
+// passed. fast enough
 func minCharacters(a string, b string) int {
 	res1, res2 := 0, 0
 
-	mA, mB := [26]int{}, [26]int{}
+	mA, sumA, mB, sumB := [26]int{}, [27]int{}, [26]int{}, [27]int{}
 
-	for i := range a {
-		char := a[i]
-		idx := char - 'a'
-		mA[idx]++
+	for _, char := range a {
+		mA[char-'a']++
 	}
 
-	for i := range b {
-		char := b[i]
-		idx := char - 'a'
-		mB[idx]++
+	for _, char := range b {
+		mB[char-'a']++
 	}
 
-	min, curr := math.MaxInt64, 0
+	for i := 1; i < 27; i++ {
+		sumA[i] = sumA[i-1] + mA[i-1]
+		sumB[i] = sumB[i-1] + mB[i-1]
+	}
+
+	minCount, curr := math.MaxInt64, 0
 	for i := 0; i <= 24; i++ {
-		if curr = sum(mA, i+1, 25) + sum(mB, 0, i); curr < min {
-			min = curr
+		if curr = sum(sumA, i+1, 25) + sum(sumB, 0, i); curr < minCount {
+			minCount = curr
 		}
 
-		if curr = sum(mA, 0, i) + sum(mB, i+1, 25); curr < min {
-			min = curr
+		if curr = sum(sumA, 0, i) + sum(sumB, i+1, 25); curr < minCount {
+			minCount = curr
 		}
 	}
 
-	res1 = min
-
-	concat := a + b
-	counter := make(map[byte]int)
-	for i := range concat {
-		char := concat[i]
-		counter[char]++
-	}
+	res1 = minCount
 
 	mostPopular := 0
-	for _, v := range counter {
-		if v > mostPopular {
-			mostPopular = v
+	for i := 0; i < 26; i++ {
+		count := mA[i] + mB[i]
+		if count > mostPopular {
+			mostPopular = count
 		}
 	}
 
-	res2 = len(concat) - mostPopular
+	res2 = len(a) + len(b) - mostPopular
 
 	if res2 < res1 {
 		return res2
@@ -57,10 +52,6 @@ func minCharacters(a string, b string) int {
 	return res1
 }
 
-func sum(arr [26]int, from, to int) (res int) {
-	for i := from; i <= to; i++ {
-		res += arr[i]
-	}
-
-	return res
+func sum(arr [27]int, from, to int) (res int) {
+	return arr[to+1] - arr[from]
 }

@@ -18,7 +18,7 @@ func Test_minCharacters(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.a+"_"+tt.b, func(t *testing.T) {
-			if got := minCharacters(tt.a, tt.b); got != tt.want {
+			if got := minCharacters2(tt.a, tt.b); got != tt.want {
 				t.Errorf("minCharacters() = %v, want %v", got, tt.want)
 			}
 		})
