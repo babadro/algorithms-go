@@ -1,36 +1,36 @@
 package unionFind
 
-func find(parent []int, i int) int {
-	if parent[i] == -1 {
+func find(id []int, i int) int {
+	if id[i] == -1 {
 		return i
 	}
 
-	return find(parent, parent[i])
+	return find(id, id[i])
 }
 
-func Union(parent []int, x, y int) {
-	xSet := find(parent, x)
-	ySet := find(parent, y)
-	parent[xSet] = ySet
+func Union(id []int, x, y int) {
+	xSet := find(id, x)
+	ySet := find(id, y)
+	id[xSet] = ySet
 }
 
 // todo 1 understand
 func IsCycle(itemsCount int, pairs [][2]int) bool {
-	parent := make([]int, itemsCount)
+	id := make([]int, itemsCount)
 
 	for i := 0; i < itemsCount; i++ {
-		parent[i] = -1
+		id[i] = -1
 	}
 
 	for i := 0; i < len(pairs); i++ {
-		x := find(parent, pairs[i][0])
-		y := find(parent, pairs[i][1])
+		x := find(id, pairs[i][0])
+		y := find(id, pairs[i][1])
 
 		if x == y {
 			return true
 		}
 
-		Union(parent, x, y)
+		Union(id, x, y)
 	}
 
 	return false
