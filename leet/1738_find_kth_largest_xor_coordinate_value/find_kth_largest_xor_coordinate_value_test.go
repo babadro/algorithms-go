@@ -1,4 +1,4 @@
-package _738_find_kth_largest_xor_coordinate_value
+package _1738_find_kth_largest_xor_coordinate_value
 
 import "testing"
 
