@@ -2,7 +2,7 @@ package _1738_find_kth_largest_xor_coordinate_value
 
 import "sort"
 
-// passed, but slow.
+// passed. Easy to understand but slow.
 func kthLargestValue(matrix [][]int, k int) int {
 	m, n := len(matrix), len(matrix[0])
 	values := make([]int, 0, m*n)
