@@ -2,6 +2,7 @@ package _1752_check_if_array_is_sorted_and_rotated
 
 import "sort"
 
+// passed. best solution. tptl
 func check2(nums []int) bool {
 	found := false
 	for i := 1; i < len(nums); i++ {
