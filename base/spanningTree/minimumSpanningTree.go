@@ -10,10 +10,9 @@ type Edge struct {
 }
 
 // Kruskal minimum spanning tree
-// V - vertex count for given graph
 // todo 1 unit tests
-func KruskalMST(V int, edges []Edge) (mst []Edge) {
-	union := unionFind.NewWQUPC(V)
+func KruskalMST(vertexCount int, edges []Edge) (mst []Edge) {
+	union := unionFind.NewWQUPC(vertexCount)
 
 	sort.Slice(edges, func(i, j int) bool {
 		return edges[i].weight < edges[j].weight
