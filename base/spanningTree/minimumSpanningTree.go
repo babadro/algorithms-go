@@ -2,6 +2,7 @@ package spanTree
 
 import (
 	"github.com/babadro/algorithms-go/base/unionFind"
+	"math"
 	"sort"
 )
 
@@ -10,7 +11,6 @@ type Edge struct {
 }
 
 // Kruskal minimum spanning tree
-// todo 1 unit tests
 func KruskalMST(vertexCount int, edges []Edge) (mst []Edge) {
 	union := unionFind.NewWQUPC(vertexCount)
 
@@ -26,6 +26,42 @@ func KruskalMST(vertexCount int, edges []Edge) (mst []Edge) {
 		union.Union(edge.src, edge.dst)
 
 		mst = append(mst, edge)
+	}
+
+	return mst
+}
+
+// todo 1 understand and unit tests
+func PrimMST(vertexCount int, adjMatrix [][]int) (mst []Edge) {
+	edgesCount := 0
+	selected := make([]bool, vertexCount)
+	selected[0] = true
+
+	for edgesCount < vertexCount-1 {
+		min := math.MaxInt64
+		x, y := 0, 0
+
+		for i := 0; i < vertexCount; i++ {
+			if selected[i] {
+				for j := 0; j < vertexCount; j++ {
+					if !selected[j] && adjMatrix[i][j] != 0 {
+						if min > adjMatrix[i][j] {
+							min = adjMatrix[i][j]
+							x, y = i, j
+						}
+					}
+				}
+			}
+		}
+
+		mst = append(mst, Edge{
+			src:    x,
+			dst:    y,
+			weight: adjMatrix[x][y],
+		})
+
+		selected[y] = true
+		edgesCount++
 	}
 
 	return mst
