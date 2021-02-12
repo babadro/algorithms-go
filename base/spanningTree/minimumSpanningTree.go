@@ -31,7 +31,7 @@ func KruskalMST(vertexCount int, edges []Edge) (mst []Edge) {
 	return mst
 }
 
-// todo 1 understand and unit tests
+// https://www.programiz.com/dsa/prim-algorithm
 func PrimMST(vertexCount int, adjMatrix [][]int) (mst []Edge) {
 	edgesCount := 0
 	selected := make([]bool, vertexCount)
