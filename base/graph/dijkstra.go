@@ -26,7 +26,7 @@ func Dijkstra(adjMatrix [][]int, vertexCount, start int) (distance []int) {
 		pred[i] = start
 	}
 
-	distance[start] = 0 // избыточно? разве не проставится в предыдущем цикле?
+	distance[start] = 0
 	visited[start] = true
 
 	var nextV int
@@ -42,7 +42,7 @@ func Dijkstra(adjMatrix [][]int, vertexCount, start int) (distance []int) {
 
 		visited[nextV] = true
 		for i := 0; i < vertexCount; i++ {
-			if !visited[i] {
+			if !visited[i] && adjMatrix[nextV][i] != 0 {
 				if minDistance+cost[nextV][i] < distance[i] {
 					distance[i] = minDistance + cost[nextV][i]
 					pred[i] = nextV

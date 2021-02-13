@@ -126,7 +126,7 @@ func TestPrimMST(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			adjMatrix := EdgesToAdjMatrix(tt.vertexCount, tt.edges)
+			adjMatrix := graph.EdgesToAdjMatrix(tt.vertexCount, tt.edges)
 			gotMst := PrimMST(tt.vertexCount, adjMatrix)
 
 			sum := 0
@@ -156,20 +156,4 @@ func TestPrimMST(t *testing.T) {
 			}
 		})
 	}
-}
-
-func EdgesToAdjMatrix(vertexCount int, edges [][3]int) [][]int {
-	matrix := make([][]int, vertexCount)
-	for i := range matrix {
-		matrix[i] = make([]int, vertexCount)
-	}
-
-	for _, edge := range edges {
-		y, x, weight := edge[0], edge[1], edge[2]
-
-		matrix[y][x] = weight
-		matrix[x][y] = weight
-	}
-
-	return matrix
 }
