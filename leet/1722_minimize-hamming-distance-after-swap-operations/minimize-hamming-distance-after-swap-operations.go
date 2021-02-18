@@ -4,7 +4,7 @@ import (
 	"github.com/babadro/algorithms-go/base/unionFind"
 )
 
-// todo 1
+// passed
 func minimumHammingDistance(source []int, target []int, allowedSwaps [][]int) int {
 	n := len(source)
 	union := unionFind.NewWQUPC(n)
@@ -20,7 +20,18 @@ func minimumHammingDistance(source []int, target []int, allowedSwaps [][]int) in
 
 	counter := 0
 	for _, set := range sets {
-		mSource, mTarget := make(map[int]bool), make(map[int]bool)
+		m := make(map[int]int)
+		for _, idx := range set {
+			m[source[idx]]++
+		}
+
+		for _, idx := range set {
+			if m[target[idx]] == 0 {
+				counter++
+			} else {
+				m[target[idx]]--
+			}
+		}
 	}
 
 	return counter
