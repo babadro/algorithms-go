@@ -22,7 +22,7 @@ func NewWQUPC(n int) WQUPC {
 	}
 }
 
-func (qu *WQUPC) root(i int) int {
+func (qu *WQUPC) Root(i int) int {
 	for i != qu.id[i] {
 		qu.id[i] = qu.id[qu.id[i]] // path compression todo 1 understand
 		i = qu.id[i]
@@ -32,12 +32,12 @@ func (qu *WQUPC) root(i int) int {
 }
 
 func (qu *WQUPC) Find(p, q int) bool {
-	return qu.root(p) == qu.root(q)
+	return qu.Root(p) == qu.Root(q)
 }
 
 func (qu *WQUPC) Union(p, q int) {
-	i := qu.root(p)
-	j := qu.root(q)
+	i := qu.Root(p)
+	j := qu.Root(q)
 
 	if qu.size[i] < qu.size[j] {
 		qu.id[i] = qu.id[j]

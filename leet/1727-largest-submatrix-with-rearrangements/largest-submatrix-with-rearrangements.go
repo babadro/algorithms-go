@@ -3,6 +3,7 @@ package _1727_largest_submatrix_with_rearrangements
 import "sort"
 
 // passed. tptl.
+// contest 224
 func largestSubmatrix(matrix [][]int) int {
 	for y := 1; y < len(matrix); y++ {
 		for x := range matrix[0] {
