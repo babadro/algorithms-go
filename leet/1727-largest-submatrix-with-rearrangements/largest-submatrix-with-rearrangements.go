@@ -4,40 +4,22 @@ import "sort"
 
 // passed. tptl.
 func largestSubmatrix(matrix [][]int) int {
-	m, n := len(matrix), len(matrix[0])
-
-	for x := 0; x < n; x++ {
-		counter := 0
-		for y := 0; y < m; y++ {
-			if matrix[y][x] == 0 {
-				counter = 0
-			} else {
-				counter++
-				matrix[y][x] = counter
+	for y := 1; y < len(matrix); y++ {
+		for x := range matrix[0] {
+			if matrix[y][x] == 1 {
+				matrix[y][x] += matrix[y-1][x]
 			}
 		}
 	}
 
+	n := len(matrix[0])
 	max := 0
-	for y := 0; y < m; y++ {
-		sort.Slice(matrix[y], func(i, j int) bool {
-			return matrix[y][i] > matrix[y][j]
-		})
-
-		maxRow := 0
-		for x := 0; x < n; x++ {
-			if matrix[y][x] == 0 {
-				break
+	for _, row := range matrix {
+		sort.Ints(row)
+		for i := 1; i <= n; i++ {
+			if res := row[n-i] * i; res > max {
+				max = res
 			}
-
-			res := matrix[y][x] * (x + 1)
-			if res > maxRow {
-				maxRow = res
-			}
-		}
-
-		if maxRow > max {
-			max = maxRow
 		}
 	}
 
