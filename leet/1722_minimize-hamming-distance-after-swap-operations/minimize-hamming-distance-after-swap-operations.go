@@ -4,7 +4,7 @@ import (
 	"github.com/babadro/algorithms-go/base/unionFind"
 )
 
-// passed
+// passed. tptl. todo 2 look for graph solutions - it might be interesting
 func minimumHammingDistance(source []int, target []int, allowedSwaps [][]int) int {
 	n := len(source)
 	union := unionFind.NewWQUPC(n)
