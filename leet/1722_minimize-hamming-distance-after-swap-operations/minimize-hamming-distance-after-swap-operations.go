@@ -5,6 +5,7 @@ import (
 )
 
 // passed. tptl. todo 2 look for graph solutions - it might be interesting
+// contest 223
 func minimumHammingDistance(source []int, target []int, allowedSwaps [][]int) int {
 	n := len(source)
 	union := unionFind.NewWQUPC(n)
