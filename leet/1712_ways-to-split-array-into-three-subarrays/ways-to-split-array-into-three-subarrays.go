@@ -1,7 +1,5 @@
 package _1712_ways_to_split_array_into_three_subarrays
 
-import "sort"
-
 func waysToSplit(nums []int) int {
 	n := len(nums)
 	for i := 1; i < n; i++ {
@@ -10,33 +8,38 @@ func waysToSplit(nums []int) int {
 
 	counter := 0
 	for i := 0; i < n-2; i++ {
-		//if nums[i] >= nums[n-1]-nums[i] {
-		//	break
-		//}
-
-		start := sort.Search(n, func(j int) bool {
-			return nums[j]-nums[i] >= nums[i]
-		})
-
-		finish := sort.Search(n, func(j int) bool {
-			return nums[j]-nums[i] > nums[n-1]-nums[j]
-		})
-
-		//var idx int
-		//for j := i; j < n; j++ {
-		//	if nums[j]-nums[i] > nums[n-1]-nums[j] {
-		//		idx = j
-		//		break
-		//	}
-		//}
-
-		count := finish - start
-		if count <= 0 {
-			break
+		start, finish := -1, n-1
+		for j := i + 1; j < n-1; j++ {
+			if start == -1 {
+				if nums[j]-nums[i] >= nums[i] {
+					start = j
+				}
+			} else if nums[j]-nums[i] > nums[n-1]-nums[j] {
+				finish = j
+				break
+			}
 		}
 
-		counter += count
+		if start == -1 || nums[n-1]-nums[finish-1] < nums[finish-1]-nums[i] {
+			continue
+		}
+
+		counter += finish - start
 	}
 
 	return counter % 1_000_000_007
 }
+
+//if nums[i] >= nums[n-1]-nums[i] {
+//	break
+//}
+//tmp := nums[i+1:n-2]
+//nTmp := len(tmp)
+//
+//start := sort.Search(nTmp, func(j int) bool {
+//	return tmp[j]-nums[i] >= nums[i]
+//})
+//
+//finish := sort.Search(nTmp, func(j int) bool {
+//	return tmp[j]-nums[i] > nums[n-1]-tmp[j]
+//})
