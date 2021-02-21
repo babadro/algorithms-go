@@ -20,18 +20,23 @@ func waysToSplit2(nums []int) int {
 	counter := 0
 	for i := 0; i < n-2; i++ {
 
-		start := sort.Search(n-3-i, func(j int) bool {
-			return nums[j+i+1]-nums[i] >= nums[i]
+		tmp := nums[i+1 : n-1]
+		k := len(tmp)
+		start := sort.Search(k, func(j int) bool {
+			return tmp[j]-nums[i] >= nums[i]
 		})
 		start += i + 1
 
-		finish := sort.Search(n-start, func(j int) bool {
-			return nums[j+start]-nums[i] > nums[n-1]-nums[j]
+		tmp2 := nums[start+1 : n]
+		finish := sort.Search(len(tmp2), func(j int) bool {
+			return nums[j]-nums[i] > nums[n-1]-nums[j]
 		})
-		finish += start
+		if finish >= len(tmp2) {
+			continue
+		}
 
 		count := finish - start
-		if count <= 0 || finish >= n || start <= i {
+		if count <= 0 {
 			continue
 		}
 
