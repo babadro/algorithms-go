@@ -14,7 +14,7 @@ func maximumScore2(nums []int, multipliers []int) int {
 	return dp[0][0]
 }
 
-// todo1 need to understand
+// todo 2 need to understand and fix - doesn't work
 //https://leetcode.com/problems/maximum-score-from-performing-multiplication-operations/discuss/1075496/C%2B%2B-Classic-
 func maximumScore(nums []int, multipliers []int) int {
 	dp := [1001][1001]int{}
