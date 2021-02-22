@@ -1,6 +1,7 @@
 package _1770_maximum_score_from_performing_multiplication_operations
 
 //https://leetcode.com/problems/maximum-score-from-performing-multiplication-operations/discuss/1075448/Python-DP-Clear-the-Cache!
+// passed. tptl. best solution
 func maximumScore2(nums []int, multipliers []int) int {
 	dp := [1001][1001]int{}
 	n, m := len(nums), len(multipliers)
@@ -15,6 +16,7 @@ func maximumScore2(nums []int, multipliers []int) int {
 }
 
 // todo 2 need to understand and fix - doesn't work
+// tptl
 //https://leetcode.com/problems/maximum-score-from-performing-multiplication-operations/discuss/1075496/C%2B%2B-Classic-
 func maximumScore(nums []int, multipliers []int) int {
 	dp := [1001][1001]int{}
