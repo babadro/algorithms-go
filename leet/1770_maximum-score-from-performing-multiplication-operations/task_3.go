@@ -1,5 +1,19 @@
 package _1770_maximum_score_from_performing_multiplication_operations
 
+//https://leetcode.com/problems/maximum-score-from-performing-multiplication-operations/discuss/1075448/Python-DP-Clear-the-Cache!
+func maximumScore2(nums []int, multipliers []int) int {
+	dp := [1001][1001]int{}
+	n, m := len(nums), len(multipliers)
+	for l := m - 1; l >= 0; l-- {
+		for r := m - 1 - l; r >= 0; r-- {
+			rightIdx, mult := n-1-r, multipliers[l+r]
+			dp[l][r] = max(nums[l]*mult+dp[l+1][r], nums[rightIdx]*mult+dp[l][r+1])
+		}
+	}
+
+	return dp[0][0]
+}
+
 // todo1 need to understand
 //https://leetcode.com/problems/maximum-score-from-performing-multiplication-operations/discuss/1075496/C%2B%2B-Classic-
 func maximumScore(nums []int, multipliers []int) int {
