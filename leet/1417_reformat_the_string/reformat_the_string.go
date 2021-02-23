@@ -17,6 +17,10 @@ func reformat(s string) string {
 		}
 	}
 
+	if diff := n - 2*i; diff < -1 || diff > 1 {
+		return ""
+	}
+
 	j++
 	i--
 
