@@ -1,6 +1,6 @@
 package _1417_reformat_the_string
 
-// todo 1
+// tptl. passed
 func reformat(s string) string {
 	n := len(s)
 	i, j := 0, n-1

@@ -25,7 +25,7 @@ func Test_reformat(t *testing.T) {
 		{"aa1", false},
 		{"a1a", false},
 		{"1aa", false},
-		{"77", true}, // todo 1 fails
+		{"77", true},
 		{"aa", true},
 		{"aaa", true},
 	}
