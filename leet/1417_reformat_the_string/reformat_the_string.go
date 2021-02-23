@@ -17,7 +17,10 @@ func reformat(s string) string {
 		}
 	}
 
-	remainder := n/2 - i + 1
+	j++
+	i--
+
+	remainder := n/2 - i
 	if remainder != 0 && remainder != 1 {
 		return ""
 	}

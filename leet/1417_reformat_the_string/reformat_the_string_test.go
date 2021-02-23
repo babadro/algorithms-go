@@ -10,7 +10,7 @@ func Test_reformat(t *testing.T) {
 		s     string
 		empty bool
 	}{
-		{"a0b1c2", false},
+		//{"a0b1c2", false},
 		//{"leetcode", true},
 		//{"1229857369", true},
 		//{"covid2019", false},
@@ -25,6 +25,9 @@ func Test_reformat(t *testing.T) {
 		//{"aa1", false},
 		//{"a1a", false},
 		//{"1aa", false},
+		{"77", true}, // todo 1 fails
+		//{"aaa", true},
+
 	}
 	for _, tt := range tests {
 		t.Run(tt.s, func(t *testing.T) {
