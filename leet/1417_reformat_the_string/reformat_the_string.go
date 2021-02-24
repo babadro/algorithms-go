@@ -30,12 +30,8 @@ func reformat(s string) string {
 	}
 
 	for k, char := range b {
-		if k%2 == remainder {
-			if !digit(char) {
-				b[k], b[j] = b[j], b[k]
-				j++
-			}
-		} else if digit(char) {
+		rem, dig := k%2 == remainder, digit(char)
+		if (rem && !dig) || (!rem && dig) {
 			b[k], b[j] = b[j], b[k]
 			j++
 		}
