@@ -4,6 +4,34 @@ import "sort"
 
 // todo 1
 func reconstructQueue(people [][]int) [][]int {
+	n := len(people)
+	res := make([][]int, n)
+
+	sort.Slice(people, func(i, j int) bool {
+		l, r := people[i], people[j]
+		if l[0] == r[0] {
+			return l[1] < r[1]
+		}
+
+		return l[0] < r[0]
+	})
+
+	for _, p := range people {
+		i, counter, height, count := 0, 0, p[0], p[1]
+		for ; counter < count || (i < n && people[i] != nil); i++ {
+			if res[i] == nil || res[i][0] >= height {
+				counter++
+			}
+		}
+
+		res[i] = p
+	}
+
+	return res
+}
+
+// doesn't work
+func reconstructQueueOld(people [][]int) [][]int {
 	sort.Slice(people, func(i, j int) bool {
 		l, r := people[i], people[j]
 		sumL, sumR := l[0]+l[1], r[0]+r[1]

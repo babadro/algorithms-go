@@ -22,13 +22,13 @@ func Test_reconstructQueue(t *testing.T) {
 		},
 		{
 			[][]int{{2, 4}, {3, 4}, {9, 0}, {0, 6}, {7, 1}, {6, 0}, {7, 3}, {2, 5}, {1, 1}, {8, 0}},
-			[][]int{}, // I don't know the answer. TLE
+			[][]int{{6, 0}, {1, 1}, {8, 0}, {7, 1}, {9, 0}, {2, 4}, {2, 5}, {3, 4}, {7, 3}},
 		},
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.people), func(t *testing.T) {
 			if got := reconstructQueue(tt.people); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("reconstructQueue() = %v, want %v", got, tt.want)
+				t.Errorf("reconstructQueueOld() = %v, want %v", got, tt.want)
 			}
 		})
 	}
