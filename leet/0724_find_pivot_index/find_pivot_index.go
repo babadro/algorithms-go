@@ -1,20 +1,20 @@
 package _724_find_pivot_index
 
-// todo 1
+// passed. easy
 func pivotIndex(nums []int) int {
-	n := len(nums)
-	sums := make([]int, n+1)
-
-	for i := n - 1; i >= 0; i-- {
-		sums[i] = nums[i] + sums[i+1]
+	n, sum := len(nums), 0
+	for _, num := range nums {
+		sum += num
 	}
 
-	sum := 0
+	left, right := 0, sum
 	for i := 0; i < n; i++ {
-		if sum == sums[i+1] {
+		right -= nums[i]
+		if left == right {
 			return i
 		}
-		sum += nums[i]
+
+		left += nums[i]
 	}
 
 	return -1
