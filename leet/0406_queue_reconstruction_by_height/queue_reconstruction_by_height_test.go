@@ -27,7 +27,7 @@ func Test_reconstructQueue(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.people), func(t *testing.T) {
-			if got := reconstructQueue(tt.people); !reflect.DeepEqual(got, tt.want) {
+			if got := reconstructQueue2(tt.people); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("reconstructQueueOld() = %v, want %v", got, tt.want)
 			}
 		})

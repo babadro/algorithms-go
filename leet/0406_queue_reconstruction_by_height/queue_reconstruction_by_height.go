@@ -2,7 +2,25 @@ package _406_queue_reconstruction_by_height
 
 import "sort"
 
-// passed. tptl.
+// best solution. tptl. passed. not mine
+func reconstructQueue2(people [][]int) [][]int {
+	sort.Slice(people, func(i, j int) bool {
+		if people[i][0] == people[j][0] {
+			return people[i][1] < people[j][1]
+		}
+		return people[i][0] > people[j][0]
+	})
+
+	ret := make([][]int, 0)
+	for _, p := range people {
+		ret = append(ret, []int{})
+		copy(ret[p[1]+1:], ret[p[1]:])
+		ret[p[1]] = p
+	}
+	return ret
+}
+
+// passed. bruteforce
 func reconstructQueue(people [][]int) [][]int {
 	n := len(people)
 	res := make([][]int, n)
