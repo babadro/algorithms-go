@@ -2,7 +2,7 @@ package _406_queue_reconstruction_by_height
 
 import "sort"
 
-// todo 1
+// passed. tptl.
 func reconstructQueue(people [][]int) [][]int {
 	n := len(people)
 	res := make([][]int, n)
@@ -18,7 +18,7 @@ func reconstructQueue(people [][]int) [][]int {
 
 	for _, p := range people {
 		i, counter, height, count := 0, 0, p[0], p[1]
-		for ; counter < count || (i < n && people[i] != nil); i++ {
+		for ; counter < count || (i < n && res[i] != nil); i++ {
 			if res[i] == nil || res[i][0] >= height {
 				counter++
 			}
