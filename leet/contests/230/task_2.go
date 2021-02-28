@@ -1,11 +1,52 @@
 package _30
 
 import (
+	"fmt"
 	"math"
 	"sort"
 )
 
-// todo 1 doesn't work
+// passed. tptl. todo 2 find shorter or more effective solution, probably backtracking\iterative if possible.
+func closestCost2(baseCosts []int, toppingCosts []int, target int) int {
+	allToppings := append(toppingCosts, toppingCosts...)
+	closestPrice := 0
+	smallestDiff := math.MaxInt64
+
+	for _, price := range baseCosts {
+		helper(price, target, &smallestDiff, &closestPrice, allToppings)
+	}
+
+	return closestPrice
+}
+
+func helper(price, target int, smallestDiff, closest *int, toppings []int) {
+	if *smallestDiff == 0 {
+		return
+	}
+
+	fmt.Println(price)
+
+	diff := price - target
+	if price < target {
+		diff = target - price
+	}
+
+	if diff == 0 {
+		*closest, *smallestDiff = price, 0
+		return
+	} else if diff < *smallestDiff {
+		*closest, *smallestDiff = price, diff
+	} else if diff == *smallestDiff && price < *closest {
+		*closest = price
+	}
+
+	if price < target && len(toppings) > 0 {
+		for i := 0; i < len(toppings); i++ {
+			helper(price+toppings[i], target, smallestDiff, closest, toppings[i+1:])
+		}
+	}
+}
+
 func closestCost(baseCosts []int, toppingCosts []int, target int) int {
 	allToppings := append(toppingCosts, toppingCosts...)
 	sort.Ints(allToppings)
