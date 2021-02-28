@@ -1,12 +1,11 @@
 package _30
 
 import (
-	"fmt"
 	"math"
 	"sort"
 )
 
-// passed. tptl. todo 2 find shorter or more effective solution, probably backtracking\iterative if possible.
+// passed. tptl. todo 2 find shorter or more effective solution, probably backtracking\iterative if possible. + benchmarks
 func closestCost2(baseCosts []int, toppingCosts []int, target int) int {
 	allToppings := append(toppingCosts, toppingCosts...)
 	closestPrice := 0
@@ -23,8 +22,6 @@ func helper(price, target int, smallestDiff, closest *int, toppings []int) {
 	if *smallestDiff == 0 {
 		return
 	}
-
-	fmt.Println(price)
 
 	diff := price - target
 	if price < target {

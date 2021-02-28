@@ -17,7 +17,7 @@ func Test_closestCost(t *testing.T) {
 		{[]int{3, 10}, []int{2, 5}, 9, 8},
 		{[]int{10}, []int{1}, 1, 10},
 		{[]int{9015, 4152, 7816, 5153, 1641, 3402, 5201}, []int{650, 447, 173, 4843}, 9775, 9788},
-		{[]int{20, 20}, []int{1, 1, 1, 1, 1, 1, 1, 1, 1, 10}, 30, 30}, // todo 2 how does it work?
+		{[]int{20, 20}, []int{1, 1, 1, 1, 1, 1, 1, 1, 1, 10}, 30, 30},
 	}
 	for _, tt := range tests {
 		name := fmt.Sprintf("%v %v %d", tt.baseCosts, tt.toppingCosts, tt.target)
