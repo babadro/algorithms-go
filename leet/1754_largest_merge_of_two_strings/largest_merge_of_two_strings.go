@@ -1,5 +1,6 @@
-package _27
+package _754_largest_merge_of_two_strings
 
+// passed. tptl. todo 2 refac
 func largestMerge(word1 string, word2 string) string {
 	b1, b2 := []byte(word1), []byte(word2)
 

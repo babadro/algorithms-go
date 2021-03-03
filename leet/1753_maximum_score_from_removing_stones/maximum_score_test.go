@@ -1,4 +1,4 @@
-package _27
+package _753_maximum_score_from_removing_stones
 
 import (
 	"fmt"

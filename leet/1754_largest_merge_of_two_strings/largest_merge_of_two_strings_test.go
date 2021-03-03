@@ -1,4 +1,4 @@
-package _27
+package _754_largest_merge_of_two_strings
 
 import "testing"
 

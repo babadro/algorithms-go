@@ -1,5 +1,6 @@
-package _27
+package _753_maximum_score_from_removing_stones
 
+// passed. tptl todo 2 refac
 func maximumScore(a int, b int, c int) int {
 	arr := [3]int{a, b, c}
 	counter := 0

@@ -1,4 +1,4 @@
-package _30
+package _774_closest_dessert_cost
 
 import (
 	"math"
