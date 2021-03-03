@@ -2,7 +2,7 @@
 // dyx, tptl?
 package unionFind
 
-// todo 1 unit tests
+// todo base unit tests
 // WQUPC - weighted quick-union with path compression
 type WQUPC struct {
 	id   []int
@@ -24,7 +24,7 @@ func NewWQUPC(n int) WQUPC {
 
 func (qu *WQUPC) Root(i int) int {
 	for i != qu.id[i] {
-		qu.id[i] = qu.id[qu.id[i]] // path compression todo 1 understand
+		qu.id[i] = qu.id[qu.id[i]] // path compression todo base understand
 		i = qu.id[i]
 	}
 

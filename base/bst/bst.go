@@ -52,7 +52,7 @@ func (t *Tree) transplant(u, v *Node) {
 	}
 }
 
-// todo 1
+// todo base
 func (t *Tree) Delete(z *Node) {
 	if z.Left == nil {
 		t.transplant(z, z.Right)

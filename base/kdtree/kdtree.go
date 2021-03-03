@@ -2,7 +2,7 @@ package kdtree
 
 import "math"
 
-// todo 1 delete func (file temp3) and unit tests
+// todo base delete func (file temp3) and unit tests
 type Node struct {
 	Point       []int
 	Left, Right *Node

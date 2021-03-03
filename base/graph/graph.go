@@ -50,7 +50,7 @@ func (g *Graph) BFS(v int, f func(v int)) {
 }
 
 // dyx
-// todo 1 add unit tests
+// todo base add unit tests
 func (g *Graph) DFS(v int, f func(v int)) {
 	visited := make(map[int]bool, g.V())
 	g.dfsHelper(v, visited, f)

@@ -1,6 +1,6 @@
 package b_tree
 
-// todo 1: insertion, deletion, unit tests
+// todo base: insertion, deletion, unit tests
 type BTreeNode struct {
 	keys []int
 	t    int

@@ -1,6 +1,6 @@
 package sorting
 
-// tptl. todo 1 iterative
+// tptl. todo base iterative
 func partition(arr []int, low, high int) int {
 	pivot := arr[high]
 
