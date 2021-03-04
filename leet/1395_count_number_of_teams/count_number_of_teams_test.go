@@ -17,7 +17,7 @@ func Test_numTeams(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.rating), func(t *testing.T) {
-			if got := numTeams(tt.rating); got != tt.want {
+			if got := numTeams2(tt.rating); got != tt.want {
 				t.Errorf("numTeams() = %v, want %v", got, tt.want)
 			}
 		})
