@@ -105,6 +105,8 @@ func minNode(x, y, z *Node, d int) *Node {
 }
 
 // todo 2 doesn't work
+// may be it'll help
+// https://github.com/kyroy/kdtree/blob/master/kdtree.go
 func (t *KDTree) DeleteNode(point []int) *Node {
 	return t.deleteNodeHelper(t.Root, point, 0)
 }
@@ -118,17 +120,17 @@ func (t *KDTree) deleteNodeHelper(node *Node, point []int, depth uint) *Node {
 
 	if pointsAreEqual(node.Point, point) {
 		if node.Right != nil {
-			min := t.findMinHelper(node.Right, cd, 0) // в оригинале тут не depth+1, а 0, но это похоже на ошибку
+			min := t.findMinHelper(node.Right, cd, 0) // почему не depth+1 ?
 
 			copyPoint(node.Point, min.Point)
 
 			node.Right = t.deleteNodeHelper(node.Right, min.Point, depth+1)
 		} else if node.Left != nil {
-			min := t.findMinHelper(node.Left, cd, 0) // в оригинале тут не depth+1, а 0, но это похоже на ошибку
+			min := t.findMinHelper(node.Left, cd, 0) //почему не depth+1 ?
 
 			copyPoint(node.Point, min.Point)
 
-			node.Left = t.deleteNodeHelper(node.Left, min.Point, depth+1)
+			node.Right = t.deleteNodeHelper(node.Left, min.Point, depth+1) // почсему node.Right, а не node.Left?
 		} else { // Leaf
 			return nil
 		}
