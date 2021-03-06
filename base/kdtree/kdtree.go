@@ -86,6 +86,7 @@ func (t *KDTree) findMinHelper(node *Node, d int, depth uint) *Node {
 		t.findMinHelper(node.Right, d, depth+1), d)
 }
 
+// todo 2 unit tests
 func (t *KDTree) FindMin(d int) *Node {
 	return t.findMinHelper(t.Root, d, 0)
 }
@@ -103,6 +104,7 @@ func minNode(x, y, z *Node, d int) *Node {
 	return res
 }
 
+// todo 2 doesn't work
 func (t *KDTree) DeleteNode(point []int) *Node {
 	return t.deleteNodeHelper(t.Root, point, 0)
 }
@@ -116,17 +118,17 @@ func (t *KDTree) deleteNodeHelper(node *Node, point []int, depth uint) *Node {
 
 	if pointsAreEqual(node.Point, point) {
 		if node.Right != nil {
-			min := t.findMinHelper(node.Right, cd, depth+1) // в оригинале тут не depth+1, а 0, но это похоже на ошибку
+			min := t.findMinHelper(node.Right, cd, 0) // в оригинале тут не depth+1, а 0, но это похоже на ошибку
 
 			copyPoint(node.Point, min.Point)
 
 			node.Right = t.deleteNodeHelper(node.Right, min.Point, depth+1)
 		} else if node.Left != nil {
-			min := t.findMinHelper(node.Left, cd, depth+1) // в оригинале тут не depth+1, а 0, но это похоже на ошибку
+			min := t.findMinHelper(node.Left, cd, 0) // в оригинале тут не depth+1, а 0, но это похоже на ошибку
 
 			copyPoint(node.Point, min.Point)
 
-			node.Right = t.deleteNodeHelper(node.Left, min.Point, depth+1)
+			node.Left = t.deleteNodeHelper(node.Left, min.Point, depth+1)
 		} else { // Leaf
 			return nil
 		}
