@@ -1,7 +1,5 @@
 package kdtree
 
-import "math"
-
 // todo base delete func (file temp3) and unit tests
 type Node struct {
 	Point       []int
@@ -32,8 +30,8 @@ func (t *KDTree) insertHelper(node *Node, point []int, depth uint) *Node {
 	return node
 }
 
-func (t *KDTree) Insert(root *Node, point []int) *Node {
-	return t.insertHelper(root, point, 0)
+func (t *KDTree) Insert(point []int) {
+	t.Root = t.insertHelper(t.Root, point, 0)
 }
 
 func pointsAreEqual(p1, p2 []int) bool {
@@ -46,13 +44,13 @@ func pointsAreEqual(p1, p2 []int) bool {
 	return true
 }
 
-func (t *KDTree) searchHelper(node *Node, point []int, depth uint) bool {
+func (t *KDTree) searchHelper(node *Node, point []int, depth uint) *Node {
 	if node == nil {
-		return false
+		return nil
 	}
 
 	if pointsAreEqual(node.Point, point) {
-		return true
+		return node
 	}
 
 	cd := int(depth) % t.K
@@ -64,42 +62,97 @@ func (t *KDTree) searchHelper(node *Node, point []int, depth uint) bool {
 	return t.searchHelper(node.Right, point, depth+1)
 }
 
-func (t *KDTree) Search(point []int) bool {
+func (t *KDTree) Search(point []int) *Node {
 	return t.searchHelper(t.Root, point, 0)
 }
 
-func (t *KDTree) findMinHelper(node *Node, d int, depth uint) int {
+func (t *KDTree) findMinHelper(node *Node, d int, depth uint) *Node {
 	if node == nil {
-		return math.MaxInt64
+		return nil
 	}
 
 	cd := int(depth) % t.K
 
 	if cd == d {
 		if node.Left == nil {
-			return node.Point[d]
+			return node
 		}
 
-		return min2(node.Point[d], t.findMinHelper(node.Left, d, depth+1))
+		return t.findMinHelper(node.Left, d, depth+1)
 	}
 
-	return min3(node.Point[d],
+	return minNode(node,
 		t.findMinHelper(node.Left, d, depth+1),
-		t.findMinHelper(node.Right, d, depth+1))
+		t.findMinHelper(node.Right, d, depth+1), d)
 }
 
-func (t *KDTree) FindMin(d int) int {
+func (t *KDTree) FindMin(d int) *Node {
 	return t.findMinHelper(t.Root, d, 0)
 }
 
-func min3(a, b, c int) (res int) {
-	return min2(a, min2(b, c))
-}
-
-func min2(a, b int) int {
-	if a < b {
-		return a
+func minNode(x, y, z *Node, d int) *Node {
+	res := x
+	if y != nil && y.Point[d] < res.Point[d] {
+		res = y
 	}
 
-	return b
+	if z != nil && z.Point[d] < res.Point[d] {
+		res = z
+	}
+
+	return res
+}
+
+func (t *KDTree) DeleteNode(point []int) *Node {
+	return t.deleteNodeHelper(t.Root, point, 0)
+}
+
+func (t *KDTree) deleteNodeHelper(node *Node, point []int, depth uint) *Node {
+	if node == nil {
+		return nil
+	}
+
+	cd := int(depth) % t.K
+
+	if pointsAreEqual(node.Point, point) {
+		if node.Right != nil {
+			min := t.findMinHelper(node.Right, cd, depth+1) // в оригинале тут не depth+1, а 0, но это похоже на ошибку
+
+			copyPoint(node.Point, min.Point)
+
+			node.Right = t.deleteNodeHelper(node.Right, min.Point, depth+1)
+		} else if node.Left != nil {
+			min := t.findMinHelper(node.Left, cd, depth+1) // в оригинале тут не depth+1, а 0, но это похоже на ошибку
+
+			copyPoint(node.Point, min.Point)
+
+			node.Right = t.deleteNodeHelper(node.Left, min.Point, depth+1)
+		} else { // Leaf
+			return nil
+		}
+
+		return node
+	}
+
+	if point[cd] < node.Point[cd] {
+		node.Left = t.deleteNodeHelper(node.Left, point, depth+1)
+	} else {
+		node.Right = t.deleteNodeHelper(node.Right, point, depth+1)
+	}
+
+	return node
+}
+
+func copyPoint(dst, src []int) {
+	for i := range src {
+		dst[i] = src[i]
+	}
+}
+
+func InOrderFunc(node *Node, f func(*Node)) {
+	if node != nil {
+		InOrderFunc(node.Left, f)
+		f(node)
+		InOrderFunc(node.Right, f)
+	}
 }
