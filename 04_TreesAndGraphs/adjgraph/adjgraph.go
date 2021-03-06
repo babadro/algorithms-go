@@ -2,7 +2,7 @@ package adjgraph
 
 import (
 	"fmt"
-	"github.com/babadro/algorithms-go/03_StacksAndQueues/03_Queue"
+	"github.com/babadro/algorithms-go/base/queue"
 	"strings"
 )
 
