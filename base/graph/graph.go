@@ -94,3 +94,24 @@ func (g *Graph) topologicalSortHelper(v int, visited map[int]bool, stack *[]int)
 
 	*stack = append(*stack, v)
 }
+
+// graph must be direct and acyclic (DAG)
+// todo 1 add unit tests where src and target would be not equal 0 and n-1.
+func (g *Graph) AllPathsFromSourceToTarget(source, target int, f func(path []int)) {
+	path := make([]int, 0)
+
+	g.allPathsHelper(source, target, path, f)
+}
+
+func (g *Graph) allPathsHelper(V, target int, path []int, f func(path []int)) {
+	path = append(path, V)
+
+	if V == target {
+		f(path)
+		return
+	}
+
+	for _, v := range g.adj[V] {
+		g.allPathsHelper(v, target, path, f)
+	}
+}
