@@ -96,22 +96,35 @@ func (g *Graph) topologicalSortHelper(v int, visited map[int]bool, stack *[]int)
 }
 
 // graph must be direct and acyclic (DAG)
-// todo 1 add unit tests where src and target would be not equal 0 and n-1.
-func (g *Graph) AllPathsFromSourceToTarget(source, target int, f func(path []int)) {
-	path := make([]int, 0)
-
-	g.allPathsHelper(source, target, path, f)
+// todo 1 - find more effective solution. add unit tests where src and target would be not equal 0 and n-1.
+func (g *Graph) AllPathsFromSourceToTarget(source, target int) [][]int {
+	return g.allPathsHelper(source, target, make([][][]int, len(g.adj)))
 }
 
-func (g *Graph) allPathsHelper(V, target int, path []int, f func(path []int)) {
-	path = append(path, V)
-
-	if V == target {
-		f(path)
-		return
+func (g *Graph) allPathsHelper(source, target int, cache [][][]int) [][]int {
+	if source == target {
+		return [][]int{{source}}
 	}
 
-	for _, v := range g.adj[V] {
-		g.allPathsHelper(v, target, path, f)
+	if cache[source] != nil {
+		return cache[source]
 	}
+
+	var res [][]int
+
+	for _, v := range g.adj[source] {
+		paths := g.allPathsHelper(v, target, cache)
+
+		for _, childPath := range paths {
+			path := make([]int, 0, len(childPath)+1)
+			path = append(path, source)
+			path = append(path, childPath...)
+
+			res = append(res, path)
+		}
+	}
+
+	cache[source] = res
+
+	return res
 }

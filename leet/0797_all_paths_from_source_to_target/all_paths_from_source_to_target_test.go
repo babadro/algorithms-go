@@ -20,7 +20,7 @@ func Test_allPathsSourceTarget(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := allPathsSourceTarget(tt.graph); !reflect.DeepEqual(got, tt.want) {
+			if got := allPathsSourceTarget2(tt.graph); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("allPathsSourceTarget() = %v, want %v", got, tt.want)
 			}
 		})

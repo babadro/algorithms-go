@@ -121,14 +121,14 @@ func TestGraph_AllPathsFromSourceToTarget(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			g := Constructor(tt.graph)
 
-			var res [][]int
-			f := func(path []int) {
-				item := make([]int, len(path))
-				copy(item, path)
-				res = append(res, item)
-			}
+			//var res [][]int
+			//f := func(path []int) {
+			//	item := make([]int, len(path))
+			//	copy(item, path)
+			//	res = append(res, item)
+			//}
 
-			g.AllPathsFromSourceToTarget(tt.source, tt.target, f)
+			res := g.AllPathsFromSourceToTarget(tt.source, tt.target)
 
 			if !reflect.DeepEqual(res, tt.want) {
 				t.Errorf("allPathsSourceTarget() = %v, want %v", res, tt.want)
