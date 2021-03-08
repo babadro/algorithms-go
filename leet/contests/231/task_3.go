@@ -2,6 +2,7 @@ package _31
 
 import "github.com/babadro/algorithms-go/base/graph"
 
+// todo 1 https://leetcode.com/problems/number-of-restricted-paths-from-first-to-last-node/discuss/1098310/C%2B%2B-BFS-%2B-DFS
 func countRestrictedPaths(n int, edges [][]int) int {
 	adjMatrix := make([][]int, n)
 	for i := range adjMatrix {
