@@ -1,6 +1,9 @@
 package graph
 
-import "math"
+import (
+	"container/heap"
+	"math"
+)
 
 // https://www.programiz.com/dsa/dijkstra-algorithm
 func Dijkstra(adjMatrix [][]int, vertexCount, start int) (distance []int) {
@@ -52,4 +55,29 @@ func Dijkstra(adjMatrix [][]int, vertexCount, start int) (distance []int) {
 	}
 
 	return distance
+}
+
+type MinHeap [][2]int
+
+func (h MinHeap) Len() int            { return len(h) }
+func (h MinHeap) Less(i, j int) bool  { return h[i][0] < h[j][0] }
+func (h MinHeap) Swap(i, j int)       { h[i], h[j] = h[j], h[i] }
+func (h *MinHeap) Push(x interface{}) { *h = append(*h, x.([2]int)) }
+func (h *MinHeap) Pop() (v interface{}) {
+	*h, v = (*h)[:len(*h)-1], (*h)[len(*h)-1]
+	return
+}
+
+// todo 1 https://leetcode.com/problems/number-of-restricted-paths-from-first-to-last-node/discuss/1098349/Golang-Go-Dijkstra-with-min-heap-%2B-DFS-solution
+func DijkstraWithHeap(adjList [][2]int, vertexCount, start int) (distance []int) {
+	dist := make([]int, vertexCount+1)
+	for i := range dist {
+		dist[i] = math.MaxInt64
+	}
+
+	dist[start] = 0
+	h := &MinHeap{}
+	heap.Init(h)
+
+	return nil
 }
