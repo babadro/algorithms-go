@@ -5,6 +5,7 @@ import (
 	"math"
 )
 
+// Very slow implementation
 // https://www.programiz.com/dsa/dijkstra-algorithm
 func Dijkstra(adjMatrix [][]int, vertexCount, start int) (distance []int) {
 	cost := make([][]int, vertexCount)
@@ -68,16 +69,36 @@ func (h *MinHeap) Pop() (v interface{}) {
 	return
 }
 
-// todo 1 https://leetcode.com/problems/number-of-restricted-paths-from-first-to-last-node/discuss/1098349/Golang-Go-Dijkstra-with-min-heap-%2B-DFS-solution
-func DijkstraWithHeap(adjList [][2]int, vertexCount, start int) (distance []int) {
-	dist := make([]int, vertexCount+1)
+// dyx. 6 times faster than previous Dijkstra implementation
+// source https://leetcode.com/problems/number-of-restricted-paths-from-first-to-last-node/discuss/1098349/Golang-Go-Dijkstra-with-min-heap-%2B-DFS-solution
+func DijkstraWithHeap(adjList [][][2]int, vertexCount, start int) (distance []int) {
+	dist := make([]int, vertexCount)
 	for i := range dist {
 		dist[i] = math.MaxInt64
 	}
 
 	dist[start] = 0
-	h := &MinHeap{}
-	heap.Init(h)
+	heapDistances := &MinHeap{}
+	heap.Init(heapDistances)
+	heapDistances.Push([2]int{0, start})
 
-	return nil
+	for heapDistances.Len() > 0 {
+		u := heap.Pop(heapDistances).([2]int)
+		uWeight, uVertex := u[0], u[1]
+
+		if uWeight > dist[uVertex] {
+			continue
+		}
+
+		for _, v := range adjList[uVertex] {
+			vWeight, vVertex := v[0], v[1]
+			totalVdist := dist[uVertex] + vWeight
+			if totalVdist < dist[vVertex] {
+				dist[vVertex] = totalVdist
+				heap.Push(heapDistances, [2]int{totalVdist, vVertex})
+			}
+		}
+	}
+
+	return dist
 }
