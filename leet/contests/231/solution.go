@@ -1,23 +1,41 @@
 package _31
 
-func dfs(al [][][2]int, dist []int, dp []int, i int) int {
-	if i == 1 {
+import "github.com/babadro/algorithms-go/base/graph"
+
+// passed. dyx.
+func countRestrictedPaths3(n int, edges [][]int) int {
+	adjList := graph.EdgesSliceToAdjList(n, edges, true)
+	distances := graph.DijkstraWithHeap(adjList, n, n-1)
+
+	memo := make([]int, n)
+	for i := range memo {
+		memo[i] = -1
+	}
+
+	return dfs2(0, memo, adjList, distances, n-1)
+}
+
+func dfs2(u int, memo []int, graph [][][2]int, dist []int, start int) int {
+	if memo[u] >= 0 {
+		return memo[u]
+	}
+
+	if u == start {
 		return 1
 	}
 
-	if dp[i] == -1 {
-		dp[i] = 0
-		for _, pair := range al[i] {
-			j := pair[0]
-			if dist[i] < dist[j] {
-				dp[i] = (dp[i] + dfs(al, dist, dp, j)) % 1_000_007
-			}
+	memo[u] = 0
+	for _, v := range graph[u] {
+		vVertex := v[1]
+		if dist[vVertex] < dist[u] {
+			memo[u] = (memo[u] + dfs2(vVertex, memo, graph, dist, start)) % 1_000_000_007
 		}
 	}
 
-	return dp[i]
+	return memo[u]
 }
 
+// todo 1 fails on 422 input
 func countRestrictedPaths2(n int, edges [][]int) int {
 	al := make([][][2]int, n+1)
 	dist := make([]int, n+1)
@@ -52,4 +70,22 @@ func countRestrictedPaths2(n int, edges [][]int) int {
 	}
 
 	return dfs(al, dist, dp, n)
+}
+
+func dfs(al [][][2]int, dist []int, dp []int, i int) int {
+	if i == 1 {
+		return 1
+	}
+
+	if dp[i] == -1 {
+		dp[i] = 0
+		for _, pair := range al[i] {
+			j := pair[0]
+			if dist[i] < dist[j] {
+				dp[i] = (dp[i] + dfs(al, dist, dp, j)) % 1_000_007
+			}
+		}
+	}
+
+	return dp[i]
 }

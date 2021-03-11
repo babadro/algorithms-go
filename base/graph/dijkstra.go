@@ -58,13 +58,13 @@ func Dijkstra(adjMatrix [][]int, vertexCount, start int) (distance []int) {
 	return distance
 }
 
-type MinHeap [][2]int
+type minHeap [][2]int
 
-func (h MinHeap) Len() int            { return len(h) }
-func (h MinHeap) Less(i, j int) bool  { return h[i][0] < h[j][0] }
-func (h MinHeap) Swap(i, j int)       { h[i], h[j] = h[j], h[i] }
-func (h *MinHeap) Push(x interface{}) { *h = append(*h, x.([2]int)) }
-func (h *MinHeap) Pop() (v interface{}) {
+func (h minHeap) Len() int            { return len(h) }
+func (h minHeap) Less(i, j int) bool  { return h[i][0] < h[j][0] }
+func (h minHeap) Swap(i, j int)       { h[i], h[j] = h[j], h[i] }
+func (h *minHeap) Push(x interface{}) { *h = append(*h, x.([2]int)) }
+func (h *minHeap) Pop() (v interface{}) {
 	*h, v = (*h)[:len(*h)-1], (*h)[len(*h)-1]
 	return
 }
@@ -78,7 +78,7 @@ func DijkstraWithHeap(adjList [][][2]int, vertexCount, start int) (distance []in
 	}
 
 	dist[start] = 0
-	heapDistances := &MinHeap{}
+	heapDistances := &minHeap{}
 	heap.Init(heapDistances)
 	heapDistances.Push([2]int{0, start})
 
