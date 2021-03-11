@@ -128,3 +128,57 @@ func (g *Graph) allPathsHelper(source, target int, cache [][][]int) [][]int {
 
 	return res
 }
+
+// todo 1 doesn't work. check it
+func (g *Graph) AllPathsFromSourceToTarget2(source, target int) [][]int {
+	sortedVertexes := make([]int, 0, g.V())
+	f := func(v int) {
+		sortedVertexes = append(sortedVertexes, v)
+	}
+
+	g.TopologicalSort(f)
+
+	d := make([][][]int, 0)
+
+	n := g.V()
+	for _, l := range sortedVertexes {
+		if l == n {
+			d[l] = [][]int{{n - 1}}
+		} else {
+			tmp := make([][]int, 0)
+			for _, v := range g.adj[l] {
+				for _, route := range d[v] {
+					item := append([]int{l}, route...)
+					tmp = append(tmp, item)
+				}
+				d[l] = tmp
+			}
+		}
+	}
+
+	return d[0]
+}
+
+/*
+func (g *Graph) AllPathsFromSourceToTarget(source, target int) [][]int {
+	sortedVertexes := make([]int, 0, g.V())
+	f := func(v int) {
+		sortedVertexes = append(sortedVertexes, v)
+	}
+
+	g.TopologicalSort(f)
+
+	dp := make([]int, g.V())
+
+	dp[target] = 1
+
+	for i := len(sortedVertexes)-1; i >= 0; i-- {
+		vertex := sortedVertexes[i]
+		for j := 0; j < len(g.adj[vertex]); i-- {
+			dp[vertex] += dp[g.adj[vertex][j]]
+		}
+	}
+
+	return dp
+}
+*/
