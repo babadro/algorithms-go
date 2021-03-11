@@ -1,41 +1,44 @@
-package _31
+package _1786_number_of_restricted_paths_from_first_to_last_node
 
 import "github.com/babadro/algorithms-go/base/graph"
 
-// passed. dyx.
-func countRestrictedPaths3(n int, edges [][]int) int {
-	adjList := graph.EdgesSliceToAdjList(n, edges, true)
-	distances := graph.DijkstraWithHeap(adjList, n, n-1)
-
-	memo := make([]int, n)
-	for i := range memo {
-		memo[i] = -1
+// doesn't work. Time limit exceeded.
+func countRestrictedPaths(n int, edges [][]int) int {
+	adjMatrix := make([][]int, n)
+	for i := range adjMatrix {
+		adjMatrix[i] = make([]int, n)
 	}
 
-	return dfs2(0, memo, adjList, distances, n-1)
-}
-
-func dfs2(u int, memo []int, graph [][][2]int, dist []int, start int) int {
-	if memo[u] >= 0 {
-		return memo[u]
+	for _, edge := range edges {
+		u, v, cost := edge[0]-1, edge[1]-1, edge[2]
+		adjMatrix[u][v] = cost
+		adjMatrix[v][u] = cost
 	}
 
-	if u == start {
-		return 1
-	}
+	distances := graph.Dijkstra(adjMatrix, n, n-1)
 
-	memo[u] = 0
-	for _, v := range graph[u] {
-		vVertex := v[1]
-		if dist[vVertex] < dist[u] {
-			memo[u] = (memo[u] + dfs2(vVertex, memo, graph, dist, start)) % 1_000_000_007
+	dag := graph.New(n)
+
+	for _, edge := range edges {
+		u, v := edge[0]-1, edge[1]-1
+		if distances[u] == distances[v] {
+			continue
+		}
+
+		if distances[u] > distances[v] {
+			dag.AddEdge(u, v)
+		} else {
+			dag.AddEdge(v, u)
 		}
 	}
 
-	return memo[u]
+	paths := dag.AllPathsFromSourceToTarget(0, n-1)
+
+	return len(paths)
 }
 
 // todo 1 fails on 422 input
+// not mine: https://leetcode.com/problems/number-of-restricted-paths-from-first-to-last-node/discuss/1098310/C%2B%2B-BFS-%2B-DFS
 func countRestrictedPaths2(n int, edges [][]int) int {
 	al := make([][][2]int, n+1)
 	dist := make([]int, n+1)

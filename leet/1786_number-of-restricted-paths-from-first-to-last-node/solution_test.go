@@ -1,4 +1,4 @@
-package _31
+package _1786_number_of_restricted_paths_from_first_to_last_node
 
 import (
 	"testing"
