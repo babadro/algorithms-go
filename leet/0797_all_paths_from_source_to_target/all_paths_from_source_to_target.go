@@ -1,6 +1,6 @@
 package _797_all_paths_from_source_to_target
 
-// tptl. passed.
+// tptl. best solution. passed.
 func allPathsSourceTarget(graph [][]int) [][]int {
 	tmp, res := make([]int, 0), make([][]int, 0)
 	traverse(graph, 0, tmp, &res)

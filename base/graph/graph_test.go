@@ -121,18 +121,39 @@ func TestGraph_AllPathsFromSourceToTarget(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			g := Constructor(tt.graph)
 
-			//var res [][]int
-			//f := func(path []int) {
-			//	item := make([]int, len(path))
-			//	copy(item, path)
-			//	res = append(res, item)
-			//}
+			var res [][]int
+			f := func(path []int) {
+				item := make([]int, len(path))
+				copy(item, path)
+				res = append(res, item)
+			}
 
-			res := g.AllPathsFromSourceToTarget(tt.source, tt.target)
+			g.AllPathsFromSourceToTarget(tt.source, tt.target, f)
 
 			if !reflect.DeepEqual(res, tt.want) {
 				t.Errorf("allPathsSourceTarget() = %v, want %v", res, tt.want)
 			}
 		})
 	}
+}
+
+func Benchmark_AllPaths(b *testing.B) {
+	var res [][]int
+
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		res = nil
+		f := func(path []int) {
+			item := make([]int, len(path))
+			copy(item, path)
+			res = append(res, item)
+		}
+		arr := [][]int{{3, 1}, {4, 6, 7, 2, 5}, {4, 6, 3}, {6, 4}, {7, 6, 5}, {6}, {7}, {}}
+		g := Constructor(arr)
+		b.StartTimer()
+
+		g.AllPathsFromSourceToTarget(0, g.V()-1, f)
+	}
+
+	_ = res
 }

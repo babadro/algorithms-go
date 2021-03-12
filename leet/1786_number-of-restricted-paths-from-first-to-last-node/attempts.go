@@ -32,7 +32,7 @@ func countRestrictedPaths(n int, edges [][]int) int {
 		}
 	}
 
-	paths := dag.AllPathsFromSourceToTarget(0, n-1)
+	paths := dag.AllPathsFromSourceToTarget3(0, n-1)
 
 	return len(paths)
 }

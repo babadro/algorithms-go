@@ -1,5 +1,6 @@
 package _797_all_paths_from_source_to_target
 
+// not effective
 func allPathsSourceTarget2(graph [][]int) [][]int {
 	return helper(graph, make([][][]int, len(graph)), 0)
 }

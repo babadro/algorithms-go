@@ -96,89 +96,22 @@ func (g *Graph) topologicalSortHelper(v int, visited map[int]bool, stack *[]int)
 }
 
 // graph must be direct and acyclic (DAG)
-// todo 1 - find more effective solution. add unit tests where src and target would be not equal 0 and n-1.
-func (g *Graph) AllPathsFromSourceToTarget(source, target int) [][]int {
-	return g.allPathsHelper(source, target, make([][][]int, len(g.adj)))
+// todo 1 add unit tests where src and target would be not equal 0 and n-1.
+func (g *Graph) AllPathsFromSourceToTarget(source, target int, f func(path []int)) {
+	path := make([]int, 0)
+
+	g.allPathsHelper(source, target, path, f)
 }
 
-func (g *Graph) allPathsHelper(source, target int, cache [][][]int) [][]int {
-	if source == target {
-		return [][]int{{source}}
+func (g *Graph) allPathsHelper(V, target int, path []int, f func(path []int)) {
+	path = append(path, V)
+
+	if V == target {
+		f(path)
+		return
 	}
 
-	if cache[source] != nil {
-		return cache[source]
+	for _, v := range g.adj[V] {
+		g.allPathsHelper(v, target, path, f)
 	}
-
-	var res [][]int
-
-	for _, v := range g.adj[source] {
-		paths := g.allPathsHelper(v, target, cache)
-
-		for _, childPath := range paths {
-			path := make([]int, 0, len(childPath)+1)
-			path = append(path, source)
-			path = append(path, childPath...)
-
-			res = append(res, path)
-		}
-	}
-
-	cache[source] = res
-
-	return res
 }
-
-// todo 1 doesn't work. check it
-func (g *Graph) AllPathsFromSourceToTarget2(source, target int) [][]int {
-	sortedVertexes := make([]int, 0, g.V())
-	f := func(v int) {
-		sortedVertexes = append(sortedVertexes, v)
-	}
-
-	g.TopologicalSort(f)
-
-	d := make([][][]int, 0)
-
-	n := g.V()
-	for _, l := range sortedVertexes {
-		if l == n {
-			d[l] = [][]int{{n - 1}}
-		} else {
-			tmp := make([][]int, 0)
-			for _, v := range g.adj[l] {
-				for _, route := range d[v] {
-					item := append([]int{l}, route...)
-					tmp = append(tmp, item)
-				}
-				d[l] = tmp
-			}
-		}
-	}
-
-	return d[0]
-}
-
-/*
-func (g *Graph) AllPathsFromSourceToTarget(source, target int) [][]int {
-	sortedVertexes := make([]int, 0, g.V())
-	f := func(v int) {
-		sortedVertexes = append(sortedVertexes, v)
-	}
-
-	g.TopologicalSort(f)
-
-	dp := make([]int, g.V())
-
-	dp[target] = 1
-
-	for i := len(sortedVertexes)-1; i >= 0; i-- {
-		vertex := sortedVertexes[i]
-		for j := 0; j < len(g.adj[vertex]); i-- {
-			dp[vertex] += dp[g.adj[vertex][j]]
-		}
-	}
-
-	return dp
-}
-*/
