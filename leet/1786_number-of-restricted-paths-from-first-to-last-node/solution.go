@@ -2,7 +2,7 @@ package _1786_number_of_restricted_paths_from_first_to_last_node
 
 import "github.com/babadro/algorithms-go/base/graph"
 
-// passed. dyx.
+// passed. dyx. todo 1 understand
 func countRestrictedPaths3(n int, edges [][]int) int {
 	adjList := graph.EdgesSliceToAdjList(n, edges, true)
 	distances := graph.DijkstraWithHeap(adjList, n, n-1)

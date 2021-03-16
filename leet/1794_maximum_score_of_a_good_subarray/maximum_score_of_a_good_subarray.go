@@ -2,7 +2,7 @@ package _1793_maximum_score_of_a_good_subarray
 
 import "math"
 
-// todo 1 doesnt' work
+// doesnt' work. wrong solution
 func maximumScore(nums []int, k int) int {
 	leftIdx, leftMin, leftMaxScore := k, math.MaxInt64, 0
 	for i := k; i >= 0; i-- {

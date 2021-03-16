@@ -16,8 +16,8 @@ func Test_maximumScore(t *testing.T) {
 		{[]int{5}, 0, 5},
 		{[]int{1, 2, 5}, 2, 5},
 		{[]int{6569, 9667, 3148, 7698, 1622, 2194, 793, 9041, 1670, 1872}, 5, 9732},
-		{arr474, 474, 36808},     // todo 1 fails.
-		{arr44424, 44424, 96844}, // todo 1 fails
+		{arr474, 474, 36808},
+		{arr44424, 44424, 96844},
 	}
 	for _, tt := range tests {
 		var name string
@@ -28,7 +28,7 @@ func Test_maximumScore(t *testing.T) {
 		}
 
 		t.Run(name, func(t *testing.T) {
-			if got := maximumScore(tt.nums, tt.k); got != tt.want {
+			if got := maximumScore2(tt.nums, tt.k); got != tt.want {
 				t.Errorf("maximumScore() = %v, want %v", got, tt.want)
 			}
 		})
