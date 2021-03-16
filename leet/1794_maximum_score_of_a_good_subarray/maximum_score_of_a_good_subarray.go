@@ -1,4 +1,4 @@
-package _794_maximum_score_of_a_good_subarray
+package _1793_maximum_score_of_a_good_subarray
 
 import "math"
 
@@ -49,4 +49,50 @@ func maximumScore(nums []int, k int) int {
 	}
 
 	return max
+}
+
+// Time limit exceeded. But, probably, algo is correct.
+func maximumScoreBruteForce(nums []int, k int) int {
+	leftMin := math.MaxInt64
+	for i := k; i >= 0; i-- {
+		if num := nums[i]; num < leftMin {
+			leftMin = num
+		}
+
+		nums[i] = leftMin
+	}
+
+	rightMin := math.MaxInt64
+	for i := k; i < len(nums); i++ {
+		if num := nums[i]; num < rightMin {
+			rightMin = num
+		}
+
+		nums[i] = rightMin
+	}
+
+	maxScore, mid := 0, nums[k]
+	for i := k; i >= 0; i-- {
+		for j := k; j < len(nums); j++ {
+			left, right := nums[i], nums[j]
+
+			minNum := min(left, min(right, mid))
+
+			length := j - i + 1
+
+			if score := minNum * length; score > maxScore {
+				maxScore = score
+			}
+		}
+	}
+
+	return maxScore
+}
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+
+	return b
 }

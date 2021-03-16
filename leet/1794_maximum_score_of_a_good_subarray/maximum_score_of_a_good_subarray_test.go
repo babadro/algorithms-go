@@ -1,4 +1,4 @@
-package _794_maximum_score_of_a_good_subarray
+package _1793_maximum_score_of_a_good_subarray
 
 import (
 	"fmt"
@@ -16,7 +16,8 @@ func Test_maximumScore(t *testing.T) {
 		{[]int{5}, 0, 5},
 		{[]int{1, 2, 5}, 2, 5},
 		{[]int{6569, 9667, 3148, 7698, 1622, 2194, 793, 9041, 1670, 1872}, 5, 9732},
-		{arr474, 474, 36808}, // todo 1 fails.
+		{arr474, 474, 36808},     // todo 1 fails.
+		{arr44424, 44424, 96844}, // todo 1 fails
 	}
 	for _, tt := range tests {
 		var name string
