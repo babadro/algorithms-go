@@ -1,4 +1,4 @@
-package _32
+package _1792_maximum_average_pass_ratio
 
 import "testing"
 

@@ -1,5 +1,6 @@
-package _32
+package _791_find_center_of_star_graph
 
+// passed. easy
 func findCenter(edges [][]int) int {
 	m := make(map[int]bool)
 

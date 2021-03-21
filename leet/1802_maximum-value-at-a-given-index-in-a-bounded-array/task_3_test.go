@@ -1,4 +1,4 @@
-package _33
+package _1802_maximum_value_at_a_given_index_in_a_bounded_array
 
 import (
 	"fmt"
@@ -26,7 +26,7 @@ func Test_maxValue(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("n: %d, index: %d, maxSum: %d", tt.n, tt.index, tt.maxSum), func(t *testing.T) {
-			if got := maxValue(tt.n, tt.index, tt.maxSum); got != tt.want {
+			if got := maxValue2(tt.n, tt.index, tt.maxSum); got != tt.want {
 				t.Errorf("maxValue() = %v, want %v", got, tt.want)
 			}
 		})

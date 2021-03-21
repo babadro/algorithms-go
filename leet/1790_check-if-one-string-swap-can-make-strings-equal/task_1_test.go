@@ -1,4 +1,4 @@
-package _32
+package _1790_check_if_one_string_swap_can_make_strings_equal
 
 import "testing"
 

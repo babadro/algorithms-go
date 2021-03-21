@@ -1,9 +1,10 @@
-package _32
+package _1792_maximum_average_pass_ratio
 
 import (
 	"container/heap"
 )
 
+// passed. tptl. medium
 func maxAverageRatio(classes [][]int, extraStudents int) float64 {
 	h := &maxHeap{}
 
