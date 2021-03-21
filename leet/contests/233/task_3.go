@@ -1,20 +1,15 @@
 package _33
 
-func maxValue(n int, index int, maxSum int) int {
-	l, r := 1, maxSum
-	for l < r {
-		mid := (l + r) / 2
+import "sort"
 
-		if curr := sum(n, index, mid); curr > maxSum {
-			r = mid - 1
-		} else if curr == maxSum {
-			return mid
-		} else {
-			l = mid + 1
-		}
+func maxValue(n int, index int, maxSum int) int {
+	f := func(num int) bool {
+		return sum(n, index, num) > maxSum
 	}
 
-	return l
+	res := sort.Search(maxSum+1, f)
+
+	return res - 1
 }
 
 func sum(n, index, num int) int {
