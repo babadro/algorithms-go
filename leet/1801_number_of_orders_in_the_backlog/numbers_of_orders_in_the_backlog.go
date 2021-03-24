@@ -20,22 +20,24 @@ func getNumberOfBacklogOrders(orders [][]int) int {
 		}
 
 		if h2.Len() > 0 {
-			if (*h2)[0][0] <= price {
+			minPrice := (*h2)[h2.Len()-1][0]
+			if (typ == buy && minPrice <= price) || (typ == sell && minPrice >= price) {
 				for h2.Len() > 0 && amount > 0 {
-					itemPrice := (*h2)[0][0]
-					if itemPrice > price {
+					last := h2.Len() - 1
+					itemPrice := (*h2)[last][0]
+					if (typ == buy && itemPrice > price) || (typ == sell && itemPrice < price) {
 						break
 					}
 
-					itemAmount := (*h2)[0][1]
+					itemAmount := (*h2)[last][1]
 					if itemAmount <= amount {
-						h2.Pop()
+						heap.Pop(h2)
 						amount -= itemAmount
 
 						continue
 					}
 
-					(*h2)[0][1] -= amount
+					(*h2)[last][1] -= amount
 					amount = 0
 				}
 			}
