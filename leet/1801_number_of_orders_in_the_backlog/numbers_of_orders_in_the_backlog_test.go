@@ -18,7 +18,7 @@ func Test_getNumberOfBacklogOrders(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.orders), func(t *testing.T) {
-			if got := getNumberOfBacklogOrders(tt.orders); got != tt.want {
+			if got := getNumberOfBacklogOrders2(tt.orders); got != tt.want {
 				t.Errorf("getNumberOfBacklogOrders() = %v, want %v", got, tt.want)
 			}
 		})

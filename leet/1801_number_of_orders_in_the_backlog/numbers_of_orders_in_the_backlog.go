@@ -1,13 +1,57 @@
 package _1801_number_of_orders_in_the_backlog
 
-import "container/heap"
+import (
+	"container/heap"
+	"github.com/babadro/algorithms-go/utils"
+)
 
 const (
 	buy = 0
 	d   = 1_000_000_007
 )
 
-// passed. tptl. todo 1 find shorter solution
+// passed. tptl. best solution. medium
+func getNumberOfBacklogOrders2(orders [][]int) int {
+	buyOr, sellOr := &maxHeap{}, &minHeap{}
+
+	for _, batch := range orders {
+		if batch[2] == 0 {
+			heap.Push(buyOr, batch)
+		} else {
+			heap.Push(sellOr, batch)
+		}
+
+		for buyOr.Len() > 0 && sellOr.Len() > 0 && (*sellOr)[0][0] <= (*buyOr)[0][0] {
+			topSell, topBuy := (*sellOr)[0], (*buyOr)[0]
+
+			count := utils.Min(topSell[1], topBuy[1])
+
+			topSell[1] -= count
+			topBuy[1] -= count
+
+			if topSell[1] == 0 {
+				heap.Pop(sellOr)
+			}
+
+			if topBuy[1] == 0 {
+				heap.Pop(buyOr)
+			}
+		}
+	}
+
+	sum := 0
+	for _, batch := range *buyOr {
+		sum = (sum + batch[1]) % d
+	}
+
+	for _, batch := range *sellOr {
+		sum = (sum + batch[1]) % d
+	}
+
+	return sum
+}
+
+// passed. too verbose
 func getNumberOfBacklogOrders(orders [][]int) int {
 	buyOr, sellOr := &maxHeap{}, &minHeap{}
 
