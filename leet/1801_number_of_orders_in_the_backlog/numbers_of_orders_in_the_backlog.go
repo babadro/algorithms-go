@@ -7,7 +7,7 @@ const (
 	d   = 1_000_000_007
 )
 
-// passed
+// passed. tptl. todo 1 find shorter solution
 func getNumberOfBacklogOrders(orders [][]int) int {
 	buyOr, sellOr := &maxHeap{}, &minHeap{}
 
