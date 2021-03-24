@@ -3,28 +3,23 @@ package _1801_number_of_orders_in_the_backlog
 import "container/heap"
 
 const (
-	buy  = 0
-	sell = 1
-	d    = 1_000_000_007
+	buy = 0
+	d   = 1_000_000_007
 )
 
-// todo 1
+// passed
 func getNumberOfBacklogOrders(orders [][]int) int {
-	buyOr, sellOr := &minHeap{}, &minHeap{}
+	buyOr, sellOr := &maxHeap{}, &minHeap{}
 
 	for _, batch := range orders {
 		price, amount, typ := batch[0], batch[1], batch[2]
-		h1, h2 := buyOr, sellOr
-		if typ == sell {
-			h1, h2 = sellOr, buyOr
-		}
 
-		if h2.Len() > 0 {
-			for h2.Len() > 0 && amount > 0 {
-				minItem := heap.Pop(h2).([]int)
-				itemPrice := minItem[0]
-				if (typ == buy && itemPrice > price) || (typ == sell && itemPrice < price) {
-					heap.Push(h2, minItem)
+		if typ == buy {
+			for sellOr.Len() > 0 && amount > 0 {
+				minItem := heap.Pop(sellOr).([]int)
+				sellPrice := minItem[0]
+				if sellPrice > price {
+					heap.Push(sellOr, minItem)
 
 					break
 				}
@@ -38,12 +33,37 @@ func getNumberOfBacklogOrders(orders [][]int) int {
 
 				minItem[1] -= amount
 				amount = 0
-				heap.Push(h2, minItem)
+				heap.Push(sellOr, minItem)
 			}
-		}
 
-		if amount > 0 {
-			heap.Push(h1, []int{price, amount})
+			if amount > 0 {
+				heap.Push(buyOr, []int{price, amount})
+			}
+		} else {
+			for buyOr.Len() > 0 && amount > 0 {
+				maxItem := heap.Pop(buyOr).([]int)
+				buyPrice := maxItem[0]
+				if buyPrice < price {
+					heap.Push(buyOr, maxItem)
+
+					break
+				}
+
+				itemAmount := maxItem[1]
+				if itemAmount <= amount {
+					amount -= itemAmount
+
+					continue
+				}
+
+				maxItem[1] -= amount
+				amount = 0
+				heap.Push(buyOr, maxItem)
+			}
+
+			if amount > 0 {
+				heap.Push(sellOr, []int{price, amount})
+			}
 		}
 	}
 
@@ -68,6 +88,20 @@ func (h minHeap) Less(i, j int) bool  { return h[i][0] < h[j][0] }
 func (h minHeap) Swap(i, j int)       { h[i], h[j] = h[j], h[i] }
 func (h *minHeap) Push(x interface{}) { *h = append(*h, x.([]int)) }
 func (h *minHeap) Pop() interface{} {
+	n := len(*h)
+	res := (*h)[n-1]
+	*h = (*h)[:n-1]
+
+	return res
+}
+
+type maxHeap [][]int
+
+func (h maxHeap) Len() int            { return len(h) }
+func (h maxHeap) Less(i, j int) bool  { return h[i][0] > h[j][0] }
+func (h maxHeap) Swap(i, j int)       { h[i], h[j] = h[j], h[i] }
+func (h *maxHeap) Push(x interface{}) { *h = append(*h, x.([]int)) }
+func (h *maxHeap) Pop() interface{} {
 	n := len(*h)
 	res := (*h)[n-1]
 	*h = (*h)[:n-1]
