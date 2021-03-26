@@ -41,3 +41,11 @@ func Min3(a, b, c int) int {
 
 	return res
 }
+
+func Abs(a int) int {
+	if a >= 0 {
+		return a
+	}
+
+	return -a
+}
