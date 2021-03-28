@@ -23,3 +23,9 @@ func Test_integerBreak(t *testing.T) {
 		})
 	}
 }
+
+func Test_2(t *testing.T) {
+	for n := 7; n <= 20; n++ {
+		t.Log(integerBreak(n))
+	}
+}

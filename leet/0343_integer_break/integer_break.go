@@ -1,6 +1,10 @@
 package _343_integer_break
 
-// tptl. passed.
+// todo 1
+// https://leetcode.com/problems/integer-break/discuss/80689/A-simple-explanation-of-the-math-part-and-a-O(n)-solution
+// and realize math solution
+
+// passed. bruteforce
 func integerBreak(n int) int {
 	max := 0
 	for count := 2; count <= n; count++ {
