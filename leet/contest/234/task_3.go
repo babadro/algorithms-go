@@ -1,5 +1,6 @@
 package _34
 
+// passed. todo 1. can i do it without key array?
 func evaluate(s string, knowledge [][]string) string {
 	dict := make(map[string][]byte, len(knowledge))
 

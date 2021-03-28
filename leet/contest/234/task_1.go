@@ -1,5 +1,6 @@
 package _34
 
+// passed. todo 1 do it without digit array
 func numDifferentIntegers(word string) int {
 	m := make(map[string]bool)
 	counter := 0

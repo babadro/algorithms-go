@@ -15,6 +15,7 @@ func Test_numDifferentIntegers(t *testing.T) {
 		{"a", 0},
 		{"0", 1},
 		{"1", 1},
+		{"1a12", 2},
 	}
 	for _, tt := range tests {
 		t.Run(tt.word, func(t *testing.T) {
