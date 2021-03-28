@@ -2,6 +2,7 @@ package _204_count_primes
 
 import "math"
 
+// passed. tptl. need to understand
 func countPrimes(n int) int {
 	var counter int
 	arr := make([]bool, n)
