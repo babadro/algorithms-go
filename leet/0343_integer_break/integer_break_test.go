@@ -18,7 +18,7 @@ func Test_integerBreak(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%d", tt.n), func(t *testing.T) {
-			if got := integerBreak2(tt.n); got != tt.want {
+			if got := integerBreak3(tt.n); got != tt.want {
 				t.Errorf("integerBreak() = %v, want %v", got, tt.want)
 			}
 		})
