@@ -1,5 +1,7 @@
 package utils
 
+import "math"
+
 func Max(a, b int) int {
 	if a > b {
 		return a
@@ -48,4 +50,27 @@ func Abs(a int) int {
 	}
 
 	return -a
+}
+
+func Pow(x, y int) int {
+	return int(math.Pow(float64(x), float64(y)))
+}
+
+// tptl
+func ModPow(base, exp, modulus int) int {
+	result := 1
+	base %= modulus
+	if base == 0 {
+		return 0
+	}
+
+	for ; exp > 0; exp >>= 1 {
+		if (exp & 1) == 1 {
+			result = (result * base) % modulus
+		}
+
+		base = (base * base) % modulus // because a^(m*n) = (a^m)^n
+	}
+
+	return result
 }

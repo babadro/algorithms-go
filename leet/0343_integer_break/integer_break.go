@@ -44,8 +44,6 @@ func integerBreak2(n int) int {
 	return res * n
 }
 
-// and realize math solution
-
 // passed. bruteforce
 func integerBreak(n int) int {
 	max := 0
