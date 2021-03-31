@@ -1,6 +1,23 @@
 package _1808_maximize_number_of_nice_divisors
 
-// todo 1 implement pure math solution without st
+// tptl. passed. best solution. hard
+func maxNiceDivisors2(n int) int {
+	if n <= 4 {
+		return n
+	}
+
+	remainder, quotient, mod := n%3, n/3, 1_000_000_007
+	if remainder == 0 {
+		return ModPow(3, quotient, mod)
+	}
+
+	if remainder == 1 {
+		return (4 * ModPow(3, quotient-1, mod)) % mod
+	}
+
+	return (2 * ModPow(3, quotient, mod)) % mod
+}
+
 // https://leetcode.com/problems/maximize-number-of-nice-divisors/discuss/1130586/C%2B%2BJava-modpow
 func maxNiceDivisors(n int) int {
 	st := []int{0, 1, 2, 3, 4, 6}
@@ -10,6 +27,9 @@ func maxNiceDivisors(n int) int {
 		return st[n]
 	}
 
+	idx := 3 + n%3
+	exp := n/3 - 1
+	_, _ = idx, exp
 	return (ModPow(3, n/3-1, mod) * st[3+n%3]) % mod
 }
 
@@ -31,12 +51,12 @@ func ModPow(base, exp, modulus int) int {
 	return result
 }
 
-func maxNiceDivisorsBruteForce(n int) int {
+func maxNiceDivisorsBruteForce(n int) (int, []int) {
 	if n == 1 {
-		return 1
+		return 1, []int{1}
 	}
 
-	max := 0
+	max, bestArr := 0, []int(nil)
 	for count := 1; count <= n; count++ {
 		num := n / count
 
@@ -60,8 +80,9 @@ func maxNiceDivisorsBruteForce(n int) int {
 
 		if product > max {
 			max = product
+			bestArr = arr
 		}
 	}
 
-	return max
+	return max, bestArr
 }
