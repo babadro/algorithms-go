@@ -39,3 +39,24 @@ func levelOrder(root *Node) [][]int {
 
 	return res
 }
+
+func levelOrderArray(root *Node) [][]int {
+	result := [][]int{}
+	if root == nil {
+		return result
+	}
+	queue := []*Node{root}
+	for len(queue) > 0 {
+		level := []int{}
+		nextQueue := []*Node{}
+		for len(queue) > 0 {
+			node := queue[0]
+			queue = queue[1:]
+			level = append(level, node.Val)
+			nextQueue = append(nextQueue, node.Children...)
+		}
+		queue = nextQueue
+		result = append(result, level)
+	}
+	return result
+}

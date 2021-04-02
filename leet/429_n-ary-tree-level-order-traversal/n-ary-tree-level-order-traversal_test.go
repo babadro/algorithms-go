@@ -78,3 +78,42 @@ func Test_levelOrder(t *testing.T) {
 func n(val int) *Node {
 	return &Node{Val: val}
 }
+
+func Benchmark_levelOrderQueue(b *testing.B) {
+	var res [][]int
+	for i := 0; i < b.N; i++ {
+		res = levelOrder(tree)
+	}
+
+	_ = res
+}
+
+func Benchmark_levelOrderArray(b *testing.B) {
+	var res [][]int
+	for i := 0; i < b.N; i++ {
+		res = levelOrderArray(tree)
+	}
+
+	_ = res
+}
+
+var tree = treeBuilder()
+
+func treeBuilder() *Node {
+	n1 := n(1)
+	n2, n3, n4, n5 := n(2), n(3), n(4), n(5)
+	n6, n7, n8, n9, n10 := n(6), n(7), n(8), n(9), n(10)
+	n11, n12, n13 := n(11), n(12), n(13)
+	n14 := n(14)
+
+	n1.Children = []*Node{n2, n3, n4, n5}
+	n3.Children = []*Node{n6, n7}
+	n4.Children = []*Node{n8}
+	n5.Children = []*Node{n9, n10}
+	n7.Children = []*Node{n11}
+	n8.Children = []*Node{n12}
+	n9.Children = []*Node{n13}
+	n11.Children = []*Node{n14}
+
+	return n1
+}
