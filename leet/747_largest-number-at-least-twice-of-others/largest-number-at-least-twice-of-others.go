@@ -1,6 +1,7 @@
 package _747_largest_number_at_least_twice_of_others
 
-// passed
+// passed. really incorrect conditions.
+// for example nums{1} and nums{2} results in answer = 1. But it's unclear.
 func dominantIndex(nums []int) int {
 	n := len(nums)
 	if n < 2 {
@@ -30,4 +31,22 @@ func dominantIndex(nums []int) int {
 	}
 
 	return -1
+}
+
+// shorter but cant pass test case nums([]int{2})
+func dominantIndex2(nums []int) int {
+	maxIdx := -1
+	for i, num := range nums {
+		if maxIdx == -1 || num > nums[maxIdx] {
+			maxIdx = i
+		}
+	}
+
+	for i, num := range nums {
+		if i != maxIdx && num*2 > nums[maxIdx] {
+			return -1
+		}
+	}
+
+	return maxIdx
 }
