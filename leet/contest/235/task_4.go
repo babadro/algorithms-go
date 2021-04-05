@@ -2,7 +2,7 @@ package _35
 
 import "github.com/babadro/algorithms-go/utils"
 
-// 1819 todo 1
+// 1819 todo 1 https://leetcode.com/problems/number-of-different-subsequences-gcds/discuss/1141549/Short-Java-O(NlogN)-Solution-with-explanation
 func countDifferentSubsequenceGCDs(nums []int) int {
 	maxNum := 0
 	for _, num := range nums {
@@ -11,34 +11,28 @@ func countDifferentSubsequenceGCDs(nums []int) int {
 		}
 	}
 
-	flags := make([]bool, maxNum+1)
+	mem := make([]bool, maxNum+1)
 	for _, num := range nums {
-		flags[num] = true
+		mem[num] = true
 	}
 
-	res := 0
+	ans := 0
 	for i := 1; i <= maxNum; i++ {
-		var niGcd int
-		if flags[i] {
-			niGcd = i
-		} else {
-			niGcd = 0
-		}
-
-		for n := 1; n*i <= maxNum && niGcd != i; n++ {
-			if flags[n*i] {
-				if niGcd != 0 {
-					niGcd = utils.GCD(niGcd, n*i)
+		g := -1
+		for j := 1; j < maxNum; j += i {
+			if mem[j] {
+				if g == -1 {
+					g = j
 				} else {
-					niGcd = n * i
+					g = utils.GCD(g, j)
 				}
 			}
 
-			if niGcd == i {
-				res += niGcd
+			if g == i {
+				ans++
 			}
 		}
 	}
 
-	return res
+	return ans
 }
