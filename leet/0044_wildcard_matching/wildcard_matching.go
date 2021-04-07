@@ -1,5 +1,8 @@
 package _044_wildcard_matching // todo 1
 
+// todo 1 https://leetcode.com/problems/wildcard-matching/discuss/347267/Go-8ms-DP-solution
+
+// bruteforce recursive. very slow. tle
 func isMatch(s string, p string) bool {
 	if len(s) == 0 && len(p) == 0 {
 		return true
