@@ -18,7 +18,8 @@ func Test_isMatch(t *testing.T) {
 		{"a", "?", true},
 		{"", "?", false},
 		{"abcd", "****", true},
-		{"adddasdfasdfasdfasdfasdfadsfasdfasdfha", "a*?*?*?*?*?*?*?*?*?*?*?*?h", false},
+		{"adddasdfasdfasdfasdfasdfadsfasdfasdfhah", "a*?*?*?*?*?*?*?*?*?*?*?*?h", true},
+		{"aaabbbaabaaaaababaabaaabbabbbbbbbbaabababbabbbaaaaba", "a*******b", false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.s+" "+tt.p, func(t *testing.T) {
@@ -28,3 +29,6 @@ func Test_isMatch(t *testing.T) {
 		})
 	}
 }
+
+// "aaabbbaabaaaaababaabaaabbabbbbbbbbaabababbabbbaaaaba"
+//"a*******b"
