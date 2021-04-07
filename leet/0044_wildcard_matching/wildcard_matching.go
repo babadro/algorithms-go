@@ -1,5 +1,4 @@
 package _044_wildcard_matching // todo 1
-import "fmt"
 
 func isMatch(s string, p string) bool {
 	if len(s) == 0 && len(p) == 0 {
@@ -7,7 +6,6 @@ func isMatch(s string, p string) bool {
 	}
 
 	if len(p) == 0 {
-		fmt.Printf("%s, %s\n", s, p)
 		return false
 	}
 
@@ -15,7 +13,6 @@ func isMatch(s string, p string) bool {
 
 	if char >= 'a' && char <= 'z' {
 		if len(s) == 0 || s[0] != char {
-			fmt.Printf("%s, %s, %s\n", s, p, string(char))
 			return false
 		}
 
@@ -24,7 +21,6 @@ func isMatch(s string, p string) bool {
 
 	if char == '?' {
 		if len(s) == 0 {
-			fmt.Printf("%s, %s, %s\n", s, p, string(char))
 			return false
 		}
 
@@ -42,6 +38,5 @@ func isMatch(s string, p string) bool {
 		}
 	}
 
-	fmt.Printf("%s, %s, %s\n", s, p, string(char))
 	return false
 }
