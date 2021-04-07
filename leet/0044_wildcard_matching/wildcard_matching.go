@@ -2,21 +2,42 @@ package _044_wildcard_matching
 
 // todo 1
 func isMatch(s string, p string) bool {
-
-}
-
-func match(b []byte, pattern byte) bool {
-	if isLetter(pattern) {
-		return len(b) == 1 && b[0] == pattern
+	if len(s) == 0 && len(p) == 0 {
+		return true
 	}
 
-	if pattern == '?' {
-		return len(b) == 1
+	if len(p) == 0 {
+		return false
 	}
 
-	return true
-}
+	char, nextP := p[0], p[1:]
 
-func isLetter(char byte) bool {
-	return char >= 'a' && char <= 'z'
+	if char >= 'a' && char <= 'z' {
+		if len(s) == 0 || s[0] != char {
+			return false
+		}
+
+		return isMatch(s[1:], nextP)
+	}
+
+	if char == '?' {
+		if len(s) == 0 {
+			return false
+		}
+
+		return isMatch(s[1:], nextP)
+	}
+
+	// char == *
+	if len(nextP) == 0 {
+		return true
+	}
+
+	for i := 0; i <= len(s); i++ {
+		if isMatch(s[:i], nextP) {
+			return true
+		}
+	}
+
+	return false
 }
