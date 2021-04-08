@@ -1,6 +1,32 @@
 package _044_wildcard_matching // todo 1
 
-// todo 1 https://leetcode.com/problems/wildcard-matching/discuss/347267/Go-8ms-DP-solution
+// https://leetcode.com/problems/wildcard-matching/discuss/347267/Go-8ms-DP-solution
+// tptl. passed. best solution. hard. not mine.
+func isMatch2(s string, p string) bool {
+	mem := make([][]bool, len(s)+1)
+	for i := range mem {
+		mem[i] = make([]bool, len(p)+1)
+	}
+
+	mem[0][0] = true
+	for j := 1; j <= len(p); j++ {
+		if p[j-1] == '*' {
+			mem[0][j] = mem[0][j-1]
+		}
+	}
+
+	for i := 1; i <= len(s); i++ {
+		for j := 1; j <= len(p); j++ {
+			if p[j-1] == '*' {
+				mem[i][j] = mem[i][j-1] || mem[i-1][j]
+			} else if p[j-1] == '?' || p[j-1] == s[i-1] {
+				mem[i][j] = mem[i-1][j-1]
+			}
+		}
+	}
+
+	return mem[len(s)][len(p)]
+}
 
 // bruteforce recursive. very slow. tle
 func isMatchBruteForce(s string, p string) bool {
