@@ -4,11 +4,8 @@ import "sort"
 
 // todo 1. TLE
 type MKAverage struct {
-	arr        []int
-	m, k       int
-	calculated bool
-	avgArr     []int
-	avg        int
+	arr  []int
+	m, k int
 }
 
 func Constructor(m int, k int) MKAverage {
@@ -17,37 +14,24 @@ func Constructor(m int, k int) MKAverage {
 
 func (this *MKAverage) AddElement(num int) {
 	this.arr = append(this.arr, num)
-	this.calculated = false
 }
 
 func (this *MKAverage) CalculateMKAverage() int {
-	if this.calculated {
-		return this.avg
-	}
-
 	if len(this.arr) < this.m {
-		this.avg, this.calculated = -1, true
-		return this.avg
+		return -1
 	}
 
-	this.avgArr = make([]int, this.m)
-	copy(this.avgArr, this.arr[len(this.arr)-this.m:])
-
-	sort.Ints(this.avgArr)
-	this.avgArr = this.avgArr[this.k:]
-	this.avgArr = this.avgArr[:len(this.avgArr)-this.k]
+	cur := make([]int, this.m)
+	copy(cur, this.arr[len(this.arr)-this.m:])
+	sort.Ints(cur)
+	cur = cur[this.k : len(cur)-this.k]
 
 	sum := 0
-	for _, num := range this.avgArr {
+	for _, num := range cur {
 		sum += num
 	}
 
-	res := sum / len(this.avgArr)
-
-	this.calculated = true
-	this.avg = res
-
-	return res
+	return sum / len(cur)
 }
 
 /**
