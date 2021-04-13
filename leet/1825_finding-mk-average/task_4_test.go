@@ -4,8 +4,8 @@ import (
 	"testing"
 )
 
-func TestConstructor(t *testing.T) {
-	obj := Constructor(3, 1)
+func TestConstructorBruteForce(t *testing.T) {
+	obj := Constructor1(3, 1)
 	obj.AddElement(3)
 	obj.AddElement(1)
 	t.Log(obj.CalculateMKAverage())

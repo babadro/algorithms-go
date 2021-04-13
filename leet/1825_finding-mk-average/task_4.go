@@ -2,14 +2,30 @@ package _1825_finding_mk_average
 
 import "sort"
 
-// todo 1. TLE
+// todo 1 https://leetcode.com/problems/finding-mk-average/discuss/1155397/Java%3A-Binary-Search-(copied-from-Arrays-Class)-%2B-ArrayList-as-SlidingWindow
 type MKAverage struct {
-	arr  []int
-	m, k int
+	m       int
+	k       int
+	resLen  int
+	nums    []int
+	indexes []int
 }
 
 func Constructor(m int, k int) MKAverage {
-	return MKAverage{m: m, k: k}
+	return MKAverage{
+		m:      m,
+		k:      k,
+		resLen: m - 2*k,
+	}
+}
+
+func (this *MKAverage) slideByRemovingElement() {
+	n, m := len(this.nums), this.m
+	if n >= m {
+		i := n - m
+		copy(this.indexes[i:len(this.indexes)-1], this.indexes[i+1:])
+		this.indexes = this.indexes[:len(this.indexes)-1]
+	}
 }
 
 func (this *MKAverage) AddElement(num int) {
@@ -33,10 +49,3 @@ func (this *MKAverage) CalculateMKAverage() int {
 
 	return sum / len(cur)
 }
-
-/**
- * Your MKAverage object will be instantiated and called as such:
- * obj := Constructor(m, k);
- * obj.AddElement(num);
- * param_2 := obj.CalculateMKAverage();
- */
