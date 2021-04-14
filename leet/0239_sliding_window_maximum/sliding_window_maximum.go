@@ -7,7 +7,7 @@ type item struct {
 	numsIdx int
 }
 
-// todo 1 hard
+// passed. tptl hard todo 2 look for better solution
 func maxSlidingWindow(nums []int, k int) []int {
 	n := len(nums)
 	res := make([]int, n-k+1)
