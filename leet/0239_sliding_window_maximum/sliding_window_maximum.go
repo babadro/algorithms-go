@@ -18,6 +18,7 @@ func maxSlidingWindow(nums []int, k int) []int {
 			num:     nums[i],
 			numsIdx: i,
 		}
+
 		heap.Push(h, elem)
 	}
 
