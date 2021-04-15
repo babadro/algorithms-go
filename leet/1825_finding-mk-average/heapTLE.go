@@ -16,7 +16,7 @@ type MKAverageHeap struct {
 	lenRes int
 }
 
-func Constructor(m int, k int) MKAverageHeap {
+func ConstructorH(m int, k int) MKAverageHeap {
 	maxH := &maxHeap{numsIdxToHeapIdx: make(map[int]int, m)}
 	minH := &minHeap{numsIdxToHeapIdx: make(map[int]int, m)}
 

@@ -1,7 +1,8 @@
 package _1825_finding_mk_average
 
-// todo 1 https://leetcode.com/problems/finding-mk-average/discuss/1155397/Java%3A-Binary-Search-(copied-from-Arrays-Class)-%2B-ArrayList-as-SlidingWindow
-type MKAverage2 struct {
+// https://leetcode.com/problems/finding-mk-average/discuss/1155397/Java%3A-Binary-Search-(copied-from-Arrays-Class)-%2B-ArrayList-as-SlidingWindow
+// doesn't work. failed test case and TLE
+type MKAverage3 struct {
 	m       int
 	k       int
 	resLen  int
@@ -9,15 +10,15 @@ type MKAverage2 struct {
 	indexes []int
 }
 
-func Constructor2(m int, k int) MKAverage2 {
-	return MKAverage2{
+func Constructor3(m int, k int) MKAverage3 {
+	return MKAverage3{
 		m:      m,
 		k:      k,
 		resLen: m - 2*k,
 	}
 }
 
-func (mk *MKAverage2) slideByRemovingElement() {
+func (mk *MKAverage3) slideByRemovingElement() {
 	n, m := len(mk.nums), mk.m
 	if n >= m {
 		i := n - m
@@ -26,7 +27,7 @@ func (mk *MKAverage2) slideByRemovingElement() {
 	}
 }
 
-func (mk *MKAverage2) AddElement(num int) {
+func (mk *MKAverage3) AddElement(num int) {
 	mk.slideByRemovingElement()
 
 	idx := mk.binarySearch(num)
@@ -37,20 +38,20 @@ func (mk *MKAverage2) AddElement(num int) {
 	mk.nums = append(mk.nums, num)
 }
 
-func (mk *MKAverage2) CalculateMKAverage() int {
+func (mk *MKAverage3) CalculateMKAverage() int {
 	if len(mk.nums) < mk.m {
 		return -1
 	}
 
 	sum := 0
-	for i := mk.m; i <= mk.m-mk.k-1; i++ {
+	for i := mk.k; i <= mk.m-mk.k-1; i++ {
 		sum += mk.nums[mk.indexes[i]]
 	}
 
 	return sum / mk.resLen
 }
 
-func (mk *MKAverage2) binarySearch(key int) int {
+func (mk *MKAverage3) binarySearch(key int) int {
 	low, high := 0, len(mk.indexes)-1
 
 	for low <= high {
