@@ -1,6 +1,6 @@
-package _35
+package _818_min_absolute_sum_difference
 
-// todo 1
+// passed. medium. tptl
 func findingUsersActiveMinutes(logs [][]int, k int) []int {
 	userToUamDict := make(map[int]map[int]bool)
 

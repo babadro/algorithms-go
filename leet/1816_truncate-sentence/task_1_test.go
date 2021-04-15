@@ -1,4 +1,4 @@
-package _35
+package _816_truncate_sentence
 
 import "testing"
 

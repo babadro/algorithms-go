@@ -1,8 +1,8 @@
-package _35
+package _816_truncate_sentence
 
 import "strings"
 
-// todo 1
+// passed. easy.
 func truncateSentence(s string, k int) string {
 	words := strings.Split(s, " ")
 

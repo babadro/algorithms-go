@@ -1,4 +1,4 @@
-package _044_wildcard_matching // todo 1
+package _044_wildcard_matching
 
 // https://leetcode.com/problems/wildcard-matching/discuss/347267/Go-8ms-DP-solution
 // tptl. passed. best solution. hard. not mine.
@@ -70,7 +70,7 @@ func isMatchBruteForce(s string, p string) bool {
 	return false
 }
 
-// todo 1 tle
+// tle
 func isMatch(s string, p string) bool {
 	mem := make(map[key]bool)
 
