@@ -5,7 +5,7 @@ import (
 )
 
 func TestConstructorBruteForce(t *testing.T) {
-	obj := Constructor1(3, 1)
+	obj := Constructor2(3, 1)
 	obj.AddElement(3)
 	obj.AddElement(1)
 	t.Log(obj.CalculateMKAverage())
