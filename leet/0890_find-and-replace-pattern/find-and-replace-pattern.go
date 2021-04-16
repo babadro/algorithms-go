@@ -3,6 +3,8 @@ package _890_find_and_replace_pattern
 import "github.com/babadro/algorithms-go/slices"
 
 // passed. tptl medium
+// todo 3 look for approach 1 in solution - interesting. Also it's possible to
+// rewrite it build each idxArr until it matches pattern, then break
 func findAndReplacePattern(words []string, pattern string) []string {
 	patternArr := idxArr(pattern, make([]int, len(pattern)))
 
