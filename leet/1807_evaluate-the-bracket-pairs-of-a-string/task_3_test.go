@@ -1,4 +1,4 @@
-package _34
+package _807_evaluate_the_bracket_pairs_of_a_string
 
 import "testing"
 

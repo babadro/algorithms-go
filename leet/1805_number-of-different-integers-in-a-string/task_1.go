@@ -1,4 +1,4 @@
-package _34
+package _805_number_of_different_integers_in_a_string
 
 // passed. todo 1 do it without digit array
 func numDifferentIntegers(word string) int {

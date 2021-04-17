@@ -1,4 +1,4 @@
-package _34
+package _805_number_of_different_integers_in_a_string
 
 import "testing"
 
