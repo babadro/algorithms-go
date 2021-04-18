@@ -1,4 +1,4 @@
-package _818_min_absolute_sum_difference
+package _1817_min_absolute_sum_difference
 
 // passed. medium. tptl
 func findingUsersActiveMinutes(logs [][]int, k int) []int {
