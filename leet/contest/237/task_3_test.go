@@ -26,7 +26,7 @@ func Test_getOrder(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := getOrder2(tt.tasks); !reflect.DeepEqual(got, tt.want) {
+			if got := getOrder(tt.tasks); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("getOrder() = %v, want %v", got, tt.want)
 			}
 		})
