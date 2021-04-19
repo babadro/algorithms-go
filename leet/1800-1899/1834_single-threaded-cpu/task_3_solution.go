@@ -1,4 +1,4 @@
-package _37
+package _834_single_threaded_cpu
 
 import (
 	"container/heap"
