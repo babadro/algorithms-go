@@ -5,7 +5,7 @@ import "testing"
 func Test_countSegments(t *testing.T) {
 	tests := []struct {
 		name string
-		s string
+		s    string
 		want int
 	}{
 		{"1", "Hello, my name is John", 5},

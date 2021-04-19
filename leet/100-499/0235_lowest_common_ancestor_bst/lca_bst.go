@@ -1,11 +1,11 @@
 package _235_lowest_common_ancestor_bst
 
 import (
-	bst "github.com/babadro/algorithms-go/leet/0108_sorted_array_to_BST"
+	"github.com/babadro/algorithms-go/leet/100-499/0108_sorted_array_to_BST"
 )
 
 // recursive
-func lowestCommonAncestor(root, p, q *bst.TreeNode) *bst.TreeNode {
+func lowestCommonAncestor(root, p, q *_0108_sorted_array_to_BST.TreeNode) *_0108_sorted_array_to_BST.TreeNode {
 	if root == nil {
 		return nil
 	}
@@ -23,7 +23,7 @@ func lowestCommonAncestor(root, p, q *bst.TreeNode) *bst.TreeNode {
 }
 
 // iterative
-func lowestCommonAncestorIterative(root, p, q *bst.TreeNode) *bst.TreeNode {
+func lowestCommonAncestorIterative(root, p, q *_0108_sorted_array_to_BST.TreeNode) *_0108_sorted_array_to_BST.TreeNode {
 	pVal := p.Val
 	qVal := q.Val
 	node := root
