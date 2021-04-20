@@ -3,16 +3,9 @@ package _1391_check_if_there_is_a_valid_path_in_a_grid
 // tptl. passed. medium (but for me it's almost hard)
 // todo 2 look for faster solution, probably iterative, if possible
 func hasValidPath(grid [][]int) bool {
-	if len(grid) == 1 && len(grid[0]) == 1 {
-		return true
-	}
+	start := [2]int{-1, -1}
 
-	next1, next2 := adjacentCells(0, 0, grid)
-	visited1, visited2 := map[[2]int]bool{}, map[[2]int]bool{}
-	start := [2]int{0, 0}
-	visited1[start], visited2[start] = true, true
-
-	return helper(start, next1, grid, visited1) || helper(start, next2, grid, visited2)
+	return helper(start, [2]int{0, 0}, grid, map[[2]int]bool{})
 }
 
 func helper(prev, curr [2]int, grid [][]int, visited map[[2]int]bool) bool {
@@ -62,6 +55,10 @@ func adjacentCells(x, y int, grid [][]int) ([2]int, [2]int) {
 }
 
 func match(prev, next [2]int, grid [][]int) bool {
+	if prev == [2]int{-1, -1} {
+		return true
+	}
+
 	x, y := next[0], next[1]
 	adj1, adj2 := adjacentCells(x, y, grid)
 
