@@ -2,7 +2,6 @@ package _679_24_game
 
 import (
 	"fmt"
-	"strconv"
 )
 
 var operators = []byte{'*', '/', '+', '-'}
@@ -10,17 +9,21 @@ var brackets = []string{"", "()", "()()", "(())"}
 
 // todo 1
 func judgePoint24(nums []int) bool {
+	numPermutations := genPerm(nums)
+
 	stmt := make([]byte, 0, 11)
 	for _, br := range brackets {
-		if helper(nums, stmt, []byte(br)) {
-			return true
+		for _, perm := range numPermutations {
+			if helper(perm, stmt, []byte(br)) {
+				return true
+			}
 		}
 	}
 
 	return false
 }
 
-func helper(nums []int, stmt []byte, brackets []byte) bool {
+func helper(nums string, stmt []byte, brackets []byte) bool {
 	n, nb, ns := len(nums), len(brackets), len(stmt)
 
 	if n == 0 && nb == 0 {
@@ -29,16 +32,13 @@ func helper(nums []int, stmt []byte, brackets []byte) bool {
 
 	last := ns - 1
 	// nums
-	if (n == 4 || stmt[last] == '(' || isOperator(stmt[last])) &&
+	if n > 0 && (n == 4 || stmt[last] == '(' || isOperator(stmt[last])) &&
 		!(n == 2 && nb == 2) && !(n == 3 && nb == 4) && !(n == 2 && nb == 3) {
-		for i := 0; i < n; i++ {
-			nextStmt := append(stmt, strconv.Itoa(nums[i])...)
-			nums[i], nums[n-1] = nums[n-1], nums[i] // todo i'm not sure
-			nextNums := nums[:n-1]
+		nextStmt := append(stmt, nums[0])
+		nextNums := nums[1:]
 
-			if helper(nextNums, nextStmt, brackets) {
-				return true
-			}
+		if helper(nextNums, nextStmt, brackets) {
+			return true
 		}
 	}
 
@@ -90,4 +90,28 @@ func eval(stmt []byte) int {
 	fmt.Println(string(stmt))
 
 	return 0
+}
+
+func genPerm(arr []int) []string {
+	var res []string
+	rec(arr, &res, 0, len(arr)-1)
+
+	return res
+}
+
+func rec(arr []int, res *[]string, l, r int) {
+	if l == r {
+		b := make([]byte, len(arr))
+		for i, num := range arr {
+			b[i] = byte('0' + num)
+		}
+
+		*res = append(*res, string(b))
+	}
+
+	for i := l; i <= r; i++ {
+		arr[i], arr[l] = arr[l], arr[i]
+		rec(arr, res, l+1, r)
+		arr[i], arr[l] = arr[l], arr[i]
+	}
 }

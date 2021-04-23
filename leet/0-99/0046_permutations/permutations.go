@@ -2,7 +2,7 @@ package _046_permutations
 
 // TODO 2 need to understand.
 // try to find iterative solution
-// complete next trask on "Sumbissions" page - Next Permutation, Permutations 2, Permutation Sequence, Combinations
+// complete next task on "Sumbissions" page - Next Permutation, Permutations 2, Permutation Sequence, Combinations
 func permute(nums []int) [][]int {
 	var res [][]int
 	perm(nums, &res, 0, len(nums)-1)
