@@ -1,8 +1,6 @@
 package _679_24_game
 
-import (
-	"fmt"
-)
+import "fmt"
 
 var operators = []byte{'*', '/', '+', '-'}
 var brackets = []string{"", "()", "()()", "(())"}
@@ -85,11 +83,58 @@ func isNum(b byte) bool {
 	return b >= '0' && b <= '9'
 }
 
-// todo take into account division by zero
-func eval(stmt []byte) int {
-	fmt.Println(string(stmt))
+func eval(stmt []byte) (float64, bool) {
+	n := len(stmt)
+	for n > 1 && stmt[0] == '(' && stmt[n-1] == ')' {
+		stmt = stmt[1 : n-1]
+		n = len(stmt)
+	}
 
-	return 0
+	res, operator := float64(0), byte('+')
+	for i, j := 0, 1; i <= len(stmt); i = j + 1 {
+		bracketBalance := 0
+		for ; j < n && (bracketBalance > 0 || (stmt[j] != '+' && stmt[j] != '-')); j++ {
+			if stmt[j] == '(' {
+				bracketBalance++
+			} else if stmt[j] == ')' {
+				bracketBalance--
+			}
+		}
+
+		next, ok := eval(stmt[i:j])
+		if !ok {
+			return 0, false
+		}
+
+		if res, ok = exec(res, next, operator); !ok {
+			return 0, false
+		}
+
+		if j < n {
+			operator = stmt[j]
+		}
+	}
+
+	return 0, true
+}
+
+func exec(l, r float64, op byte) (float64, bool) {
+	switch op {
+	case '+':
+		return l + r, true
+	case '-':
+		return l - r, true
+	case '/':
+		if r == 0 {
+			return 0, false
+		}
+
+		return l / r, true
+	case '*':
+		return l * r, true
+	}
+
+	panic(fmt.Sprintf("unknown operator %s", string(op)))
 }
 
 func genPerm(arr []int) []string {
