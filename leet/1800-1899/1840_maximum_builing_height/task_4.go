@@ -5,7 +5,7 @@ import (
 	"sort"
 )
 
-// todo 1
+// todo 1 look for solution https://leetcode.com/problems/maximum-building-height/discuss/1176397/Golang-Go-two-pass-solution
 func maxBuilding(n int, restrictions [][]int) int {
 	sort.Slice(restrictions, func(i, j int) bool {
 		return restrictions[i][0] < restrictions[j][0]
