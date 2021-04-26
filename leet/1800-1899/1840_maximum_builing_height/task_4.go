@@ -1,4 +1,4 @@
-package _38
+package _1840_maximum_builing_height
 
 import (
 	"github.com/babadro/algorithms-go/utils"
@@ -12,6 +12,41 @@ func maxBuilding(n int, restrictions [][]int) int {
 	})
 
 	rLen := len(restrictions)
+	for {
+		lastX, lastY := 1, 0
+		flag := true
+		for _, r := range restrictions {
+			x, y := r[0], r[1]
+			maxHeight := x - lastX + lastY
+			if y > maxHeight {
+				r[1] = maxHeight
+				flag = false
+			}
+
+			lastX, lastY = r[0], r[1]
+		}
+
+		if rLen > 0 {
+			lastX, lastY = restrictions[rLen-1][0], restrictions[rLen-1][1]
+			for i := rLen - 2; i >= 0; i-- {
+				r := restrictions[i]
+
+				x, y := r[0], r[1]
+				maxHeight := lastX - x + lastY
+				if y > maxHeight {
+					r[1] = maxHeight
+					flag = false
+				}
+
+				lastX, lastY = r[0], r[1]
+			}
+		}
+
+		if flag {
+			break
+		}
+	}
+
 	maxH := 0
 	lastX, lastY := 1, 0
 	for i := 0; i <= rLen; i++ {
