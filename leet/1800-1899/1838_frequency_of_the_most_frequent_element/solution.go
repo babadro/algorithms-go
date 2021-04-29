@@ -7,7 +7,7 @@ import (
 
 // passed. tptl. medium (hard for me)
 // https://leetcode.com/problems/frequency-of-the-most-frequent-element/discuss/1175042/C%2B%2B-Two-Pointers
-// todo 1 need to understand and outline
+// todo 1 need to outline
 func maxFrequency2(nums []int, k int) int {
 	res := 1
 	sort.Ints(nums)
