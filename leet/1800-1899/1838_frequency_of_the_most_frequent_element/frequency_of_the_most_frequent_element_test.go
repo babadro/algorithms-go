@@ -25,7 +25,7 @@ func Test_maxFrequency(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.nums), func(t *testing.T) {
-			if got := maxFrequency(tt.nums, tt.k); got != tt.want {
+			if got := maxFrequency2(tt.nums, tt.k); got != tt.want {
 				t.Errorf("maxFrequency() = %v, want %v", got, tt.want)
 			}
 		})

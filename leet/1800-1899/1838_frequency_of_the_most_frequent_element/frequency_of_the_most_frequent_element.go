@@ -4,9 +4,7 @@ import "sort"
 
 const limit = 10_000
 
-// todo 1 doesn't work
-// look here: https://leetcode.com/problems/frequency-of-the-most-frequent-element/discuss/1175042/C%2B%2B-Two-Pointers
-// or here: https://leetcode.com/problems/frequency-of-the-most-frequent-element/discuss/1178252/Java-or-Sliding-window
+// doesn't work
 func maxFrequency(nums []int, k int) int {
 	y := sort.Search(limit, func(i int) bool {
 		return sum(i, nums) >= k
