@@ -5,26 +5,21 @@ import (
 	"sort"
 )
 
-// passed. tptl. medium
-// https://leetcode.com/problems/frequency-of-the-most-frequent-element/discuss/1178252/Java-or-Sliding-window
+// passed. tptl. medium (hard for me)
+// https://leetcode.com/problems/frequency-of-the-most-frequent-element/discuss/1175042/C%2B%2B-Two-Pointers
+// todo 1 need to understand and outline
 func maxFrequency2(nums []int, k int) int {
+	res := 1
 	sort.Ints(nums)
-	n := len(nums)
-	max, r, l, cum := 0, n-1, n-1, 0
-	for l >= 0 && r >= l {
-		cum += nums[r] - nums[l]
-		if cum <= k {
-			l--
-			max = utils.Max(max, r-l)
-		} else {
-			for ; r > 0 && nums[r] == nums[r-1]; r-- {
-			}
-
-			cum -= (nums[r] - nums[r-1]) * (r - l)
-			r--
-			l--
+	i := len(nums) - 1
+	for j := i; i > 0; i-- {
+		for ; j >= 0 && k >= nums[i]-nums[j]; j-- {
+			k -= nums[i] - nums[j]
 		}
+
+		res = utils.Max(res, i-j)
+		k += (nums[i] - nums[i-1]) * (i - j - 1)
 	}
 
-	return max
+	return res
 }

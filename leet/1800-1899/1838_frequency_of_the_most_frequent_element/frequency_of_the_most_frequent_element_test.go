@@ -22,6 +22,8 @@ func Test_maxFrequency(t *testing.T) {
 		{longArr, 3056, 73},
 		{[]int{1, 2, 10, 11, 11, 11}, 1, 4},
 		{[]int{1, 2, 10, 11, 12, 13}, 6, 4},
+		{[]int{1, 1, 1, 3, 4}, 0, 3},
+		{[]int{10_000}, 10_000, 1},
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.nums), func(t *testing.T) {
