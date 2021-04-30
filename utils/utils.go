@@ -85,3 +85,15 @@ func GCD(a, b int) int {
 
 	return a
 }
+
+// tptl
+func Log(b, x int) (pow int) {
+	for {
+		if x <= b-1 {
+			return pow
+		}
+
+		pow++
+		x /= b
+	}
+}
