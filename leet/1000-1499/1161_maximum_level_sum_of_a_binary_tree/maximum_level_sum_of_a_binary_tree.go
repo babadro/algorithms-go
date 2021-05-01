@@ -2,56 +2,34 @@ package _1161_maximum_level_sum_of_a_binary_tree
 
 import (
 	"github.com/babadro/algorithms-go/base/binaryTree"
-	"math"
 )
 
-type nodeInfo struct {
-	level int
-	*binaryTree.Node
-}
-
-// passed. medium
+// passed. tptl. medium. best solution (not mine)
 func maxLevelSum(root *binaryTree.Node) int {
-	if root == nil {
-		return 1
-	}
+	q, res, max, level := []*binaryTree.Node{root}, 1, root.Val, 1
 
-	queue := []nodeInfo{{1, root}}
+	for len(q) > 0 {
+		sum := 0
+		var node *binaryTree.Node
+		for l := len(q); l > 0; l-- {
+			node, q = q[0], q[1:]
+			sum += node.Val
 
-	level, max := 0, math.MinInt32
-	currLevel, sum := 0, math.MinInt32
-	var node nodeInfo
-	for len(queue) > 0 {
-		node, queue = queue[0], queue[1:]
-
-		if node.level != currLevel {
-			if sum > max {
-				max, level = sum, currLevel
+			if node.Left != nil {
+				q = append(q, node.Left)
 			}
 
-			currLevel, sum = node.level, node.Val
-		} else {
-			sum += node.Val
+			if node.Right != nil {
+				q = append(q, node.Right)
+			}
 		}
 
-		if node.Left != nil {
-			queue = append(queue, nodeInfo{
-				level: currLevel + 1,
-				Node:  node.Left,
-			})
+		if sum > max {
+			max, res = sum, level
 		}
 
-		if node.Right != nil {
-			queue = append(queue, nodeInfo{
-				level: currLevel + 1,
-				Node:  node.Right,
-			})
-		}
+		level++
 	}
 
-	if sum > max {
-		max, level = sum, currLevel
-	}
-
-	return level
+	return res
 }
