@@ -1,6 +1,7 @@
 package _1850_minimum_adjacent_swaps_to_reach_the_kth_smallest_number
 
 import (
+	"fmt"
 	"github.com/babadro/algorithms-go/perm"
 )
 
@@ -23,6 +24,8 @@ func getMinSwaps(num string, k int) int {
 
 				res++
 			}
+
+			fmt.Println(string(num1))
 		}
 	}
 
