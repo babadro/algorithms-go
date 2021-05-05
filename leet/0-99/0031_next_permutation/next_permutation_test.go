@@ -28,3 +28,20 @@ func Test_nextPermutation(t *testing.T) {
 		})
 	}
 }
+
+func Test(t *testing.T) {
+	nums := []int{1, 2, 3, 4}
+
+	i := 0
+	target := []int{4, 3, 2, 1}
+	for {
+		if reflect.DeepEqual(nums, target) {
+			t.Log(i)
+
+			return
+		}
+
+		nextPermutation(nums)
+		i++
+	}
+}
