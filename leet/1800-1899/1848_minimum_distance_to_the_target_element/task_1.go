@@ -1,11 +1,11 @@
-package _39
+package _1848_minimum_distance_to_the_target_element
 
 import (
 	"github.com/babadro/algorithms-go/utils"
 	"sort"
 )
 
-// passed. todo 2 check better solution
+// passed. easy. todo 2 check better solution
 func getMinDistance(nums []int, target int, start int) int {
 	var idxes []int
 	for i, num := range nums {

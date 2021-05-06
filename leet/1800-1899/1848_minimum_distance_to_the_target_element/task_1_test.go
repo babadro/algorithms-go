@@ -1,4 +1,4 @@
-package _39
+package _1848_minimum_distance_to_the_target_element
 
 import (
 	"fmt"
