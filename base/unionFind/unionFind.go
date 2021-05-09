@@ -14,6 +14,7 @@ func Union(id []int, x, y int) {
 	id[xSet] = ySet
 }
 
+// todo base unit tests
 func IsCycle(itemsCount int, pairs [][2]int) bool {
 	id := make([]int, itemsCount)
 

@@ -6,6 +6,8 @@ import (
 )
 
 // todo 1
+// https://leetcode.com/problems/ways-to-split-array-into-three-subarrays/discuss/1005689/Java-O(N)-sliding-window
+// https://leetcode.com/problems/ways-to-split-array-into-three-subarrays/discuss/999257/C%2B%2BJavaPython-O(n)-with-picture
 func waysToSplit2(nums []int) int {
 	n := len(nums)
 	for i := 1; i < n; i++ {
