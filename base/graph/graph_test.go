@@ -85,6 +85,21 @@ func TestGraph_TopologicalSort(t *testing.T) {
 			},
 			[]int{5, 4, 2, 3, 1, 0},
 		},
+		{
+			"2",
+			func() *Graph {
+				g := New(6)
+
+				g.AddEdge(0, 1)
+				g.AddEdge(1, 2)
+				g.AddEdge(2, 3)
+				g.AddEdge(3, 4)
+				g.AddEdge(4, 5)
+
+				return g
+			},
+			[]int{0, 1, 2, 3, 4, 5},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
