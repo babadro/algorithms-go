@@ -16,7 +16,7 @@ func Test_maxSumMinProduct(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.nums), func(t *testing.T) {
-			if got := maxSumMinProduct(tt.nums); got != tt.want {
+			if got := maxSumMinProduct3(tt.nums); got != tt.want {
 				t.Errorf("maxSumMinProduct() = %v, want %v", got, tt.want)
 			}
 		})

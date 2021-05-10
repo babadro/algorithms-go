@@ -1,6 +1,6 @@
 package _1856_maximum_subarray_min_product
 
-// passed, but very slow. tptl
+// passed. Medium (hard for me). Easy to understand, but very slow. tptl
 // https://leetcode.com/problems/maximum-subarray-min-product/discuss/1199635/Java-Simple-and-Easy-understood
 func maxSumMinProduct(nums []int) int {
 	res := 0
