@@ -1,8 +1,6 @@
-package _40
+package _1857_largest_color_value_in_a_directed_graph
 
-// doesn't work todo 1
-// https://leetcode.com/problems/largest-color-value-in-a-directed-graph/discuss/1198639/because-only-26-colors-C%2B%2B-O(n)
-// todo 3 solution had made probably without 26 colors assumtion https://leetcode.com/problems/largest-color-value-in-a-directed-graph/discuss/1198765/Java-Simple-DFS-%2B-memo
+// doesn't work
 func largestPathValue(colors string, edges [][]int) int {
 	V := len(colors)
 	g := New(V)

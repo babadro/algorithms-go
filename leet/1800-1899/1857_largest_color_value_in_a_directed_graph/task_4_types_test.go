@@ -1,4 +1,4 @@
-package _40
+package _1857_largest_color_value_in_a_directed_graph
 
 import (
 	"fmt"
