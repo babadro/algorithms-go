@@ -2,6 +2,30 @@ package _855_maximum_distance_between_a_pair_of_values
 
 import "sort"
 
+// tptl. passed. medium. best solution
+func maxDistance2(nums1 []int, nums2 []int) int {
+	max := 0
+	for i, j := 0, 0; i < len(nums1) && j < len(nums2); {
+		if i > j {
+			j++
+			continue
+		}
+
+		if nums1[i] > nums2[j] {
+			i++
+			continue
+		}
+
+		if dist := j - i; dist > max {
+			max = dist
+		}
+
+		j++
+	}
+
+	return max
+}
+
 // passed
 func maxDistance(nums1 []int, nums2 []int) int {
 	max := 0

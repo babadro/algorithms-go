@@ -18,7 +18,7 @@ func Test_maxDistance(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run("", func(t *testing.T) {
-			if got := maxDistance(tt.nums1, tt.nums2); got != tt.want {
+			if got := maxDistance2(tt.nums1, tt.nums2); got != tt.want {
 				t.Errorf("maxDistance() = %v, want %v", got, tt.want)
 			}
 		})
