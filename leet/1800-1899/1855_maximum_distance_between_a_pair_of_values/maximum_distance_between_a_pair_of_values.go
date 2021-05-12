@@ -1,4 +1,4 @@
-package _855_maximum_distance_between_a_pair_of_values
+package _1855_maximum_distance_between_a_pair_of_values
 
 import "sort"
 
