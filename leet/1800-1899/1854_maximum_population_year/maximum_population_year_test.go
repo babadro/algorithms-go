@@ -15,7 +15,7 @@ func Test_maximumPopulation(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.logs), func(t *testing.T) {
-			if got := maximumPopulation(tt.logs); got != tt.want {
+			if got := maximumPopulation2(tt.logs); got != tt.want {
 				t.Errorf("maximumPopulation() = %v, want %v", got, tt.want)
 			}
 		})
