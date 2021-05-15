@@ -1,6 +1,8 @@
 package _1825_finding_mk_average
 
 import (
+	"io/ioutil"
+	"strconv"
 	"testing"
 )
 
@@ -38,16 +40,24 @@ func TestMKAverage(t *testing.T) {
 			input:    [][]int{{3, 1}, {17612}, {74607}, {}, {8272}, {33433}, {}, {15456}, {64938}, {}, {99741}},
 			want:     []interface{}{nil, nil, nil, -1, nil, nil, 33433, nil, nil, 33433, nil},
 		},
+		{
+			name:     "3_tle",
+			commands: tleCommands,
+			input:    tleArguments,
+		},
 	}
 
 	var obj MKAverage1
 
 	for _, tt := range tests {
+		var gotRes int
+		output := "[]interface{}{"
 		t.Run(tt.name, func(t *testing.T) {
+
 			for i := range tt.commands {
 				command := tt.commands[i]
 				input := tt.input[i]
-				want := tt.want[i]
+				//	want := tt.want[i]
 
 				switch command {
 				case "MKAverage":
@@ -71,21 +81,36 @@ func TestMKAverage(t *testing.T) {
 						return
 					}
 
-					wantRes, ok := want.(int)
-					if !ok {
-						t.Error("wrong testcase. Want res should be int")
-						return
-					}
+					//	wantRes, ok := want.(int)
+					//	if !ok {
+					//		t.Error("wrong testcase. Want res should be int")
+					//		return
+					//	}
 
-					gotRes := obj.CalculateMKAverage()
-					if gotRes != wantRes {
-						t.Errorf("want %d, got %d", wantRes, gotRes)
-					}
+					gotRes = obj.CalculateMKAverage()
+					//if gotRes != wantRes {
+					//	t.Errorf("want %d, got %d", wantRes, gotRes)
+					//}
 				default:
 					t.Errorf("unknown command %q", command)
 					return
 				}
+
+				if i > 0 {
+					output += ","
+				}
+
+				if command == "calculateMKAverage" {
+					output += strconv.Itoa(gotRes)
+				} else {
+					output += "nil"
+				}
 			}
 		})
+		output += "}"
+
+		if err := ioutil.WriteFile(tt.name+".txt", []byte(output), 0644); err != nil {
+			panic(err)
+		}
 	}
 }
