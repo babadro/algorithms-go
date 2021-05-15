@@ -1,8 +1,7 @@
 package _1825_finding_mk_average
 
 import (
-	"io/ioutil"
-	"strconv"
+	"github.com/babadro/algorithms-go/leet/1800-1899/1825_finding-mk-average/tleInput"
 	"testing"
 )
 
@@ -41,23 +40,30 @@ func TestMKAverage(t *testing.T) {
 			want:     []interface{}{nil, nil, nil, -1, nil, nil, 33433, nil, nil, 33433, nil},
 		},
 		{
-			name:     "3_tle",
-			commands: tleCommands,
-			input:    tleArguments,
+			name:     "tle_1",
+			commands: tleInput.TleCommands,
+			input:    tleInput.TleArguments,
+			want:     tleInput.TleOutput,
+		},
+		{
+			name:     "tle_2",
+			commands: tleInput.TleCommands2,
+			input:    tleInput.TleArguments2,
+			want:     tleInput.TleOutput2,
 		},
 	}
 
-	var obj MKAverage1
+	var obj MKAverage
 
 	for _, tt := range tests {
 		var gotRes int
-		output := "[]interface{}{"
+		//output := "[]interface{}{"
 		t.Run(tt.name, func(t *testing.T) {
 
 			for i := range tt.commands {
 				command := tt.commands[i]
 				input := tt.input[i]
-				//	want := tt.want[i]
+				want := tt.want[i]
 
 				switch command {
 				case "MKAverage":
@@ -67,7 +73,7 @@ func TestMKAverage(t *testing.T) {
 					}
 
 					m, k := input[0], input[1]
-					obj = Constructor1(m, k)
+					obj = Constructor(m, k)
 				case "addElement":
 					if len(input) != 1 {
 						t.Error("wrong testcase. Len input for addElement should be 1")
@@ -81,36 +87,36 @@ func TestMKAverage(t *testing.T) {
 						return
 					}
 
-					//	wantRes, ok := want.(int)
-					//	if !ok {
-					//		t.Error("wrong testcase. Want res should be int")
-					//		return
-					//	}
+					wantRes, ok := want.(int)
+					if !ok {
+						t.Error("wrong testcase. Want res should be int")
+						return
+					}
 
 					gotRes = obj.CalculateMKAverage()
-					//if gotRes != wantRes {
-					//	t.Errorf("want %d, got %d", wantRes, gotRes)
-					//}
+					if gotRes != wantRes {
+						t.Errorf("want %d, got %d", wantRes, gotRes)
+					}
 				default:
 					t.Errorf("unknown command %q", command)
 					return
 				}
 
-				if i > 0 {
-					output += ","
-				}
-
-				if command == "calculateMKAverage" {
-					output += strconv.Itoa(gotRes)
-				} else {
-					output += "nil"
-				}
+				//if i > 0 {
+				//	output += ","
+				//}
+				//
+				//if command == "calculateMKAverage" {
+				//	output += strconv.Itoa(gotRes)
+				//} else {
+				//	output += "nil"
+				//}
 			}
 		})
-		output += "}"
-
-		if err := ioutil.WriteFile(tt.name+".txt", []byte(output), 0644); err != nil {
-			panic(err)
-		}
+		//output += "}"
+		//
+		//if err := ioutil.WriteFile(tt.name+".txt", []byte(output), 0644); err != nil {
+		//	panic(err)
+		//}
 	}
 }

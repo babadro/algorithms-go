@@ -6,18 +6,19 @@ import (
 )
 
 type MKAverage struct {
-	queue  *list.List
-	bst    bst.Tree
-	k, m   int
-	cached bool
-	res    int
+	queue        *list.List
+	bst          bst.Tree
+	m, k, length int
+	cached       bool
+	res          int
 }
 
 func Constructor(m int, k int) MKAverage {
 	return MKAverage{
-		queue: list.New(),
-		k:     k,
-		m:     m,
+		queue:  list.New(),
+		m:      m,
+		k:      k,
+		length: m - 2*k,
 	}
 }
 
@@ -48,26 +49,25 @@ func (this *MKAverage) CalculateMKAverage() int {
 		return this.res
 	}
 
-	sum := 0
-	skip, counter := this.k, this.m-2*this.k
+	sum, skip, counter := 0, 0, 0
 
 	f := func(node *bst.Node) {
-		if skip > 0 {
-			skip--
+		if skip < this.k {
+			skip++
 			return
 		}
 
-		if counter == 0 {
+		if counter == this.length {
 			return
 		}
 
 		sum += node.Key
-		counter--
+		counter++
 	}
 
 	bst.Inorder(this.bst.Root, f)
 
-	this.res = sum / this.queue.Len()
+	this.res = sum / this.length
 	this.cached = true
 
 	return this.res

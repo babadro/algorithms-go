@@ -1,4 +1,4 @@
-package _1825_finding_mk_average
+package tleInput
 
 import (
 	"io/ioutil"
@@ -10,8 +10,8 @@ func Test_inputConvertor(t *testing.T) {
 [[3, 1], [3], [1], [], [10], [], [5], [5], [5], []]`
 
 	_ = input
-	b := []byte(inputConvertor(bigInputStr))
-	ioutil.WriteFile("bigInput2.go", b, 0644)
+	b := []byte(inputConvertor(TleInputStr2))
+	ioutil.WriteFile("tleInput1.go", b, 0644)
 	t.Log()
 }
 

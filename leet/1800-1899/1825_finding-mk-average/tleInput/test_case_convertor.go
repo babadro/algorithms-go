@@ -1,4 +1,4 @@
-package _1825_finding_mk_average
+package tleInput
 
 import "strings"
 
