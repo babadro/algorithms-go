@@ -1,4 +1,4 @@
-package _1825_finding_mk_average
+package tle_and_not_success_solutions
 
 import (
 	"container/heap"

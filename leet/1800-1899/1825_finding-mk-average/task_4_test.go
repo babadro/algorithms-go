@@ -2,11 +2,12 @@ package _1825_finding_mk_average
 
 import (
 	"github.com/babadro/algorithms-go/leet/1800-1899/1825_finding-mk-average/tleInput"
+	"github.com/babadro/algorithms-go/leet/1800-1899/1825_finding-mk-average/tle_and_not_success_solutions"
 	"testing"
 )
 
 func TestConstructorBruteForce(t *testing.T) {
-	obj := ConstructorBST(3, 1)
+	obj := tle_and_not_success_solutions.ConstructorBST(3, 1)
 	obj.AddElement(3)
 	obj.AddElement(1)
 	t.Log(obj.CalculateMKAverage())
@@ -53,7 +54,7 @@ func TestMKAverage(t *testing.T) {
 		},
 	}
 
-	var obj MKAverageJava
+	var obj MKAverage
 
 	for _, tt := range tests {
 		var gotRes int
@@ -73,7 +74,7 @@ func TestMKAverage(t *testing.T) {
 					}
 
 					m, k := input[0], input[1]
-					obj = ConstructorJava(m, k)
+					obj = Constructor(m, k)
 				case "addElement":
 					if len(input) != 1 {
 						t.Error("wrong testcase. Len input for addElement should be 1")

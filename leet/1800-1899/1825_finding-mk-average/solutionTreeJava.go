@@ -3,7 +3,7 @@ package _1825_finding_mk_average
 import "container/list"
 
 // https://leetcode.com/problems/finding-mk-average/discuss/1155190/Segment-Treejava-68ms
-// passed
+// passed. good solution. todo 2 need to understand
 type MKAverageJava struct {
 	queue *list.List
 	count []int

@@ -1,4 +1,4 @@
-package _1825_finding_mk_average
+package tle_and_not_success_solutions
 
 // https://leetcode.com/problems/finding-mk-average/discuss/1155397/Java%3A-Binary-Search-(copied-from-Arrays-Class)-%2B-ArrayList-as-SlidingWindow
 // doesn't work. failed test case and TLE
