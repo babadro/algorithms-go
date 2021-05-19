@@ -5,7 +5,7 @@ import (
 	"github.com/babadro/algorithms-go/base/bst"
 )
 
-type MKAverage struct {
+type MKAverageBST struct {
 	queue        *list.List
 	bst          bst.Tree
 	m, k, length int
@@ -13,8 +13,8 @@ type MKAverage struct {
 	res          int
 }
 
-func Constructor(m int, k int) MKAverage {
-	return MKAverage{
+func ConstructorBST(m int, k int) MKAverageBST {
+	return MKAverageBST{
 		queue:  list.New(),
 		m:      m,
 		k:      k,
@@ -22,7 +22,7 @@ func Constructor(m int, k int) MKAverage {
 	}
 }
 
-func (this *MKAverage) AddElement(num int) {
+func (this *MKAverageBST) AddElement(num int) {
 	if this.queue.Len() == this.m {
 		nodeToRemove := this.queue.Front()
 
@@ -40,7 +40,7 @@ func (this *MKAverage) AddElement(num int) {
 	this.cached = false
 }
 
-func (this *MKAverage) CalculateMKAverage() int {
+func (this *MKAverageBST) CalculateMKAverage() int {
 	if this.queue.Len() < this.m {
 		return -1
 	}

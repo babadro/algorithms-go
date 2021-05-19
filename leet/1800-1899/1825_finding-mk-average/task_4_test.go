@@ -6,7 +6,7 @@ import (
 )
 
 func TestConstructorBruteForce(t *testing.T) {
-	obj := Constructor(3, 1)
+	obj := ConstructorBST(3, 1)
 	obj.AddElement(3)
 	obj.AddElement(1)
 	t.Log(obj.CalculateMKAverage())
@@ -53,7 +53,7 @@ func TestMKAverage(t *testing.T) {
 		},
 	}
 
-	var obj MKAverage
+	var obj MKAverageJava
 
 	for _, tt := range tests {
 		var gotRes int
@@ -73,7 +73,7 @@ func TestMKAverage(t *testing.T) {
 					}
 
 					m, k := input[0], input[1]
-					obj = Constructor(m, k)
+					obj = ConstructorJava(m, k)
 				case "addElement":
 					if len(input) != 1 {
 						t.Error("wrong testcase. Len input for addElement should be 1")
