@@ -1,4 +1,4 @@
-package _834_single_threaded_cpu
+package _1834_single_threaded_cpu
 
 import (
 	"reflect"
