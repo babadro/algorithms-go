@@ -25,7 +25,11 @@ func helper(nums string, stmt []byte, brackets []byte) bool {
 	n, nb, ns := len(nums), len(brackets), len(stmt)
 
 	if n == 0 && nb == 0 {
-		return eval(stmt) == 24
+		res, ok := eval(stmt)
+
+		if ok && res == 24 {
+			return true
+		}
 	}
 
 	last := ns - 1
