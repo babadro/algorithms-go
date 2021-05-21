@@ -9,6 +9,25 @@ import (
 
 // input.txt:
 
+// 2
+
+func SingleNum() (a int) { // 2
+	f, err := os.Open("input.txt")
+	if err != nil {
+		panic(err)
+	}
+
+	defer f.Close()
+
+	if _, err = fmt.Fscanf(f, "%d", &a); err != nil {
+		panic(err)
+	}
+
+	return
+}
+
+// input.txt:
+
 // 2 3
 
 func TwoNums() (a, b int) { // 2 3
@@ -92,6 +111,32 @@ func NumArr() (arr []int) { // []int{1, 2, 3, 4, 5}
 		}
 
 		arr = append(arr, curr)
+
+		if err = scanner.Err(); err != nil {
+			panic(err)
+		}
+	}
+
+	return arr
+}
+
+// input.txt:
+
+// abc
+// def
+// hig
+
+func StringArr() (arr []string) { // []int{"abc", "def", "hig"}
+	f, err := os.Open("input.txt")
+	if err != nil {
+		panic(err)
+	}
+	defer f.Close()
+
+	scanner := bufio.NewScanner(f)
+
+	for scanner.Scan() {
+		arr = append(arr, scanner.Text())
 
 		if err = scanner.Err(); err != nil {
 			panic(err)
