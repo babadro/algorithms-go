@@ -5,33 +5,91 @@ import (
 	"fmt"
 	"os"
 	"strconv"
-	"strings"
 )
 
 func main() {
 	var userLimit, serviceLimit, duration int
-
-	_, _, _ = userLimit, serviceLimit, duration
-
-	flag := false
+	var requests [][2]int
 	scanner := bufio.NewScanner(os.Stdin)
+	flag := true
 	for scanner.Scan() {
-		if !flag {
-			input := scanner.Text()
-			arr := strings.Split(input, " ")
-			userLimit, _ = strconv.Atoi(arr[0])
-			serviceLimit, _ = strconv.Atoi(arr[1])
-			duration, _ = strconv.Atoi(arr[2])
+		if num, err := strconv.Atoi(scanner.Text()); err == nil && num == -1 {
+			break
+		}
 
-			flag = true
-		} else {
-			input := scanner.Text()
-			if _, err := strconv.Atoi(input); err != nil {
-				break
+		if flag {
+			if _, err := fmt.Sscanf(scanner.Text(), "%d %d %d", &userLimit, &serviceLimit, &duration); err != nil {
+				panic(err)
 			}
 
+			flag = false
+
+			continue
 		}
+
+		var now, userID int
+		_, err := fmt.Sscanf(scanner.Text(), "%d %d", &now, &userID)
+		if err != nil {
+			panic(err)
+		}
+
+		requests = append(requests, [2]int{now, userID})
 	}
 
-	fmt.Println(userLimit, " ", serviceLimit, " ", duration)
+	statuses := checkRequests(userLimit, serviceLimit, duration, requests)
+
+	for _, s := range statuses {
+		fmt.Println(s)
+	}
+}
+
+func checkRequests(userLimit, serviceLimit, duration int, reqs [][2]int) (statuses []int) {
+	var serviceRequests []int
+	var usersRequests = make(map[int][]int)
+	statuses = make([]int, len(reqs))
+
+	for i, req := range reqs {
+		now, userID := req[0], req[1]
+
+		if !check(serviceRequests, now, serviceLimit, duration) {
+			statuses[i] = 503
+
+			continue
+		}
+
+		serviceRequests = append(serviceRequests, now)
+		if len(serviceRequests) > serviceLimit {
+			serviceRequests = serviceRequests[1:]
+		}
+
+		uRequests := usersRequests[userID]
+		if !check(uRequests, now, userLimit, duration) {
+			statuses[i] = 429
+
+			continue
+		}
+
+		uRequests = append(uRequests, now)
+		if len(uRequests) > userLimit {
+			uRequests = uRequests[1:]
+		}
+
+		usersRequests[userID] = uRequests
+
+		statuses[i] = 200
+	}
+
+	return statuses
+}
+
+func check(reqs []int, now, limit, duration int) bool {
+	if limit == 0 {
+		return false
+	}
+
+	if len(reqs) < limit || now-duration > (reqs)[0] {
+		return true
+	}
+
+	return false
 }
