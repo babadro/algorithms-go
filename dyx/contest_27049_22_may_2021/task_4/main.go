@@ -1,37 +1,35 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"net/http"
 	"os"
 	"sort"
 	"strconv"
 )
 
-type Arr []int
-
 func main() {
-	//serverURL, port, a, b := parseInput()
-	//
-	//r := fmt.Sprintf("%s:%d?a=%d&b=%d", serverURL, port, a, b)
-	//
-	//resp, err := http.Get(r)
-	//if err != nil {
-	//	panic(err)
-	//}
-	//defer resp.Body.Close()
-	//
-	//bytesResp, err := ioutil.ReadAll(resp.Body)
-	//if err != nil {
-	//	panic(err)
-	//}
+	serverURL, port, a, b := parseInput()
 
-	//var arr []int
-	//if err := json.Unmarshal(bytesResp, &arr); err != nil {
-	//	panic(err)
-	//}
+	r := fmt.Sprintf("%s:%d?a=%d&b=%d", serverURL, port, a, b)
 
-	arr := []int{5, 4, 3, 2, 1}
+	resp, err := http.Get(r)
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+
+	bytesResp, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		panic(err)
+	}
+
+	var arr []int
+	if err := json.Unmarshal(bytesResp, &arr); err != nil {
+		panic(err)
+	}
 
 	sort.Ints(arr)
 
