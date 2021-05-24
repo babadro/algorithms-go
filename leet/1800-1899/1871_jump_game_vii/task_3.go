@@ -1,7 +1,6 @@
 package _1871_jump_game_vii
 
 // passed, but it's slow solution
-// todo 2 look for faster solution
 func canReachSlow(s string, minJump int, maxJump int) bool {
 	n := len(s)
 	last := n - 1

@@ -2,7 +2,7 @@ package _42
 
 import "github.com/babadro/algorithms-go/utils"
 
-// todo 1
+// passed. easy. todo 3 find shorter solution
 func checkZeroOnes(s string) bool {
 	s += " "
 	counterOnes := 0
