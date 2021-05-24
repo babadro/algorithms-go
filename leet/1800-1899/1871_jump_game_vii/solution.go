@@ -2,7 +2,7 @@ package _1871_jump_game_vii
 
 import "github.com/babadro/algorithms-go/utils"
 
-// tptl. passed. best solution. medium
+// tptl. passed. best solution. medium (this solution hard for me)
 func canReach(s string, minJump int, maxJump int) bool {
 	b := []byte(s)
 	n := len(b)
