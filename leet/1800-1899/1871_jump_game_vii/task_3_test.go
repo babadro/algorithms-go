@@ -15,7 +15,7 @@ func Test_canReach(t *testing.T) {
 		{"01101110", 2, 3, false},
 		{"011110", 1, 2, false},
 		{"00", 1, 1, true},
-		{tle1String, tle1MinJump, 5, true},
+		{tle1String, tle1MinJump, tle1MaxJump, true},
 	}
 	for _, tt := range tests {
 		t.Run(tt.s, func(t *testing.T) {
