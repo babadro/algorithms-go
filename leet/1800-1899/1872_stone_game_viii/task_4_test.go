@@ -1,4 +1,4 @@
-package _42
+package _1872_stone_game_viii
 
 import (
 	"fmt"

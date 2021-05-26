@@ -1,6 +1,6 @@
-package _42
+package _1872_stone_game_viii
 
-// todo 1 need to understand
+// todo 2 need to understand
 // https://leetcode.com/problems/stone-game-viii/discuss/1224872/Top-Down-and-Bottom-Up
 func stoneGameVIII(stones []int) int {
 	n := len(stones)
