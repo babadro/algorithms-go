@@ -53,3 +53,21 @@ func Test_bruteforce(t *testing.T) {
 func Test_bruteforce1(t *testing.T) {
 	rearrangeSticksBruteforce(4, 3)
 }
+
+func Benchmark_rearrangeSticks(b *testing.B) {
+	var res int
+	for i := 0; i < b.N; i++ {
+		res = rearrangeSticks(20, 11)
+	}
+
+	_ = res
+}
+
+func Benchmark_rearrangeSticksRecursive(b *testing.B) {
+	var res int
+	for i := 0; i < b.N; i++ {
+		res = rearrangeSticksRecursive(20, 11)
+	}
+
+	_ = res
+}
