@@ -1,9 +1,7 @@
 package _866_number_of_ways_to_rearrange_sticks_with_k_sticks_visible
 
-import "fmt"
-
-// todo 1
-func rearrangeSticks(n int, k int) int {
+// bruteforce. tle
+func rearrangeSticksBruteforce(n int, k int) int {
 	nums := make([]int, n)
 	for i := 0; i < n; i++ {
 		nums[i] = i + 1
@@ -11,7 +9,7 @@ func rearrangeSticks(n int, k int) int {
 
 	count := 0
 	if visibleCount(nums) == k {
-		fmt.Println(nums)
+		//fmt.Println(nums)
 		count = 1
 	}
 
@@ -23,7 +21,7 @@ func rearrangeSticks(n int, k int) int {
 
 		if visibleCount(nums) == k {
 			count++
-			fmt.Println(nums)
+			//fmt.Println(nums)
 		}
 	}
 

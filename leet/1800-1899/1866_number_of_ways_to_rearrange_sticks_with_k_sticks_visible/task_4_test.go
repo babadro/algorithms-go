@@ -32,7 +32,7 @@ func Test_rearrangeSticks(t *testing.T) {
 	}{
 		{3, 2, 3},
 		{5, 5, 1},
-		//{20, 11, 647427950},
+		{20, 11, 647427950},
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%d %d", tt.n, tt.k), func(t *testing.T) {
@@ -46,10 +46,10 @@ func Test_rearrangeSticks(t *testing.T) {
 func Test_bruteforce(t *testing.T) {
 	n := 4
 	for i := 1; i <= n; i++ {
-		t.Logf("n=%d, k=%d: %d", n, i, rearrangeSticks(n, i))
+		t.Logf("n=%d, k=%d: %d", n, i, rearrangeSticksBruteforce(n, i))
 	}
 }
 
 func Test_bruteforce1(t *testing.T) {
-	rearrangeSticks(4, 3)
+	rearrangeSticksBruteforce(4, 3)
 }
