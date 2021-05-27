@@ -1,4 +1,4 @@
-package _42
+package _869_longer_contiguous_segments_of_ones_than_zeroes
 
 import "testing"
 
@@ -7,7 +7,7 @@ func Test_checkZeroOnes(t *testing.T) {
 		s    string
 		want bool
 	}{
-		//{"1101", true},
+		{"1101", true},
 		{"111000", false},
 		{"110100010", false},
 		{"1", true},

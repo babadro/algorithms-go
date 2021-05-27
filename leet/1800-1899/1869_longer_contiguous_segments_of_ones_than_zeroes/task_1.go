@@ -1,4 +1,4 @@
-package _42
+package _869_longer_contiguous_segments_of_ones_than_zeroes
 
 import "github.com/babadro/algorithms-go/utils"
 

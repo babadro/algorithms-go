@@ -1,4 +1,4 @@
-package _41
+package _866_number_of_ways_to_rearrange_sticks_with_k_sticks_visible
 
 import "fmt"
 

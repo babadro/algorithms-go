@@ -1,4 +1,4 @@
-package _41
+package _863_sum_of_all_subset_xor_totals
 
 // passed. tptl. bruteforce. todo 1 bitmask solution https://leetcode.com/problems/sum-of-all-subset-xor-totals/discuss/1211182/Bitmask
 func subsetXORSum(nums []int) int {
