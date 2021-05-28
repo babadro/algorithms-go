@@ -10,7 +10,9 @@ func Test_judgePoint24(t *testing.T) {
 		nums []int
 		want bool
 	}{
-		{[]int{4, 1, 8, 7}, true},
+		{[]int{1, 2, 3, 4}, true},
+		//{[]int{4, 1, 8, 7}, true},
+		//{[]int{1, 2, 1, 2}, false},
 	}
 	for _, tt := range tests {
 		name := fmt.Sprintf("%d%d%d%d", tt.nums[0], tt.nums[1], tt.nums[2], tt.nums[3])

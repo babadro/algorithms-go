@@ -5,8 +5,8 @@ import "fmt"
 var operators = []byte{'*', '/', '+', '-'}
 var brackets = []string{"", "()", "()()", "(())"}
 
-// todo 1
-func judgePoint24(nums []int) bool {
+// obviously, it's a wrong way.
+func judgePoint24Brute(nums []int) bool {
 	numPermutations := genPerm(nums)
 
 	stmt := make([]byte, 0, 11)
