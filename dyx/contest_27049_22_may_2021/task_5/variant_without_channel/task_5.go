@@ -7,18 +7,14 @@ import (
 	"strconv"
 )
 
-// it works
+// Условию задачи работа с вводом и выводом не соответствовала, т.е. это просто чтобы по-быстрому написать юнит-тесты
 func main() {
 	var userLimit, serviceLimit, duration int
-	var requests = make(chan [2]int)
-	var statuses = make(chan int)
+	var requests [][2]int
 	scanner := bufio.NewScanner(os.Stdin)
 	flag := true
 	for scanner.Scan() {
 		if num, err := strconv.Atoi(scanner.Text()); err == nil && num == -1 {
-			close(requests)
-			close(statuses)
-
 			break
 		}
 
@@ -26,8 +22,6 @@ func main() {
 			if _, err := fmt.Sscanf(scanner.Text(), "%d %d %d", &userLimit, &serviceLimit, &duration); err != nil {
 				panic(err)
 			}
-
-			go checkRequestsChan(userLimit, serviceLimit, duration, requests, statuses)
 
 			flag = false
 
@@ -40,28 +34,33 @@ func main() {
 			panic(err)
 		}
 
-		requests <- [2]int{now, userID}
+		requests = append(requests, [2]int{now, userID})
+	}
 
-		fmt.Println(<-statuses)
+	statuses := checkRequests(userLimit, serviceLimit, duration, requests)
+
+	for _, s := range statuses {
+		fmt.Println(s)
 	}
 }
 
-func checkRequestsChan(userLimit, serviceLimit, duration int, reqs chan [2]int, statuses chan int) {
+func checkRequests(userLimit, serviceLimit, duration int, reqs [][2]int) (statuses []int) {
 	var serviceRequests []int
 	var usersRequests = make(map[int][]int)
+	statuses = make([]int, len(reqs))
 
-	for req := range reqs {
+	for i, req := range reqs {
 		now, userID := req[0], req[1]
 
 		uRequests := usersRequests[userID]
 		if !check(uRequests, now, userLimit, duration) {
-			statuses <- 429
+			statuses[i] = 429
 
 			continue
 		}
 
 		if !check(serviceRequests, now, serviceLimit, duration) {
-			statuses <- 503
+			statuses[i] = 503
 
 			continue
 		}
@@ -78,8 +77,10 @@ func checkRequestsChan(userLimit, serviceLimit, duration int, reqs chan [2]int, 
 
 		usersRequests[userID] = uRequests
 
-		statuses <- 200
+		statuses[i] = 200
 	}
+
+	return statuses
 }
 
 func check(reqs []int, now, limit, duration int) bool {

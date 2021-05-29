@@ -22,18 +22,7 @@ func Test_checkRequests(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%d %d %d", tt.userLimit, tt.serviceLimit, tt.duration), func(t *testing.T) {
-			reqs, statuses := make(chan [2]int), make(chan int)
-			go checkRequestsChan(tt.userLimit, tt.serviceLimit, tt.duration, reqs, statuses)
-
-			gotStatuses := make([]int, 0, len(tt.reqs))
-			for _, req := range tt.reqs {
-				reqs <- req
-				gotStatuses = append(gotStatuses, <-statuses)
-			}
-
-			close(reqs)
-
-			if !reflect.DeepEqual(gotStatuses, tt.wantStatuses) {
+			if gotStatuses := checkRequests(tt.userLimit, tt.serviceLimit, tt.duration, tt.reqs); !reflect.DeepEqual(gotStatuses, tt.wantStatuses) {
 				t.Errorf("checkRequests() = %v, want %v", gotStatuses, tt.wantStatuses)
 			}
 		})
