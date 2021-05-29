@@ -7,6 +7,7 @@ import (
 	"strconv"
 )
 
+// it works
 func main() {
 	var userLimit, serviceLimit, duration int
 	var requests [][2]int
@@ -51,6 +52,13 @@ func checkRequests(userLimit, serviceLimit, duration int, reqs [][2]int) (status
 	for i, req := range reqs {
 		now, userID := req[0], req[1]
 
+		uRequests := usersRequests[userID]
+		if !check(uRequests, now, userLimit, duration) {
+			statuses[i] = 429
+
+			continue
+		}
+
 		if !check(serviceRequests, now, serviceLimit, duration) {
 			statuses[i] = 503
 
@@ -60,13 +68,6 @@ func checkRequests(userLimit, serviceLimit, duration int, reqs [][2]int) (status
 		serviceRequests = append(serviceRequests, now)
 		if len(serviceRequests) > serviceLimit {
 			serviceRequests = serviceRequests[1:]
-		}
-
-		uRequests := usersRequests[userID]
-		if !check(uRequests, now, userLimit, duration) {
-			statuses[i] = 429
-
-			continue
 		}
 
 		uRequests = append(uRequests, now)
