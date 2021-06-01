@@ -1,4 +1,4 @@
-package _43
+package _880_check_if_word_equals_summation_of_two_words
 
 import "testing"
 

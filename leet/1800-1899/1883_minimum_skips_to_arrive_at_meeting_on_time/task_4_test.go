@@ -1,4 +1,4 @@
-package _43
+package _1883_minimum_skips_to_arrive_at_meeting_on_time
 
 import (
 	"fmt"

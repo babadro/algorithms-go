@@ -1,8 +1,8 @@
-package _43
+package _880_check_if_word_equals_summation_of_two_words
 
 import "strconv"
 
-// passed. easy
+// passed. easy todo 3 try to find shorter solution
 func isSumEqual(firstWord string, secondWord string, targetWord string) bool {
 	var num1 []byte
 	for i := range firstWord {
