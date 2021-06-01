@@ -2,7 +2,7 @@ package _1881_maximum_value_after_insertion
 
 import "strconv"
 
-// passed.
+// passed. not difficult
 func maxValue(n string, x int) string {
 	i := 0
 	negative := n[0] == '-'

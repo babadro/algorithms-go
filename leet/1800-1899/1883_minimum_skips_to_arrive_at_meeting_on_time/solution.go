@@ -2,6 +2,7 @@ package _1883_minimum_skips_to_arrive_at_meeting_on_time
 
 // https://leetcode.com/problems/minimum-skips-to-arrive-at-meeting-on-time/discuss/1239838/JavaC%2B%2BPython-DP-Solution
 // todo 1 need to understand
+// tptl. hard. passed
 func minSkips(dist []int, speed int, hoursBefore int) int {
 	n := len(dist)
 	dp := make([]int, n+1)
