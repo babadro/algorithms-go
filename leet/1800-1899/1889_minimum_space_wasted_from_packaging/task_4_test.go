@@ -12,6 +12,7 @@ func Test_minWastedSpace(t *testing.T) {
 		{[]int{2, 3, 5}, [][]int{{1, 4}, {2, 3}, {3, 4}}, -1},
 		{[]int{3, 5, 8, 10, 11, 12}, [][]int{{12}, {11, 9}, {10, 5, 14}}, 9},
 		{tle1Packages, tle1Boxes, 499949986},
+		{wrongAns1Packages, wrongAns1Boxes, 1674615},
 	}
 	for _, tt := range tests {
 		t.Run("", func(t *testing.T) {

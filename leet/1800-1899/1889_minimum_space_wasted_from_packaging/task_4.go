@@ -5,13 +5,14 @@ import (
 	"sort"
 )
 
-// todo 1 - TLE
+// todo 1 it works, but slow - 4188ms. Find faster solution
 func minWastedSpace(packages []int, boxes [][]int) int {
 	sort.Ints(packages)
 	n := len(packages)
 	min, max := packages[0], packages[n-1]
 
 	res := -1
+Loop:
 	for _, line := range boxes {
 		flag := false
 		h := &minHeap{}
@@ -33,12 +34,16 @@ func minWastedSpace(packages []int, boxes [][]int) int {
 
 		currRes := 0
 		currBox := heap.Pop(h).(int)
+
 		for _, pack := range packages {
 			for currBox < pack {
 				currBox = heap.Pop(h).(int)
 			}
 
 			currRes += currBox - pack
+			if res != -1 && currRes >= res {
+				continue Loop
+			}
 		}
 
 		if res == -1 || currRes < res {
