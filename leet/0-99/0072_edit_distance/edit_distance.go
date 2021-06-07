@@ -2,7 +2,7 @@ package _072_edit_distance
 
 import "github.com/babadro/algorithms-go/utils"
 
-// passed. not mine. tptl hard. dynamic programming.
+// passed. not mine. tptl hard. #dynamic programming. #string
 func minDistance(word1 string, word2 string) int {
 	n, m := len(word1), len(word2)
 
