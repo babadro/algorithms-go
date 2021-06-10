@@ -6,6 +6,7 @@ import (
 )
 
 // todo 1 it works, but slow - 4188ms. Find faster solution
+// tptl hard
 func minWastedSpace(packages []int, boxes [][]int) int {
 	sort.Ints(packages)
 	n := len(packages)

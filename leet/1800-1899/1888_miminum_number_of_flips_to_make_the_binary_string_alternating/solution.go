@@ -5,6 +5,7 @@ import (
 )
 
 // https://leetcode.com/problems/minimum-number-of-flips-to-make-the-binary-string-alternating/discuss/1258225/Simple-cpp-solution-using-sliding-window-with-explanation.-O(N)-TC
+// passed. tptl. medium (hard for me). #string
 func minFlips(s string) int {
 	n := len(s)
 	diff0, diff1, res := 0, 0, math.MaxInt32
