@@ -16,7 +16,7 @@ func Test_reductionOperations(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.nums), func(t *testing.T) {
-			if got := reductionOperationsSort(tt.nums); got != tt.want {
+			if got := reductionOperations2(tt.nums); got != tt.want {
 				t.Errorf("reductionOperations() = %v, want %v", got, tt.want)
 			}
 		})
