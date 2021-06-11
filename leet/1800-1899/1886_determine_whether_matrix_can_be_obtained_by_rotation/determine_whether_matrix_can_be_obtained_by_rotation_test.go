@@ -17,7 +17,32 @@ func Test_findRotation(t *testing.T) {
 				{1, 0},
 				{0, 1},
 			},
-			want: true},
+			want: true,
+		},
+		{
+			mat: [][]int{
+				{0, 0, 0},
+				{0, 1, 0},
+				{1, 1, 1},
+			},
+			target: [][]int{
+				{1, 1, 1},
+				{0, 1, 0},
+				{0, 0, 0},
+			},
+			want: true,
+		},
+		{
+			mat: [][]int{
+				{0, 1},
+				{1, 1},
+			},
+			target: [][]int{
+				{1, 0},
+				{0, 1},
+			},
+			want: false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run("", func(t *testing.T) {
