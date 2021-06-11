@@ -1,6 +1,5 @@
 package sorting
 
-// todo base
 func Bubble(nums []int) {
 	n := len(nums)
 	for i := 0; i < n-1; i++ {
