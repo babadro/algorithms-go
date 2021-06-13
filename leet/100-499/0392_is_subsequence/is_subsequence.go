@@ -1,6 +1,6 @@
 package _392_is_subsequence
 
-// tptl. passed. best solution.
+// tptl. passed. best solution. #string
 func isSubsequence(s string, t string) bool {
 	j := 0
 	for i := 0; i < len(t) && j < len(s); i++ {
