@@ -1,4 +1,4 @@
-package _45
+package _898_maximum_number_of_removable_characters
 
 // tptl. passed. medium #string
 // https://leetcode.com/problems/maximum-number-of-removable-characters/discuss/1268656/C%2B%2B-Binary-search

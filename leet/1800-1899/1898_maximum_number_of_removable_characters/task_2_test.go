@@ -1,4 +1,4 @@
-package _45
+package _898_maximum_number_of_removable_characters
 
 import "testing"
 

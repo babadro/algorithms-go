@@ -1,4 +1,4 @@
-package _45
+package _899_merge_triplets_to_form_target_triplet
 
 import (
 	"fmt"
