@@ -25,27 +25,12 @@ func check(s, p string, count int, removable []int) bool {
 		b[removable[i]] = 0
 	}
 
-	var b2 []byte
-	for i := range s {
-		if b[i] != 0 {
-			b2 = append(b2, b[i])
-		}
-	}
-
-	newS := string(b2)
-
-	res := isSubsequence(p, newS)
-
-	return res
-}
-
-func isSubsequence(s string, t string) bool {
 	j := 0
-	for i := 0; i < len(t) && j < len(s); i++ {
-		if t[i] == s[j] {
+	for i := 0; i < len(b) && j < len(p); i++ {
+		if p[j] == b[i] {
 			j++
 		}
 	}
 
-	return j == len(s)
+	return j == len(p)
 }
