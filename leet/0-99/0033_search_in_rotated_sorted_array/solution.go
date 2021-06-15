@@ -1,5 +1,6 @@
 package _033_search_in_rotated_sorted_array
 
+// tptl. passed. mine. easy to understand. best solution
 func search2(nums []int, target int) int {
 	n := len(nums)
 	start1, start2 := 0, n

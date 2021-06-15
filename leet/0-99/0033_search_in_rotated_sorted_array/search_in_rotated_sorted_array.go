@@ -4,8 +4,7 @@ import (
 	"sort"
 )
 
-// TODO 2 look for mor short solution. And, maybe, without sort.Search
-// like https://leetcode.com/problems/search-in-rotated-sorted-array/discuss/307436/Faster-than-100-Go
+// not easy to understand.
 // Runtime: 0 ms, faster than 100.00% of Go online submissions for Search in Rotated Sorted Array.
 // Memory Usage: 2.6 MB, less than 50.00% of Go online submissions for Search in Rotated Sorted Array.
 func search(nums []int, target int) int {
