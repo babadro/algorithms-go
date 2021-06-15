@@ -9,7 +9,6 @@ func TestSearch(t *testing.T) {
 		expected int
 	}{
 		{[]int{4, 5, 6, 7, 0, 1, 2}, 0, 4},
-		{[]int{}, 0, -1},
 		{[]int{1}, 0, -1},
 		{[]int{1}, 1, 0},
 		{[]int{2, 1}, 1, 1},

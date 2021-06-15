@@ -3,41 +3,44 @@ package _033_search_in_rotated_sorted_array
 func search2(nums []int, target int) int {
 	n := len(nums)
 	start1, start2 := 0, n
-	for i := 0; i < n-1; i++ {
-		if nums[i] > nums[i+1] {
-			start2 = i+1
-			break
-		}
+	start2 = findStart2(nums)
+
+	if target < nums[0] {
+		return binarySearch2(nums, start2, n, target)
 	}
 
-	if res := binarySearch2(nums, start1, start2, target); res != -1 {
-		return res
-	}
-
-	return binarySearch2(nums, start2, n, target)
+	return binarySearch2(nums, start1, start2, target)
 }
 
 func findStart2(nums []int) int {
-	l, r := 0, len(nums)
+	l, r, res := 0, len(nums), -1
+	first, last := nums[0], nums[len(nums)-1]
+
 	for l < r {
-		mid := (l+r)/2
+		mid := (l + r) / 2
 		curr := nums[mid]
-		if
+		if curr > last {
+			l = mid + 1
+		} else if curr < first {
+			res, r = mid, mid
+		} else {
+			return len(nums)
+		}
 	}
 
-	return len(nums)
+	return res
 }
 
 func binarySearch2(nums []int, left, right, target int) int {
 	for left < right {
-		midIdx := (left+right)/2
-		curr := nums[midIdx]
+		mid := (left + right) / 2
+		curr := nums[mid]
 		if target > curr {
-			left = midIdx + 1
+			left = mid + 1
 		} else if target < curr {
-			right = midIdx
+			right = mid
 		} else {
-			return midIdx
+			return mid
 		}
 	}
 
