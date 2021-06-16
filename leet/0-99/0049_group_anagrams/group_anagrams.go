@@ -1,21 +1,22 @@
 package _049_group_anagrams
 
-// 100% 100%
+// passed. skipped easy
 func groupAnagrams(strs []string) [][]string {
-	anagrams := make(map[[26]byte]int)
-	var res [][]string
+	m := make(map[[26]byte][]string)
 	for _, str := range strs {
 		key := [26]byte{}
-		for _, b := range str {
-			key[b-'a']++
+		for i := range str {
+			char := str[i]
+			key[char-'a']++
 		}
-		if id, ok := anagrams[key]; !ok {
-			id = len(res)
-			anagrams[key] = id
-			res = append(res, []string{str})
-		} else {
-			res[id] = append(res[id], str)
-		}
+
+		m[key] = append(m[key], str)
 	}
+
+	res := make([][]string, 0, len(m))
+	for _, v := range m {
+		res = append(res, v)
+	}
+
 	return res
 }
