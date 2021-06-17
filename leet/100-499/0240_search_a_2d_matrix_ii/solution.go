@@ -1,6 +1,8 @@
 package _240_search_a_2d_matrix_ii
 
-// best solution, passed. tptl. medium, #binarysearch
+// todo 1 reimplement O(logn + logm) - binary search solution
+
+// O(m+n). passed.
 func searchMatrix3(matrix [][]int, target int) bool {
 	if matrix == nil || len(matrix) == 0 || len(matrix[0]) == 0 {
 		return false
