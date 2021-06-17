@@ -1,4 +1,4 @@
-package _004_mediam_of_two_sorted_arrays
+package _004_median_of_two_sorted_arrays
 
 import (
 	"fmt"
