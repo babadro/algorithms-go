@@ -5,7 +5,7 @@ import (
 	"math"
 )
 
-// passed. tptl. best solution O(log(m+n)). todo 2 need to understand
+// passed. tptl. hard. #array best solution O(log(m+n)). todo 2 need to understand
 // https://leetcode.com/problems/median-of-two-sorted-arrays/discuss/2689/Solution-in-C%2B%2B-well-explained
 func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 	if len(nums1) > len(nums2) {
