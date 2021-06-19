@@ -1,25 +1,44 @@
 package _0435_non_overlapping_intervals
 
-import "math"
+import (
+	"sort"
+)
 
-var min = math.MaxInt64
+var max = 0
 
 // todo 1
 func eraseOverlapIntervals(intervals [][]int) int {
-	n := len(intervals)
+	sort.Slice(intervals, func(i, j int) bool {
+		return intervals[i][0] < intervals[j][0]
+	})
 
-	return n
+	res := make([][]int, 0)
 
+	helper(0, 0, 0, nil, intervals, &res)
+
+	return len(intervals) - max
 }
 
-func helper2(lastFinish, i, count int, intervals [][]int) {
+func helper(lastFinish, i, count int, curr, intervals [][]int, res *[][]int) {
 	if i == len(intervals) {
-		if count < min {
-			min = count
+		tmp := make([][]int, len(curr))
+		copy(tmp, curr)
+		*res = append(*res, tmp...)
+
+		if count > max {
+			max = count
 		}
 
 		return
 	}
 
-	//if lastFinish < intervals[i][0]
+	helper(lastFinish, i+1, count, curr, intervals, res)
+	if start := intervals[i][0]; start >= lastFinish {
+		count++
+		lastFinish = intervals[i][1]
+
+		curr = append(curr, intervals[i])
+
+		helper(lastFinish, i+1, count, curr, intervals, res)
+	}
 }

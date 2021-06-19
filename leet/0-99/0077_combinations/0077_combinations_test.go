@@ -5,7 +5,7 @@ import (
 )
 
 func Test_combine(t *testing.T) {
-	res := combine(20, 20)
+	res := combine(5, 3)
 
 	for _, item := range res {
 		t.Log(item)

@@ -1,32 +1,28 @@
 package _0077_combinations
 
-import "fmt"
-
-// todo 1 need optimization
+// passed. best solution. tptl. medium.
 func combine(n int, k int) [][]int {
-	curr := make([]int, k)
+	curr := make([]int, 0, k)
 	res := make([][]int, 0)
-	helper(n, 1, k, 0, curr, &res)
+	helper(n, 1, k, k, curr, &res)
 
 	return res
 }
 
-func helper(n, num, k, idx int, curr []int, res *[][]int) {
-	if idx >= k {
-		item := make([]int, k)
-		copy(item, curr[:k])
+func helper(n, num, k, size int, curr []int, res *[][]int) {
+	if size == 0 {
+		item := make([]int, len(curr))
+		copy(item, curr)
 		*res = append(*res, item)
 
 		return
 	}
 
-	if num > n {
+	if n+1-num < size {
 		return
 	}
 
-	fmt.Println(curr)
-
-	helper(n, num+1, k, idx, curr, res)
-	curr[idx] = num
-	helper(n, num+1, k, idx+1, curr, res)
+	helper(n, num+1, k, size, curr, res)
+	curr = append(curr, num)
+	helper(n, num+1, k, size-1, curr, res)
 }
