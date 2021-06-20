@@ -8,10 +8,11 @@ func earliestAndLatest2(n int, firstPlayer int, secondPlayer int) []int {
 }
 
 // https://leetcode.com/problems/the-earliest-and-latest-rounds-where-players-compete/discuss/1268539/Recursion-(500ms)-%2B-Memo-(0ms)
-var minR = math.MaxInt32
-var maxR = math.MaxInt32
+var minR int
+var maxR int
 
 func earliestAndLatest(n int, firstPlayer int, secondPlayer int) []int {
+	minR, maxR = math.MaxInt32, math.MinInt32
 	dfs((1<<n)-1, 1, 0, 27, firstPlayer-1, secondPlayer-1)
 
 	return []int{minR, maxR}
