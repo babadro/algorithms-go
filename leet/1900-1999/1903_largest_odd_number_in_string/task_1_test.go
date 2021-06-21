@@ -1,4 +1,4 @@
-package contest
+package _903_largest_odd_number_in_string
 
 import "testing"
 
