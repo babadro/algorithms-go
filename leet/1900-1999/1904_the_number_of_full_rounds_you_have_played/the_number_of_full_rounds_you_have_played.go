@@ -2,7 +2,7 @@ package _1904_the_number_of_full_rounds_you_have_played
 
 import "strconv"
 
-// math. easy. best solution.
+// math. passed. easy. best solution. #time
 func numberOfRounds2(startTime string, finishTime string) int {
 	startH, _ := strconv.Atoi(startTime[:2])
 	startM, _ := strconv.Atoi(startTime[3:])
