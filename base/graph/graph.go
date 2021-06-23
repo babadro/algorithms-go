@@ -29,9 +29,9 @@ func (g *Graph) V() int {
 // dyx
 func (g *Graph) BFS(v int, f func(v int)) {
 	visited := make(map[int]bool, g.V())
-	visited[v] = true
-
 	q := list.New()
+
+	visited[v] = true
 	q.PushBack(v)
 
 	for q.Front() != nil {
@@ -42,8 +42,8 @@ func (g *Graph) BFS(v int, f func(v int)) {
 
 		for _, adjV := range g.adj[v] {
 			if !visited[adjV] {
-				q.PushBack(adjV)
 				visited[adjV] = true
+				q.PushBack(adjV)
 			}
 		}
 	}
