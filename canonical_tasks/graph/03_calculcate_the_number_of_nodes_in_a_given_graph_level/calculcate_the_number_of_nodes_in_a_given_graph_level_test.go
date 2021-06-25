@@ -18,6 +18,7 @@ func TestCalculate(t *testing.T) {
 				2: {3, 4},
 				3: {5},
 				4: nil,
+				5: nil,
 			},
 			level: 4,
 			want:  1,
@@ -25,7 +26,7 @@ func TestCalculate(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v, %d", tt.g, tt.level), func(t *testing.T) {
-			if got := Calculate(tt.g, tt.level); got != tt.want {
+			if got := CalculateBFS(tt.g, tt.level); got != tt.want {
 				t.Errorf("Calculate() = %v, want %v", got, tt.want)
 			}
 		})

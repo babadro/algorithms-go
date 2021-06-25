@@ -2,6 +2,7 @@ package _1900_the_earliest_and_latest_rounds_where_players_compete
 
 import "math"
 
+// todo 1 more effective solution with memorization
 // https://leetcode.com/problems/the-earliest-and-latest-rounds-where-players-compete/discuss/1268586/Java-DP-with-memory
 func earliestAndLatest2(n int, firstPlayer int, secondPlayer int) []int {
 	return nil
@@ -11,6 +12,7 @@ func earliestAndLatest2(n int, firstPlayer int, secondPlayer int) []int {
 var minR int
 var maxR int
 
+// todo 1 need to understand
 func earliestAndLatest(n int, firstPlayer int, secondPlayer int) []int {
 	minR, maxR = math.MaxInt32, math.MinInt32
 	dfs((1<<n)-1, 1, 0, 27, firstPlayer-1, secondPlayer-1)

@@ -2,7 +2,6 @@ package _1883_minimum_skips_to_arrive_at_meeting_on_time
 
 import "math"
 
-// todo 1
 // This approach is wrong. It doesn't work
 func minSkipsIterative(dist []int, speed int, hoursBefore int) int {
 	minTime := float64(0)
