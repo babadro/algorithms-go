@@ -46,6 +46,25 @@ func TestGraph_BFS(t *testing.T) {
 			2,
 			[]int{2, 3, 1},
 		},
+		{
+			"3",
+			func() *Graph {
+				arr := [][]int{
+					0: {1, 2, 3},
+					1: {4, 5, 6},
+					2: nil,
+					3: nil,
+					4: nil,
+					5: nil,
+					6: {7},
+					7: nil,
+				}
+
+				return &Graph{adj: arr}
+			},
+			0,
+			[]int{0, 1, 2, 3, 4, 5, 6, 7},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
