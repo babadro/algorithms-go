@@ -12,48 +12,48 @@ func leastInterval(tasks []byte, n int) int {
 		m[b]++
 	}
 
-	h := &minHeap{}
+	h := &minHeap{now: 0}
 
 	for char, count := range m {
-		*h = append(*h, [3]int{0, count, int(char)})
+		h.arr = append(h.arr, [3]int{0, count, int(char)})
 	}
 
 	heap.Init(h)
 
-	curTime := 0
-	for ; h.Len() > 0; curTime++ {
-		if (*h)[0][0] > curTime {
+	for h.arr[0][1] > 0 {
+		if h.arr[0][0] <= h.now {
+			h.arr[0][0] = h.now + 1 + n
+			h.arr[0][1]--
+
+			fmt.Printf("%s\n", string(byte(h.arr[0][2])))
+		} else {
 			fmt.Println("idle")
-			continue
 		}
 
-		item := heap.Pop(h).([3]int)
-		item[0] = curTime + 1 + n
-		item[1]--
-		if item[1] > 0 {
-			heap.Push(h, item)
-		}
-
-		fmt.Printf("%s\n", string(byte(item[2])))
+		h.now++
+		heap.Init(h)
 	}
 
-	return curTime
+	return h.now
 }
 
-type minHeap [][3]int
+type minHeap struct {
+	arr [][3]int
+	now int
+}
 
-func (h minHeap) Len() int { return len(h) }
+func (h minHeap) Len() int { return len(h.arr) }
 func (h minHeap) Less(i, j int) bool {
-	t1, t2 := h[i][0], h[j][0]
-	if t1 == t2 {
-		return h[i][1] > h[j][1]
+	ok1, ok2 := h.now-h.arr[i][0] >= 0, h.now-h.arr[j][0] >= 0
+	if ok1 == ok2 {
+		return h.arr[i][1] > h.arr[j][1]
 	}
 
-	return h[i][0] < h[j][0]
+	return ok1
 }
-func (h minHeap) Swap(i, j int)       { h[i], h[j] = h[j], h[i] }
-func (h *minHeap) Push(x interface{}) { *h = append(*h, x.([3]int)) }
+func (h minHeap) Swap(i, j int)       { h.arr[i], h.arr[j] = h.arr[j], h.arr[i] }
+func (h *minHeap) Push(x interface{}) { h.arr = append(h.arr, x.([3]int)) }
 func (h *minHeap) Pop() (v interface{}) {
-	*h, v = (*h)[:len(*h)-1], (*h)[len(*h)-1]
+	h.arr, v = (h.arr)[:len(h.arr)-1], (h.arr)[len(h.arr)-1]
 	return
 }
