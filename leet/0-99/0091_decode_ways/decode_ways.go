@@ -6,23 +6,28 @@ func numDecodings(s string) int {
 	if s[0] == '0' {
 		return 0
 	}
+
 	arr := make([]int, n)
 	if last := n - 1; s[last] != '0' {
 		arr[last] = 1
 	}
+
 	for i := n - 2; i >= 0; i-- {
 		if nextNum := arr[i+1]; nextNum == 0 {
 			arr[i] = 1
 		} else {
 			arr[i] = nextNum
 		}
+
 		currChar, nextChar := s[i], s[i+1]
 		if nextChar == '0' {
 			if currChar == '0' || currChar > '2' {
 				return 0
 			}
+
 			continue
 		}
+
 		idx := i + 2
 		if (currChar == '1' && nextChar > '0') || (currChar == '2' && nextChar > '0' && nextChar <= '6') {
 			if idx >= n {
@@ -32,6 +37,7 @@ func numDecodings(s string) int {
 			}
 		}
 	}
+
 	return arr[0]
 }
 
