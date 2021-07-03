@@ -1,6 +1,6 @@
 package _207_course_schedule
 
-// 4% 7%
+// 4ms 5.9
 // todo 3 best solution. Need to understand
 func canFinish(numCourses int, prerequisites [][]int) bool {
 	in := make([]int, numCourses)
@@ -66,10 +66,11 @@ func DFS(g map[int][]int, cur int, state []int) bool {
 	state[cur] = 2
 
 	for _, neighbor := range g[cur] {
-		if !DFS(g, neighbor, state) {
+		if !DFS(g, neighbor, state) { // have circle
 			return false
 		}
 	}
+
 	state[cur] = 1
 
 	return true

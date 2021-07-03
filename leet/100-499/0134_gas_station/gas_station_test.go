@@ -29,7 +29,7 @@ func TestCanCompleterCircuit(t *testing.T) {
 		},
 	}
 	for i, c := range cases {
-		if fact := canCompleteCircuit(c.gas, c.cost); fact != c.expected {
+		if fact := canCompleteCircuit2(c.gas, c.cost); fact != c.expected {
 			t.Errorf("case#%d, want %d, got %d", i+1, c.expected, fact)
 		}
 	}

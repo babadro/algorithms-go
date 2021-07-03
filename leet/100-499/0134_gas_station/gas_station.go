@@ -1,7 +1,6 @@
 package _134_gas_station
 
-// 20% 100%. This is a brutforce
-// TODO 2 find quickier solution in discuss
+// 20% 100%. This is a brutforce. passed.
 func canCompleteCircuit(gas []int, cost []int) int {
 	n := len(gas)
 Loop:
@@ -17,5 +16,6 @@ Loop:
 		}
 		return start
 	}
+
 	return -1
 }
