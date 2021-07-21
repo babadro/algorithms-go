@@ -1,7 +1,7 @@
 package _1930_unique_length_3_palindromic_subsequences
 
 // todo 1. TLE
-func countPalindromicSubsequence(s string) int {
+func countPalindromicSubsequenceBruteForce(s string) int {
 	uniq := [26]bool{}
 	count := 0
 	for i := range s {

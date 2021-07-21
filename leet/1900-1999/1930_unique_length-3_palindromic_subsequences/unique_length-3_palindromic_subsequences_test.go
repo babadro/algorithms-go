@@ -15,9 +15,14 @@ func Test_countPalindromicSubsequence(t *testing.T) {
 		{"aabbaa", 2},
 		{tleInput1, 676},
 		{tleInput2, 1},
+		{bigInput3, 26},
 	}
 	for _, tt := range tests {
-		t.Run(tt.s, func(t *testing.T) {
+		name := tt.s
+		if len(tt.s) > 10 {
+			name = tt.s[:10]
+		}
+		t.Run(name, func(t *testing.T) {
 			if got := countPalindromicSubsequence(tt.s); got != tt.want {
 				t.Errorf("countPalindromicSubsequence() = %v, want %v", got, tt.want)
 			}
