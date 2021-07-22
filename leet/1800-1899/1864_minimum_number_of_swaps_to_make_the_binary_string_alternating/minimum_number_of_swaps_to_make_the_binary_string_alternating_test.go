@@ -14,6 +14,8 @@ func Test_minSwaps(t *testing.T) {
 		{"00", -1},
 		{"1", 0},
 		{"0", 0},
+		{"100", 1},
+		{"011", 1},
 	}
 	for _, tt := range tests {
 		t.Run(tt.s, func(t *testing.T) {
