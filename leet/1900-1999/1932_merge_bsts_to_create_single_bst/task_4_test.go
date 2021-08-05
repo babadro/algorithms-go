@@ -1,4 +1,4 @@
-package contest
+package _1932_merge_bsts_to_create_single_bst
 
 import (
 	"github.com/babadro/algorithms-go/base/binaryTree"

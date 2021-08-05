@@ -1,11 +1,11 @@
-package contest
+package _1932_merge_bsts_to_create_single_bst
 
 import (
 	"github.com/babadro/algorithms-go/base/binaryTree"
 	"math"
 )
 
-// todo 1
+// doesn't work
 func canMerge(trees []*binaryTree.Node) *binaryTree.Node {
 	roots := make(map[int]*binaryTree.Node)
 	leafToParent := make(map[int]*binaryTree.Node)
