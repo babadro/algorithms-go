@@ -6,7 +6,7 @@ import (
 )
 
 // doesn't work
-func canMerge(trees []*binaryTree.Node) *binaryTree.Node {
+func canMerge2(trees []*binaryTree.Node) *binaryTree.Node {
 	roots := make(map[int]*binaryTree.Node)
 	leafToParent := make(map[int]*binaryTree.Node)
 

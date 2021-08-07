@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func Test_canMerge(t *testing.T) {
+func Test_canMerge2(t *testing.T) {
 	tests := []struct {
 		name  string
 		trees func() []*binaryTree.Node
@@ -43,15 +43,11 @@ func Test_canMerge(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			trees, want := tt.trees(), tt.want()
-			if got := canMerge(trees); !reflect.DeepEqual(got, want) {
+			if got := canMerge2(trees); !reflect.DeepEqual(got, want) {
 				t.Errorf("canMerge() = %v, want %v", got, want)
 			}
 		})
 	}
-}
-
-func n(v int) *binaryTree.Node {
-	return &binaryTree.Node{Val: v}
 }
 
 func nodes(values ...int) map[int]*binaryTree.Node {
