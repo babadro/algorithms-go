@@ -2,7 +2,6 @@ package _1932_merge_bsts_to_create_single_bst
 
 import (
 	"github.com/babadro/algorithms-go/base/binaryTree"
-	"math"
 )
 
 // doesn't work
@@ -73,19 +72,4 @@ func pop(nodes map[int]*binaryTree.Node) (k int, v *binaryTree.Node) {
 	}
 
 	return 0, nil
-}
-
-func isValidBST(root *binaryTree.Node) bool {
-	return recursive(root, math.MinInt64, math.MaxInt64)
-}
-
-func recursive(node *binaryTree.Node, min, max int) bool {
-	if node == nil {
-		return true
-	}
-	if node.Val <= min || node.Val >= max {
-		return false
-	}
-
-	return recursive(node.Left, min, node.Val) && recursive(node.Right, node.Val, max)
 }
