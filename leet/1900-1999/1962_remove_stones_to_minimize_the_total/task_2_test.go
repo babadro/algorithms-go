@@ -1,4 +1,4 @@
-package contest
+package _962_remove_stones_to_minimize_the_total
 
 import (
 	"fmt"

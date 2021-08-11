@@ -1,4 +1,4 @@
-package contest
+package _1964_find_the_longest_valid_obstacle_course_at_each_position
 
 import (
 	"fmt"

@@ -16,7 +16,7 @@ func Test_lengthOfLIS(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.nums), func(t *testing.T) {
-			if got := lengthOfLIS(tt.nums); got != tt.want {
+			if got := lengthOfLIS2(tt.nums); got != tt.want {
 				t.Errorf("lengthOfLIS() = %v, want %v", got, tt.want)
 			}
 		})
