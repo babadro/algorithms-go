@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-// todo 1
+// doesn't work
 func leastInterval(tasks []byte, n int) int {
 	m := make(map[byte]int)
 	for _, b := range tasks {
