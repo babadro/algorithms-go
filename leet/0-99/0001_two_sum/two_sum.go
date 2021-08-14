@@ -2,7 +2,7 @@ package _001_two_sum
 
 import "sort"
 
-// passed. mine. verbose and slow
+// passed. mine. verbose and slow.
 func twoSum(nums []int, target int) []int {
 	idxes := make([]int, len(nums))
 	for i := range idxes {
