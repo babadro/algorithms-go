@@ -1,8 +1,8 @@
 package _621_task_scheduler
 
 // https://leetcode.com/problems/task-scheduler/discuss/322606/simple-go-solution
-//https://leetcode.com/problems/task-scheduler/discuss/341568/C%2B%2B-8ms-100-O(n)-solution-w-explanation
-// todo 1
+// https://leetcode.com/problems/task-scheduler/discuss/341568/C%2B%2B-8ms-100-O(n)-solution-w-explanation
+// passed. tptl medium (hard for me). #array
 func leastInterval2(tasks []byte, n int) int {
 	stat := [26]int{}
 	for _, ch := range tasks {
@@ -15,7 +15,7 @@ func leastInterval2(tasks []byte, n int) int {
 			maxFreqCount++
 		} else if maxFreq < freq {
 			maxFreqCount = 1
-			maxFreq = 1
+			maxFreq = freq
 		}
 	}
 
