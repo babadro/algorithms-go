@@ -18,7 +18,7 @@ func Test_canPartition(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.nums), func(t *testing.T) {
-			if got := canPartitionBottomUp(tt.nums); got != tt.want {
+			if got := canPartitionBottomUpOptimized(tt.nums); got != tt.want {
 				t.Errorf("canPartition() = %v, want %v", got, tt.want)
 			}
 		})
