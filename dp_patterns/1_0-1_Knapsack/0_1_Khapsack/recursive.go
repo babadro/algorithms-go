@@ -1,8 +1,8 @@
-package __Khapsack
+package __1_Khapsack
 
 import "github.com/babadro/algorithms-go/utils"
 
-func Knapsack(profits, weights []int, capacity int) int {
+func KnapsackRecursive(profits, weights []int, capacity int) int {
 	dp := make([][]int, len(profits))
 	for i := range dp {
 		dp[i] = make([]int, capacity+1)

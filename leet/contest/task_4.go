@@ -5,6 +5,8 @@ import (
 	"sort"
 )
 
+// passed. #hard #tptl mine
+// todo 2 find shorter solution
 func latestDayToCross(row int, col int, cells [][]int) int {
 	matrix := make([][]int, row)
 	for i := range matrix {
