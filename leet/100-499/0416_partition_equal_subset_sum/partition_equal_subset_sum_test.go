@@ -15,6 +15,7 @@ func Test_canPartition(t *testing.T) {
 		{[]int{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, true},
 		{[]int{1, 1, 2, 2, 3, 3, 4, 4}, true},
 		{tleInput1, false},
+		{[]int{14, 9, 8, 4, 3, 2}, true},
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.nums), func(t *testing.T) {

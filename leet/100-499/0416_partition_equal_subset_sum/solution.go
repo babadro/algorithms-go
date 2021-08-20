@@ -78,7 +78,7 @@ func canPartitionBottomUp(nums []int) bool {
 	for i := 1; i < n; i++ {
 		for s := 1; s <= sum; s++ {
 			if dp[i-1][s] {
-				dp[i][s] = dp[i-1][s]
+				dp[i][s] = true
 			} else if s >= nums[i] {
 				dp[i][s] = dp[i-1][s-nums[i]]
 			}
@@ -103,15 +103,12 @@ func canPartitionBottomUpOptimized(nums []int) bool {
 	dp := make([]bool, sum+1)
 	dp[0] = true
 	for _, num := range nums {
-		for i := sum; i >= num; i-- {
-			if j := i - num; j >= 0 && dp[j] {
-				dp[i] = true
-				if i == sum {
-					return true
-				}
+		for s := sum; s >= num; s-- {
+			if dp[s-num] {
+				dp[s] = true
 			}
 		}
 	}
 
-	return false
+	return dp[sum]
 }
