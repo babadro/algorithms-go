@@ -6,7 +6,7 @@ import (
 )
 
 // tle
-func recoverArray(n int, sums []int) []int {
+func recoverArrayTle(n int, sums []int) []int {
 	sort.Ints(sums)
 
 	var res []int
