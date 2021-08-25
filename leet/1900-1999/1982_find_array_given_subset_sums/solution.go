@@ -3,20 +3,19 @@ package _982_find_array_given_subset_sums
 import "sort"
 
 // java version in comments: https://leetcode.com/problems/find-array-given-subset-sums/discuss/1419206/Python3-O(NlogN)-solution-beats-100-of-submissions-in-runtime
+// todo 1 read the explanation
 func recoverArray(n int, sums []int) []int {
-	sumList := make([]int, len(sums))
-	copy(sumList, sums)
-	sort.Slice(sumList, func(i, j int) bool {
-		return sumList[i] > sumList[j]
+	sort.Slice(sums, func(i, j int) bool {
+		return sums[i] > sums[j]
 	})
 
 	res := make([]int, n)
 	i := 0
-	for len(sumList) > 2 {
+	for len(sums) > 2 {
 		var array1, array2 []int
-		num := sumList[0] - sumList[1]
-		counts := getCountMap(sumList)
-		for _, elm := range sumList {
+		num := sums[0] - sums[1]
+		counts := getCountMap(sums)
+		for _, elm := range sums {
 			if _, ok := counts[elm]; ok {
 				array2 = append(array2, elm)
 				array1 = append(array1, elm-num)
@@ -29,19 +28,19 @@ func recoverArray(n int, sums []int) []int {
 		if index != -1 && array1[index] == 0 {
 			res[i] = num
 			i++
-			sumList = array1
+			sums = array1
 			continue
 		}
 
 		res[i] = -num
 		i++
-		sumList = array2
+		sums = array2
 	}
 
-	if sumList[0] == 0 {
-		res[i] = sumList[1]
+	if sums[0] == 0 {
+		res[i] = sums[1]
 	} else {
-		res[i] = sumList[0]
+		res[i] = sums[0]
 	}
 
 	return res
