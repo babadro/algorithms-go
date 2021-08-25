@@ -1,4 +1,4 @@
-package contest
+package _970_last_day_where_you_can_still_cross
 
 import "testing"
 

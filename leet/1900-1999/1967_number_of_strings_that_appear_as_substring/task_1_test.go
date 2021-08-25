@@ -1,4 +1,4 @@
-package contest
+package _967_number_of_strings_that_appear_as_substring
 
 import "testing"
 

@@ -1,25 +1,21 @@
-package contest2
+package _982_find_array_given_subset_sums
 
 import (
 	"math"
 	"sort"
 )
 
+// tle
 func recoverArray(n int, sums []int) []int {
 	sort.Ints(sums)
 
-	dp := make([][]bool, len(sums))
-	for i := range dp {
-		dp[i] = make([]bool, n+1)
-	}
-
 	var res []int
-	req(sums, make([]int, 0, n), &res, 0, n, dp)
+	req(sums, make([]int, 0, n), &res, 0, n)
 
 	return res
 }
 
-func req(sums, curr []int, res *[]int, idx, n int, dp [][]bool) {
+func req(sums, curr []int, res *[]int, idx, n int) {
 	if n == 0 {
 		candidate := getSums(curr)
 		sort.Ints(candidate)
@@ -27,23 +23,17 @@ func req(sums, curr []int, res *[]int, idx, n int, dp [][]bool) {
 			ans := make([]int, len(curr))
 			copy(ans, curr)
 			*res = ans
-			return
 		}
+
+		return
 	}
 
 	if idx == len(sums) || n < 0 {
 		return
 	}
 
-	if dp[idx][n] {
-		//fmt.Println("Yepp")
-		//	return
-	}
-
-	req(sums, curr, res, idx+1, n, dp)
-	req(sums, append(curr, sums[idx]), res, idx+1, n-1, dp)
-
-	dp[idx][n] = true
+	req(sums, curr, res, idx+1, n)
+	req(sums, append(curr, sums[idx]), res, idx+1, n-1)
 }
 
 func getSums(nums []int) []int {
