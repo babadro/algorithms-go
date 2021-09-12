@@ -11,7 +11,7 @@ func recoverArray(n int, sums []int) []int {
 
 	res := make([]int, n)
 	i := 0
-	for len(sums) > 2 {
+	for ; len(sums) > 2; i++ {
 		var array1, array2 []int
 		num := sums[0] - sums[1]
 		counts := getCountMap(sums)
@@ -24,17 +24,14 @@ func recoverArray(n int, sums []int) []int {
 			}
 		}
 
-		index := indexOf(array2, num)
-		if index != -1 && array1[index] == 0 {
+		idx := indexOf(array2, num)
+		if idx != -1 && array1[idx] == 0 {
 			res[i] = num
-			i++
 			sums = array1
-			continue
+		} else {
+			res[i] = -num
+			sums = array2
 		}
-
-		res[i] = -num
-		i++
-		sums = array2
 	}
 
 	if sums[0] == 0 {
