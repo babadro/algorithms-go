@@ -34,6 +34,8 @@ func largestRectangleArea(heights []int) int {
 
 // todo 1
 // best solution. need to understand
+// https://medium.com/algorithms-digest/largest-rectangle-in-histogram-234004ecd15a
+// https://medium.com/algorithms-digest/previous-smaller-element-e3996fb8be3c
 func largestRectangleArea2(heights []int) int {
 	// Keep a stack of indices for the heights
 	// E.g. [0,1,2,3] => heights[1,6,8,9]
