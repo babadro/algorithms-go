@@ -14,6 +14,7 @@ func recursive(node *binaryTree.Node, min, max int) bool {
 	if node == nil {
 		return true
 	}
+
 	if node.Val <= min || node.Val >= max {
 		return false
 	}

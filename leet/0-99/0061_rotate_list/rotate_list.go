@@ -2,9 +2,35 @@ package _061_rotate_list
 
 import "github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
 
-// tptl. passed. todo 1 find for better solution (probably two pointers solution or solution
-// without copying slices)
+// tptl. passed. todo2 look two pointer solution
 func rotateRight(head *single.ListNode, k int) *single.ListNode {
+	n := 1
+	tail := head
+	for tail != nil && tail.Next != nil {
+		n++
+		tail = tail.Next
+	}
+
+	j := k % n
+	if j == 0 {
+		return head
+	}
+
+	newTail := head
+	for i := 0; i < n-j-1; i++ {
+		newTail = newTail.Next
+	}
+
+	newHead := newTail.Next
+
+	newTail.Next = nil
+	tail.Next = head
+
+	return newHead
+}
+
+// passed. naive
+func rotateRight2(head *single.ListNode, k int) *single.ListNode {
 	nodes := make([]*single.ListNode, 0)
 
 	node := head

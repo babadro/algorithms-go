@@ -3,7 +3,6 @@ package _102_binary_tree_level_order_traversal
 import "github.com/babadro/algorithms-go/base/binaryTree"
 
 // 100% 66%
-// TODO 2 find better solution in discuss
 func levelOrder(root *binaryTree.Node) [][]int {
 	if root == nil {
 		return nil

@@ -54,5 +54,6 @@ func maxProduct2(nums []int) int {
 			tmp = max
 		}
 	}
+
 	return tmp
 }

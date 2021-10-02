@@ -25,7 +25,8 @@ func Test_rotateRight(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			head := single.ArrToLinkedList(tt.input)
-			if got := rotateRight(head, tt.k); !reflect.DeepEqual(single.LinkedListToArr(got), tt.want) {
+			got := single.LinkedListToArr(rotateRight(head, tt.k))
+			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("rotateRight() = %v, want %v", got, tt.want)
 			}
 		})
