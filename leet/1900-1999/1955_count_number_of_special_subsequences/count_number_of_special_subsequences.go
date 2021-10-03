@@ -1,6 +1,6 @@
 package _1955_count_number_of_special_subsequences
 
-// todo 1 tle
+// tle
 func countSpecialSubsequencesTLE(nums []int) int {
 	res := 0
 	n := len(nums)
