@@ -17,7 +17,7 @@ func Test_findTargetSumWays(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run("", func(t *testing.T) {
-			if got := findTargetTopDown(tt.nums, tt.target); got != tt.want {
+			if got := findTargetSumTopDown(tt.nums, tt.target); got != tt.want {
 				t.Errorf("findTargetSumWays() = %v, want %v", got, tt.want)
 			}
 		})
