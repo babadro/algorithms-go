@@ -19,7 +19,6 @@ func recBruteForce(nums []int, idx, cur, target int) int {
 	return res1 + res2
 }
 
-// tptl. passed. #medium (hard for me). #dp
 func findTargetSumTopDown(nums []int, target int) int {
 	total := 0
 	for _, num := range nums {
@@ -63,4 +62,69 @@ func recTopDown(dp [][]int, nums []int, idx, sum int) int {
 	}
 
 	return dp[idx][sum]
+}
+
+// todo 1 doesn't work
+func findTargetSumBottomUp(nums []int, target int) int {
+	total := 0
+	for _, num := range nums {
+		total += num
+	}
+
+	if total < target || target < -total || (total+target)%2 == 1 {
+		return 0
+	}
+
+	sum := (total + target) / 2
+	n := len(nums)
+	dp := make([][]int, n)
+	for i := range dp {
+		dp[i] = make([]int, sum+1)
+	}
+
+	for i := range dp {
+		dp[i][0] = 1
+	}
+
+	for s := 0; s <= sum; s++ {
+		if nums[0] == s {
+			dp[0][s] = 1
+		}
+	}
+
+	for i := 1; i < n; i++ {
+		for s := 0; s <= sum; s++ {
+			dp[i][s] = dp[i-1][s]
+			if s >= nums[i] {
+				dp[i][s] += dp[i-1][s-nums[i]]
+			}
+		}
+	}
+
+	return dp[n-1][sum]
+}
+
+// tptl. passed. #medium (hard for me). #dp
+// todo 1 need to understand
+func findTargetSumBottomUpOptimized(nums []int, target int) int {
+	total := 0
+	for _, num := range nums {
+		total += num
+	}
+
+	if total < target || target < -total || (total+target)%2 == 1 {
+		return 0
+	}
+
+	sum := (total + target) / 2
+
+	dp := make([]int, sum+1)
+	dp[0] = 1
+	for _, num := range nums {
+		for i := sum; i >= num; i-- {
+			dp[i] += dp[i-num]
+		}
+	}
+
+	return dp[sum]
 }

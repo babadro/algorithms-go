@@ -14,10 +14,11 @@ func Test_findTargetSumWays(t *testing.T) {
 		{[]int{1, 0}, 1, 2},
 		{[]int{1, 2, 1}, 0, 2},
 		{[]int{0, 0, 0}, 0, 8},
+		{[]int{0, 0}, 0, 4},
 	}
 	for _, tt := range tests {
 		t.Run("", func(t *testing.T) {
-			if got := findTargetSumTopDown(tt.nums, tt.target); got != tt.want {
+			if got := findTargetSumBottomUpOptimized(tt.nums, tt.target); got != tt.want {
 				t.Errorf("findTargetSumWays() = %v, want %v", got, tt.want)
 			}
 		})
