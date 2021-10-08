@@ -1,6 +1,6 @@
 package _494_target_sum
 
-// todo 1 doesn't work
+// tptl. passed. #medium (hard for me). #dp
 func findTargetTopDown(nums []int, target int) int {
 	total := 0
 	for _, num := range nums {
@@ -24,11 +24,15 @@ func findTargetTopDown(nums []int, target int) int {
 }
 
 func recTopDown(dp [][]int, nums []int, idx, sum int) int {
-	if sum == 0 {
-		return 1
+	if idx == len(nums) {
+		if sum == 0 {
+			return 1
+		}
+
+		return 0
 	}
 
-	if sum < 0 || idx == len(nums) {
+	if sum < 0 {
 		return 0
 	}
 
