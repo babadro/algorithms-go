@@ -50,9 +50,7 @@ func min(s1, s2 string) string {
 	return s2
 }
 
-// todo 1 dp solution doesn't work here. Use monostack:
-// https://leetcode.com/problems/smallest-k-length-subsequence-with-occurrences-of-a-letter/discuss/1502211/Monostack-sort-of
-// solve this problem first as example uf using monostack https://leetcode.com/problems/daily-temperatures/discuss/130532/mono-stack
+// dp solution doesn't work here.
 func smallestSubsequenceTopDown(s string, k int, letter byte, repetition int) string {
 	dp := make([]map[string]string, len(s))
 	for i := range dp {
