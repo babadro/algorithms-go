@@ -2,6 +2,7 @@ package _2030_smallest_k_length_subsequence_with_occurrences_of_a_letter
 
 // passed tptl #monostack #hard
 // https://leetcode.com/problems/smallest-k-length-subsequence-with-occurrences-of-a-letter/discuss/1502211/Monostack-sort-of
+// todo 1 need to understand
 func smallestSubsequence(s string, k int, letter byte, repetition int) string {
 	count := 0
 	for i := range s {
