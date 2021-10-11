@@ -12,7 +12,7 @@ func smallestSubsequence(s string, k int, letter byte, repetition int) string {
 
 	extra := count - repetition
 	remove := len(s) - k
-	var mono, res []byte
+	var mono []byte
 	for i := range s {
 		top := len(mono) - 1
 		for len(mono) > 0 && mono[top] > s[i] && remove > 0 {
@@ -33,15 +33,17 @@ func smallestSubsequence(s string, k int, letter byte, repetition int) string {
 		mono = append(mono, s[i])
 	}
 
+	res := make([]byte, 0, k)
 	for i := 0; len(res) < k; i++ {
 		if mono[i] != letter && len(res)+repetition >= k {
 			continue
 		}
 
-		res = append(res, mono[i])
 		if mono[i] == letter && repetition > 0 {
 			repetition--
 		}
+
+		res = append(res, mono[i])
 	}
 
 	return string(res)
