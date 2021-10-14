@@ -1,6 +1,7 @@
 package subset_sum
 
 // tptl #dp
+// look task 416 on leetcode.
 func canPartition(nums []int, sum int) bool {
 	dp := make([]bool, sum+1)
 	dp[0] = true
