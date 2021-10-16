@@ -1,7 +1,7 @@
 package _2029_stone_game_ix
 
-// todo 1 need to understand. too complicated.
-// read another simulation solution and math solution with explanation.
+// todo 2 read math solution with explanation.
+// tptl passed medium (hard for me) #dfs #stone
 func stoneGameIX(stones []int) bool {
 	r := [3]int{}
 	for _, s := range stones {
