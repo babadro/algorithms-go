@@ -14,10 +14,11 @@ func Test_coinChange(t *testing.T) {
 		{"3", []int{1}, 0, 0},
 		{"4", []int{1}, 1, 1},
 		{"5", []int{1}, 2, 2},
+		{"6", []int{186, 419, 83, 408}, 6249, 20},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := coinChangeGreedy(tt.coins, tt.amount); got != tt.want {
+			if got := coinChangeBruteForce2(tt.coins, tt.amount); got != tt.want {
 				t.Errorf("coinChange() = %v, want %v", got, tt.want)
 			}
 		})
