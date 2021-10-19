@@ -27,6 +27,7 @@ func recBruteForce(coins []int, idx, cur, amount int) int {
 	return min(sum1, sum2)
 }
 
+// todo 1 doesn't work
 func coinChangeTopDown(coins []int, amount int) int {
 	dp := make([][]int, len(coins))
 	for i := range dp {
