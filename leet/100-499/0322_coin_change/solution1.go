@@ -1,6 +1,7 @@
 package _322_coin_change
 
 import (
+	"fmt"
 	"math"
 )
 
@@ -37,14 +38,14 @@ func coinChangeTopDown(coins []int, amount int) int {
 		}
 	}
 
-	if res := recTopDown(dp, coins, 0, 0, amount); res != math.MaxInt64 {
+	if res := recTopDown(dp, coins, 0, 0, amount, nil); res != math.MaxInt64 {
 		return res
 	}
 
 	return -1
 }
 
-func recTopDown(dp [][]int, coins []int, idx, cur, amount int) int {
+func recTopDown(dp [][]int, coins []int, idx, cur, amount int, arr []int) int {
 	if amount == 0 {
 		return cur
 	}
@@ -53,12 +54,27 @@ func recTopDown(dp [][]int, coins []int, idx, cur, amount int) int {
 		return math.MaxInt64
 	}
 
-	if dp[idx][cur] == -1 {
-		sum1 := recTopDown(dp, coins, idx, cur+1, amount-coins[idx])
-		sum2 := recTopDown(dp, coins, idx+1, cur, amount)
-
-		dp[idx][cur] = min(sum1, sum2)
+	if idx == 2 && amount == 5 {
+		fmt.Println(arr)
 	}
 
-	return dp[idx][cur]
+	if dp[idx][amount] == -1 {
+		sum1 := recTopDown(dp, coins, idx, cur+1, amount-coins[idx], append(arr, coins[idx]))
+		sum2 := recTopDown(dp, coins, idx+1, cur, amount, arr)
+
+		if idx == 2 && amount == 5 {
+			fmt.Println("ho")
+		}
+
+		dp[idx][amount] = min(sum1, sum2)
+	}
+
+	return dp[idx][amount]
+}
+
+func check(arr []int) bool {
+	if len(arr) != 3 {
+		return false
+	}
+	return arr[0] == 1 && arr[1] == 5 && arr[2] == 5
 }
