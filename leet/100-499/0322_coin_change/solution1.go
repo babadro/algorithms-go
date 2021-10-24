@@ -125,10 +125,3 @@ func recTopDown2(dp [][]item, coins []int, idx, amount int, arr []int) int {
 
 	return dp[idx][amount].count
 }
-
-func check(arr []int) bool {
-	if len(arr) != 3 {
-		return false
-	}
-	return arr[0] == 1 && arr[1] == 5 && arr[2] == 5
-}
