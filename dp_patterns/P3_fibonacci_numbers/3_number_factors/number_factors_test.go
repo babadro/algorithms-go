@@ -17,7 +17,7 @@ func TestCountWays(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.n), func(t *testing.T) {
-			if got := CountWaysBottomUp(tt.n); got != tt.want {
+			if got := CountWaysOptimized(tt.n); got != tt.want {
 				t.Errorf("CountWays() = %v, want %v", got, tt.want)
 			}
 		})

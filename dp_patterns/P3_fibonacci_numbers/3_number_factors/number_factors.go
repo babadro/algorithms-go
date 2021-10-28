@@ -57,9 +57,16 @@ func CountWaysBottomUp(n int) int {
 }
 
 func CountWaysOptimized(n int) int {
-	n1, n2, n3, n4 := 1, 1, 1, 2
+	dp := [4]int{1, 1, 1, 2}
+	if n < len(dp) {
+		return dp[n]
+	}
 
 	for i := 4; i <= n; i++ {
-		// todo 1
+		tmp := dp[3] + dp[1] + dp[0]
+		dp[0], dp[1], dp[2] = dp[1], dp[2], dp[3]
+		dp[3] = tmp
 	}
+
+	return dp[3]
 }
