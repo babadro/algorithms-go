@@ -61,19 +61,25 @@ func jumpButtomUp(jumps []int) int {
 	return dp[0]
 }
 
-// passed. tptl. todo 1 need to understand
+// passed. tptl. best solution
+// https://leetcode.com/problems/jump-game-ii/discuss/1526030/O(N)-Greedy-solution-with-explanation
+// Greedy solution - we only jump only when we have to
+// i.e we cannot reach that index without jumping previously
+// When we have to jump, we know we can jump to "furthest"
 func jumpBestSolution(nums []int) int {
-	minReqJump, mxLenForCurJump, mxLenForNxtJump := 0, 1, 1
-	for i := 0; i < len(nums)-1; i++ {
-		mxLenForCurJump--
-		mxLenForNxtJump = max(mxLenForNxtJump-1, nums[i])
-		if mxLenForCurJump == 0 {
-			mxLenForCurJump = mxLenForNxtJump
-			minReqJump++
+	var furthest, currPosition, jumps int
+	for i := 0; i < len(nums); i++ {
+		if i > currPosition {
+			jumps++
+			currPosition = furthest
+		}
+
+		if nums[i]+i > furthest {
+			furthest = max(furthest, nums[i]+i)
 		}
 	}
 
-	return minReqJump
+	return jumps
 }
 
 func max(a, b int) int {
