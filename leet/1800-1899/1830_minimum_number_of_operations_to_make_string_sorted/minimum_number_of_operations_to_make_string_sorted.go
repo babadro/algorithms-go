@@ -1,7 +1,5 @@
 package _1830_minimum_number_of_operations_to_make_string_sorted
 
-import "fmt"
-
 // todo 1
 func makeStringSorted(s string) int {
 	b := []byte(s)
@@ -17,15 +15,25 @@ Loop:
 				}
 
 				b[i-1], b[j] = b[j], b[i-1]
-				for idx := i; idx < (n+idx)/2; idx++ {
-					b[idx], b[n-1-idx] = b[n-1-idx], b[idx]
+				for k := 0; k < (n-i)/2; k++ {
+					idx1, idx2 := k+i, n-1-k
+					b[idx1], b[idx2] = b[idx2], b[idx1]
 				}
 
-				fmt.Println(string(b))
 				continue Loop
 			}
 		}
 
 		return res
 	}
+}
+
+func reverse(str string, i int) string {
+	b := []byte(str)
+	for j := 0; j < (len(b)-i)/2; j++ {
+		idx1, idx2 := j+i, len(b)-1-j
+		b[idx1], b[idx2] = b[idx2], b[idx1]
+	}
+
+	return string(b)
 }
