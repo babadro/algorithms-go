@@ -1,3 +1,7 @@
+// https://leetcode.com/problems/minimum-number-of-operations-to-make-string-sorted/discuss/1163050/Python-O(26n)-math-solution-beats-100-explained
+// https://leetcode.com/problems/minimum-number-of-operations-to-make-string-sorted/discuss/1163811/Java-Solution-O(26n)
+//https://leetcode.com/problems/minimum-number-of-operations-to-make-string-sorted/discuss/1164153/C%2B%2B-24-ms
+
 package _1830_minimum_number_of_operations_to_make_string_sorted
 
 // todo 1
