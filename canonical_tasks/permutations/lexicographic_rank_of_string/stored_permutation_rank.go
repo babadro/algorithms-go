@@ -7,17 +7,37 @@ const (
 	maxChar = 256
 )
 
-// todo 1
+// passed. tptl
 func findRank(s string) int {
 	n := len(s)
 
+	rank := 1
+
+	count := populateCount(s)
+	factorialMemo := modFactorial(n, mod)
+
+	for i := 0; i < n; i++ {
+		rank += count[s[i]-1] * factorialMemo[n-1-i]
+
+		rank %= mod
+
+		count = updateCount(count, int(s[i]))
+	}
+
+	return rank
 }
 
-func factorial(n int) int {
-	res := 1
+func modFactorial(n, mod int) []int {
+	if n == 0 {
+		return nil
+	}
+
+	res := make([]int, n+1)
+	res[0] = 1
 
 	for i := 1; i <= n; i++ {
-		res *= i
+		res[i] = i * res[i-1]
+		res[i] %= mod
 	}
 
 	return res
