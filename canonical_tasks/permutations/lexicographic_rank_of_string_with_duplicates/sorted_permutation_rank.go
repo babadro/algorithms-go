@@ -28,7 +28,7 @@ func findRank(s string) int {
 		dFac := 1
 
 		for _, ele := range dCount {
-			dFac
+			dFac *=
 		}
 	}
 }

@@ -1,3 +1,4 @@
+// https://leetcode.com/problems/minimum-number-of-operations-to-make-string-sorted/discuss/1163050/Python-O(26n)-math-solution-explained
 package _1808_maximize_number_of_nice_divisors
 
 // tptl. passed. best solution. hard
