@@ -1,16 +1,17 @@
 // https://www.interviewbit.com/problems/sorted-permutation-rank-with-repeats/
 // https://www.geeksforgeeks.org/lexicographic-rank-string-duplicate-characters/
+// https://www.algostreak.com/post/sorted-permutation-rank-with-repeats-interviewbit-solution
 package lexicographic_rank_of_string_with_duplicates
 
 const (
-	mod     = 1_000_003
-	maxChar = 256
+	mod = 1_000_003
 )
 
-// todo 1
+// tptl passed
 func findRank(s string) int {
 	n := len(s)
-	tCount := 1
+	ans := 1
+	factMemo := modFactorial(n, mod)
 
 	for i := 0; i < n; i++ {
 		lessThan := 0
@@ -25,12 +26,21 @@ func findRank(s string) int {
 			dCount[s[j]]++
 		}
 
-		dFac := 1
-
+		denominator := 1
 		for _, ele := range dCount {
-			dFac *=
+			denominator = (denominator * factMemo[ele]) % mod
 		}
+
+		inverse := ModPow(denominator, mod-2, mod)
+
+		permutation := (factMemo[n-i-1] * inverse) % mod
+		totalPermutation := (lessThan * permutation) % mod
+
+		ans += totalPermutation
+		ans %= mod
 	}
+
+	return ans
 }
 
 func modFactorial(n, mod int) []int {
@@ -47,4 +57,22 @@ func modFactorial(n, mod int) []int {
 	}
 
 	return res
+}
+
+func ModPow(base, exp, modulus int) int {
+	result := 1
+	base %= modulus
+	if base == 0 {
+		return 0
+	}
+
+	for ; exp > 0; exp >>= 1 {
+		if (exp & 1) == 1 {
+			result = (result * base) % modulus
+		}
+
+		base = (base * base) % modulus // because a^(m*n) = (a^m)^n
+	}
+
+	return result
 }
