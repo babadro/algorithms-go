@@ -14,7 +14,7 @@ func Test_makeStringSorted(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.s, func(t *testing.T) {
-			if got := makeStringSorted(tt.s); got != tt.want {
+			if got := makeStringSorted2(tt.s); got != tt.want {
 				t.Errorf("makeStringSorted() = %v, want %v", got, tt.want)
 			}
 		})
