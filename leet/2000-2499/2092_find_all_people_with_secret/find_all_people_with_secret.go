@@ -4,41 +4,19 @@ import "sort"
 
 // todo 1
 func findAllPeople(_ int, meetings [][]int, firstPerson int) []int {
-	schedule := make(map[int]map[int]bool)
-
-	for _, meeting := range meetings {
-		t := meeting[2]
-		participants, ok := schedule[t]
-		if !ok {
-			participants = make(map[int]bool)
-		}
-
-		p1, p2 := meeting[0], meeting[1]
-		participants[p1], participants[p2] = true, true
-
-		schedule[t] = participants
-	}
-
 	hasSecret := make(map[int]bool)
 	hasSecret[0], hasSecret[firstPerson] = true, true
 
-	sortedMeetingTimes := make([]int, 0, len(schedule))
-	for t := range schedule {
-		sortedMeetingTimes = append(sortedMeetingTimes, t)
-	}
+	sort.Slice(meetings, func(i, j int) bool {
+		return meetings[i][2] < meetings[j][2]
+	})
 
-	sort.Ints(sortedMeetingTimes)
-
-	for _, t := range sortedMeetingTimes {
-		participants := schedule[t]
-		for participant := range participants {
-			if hasSecret[participant] {
-				for p := range participants {
-					hasSecret[p] = true
-				}
-
-				break
-			}
+	for _, m := range meetings {
+		p1, p2 := m[0], m[1]
+		if hasSecret[p1] {
+			hasSecret[p2] = true
+		} else if hasSecret[p2] {
+			hasSecret[p1] = true
 		}
 	}
 

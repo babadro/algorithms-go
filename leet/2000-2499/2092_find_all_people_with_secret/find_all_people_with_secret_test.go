@@ -17,6 +17,7 @@ func Test_findAllPeople(t *testing.T) {
 		{4, [][]int{{3, 1, 3}, {1, 2, 2}, {0, 3, 3}}, 3, []int{0, 1, 3}},
 		{5, [][]int{{3, 4, 2}, {1, 2, 1}, {2, 3, 1}}, 1, []int{0, 1, 2, 3, 4}},
 		{6, [][]int{{0, 2, 1}, {1, 3, 1}, {4, 5, 1}}, 1, []int{0, 1, 2, 3}},
+		{7336, bigInput1, 6384, expected1},
 	}
 	for _, tt := range tests {
 		t.Run("", func(t *testing.T) {
@@ -24,7 +25,8 @@ func Test_findAllPeople(t *testing.T) {
 			sort.Ints(got)
 			sort.Ints(tt.want)
 			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("findAllPeople() = %v, want %v", got, tt.want)
+				t.Log(tt.want)
+				t.Log(got)
 			}
 		})
 	}
