@@ -7,6 +7,17 @@ import (
 )
 
 func Test_findAllPeople(t *testing.T) {
+	// [][]int{{0, 1, 1}, {0, 2, 1}, {0, 3, 1}, {0, 4, 1}...., {0, 99_999, 1}}
+	tl1Input := make([][]int, 99_999)
+	for i := range tl1Input {
+		tl1Input[i] = []int{0: 0, 1: i + 1, 2: 1}
+	}
+
+	tle1Want := make([]int, 100_000)
+	for i := range tle1Want {
+		tle1Want[i] = i
+	}
+
 	tests := []struct {
 		n           int
 		meetings    [][]int
@@ -18,6 +29,7 @@ func Test_findAllPeople(t *testing.T) {
 		{5, [][]int{{3, 4, 2}, {1, 2, 1}, {2, 3, 1}}, 1, []int{0, 1, 2, 3, 4}},
 		{6, [][]int{{0, 2, 1}, {1, 3, 1}, {4, 5, 1}}, 1, []int{0, 1, 2, 3}},
 		{7336, bigInput1, 6384, expected1},
+		{100_000, tl1Input, 1, tle1Want},
 	}
 	for _, tt := range tests {
 		t.Run("", func(t *testing.T) {
@@ -25,8 +37,8 @@ func Test_findAllPeople(t *testing.T) {
 			sort.Ints(got)
 			sort.Ints(tt.want)
 			if !reflect.DeepEqual(got, tt.want) {
+				t.Error(got)
 				t.Log(tt.want)
-				t.Log(got)
 			}
 		})
 	}
