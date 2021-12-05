@@ -2,7 +2,6 @@ package _2092_find_all_people_with_secret
 
 import (
 	"github.com/babadro/algorithms-go/base/unionFind"
-	"github.com/babadro/algorithms-go/utils"
 	"sort"
 )
 
@@ -37,7 +36,11 @@ func findAllPeople(n int, meetings [][]int, firstPerson int) []int {
 
 		root1, root2 := find(union, meetings[i][0]), find(union, meetings[i][1])
 		if root1 != root2 {
-			union[utils.Max(root1, root2)] = utils.Min(root1, root2)
+			if root1 > root2 { // todo 1 need to understand
+				root1, root2 = root2, root1
+			}
+
+			union[root2] = root1
 		}
 	}
 
