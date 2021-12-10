@@ -24,15 +24,23 @@ func (g *EulerianPahGraph) AddEdge(u, v int) {
 
 func getUndirectedGraph(g Graph) Graph {
 	undirectedGraph := New(g.V())
-	uniqBackDirectionEdges := make(map[[2]int]bool)
+	uniqEdges := make(map[[2]int]bool)
 	for i := 0; i < g.V(); i++ {
 		for _, v := range g.adj[i] {
-			undirectedGraph.AddEdge(i, v)
+			edge1, edge2 := [2]int{i, v}, [2]int{v, i}
+			if !uniqEdges[edge1] {
+				uniqEdges[edge1] = true
+				undirectedGraph.AddEdge(edge1[0], edge1[1])
+			}
 
+			if !uniqEdges[edge2] {
+				uniqEdges[edge2] = true
+				undirectedGraph.AddEdge(edge2[0], edge2[1])
+			}
 		}
 	}
 
-	return adjMatrix
+	return *undirectedGraph
 }
 
 func IsConnected(g Graph) bool {
