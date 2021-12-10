@@ -19,7 +19,6 @@ func Constructor(g [][]int) *Graph {
 
 func (g *Graph) AddEdge(src, dst int) {
 	g.adj[src] = append(g.adj[src], dst)
-	//g.adj[dst] = append(g.adj[dst], src) // non directional graph
 }
 
 func (g *Graph) V() int {
@@ -51,9 +50,11 @@ func (g *Graph) BFS(v int, f func(v int)) {
 
 // dyx
 // todo base add unit tests
-func (g *Graph) DFS(v int, f func(v int)) {
-	visited := make(map[int]bool, g.V())
+func (g *Graph) DFS(v int, f func(v int)) (visited map[int]bool) {
+	visited = make(map[int]bool, g.V())
 	g.dfsHelper(v, visited, f)
+
+	return visited
 }
 
 func (g *Graph) dfsHelper(v int, visited map[int]bool, f func(v int)) {
