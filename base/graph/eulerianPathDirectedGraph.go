@@ -1,23 +1,23 @@
 package graph
 
 // directed graph
-// https://www.techiedelight.com/eulerian-path-directed-graph/	has eulerian path todo base
+// https://www.techiedelight.com/eulerian-path-directed-graph/	has eulerian path
 
-type EulerianPahGraph struct {
+type EulerianPahDirectedGraph struct {
 	// to store in-degree of each vertex in the graph
 	in []int
 
 	Graph
 }
 
-func NewEulerianPathGraph(V int) *EulerianPahGraph {
-	return &EulerianPahGraph{
+func NewEulerianPathGraph(V int) *EulerianPahDirectedGraph {
+	return &EulerianPahDirectedGraph{
 		in:    make([]int, V),
 		Graph: *New(V),
 	}
 }
 
-func (g *EulerianPahGraph) AddEdge(u, v int) {
+func (g *EulerianPahDirectedGraph) AddEdge(u, v int) {
 	g.Graph.AddEdge(u, v)
 	g.in[v]++
 }
@@ -70,7 +70,7 @@ func IsConnected(g Graph) bool {
 	return true
 }
 
-func HasEulerPath(g EulerianPahGraph) bool {
+func HasEulerPath(g EulerianPahDirectedGraph) bool {
 	/*
 	   The following loop checks the following conditions to determine if an
 	   Eulerian path can exist or not:
@@ -102,6 +102,3 @@ func HasEulerPath(g EulerianPahGraph) bool {
 }
 
 // https://www.techiedelight.com/eulerian-cycle-directed-graph/ has eulerian cycle todo base
-
-// undirected graph
-// https://www.techiedelight.com/eulerian-path-undirected-graph/ has eulerian path or cycle todo base
