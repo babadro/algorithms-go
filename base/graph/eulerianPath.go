@@ -18,7 +18,7 @@ func NewEulerianPathGraph(V int) *EulerianPahGraph {
 }
 
 func (g *EulerianPahGraph) AddEdge(u, v int) {
-	g.AddEdge(u, v)
+	g.Graph.AddEdge(u, v)
 	g.in[v]++
 }
 
@@ -97,6 +97,8 @@ func HasEulerPath(g EulerianPahGraph) bool {
 		}
 
 	}
+
+	return IsConnected(getUndirectedGraph(g.Graph))
 }
 
 // https://www.techiedelight.com/eulerian-cycle-directed-graph/ has eulerian cycle todo base
