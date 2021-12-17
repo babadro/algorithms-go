@@ -1,7 +1,7 @@
 package graph
 
 // directed graph
-// https://www.techiedelight.com/eulerian-path-directed-graph/	has eulerian path
+// https://www.techiedelight.com/eulerian-path-directed-graph/
 
 type EulerianPahDirectedGraph struct {
 	// to store in-degree of each vertex in the graph
@@ -100,5 +100,3 @@ func HasEulerPath(g EulerianPahDirectedGraph) bool {
 
 	return IsConnected(getUndirectedGraph(g.Graph))
 }
-
-// https://www.techiedelight.com/eulerian-cycle-directed-graph/ has eulerian cycle todo base
