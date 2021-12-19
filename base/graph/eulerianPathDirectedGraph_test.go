@@ -19,13 +19,13 @@ func TestEulerianPathGraph(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run("", func(t *testing.T) {
-			g := NewEulerianPathGraph(tt.n)
+			g := NewEulerianGraph(tt.n)
 			for _, edge := range tt.edges {
 				g.AddEdge(edge[0], edge[1])
 			}
 
 			if got := HasEulerPath(*g); got != tt.want {
-				t.Errorf("NewEulerianPathGraph() = %v, want %v", got, tt.want)
+				t.Errorf("NewEulerianGraph() = %v, want %v", got, tt.want)
 			}
 		})
 	}

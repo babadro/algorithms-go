@@ -1,7 +1,7 @@
 package graph
 
 // undirected graph
-// https://www.techiedelight.com/eulerian-path-undirected-graph/ has eulerian path or cycle todo base
+// https://www.techiedelight.com/eulerian-path-undirected-graph/ has eulerian path or cycle
 func UndirectedGraphHasEulerianPathOrCycle(g Graph) (hasPath, hasCycle bool) {
 	if !IsConnected(g) {
 		return false, false
