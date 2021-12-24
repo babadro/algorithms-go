@@ -1,6 +1,6 @@
 package graph
 
-// https://www.techiedelight.com/eulerian-cycle-directed-graph/ has eulerian cycle todo base
+// https://www.techiedelight.com/eulerian-cycle-directed-graph/ has eulerian cycle
 func (g *EulerianGraph) HasEulerianCycle() bool {
 	// check if every vertex has the same in-degree and out-degree
 	for i := range g.adj {
