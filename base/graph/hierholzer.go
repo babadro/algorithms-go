@@ -1,6 +1,7 @@
 package graph
 
 // https://www.thecrazyprogrammer.com/2021/04/hierholzers-algorithm.html
+// https://www.geeksforgeeks.org/hierholzers-algorithm-directed-graph/
 // dyx
 func EulerianCircuit(adj [][]int) []int {
 	curPath, circuit := []int{0}, make([]int, 0, len(adj))
