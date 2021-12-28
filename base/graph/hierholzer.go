@@ -1,24 +1,30 @@
 package graph
 
-// https://www.thecrazyprogrammer.com/2021/04/hierholzers-algorithm.html todo base
+// https://www.thecrazyprogrammer.com/2021/04/hierholzers-algorithm.html
+// dyx
 func EulerianCircuit(adj [][]int) []int {
-	edges := make(map[int]int)
+	curPath, circuit := []int{0}, make([]int, 0, len(adj))
 
-	for i := 0; i < len(adj); i++ {
-		edges[i] = len(adj)
-	}
+	for len(curPath) > 0 {
+		cur := curPath[len(curPath)-1]
 
-	var currPath []int
+		if len(adj[cur]) > 0 {
+			last := len(adj[cur]) - 1
 
-	var circuit []int
+			curPath = append(curPath, adj[cur][last])
+			adj[cur] = adj[cur][:last]
+		} else {
+			last := len(curPath) - 1
 
-	currPath = append(currPath, 0)
-
-	currV := 0
-
-	for len(currPath) != 0 {
-		if edges[currV] > 0 {
-			currPath
+			circuit = append(circuit, curPath[last])
+			curPath = curPath[:last]
 		}
 	}
+
+	last := len(circuit) - 1
+	for i := 0; i < len(circuit)/2; i++ {
+		circuit[i], circuit[last-i] = circuit[last-i], circuit[i]
+	}
+
+	return circuit
 }
