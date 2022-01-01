@@ -1,5 +1,6 @@
 package _2097_valid_arrangement_of_pairs
 
+// passed dyx hard #graph
 func validArrangement(pairs [][]int) [][]int {
 	cnt := make(map[int]int)
 	graph := make(map[int][]int)

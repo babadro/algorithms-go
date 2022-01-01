@@ -30,6 +30,50 @@ func EulerianCircuit(adj [][]int) []int {
 	return circuit
 }
 
+// https://leetcode.com/problems/valid-arrangement-of-pairs/
+func EulerianPathOrCircuit(adj [][]int) []int {
+	cnt := make(map[int]int)
+	for from := range adj {
+		for _, to := range adj[from] {
+			cnt[from]++
+			cnt[to]--
+		}
+	}
+
+	start := adj[0][0]
+	for vertex, inOutDegree := range cnt {
+		if inOutDegree > 0 { // eulerian path
+			start = vertex
+			break
+		}
+	}
+
+	stack, path := []int{start}, make([]int, 0, len(adj))
+
+	for len(stack) > 0 {
+		cur := stack[len(stack)-1]
+
+		if len(adj[cur]) > 0 {
+			last := len(adj[cur]) - 1
+
+			stack = append(stack, adj[cur][last])
+			adj[cur] = adj[cur][:last]
+		} else {
+			last := len(stack) - 1
+
+			path = append(path, stack[last])
+			stack = stack[:last]
+		}
+	}
+
+	last := len(path) - 1
+	for i := 0; i < len(path)/2; i++ {
+		path[i], path[last-i] = path[last-i], path[i]
+	}
+
+	return path
+}
+
 // another yet variant.
 func eulerianCircuit2(adj [][]int) []int {
 	stack, route := []int{0}, make([]int, 0, len(adj))

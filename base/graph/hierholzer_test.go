@@ -34,7 +34,7 @@ func TestEulerianCircuit(t *testing.T) {
 				g.AddEdge(edge[0], edge[1])
 			}
 
-			if got := EulerianCircuit2(g.adj); !reflect.DeepEqual(got, tt.want) {
+			if got := EulerianCircuit(g.adj); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("EulerianCircuit() = %v, want %v", got, tt.want)
 			}
 		})
