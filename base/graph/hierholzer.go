@@ -29,3 +29,29 @@ func EulerianCircuit(adj [][]int) []int {
 
 	return circuit
 }
+
+// another yet variant.
+func eulerianCircuit2(adj [][]int) []int {
+	stack, route := []int{0}, make([]int, 0, len(adj))
+
+	for len(stack) > 0 {
+		for len(adj[stack[len(stack)-1]]) > 0 {
+			i := stack[len(stack)-1]
+
+			last := len(adj[i]) - 1
+			stack = append(stack, adj[i][last])
+			adj[i] = adj[i][:last]
+		}
+
+		last := len(stack) - 1
+		route = append(route, stack[last])
+		stack = stack[:last]
+	}
+
+	last := len(route) - 1
+	for i := 0; i < len(route)/2; i++ {
+		route[i], route[last-i] = route[last-i], route[i]
+	}
+
+	return route
+}

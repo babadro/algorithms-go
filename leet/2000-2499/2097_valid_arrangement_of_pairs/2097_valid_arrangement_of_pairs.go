@@ -3,7 +3,7 @@ package _2097_valid_arrangement_of_pairs
 // todo 1
 // https://www.geeksforgeeks.org/hierholzers-algorithm-directed-graph/
 // https://www.thecrazyprogrammer.com/2021/04/hierholzers-algorithm.html
-func validArrangement(pairs [][]int) [][]int {
+func validArrangement2(pairs [][]int) [][]int {
 	adj := make(map[int][]int)
 
 	for _, pair := range pairs {
