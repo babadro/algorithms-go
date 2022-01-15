@@ -13,7 +13,7 @@ func Test_earliestFullBloom(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run("", func(t *testing.T) {
-			if got := earliestFullBloom(tt.plantTime, tt.growTime); got != tt.want {
+			if got := earliestFullBloom2(tt.plantTime, tt.growTime); got != tt.want {
 				t.Errorf("earliestFullBloom() = %v, want %v", got, tt.want)
 			}
 		})
