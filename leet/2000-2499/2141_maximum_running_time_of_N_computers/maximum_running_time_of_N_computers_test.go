@@ -8,8 +8,10 @@ func Test_maxRunTime(t *testing.T) {
 		batteries []int
 		want      int64
 	}{
-		{2, []int{3, 3, 3}, 4},
-		{2, []int{1, 1, 1, 1}, 2},
+		//{2, []int{3, 3, 3}, 4},
+		//{2, []int{1, 1, 1, 1}, 2},
+		//{3, []int{10, 10, 3, 5}, 8},
+		{6, []int{1, 1, 4, 9, 9, 9}, 1},
 	}
 	for _, tt := range tests {
 		t.Run("", func(t *testing.T) {
