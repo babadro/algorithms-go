@@ -1,41 +1,33 @@
 package _2151_max_good_people_based_on_statements
 
 // https://leetcode.com/problems/maximum-good-people-based-on-statements/discuss/1711775/Go-bitmask
+// tptl passed #hard
 func maximumGood(statements [][]int) int {
 	n := len(statements)
 	res := 0
-	for i := 0; i < (1 << n); i++ {
+Loop:
+	for combination := 0; combination < (1 << n); combination++ {
 		cnt := 0
-		good := make([]bool, n)
-		for j := 0; j < n; j++ {
-			if (i & (1 << j)) != 0 {
-				cnt++
-				good[j] = true
-			}
-		}
 
-		check := true
 		for j := 0; j < n; j++ {
-			if good[j] {
+			if isGood(combination, j) {
+				cnt++
+
 				for k := 0; k < n; k++ {
 					if statements[j][k] == 0 {
-						if good[k] {
-							check = false
+						if isGood(combination, k) {
+							continue Loop
 						}
-					}
-
-					if statements[j][k] == 1 {
-						if !good[k] {
-							check = false
+					} else if statements[j][k] == 1 {
+						if !isGood(combination, k) {
+							continue Loop
 						}
 					}
 				}
 			}
 		}
 
-		if check {
-			res = max(res, cnt)
-		}
+		res = max(res, cnt)
 	}
 
 	return res
@@ -47,4 +39,8 @@ func max(a, b int) int {
 	}
 
 	return b
+}
+
+func isGood(num, bit int) bool {
+	return num&(1<<bit) != 0
 }
