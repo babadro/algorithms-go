@@ -1,6 +1,6 @@
 package _2147_numbers_of_ways_to_divide_long_corridor
 
-// todo 1. tptl passed. medium
+// tptl passed. medium
 func numberOfWays(corridor string) int {
 	seats, plants, res := 0, 0, 1
 	for _, ch := range corridor {
