@@ -1,6 +1,6 @@
 package _2157_groups_of_strings
 
-// todo 1 tle, but probably correct
+// tle, but correct
 func groupStrings(words []string) []int {
 	nums := wordsToNums(words)
 
