@@ -5,7 +5,7 @@ import (
 	"math"
 )
 
-// todo 1 doesn't work
+// passed. tptl. hard
 func minimumDifference(nums []int) int64 {
 	n := len(nums) / 3
 
@@ -24,12 +24,11 @@ func minimumDifference(nums []int) int64 {
 	heap.Init(&minH)
 
 	diff := make([]int, n+1)
-	temp := 1
 	for i := range diff {
 		diff[i] += leftSum
 		diff[len(diff)-i-1] -= rightSum
 
-		l, r := n+i, len(nums)-n
+		l, r := n+i, len(nums)-n-i-1
 		heap.Push(&maxH, nums[l])
 		heap.Push(&minH, nums[r])
 
@@ -38,11 +37,7 @@ func minimumDifference(nums []int) int64 {
 
 		rightSum += nums[r]
 		rightSum -= heap.Pop(&minH).(int)
-
-		temp++
 	}
-
-	_ = temp
 
 	res := math.MaxInt64
 	for _, d := range diff {
