@@ -36,6 +36,7 @@ func dp(pos, room, numSlots int, nums []int, memo map[int]int) int {
 
 // https://leetcode.com/problems/maximum-and-sum-of-array/discuss/1766824/JavaC%2B%2BPython-DP-Solution
 // passed. hard
+// todo 2 - need to understand
 func maximumANDSum2(nums []int, numSlots int) int {
 	mask := int(math.Pow(3, float64(numSlots))) - 1
 	memo := make([]int, mask+1)
