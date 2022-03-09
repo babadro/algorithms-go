@@ -6,7 +6,7 @@ import (
 )
 
 // https://leetcode.com/problems/maximum-and-sum-of-array/discuss/1769139/Python.-Simple-dp-solution-without-bitmask-with-explanation
-// passed. Not fast, but clear and simple
+// tptl passed. Not fast, but clear and simple
 func maximumANDSum(nums []int, numSlots int) int {
 	room, _ := strconv.Atoi("222222222"[:numSlots])
 	memo := make(map[int]int)

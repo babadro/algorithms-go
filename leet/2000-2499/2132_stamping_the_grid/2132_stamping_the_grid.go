@@ -1,10 +1,7 @@
 package _2132_stamping_the_grid
 
-// todo 1 - doesn't work. Fix last test case
-// #hard
+// doesn't work.
 func possibleToStamp(grid [][]int, stampHeight int, stampWidth int) bool {
-	m := make(map[[2]int][2]bool)
-
 	for y := range grid {
 		for x := 0; x < len(grid[y]); x++ {
 			start := x
@@ -21,10 +18,7 @@ func possibleToStamp(grid [][]int, stampHeight int, stampWidth int) bool {
 
 			if finish-start >= stampWidth {
 				for k := start; k < finish; k++ {
-					key := [2]int{k, y}
-					v := m[key]
-					v[0] = true
-					m[key] = v
+					grid[y][k]--
 				}
 			}
 
@@ -48,10 +42,7 @@ func possibleToStamp(grid [][]int, stampHeight int, stampWidth int) bool {
 
 			if finish-start >= stampHeight {
 				for k := start; k < finish; k++ {
-					key := [2]int{x, k}
-					v := m[key]
-					v[1] = true
-					m[key] = v
+					grid[k][x]--
 				}
 			}
 
@@ -59,9 +50,17 @@ func possibleToStamp(grid [][]int, stampHeight int, stampWidth int) bool {
 		}
 	}
 
-	for _, v := range m {
-		if !v[0] || !v[1] {
-			return false
+	for y := range grid {
+		for x := range grid[y] {
+			cell := grid[y][x]
+
+			if cell == 1 {
+				continue
+			}
+
+			if cell != -2 {
+				return false
+			}
 		}
 	}
 

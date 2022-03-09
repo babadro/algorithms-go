@@ -1,6 +1,6 @@
 package _2176_count_equal_and_divisible_pairs_in_an_array
 
-// tptl passed
+// tptl passed. hard
 // https://leetcode.com/problems/count-equal-and-divisible-pairs-in-an-array/discuss/1784521/O(n-sqrt-n)
 func countPairs(nums []int, k int) int {
 	res := 0

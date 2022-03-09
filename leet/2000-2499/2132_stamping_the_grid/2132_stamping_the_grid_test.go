@@ -26,10 +26,23 @@ func Test_possibleToStamp(t *testing.T) {
 				{1, 1, 1, 0}, {0, 0, 0, 1}, {1, 1, 1, 0}, {1, 1, 0, 0}, {0, 0, 0, 0}, {0, 1, 0, 1}, {0, 1, 0, 1}, {1, 1, 1, 0}, {1, 0, 1, 1}, {0, 0, 0, 1},
 			}, 13, 16, false,
 		},
+		{
+			[][]int{
+				{1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1},
+			}, 9, 4, true,
+		},
+		{
+			[][]int{{0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 1, 0, 0}, {0, 0, 0, 0, 1}, {0, 0, 0, 1, 1}},
+			2, 2, false,
+		},
+		{
+			[][]int{{1, 0, 0, 1, 1}, {1, 0, 0, 0, 1}, {1, 1, 1, 0, 1}},
+			2, 1, true,
+		},
 	}
 	for _, tt := range tests {
 		t.Run("", func(t *testing.T) {
-			if got := possibleToStamp(tt.grid, tt.stampHeight, tt.stampWidth); got != tt.want {
+			if got := possibleToStamp2(tt.grid, tt.stampHeight, tt.stampWidth); got != tt.want {
 				t.Errorf("possibleToStamp() = %v, want %v", got, tt.want)
 			}
 		})
