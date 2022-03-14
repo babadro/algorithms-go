@@ -6,41 +6,41 @@ import (
 )
 
 // https://leetcode.com/problems/minimum-weighted-subgraph-with-the-required-paths/discuss/1844095/Three-Dijkstras
-// todo 1 doesn't work - need to recheck. #hard
+// dyx. todo 2 understand. #hard
 func minimumWeight(n int, edges [][]int, src1 int, src2 int, dest int) int64 {
 	maxVal, res := 10000000000, math.MaxInt64
-	al, ral := make([][][2]int, n), make([][][2]int, n)
-	dd, s1d, s2d := makeSlice(n, maxVal), makeSlice(n, maxVal), makeSlice(n, maxVal)
-	dd[dest], s1d[src1], s2d[src2] = 0, 0, 0
+	graph, reversedGraph := make([][][2]int, n), make([][][2]int, n)
+	commonDist, src1Dist, src2Dist := makeSlice(n, maxVal), makeSlice(n, maxVal), makeSlice(n, maxVal)
+	commonDist[dest], src1Dist[src1], src2Dist[src2] = 0, 0, 0
 
 	for _, e := range edges {
 		from, to, weight := e[0], e[1], e[2]
 
-		al[from] = append(al[from], [2]int{to, weight})
-		ral[to] = append(ral[to], [2]int{from, weight})
+		graph[from] = append(graph[from], [2]int{to, weight})
+		reversedGraph[to] = append(reversedGraph[to], [2]int{from, weight})
 	}
 
-	bfs(dest, ral, dd)
-	bfs(src1, al, s1d)
-	bfs(src2, al, s2d)
+	bfs(dest, reversedGraph, commonDist)
+	bfs(src1, graph, src1Dist)
+	bfs(src2, graph, src2Dist)
 
-	if dd[src1] == maxVal || dd[src2] == maxVal {
+	if commonDist[src1] == maxVal || commonDist[src2] == maxVal {
 		return -1
 	}
 
 	for i := 0; i < n; i++ {
-		res = min(res, dd[i]+s1d[i]+s2d[i])
+		res = min(res, commonDist[i]+src1Dist[i]+src2Dist[i])
 	}
 
 	return int64(res)
 }
 
 func bfs(st int, al [][][2]int, visited []int) {
-	pq := minHeap{}
-	heap.Push(&pq, [2]int{st, 0})
+	priorityQ := minHeap{}
+	heap.Push(&priorityQ, [2]int{0, st})
 
-	for len(pq) != 0 {
-		top := heap.Pop(&pq).([2]int)
+	for len(priorityQ) != 0 {
+		top := heap.Pop(&priorityQ).([2]int)
 		dist, i := top[0], top[1]
 
 		if visited[i] != dist {
@@ -51,7 +51,7 @@ func bfs(st int, al [][][2]int, visited []int) {
 			j, w := edge[0], edge[1]
 			if visited[j] > dist+w {
 				visited[j] = dist + w
-				heap.Push(&pq, [2]int{visited[j], j})
+				heap.Push(&priorityQ, [2]int{visited[j], j})
 			}
 		}
 

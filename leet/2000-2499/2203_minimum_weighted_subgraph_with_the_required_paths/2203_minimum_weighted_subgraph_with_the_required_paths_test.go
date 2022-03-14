@@ -15,6 +15,7 @@ func Test_minimumWeight(t *testing.T) {
 	}{
 		{n: 6, edges: [][]int{{0, 2, 2}, {0, 5, 6}, {1, 0, 3}, {1, 4, 5}, {2, 1, 1}, {2, 3, 3}, {2, 3, 4}, {3, 4, 2}, {4, 5, 1}},
 			src1: 0, src2: 1, dest: 5, want: 9},
+		{n: 3, edges: [][]int{{0, 1, 1}, {2, 1, 1}}, src1: 0, src2: 1, dest: 2, want: -1},
 	}
 	for _, tt := range tests {
 		t.Run("", func(t *testing.T) {
