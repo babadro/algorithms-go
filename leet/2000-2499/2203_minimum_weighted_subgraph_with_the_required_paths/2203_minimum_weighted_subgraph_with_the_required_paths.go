@@ -6,7 +6,7 @@ import (
 )
 
 // https://leetcode.com/problems/minimum-weighted-subgraph-with-the-required-paths/discuss/1844095/Three-Dijkstras
-// dyx. todo 2 understand. #hard
+// dyx passed. todo 2 understand. #hard #graph #dijkstra
 // there is a more simple version without priority queue: https://leetcode.com/problems/minimum-weighted-subgraph-with-the-required-paths/discuss/1846504/Go-GoLang-or-Time%3A-O(n-log-n-*-3)-355-ms-100-or-Space%3A-O(n-*-5)-31.1-MB-100
 func minimumWeight(n int, edges [][]int, src1 int, src2 int, dest int) int64 {
 	maxVal, res := 10000000000, math.MaxInt64
