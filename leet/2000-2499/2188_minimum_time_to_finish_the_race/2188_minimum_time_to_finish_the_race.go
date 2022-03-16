@@ -2,12 +2,11 @@ package _2188_minimum_time_to_finish_the_race
 
 import "math"
 
-var dp, best [1001]int
-
-var maxLaps = 0
-
-// todo 1 finish it
+// https://leetcode.com/problems/minimum-time-to-finish-the-race/discuss/1802498/Pretreatment-%2B-DP
+// passed #hard tptl #dp
 func minimumFinishTime(tires [][]int, changeTime int, numLaps int) int {
+	dp, best, maxLaps := make([]int, 1001), make([]int, 1001), 0
+
 	for _, t := range tires {
 		lapTime, time := t[0], t[0]
 		for lap := 1; lap <= numLaps && lapTime < t[0]+changeTime; lap++ {
@@ -21,18 +20,18 @@ func minimumFinishTime(tires [][]int, changeTime int, numLaps int) int {
 		}
 	}
 
-	return dfs(numLaps, changeTime)
+	return dfs(numLaps, changeTime, maxLaps, dp, best)
 }
 
-func dfs(laps, changeTime int) int {
+func dfs(laps, changeTime, maxLaps int, dp, best []int) int {
 	if laps == 0 {
 		return -changeTime
 	}
 
-	if dp[laps] != 0 {
+	if dp[laps] == 0 {
 		dp[laps] = math.MaxInt64
-		for i := 1; i < min(laps, maxLaps); i++ {
-			dp[laps] = min(dp[laps], best[i]+changeTime+dfs(laps-i, changeTime))
+		for i := 1; i <= min(laps, maxLaps); i++ {
+			dp[laps] = min(dp[laps], best[i]+changeTime+dfs(laps-i, changeTime, maxLaps, dp, best))
 		}
 	}
 
