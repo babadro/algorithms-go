@@ -107,7 +107,7 @@ func coinChangeBottomUp(coins []int, amount int) int {
 	return -1
 }
 
-// todo 1 doesn't work. Just for demonstration
+// Just for demonstration
 func coinChangeTopDown3(coins []int, amount int) int {
 	dp := make([][]int, len(coins))
 	for i := range dp {

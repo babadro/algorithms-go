@@ -3,7 +3,7 @@ package _2188_minimum_time_to_finish_the_race
 import "math"
 
 // https://leetcode.com/problems/minimum-time-to-finish-the-race/discuss/1802498/Pretreatment-%2B-DP
-// passed #hard tptl #dp
+// passed #hard tptl #dp #ntu
 func minimumFinishTime(tires [][]int, changeTime int, numLaps int) int {
 	dp, best, maxLaps := make([]int, 1001), make([]int, 1001), 0
 
