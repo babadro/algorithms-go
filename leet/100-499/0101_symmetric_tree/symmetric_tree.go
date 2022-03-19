@@ -1,4 +1,4 @@
-package _101_symmetric_tree
+package _101_symmetric_tree // test
 
 import (
 	"github.com/babadro/algorithms-go/base/binaryTree"
