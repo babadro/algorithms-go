@@ -1,11 +1,12 @@
 package _2092_find_all_people_with_secret
 
 import (
-	"github.com/babadro/algorithms-go/base/unionFind"
 	"sort"
+
+	"github.com/babadro/algorithms-go/base/unionFind"
 )
 
-// tptl passed. best solution.
+// tptl passed. best solution. #hard
 // https://leetcode.com/problems/find-all-people-with-secret/discuss/1601768/Union-Find-with-Disconnects
 func findAllPeople(n int, meetings [][]int, firstPerson int) []int {
 	union := make([]int, n)
