@@ -1,25 +1,85 @@
 package _2213_longest_subsring_of_one_repeating_character
 
-// https://leetcode.com/problems/longest-substring-of-one-repeating-character/discuss/1877448/Merge-intervals-using-map
+// todo 1 https://leetcode.com/problems/longest-substring-of-one-repeating-character/discuss/1879490/Segment-Tree
+// doesn't work. fix it
 func longestRepeating(s string, queryCharacters string, queryIndices []int) []int {
-	m, sizes := make(map[int]int), make(map[int]int)
-	res := make([]int, 0, len(queryIndices))
-}
+	var res []int
+	powOf2, sz := 1, len(s)
 
-type maxHeap []int
+	for powOf2 < sz {
+		powOf2 <<= 1
+	}
 
-func (m maxHeap) Len() int           { return len(m) }
-func (m maxHeap) Less(i, j int) bool { return m[i] > m[j] }
-func (m maxHeap) Swap(i, j int) {
-	m[i], m[j] = m[j], m[i]
-}
-func (m *maxHeap) Push(x interface{}) {
-	*m = append(*m, x.(int))
-}
-func (m *maxHeap) Pop() interface{} {
-	last := len(*m) - 1
-	res := (*m)[last]
-	*m = (*m)[:last]
+	st := make([]node, powOf2*2)
+	for i := range st {
+		st[i].sz = 1 // initial value
+	}
+
+	for i := 0; i < len(s); i++ {
+		stSet(st, i, s[i], 0, 0, powOf2-1)
+	}
+
+	for j := 0; j < len(queryCharacters); j++ {
+		res = append(res, stSet(st, queryIndices[j], queryCharacters[j], 0, 0, powOf2-1))
+	}
 
 	return res
 }
+
+type node struct {
+	lc, rc                 byte
+	pref, suf, longest, sz int
+}
+
+func (n *node) merge(l, r node) {
+	n.longest = max(l.longest, r.longest)
+	if l.rc == r.lc {
+		n.longest = max(n.longest, l.suf+r.pref)
+	}
+
+	n.sz = l.sz + r.sz
+	n.lc, n.rc = l.lc, r.rc
+
+	if l.pref == l.sz && l.lc == r.lc {
+		n.pref = l.pref + r.pref
+	} else {
+		n.pref = l.pref
+	}
+
+	if r.suf == r.sz && r.rc == l.lc {
+		n.suf = r.suf + l.suf
+	} else {
+		n.suf = r.suf
+	}
+}
+
+func stSet(st []node, pos int, ch byte, i, l, r int) int {
+	if l <= pos && pos <= r {
+		if l != r {
+			m := l + (r-l)/2
+			li := 2*i + 1
+			ri := 2*i + 2
+
+			stSet(st, pos, ch, li, l, m)
+			stSet(st, pos, ch, ri, m+1, r)
+			st[i].merge(st[li], st[ri])
+		} else {
+			st[i].lc, st[i].rc = ch, ch
+			st[i].suf, st[i].pref, st[i].longest = 1, 1, 1
+		}
+	}
+
+	return st[i].longest
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+
+	return b
+}
+
+// todo 2 implement it:
+// https://leetcode.com/problems/longest-substring-of-one-repeating-character/discuss/1877448/Merge-intervals-using-map
+// notes: use bst and map for replace c++ map. Use map and maxHeap for replace c++ multiset. Implement bst with generics.

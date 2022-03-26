@@ -1,5 +1,6 @@
 package bst
 
+// todo base implement with generics
 type Node struct {
 	Key                 int
 	Left, Right, Parent *Node
