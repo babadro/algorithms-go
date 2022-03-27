@@ -1,85 +1,58 @@
 package _2213_longest_subsring_of_one_repeating_character
 
-// todo 1 https://leetcode.com/problems/longest-substring-of-one-repeating-character/discuss/1879490/Segment-Tree
-// doesn't work. fix it
+// https://leetcode.com/problems/longest-substring-of-one-repeating-character/discuss/1866110/Java-clean-Segment-tree-solution
+// todo 1
 func longestRepeating(s string, queryCharacters string, queryIndices []int) []int {
-	var res []int
-	powOf2, sz := 1, len(s)
 
-	for powOf2 < sz {
-		powOf2 <<= 1
-	}
-
-	st := make([]node, powOf2*2)
-	for i := range st {
-		st[i].sz = 1 // initial value
-	}
-
-	for i := 0; i < len(s); i++ {
-		stSet(st, i, s[i], 0, 0, powOf2-1)
-	}
-
-	for j := 0; j < len(queryCharacters); j++ {
-		res = append(res, stSet(st, queryIndices[j], queryCharacters[j], 0, 0, powOf2-1))
-	}
-
-	return res
 }
 
 type node struct {
-	lc, rc                 byte
-	pref, suf, longest, sz int
+	max             int
+	prefSt, prefEnd int
+	suffSt, suffEnd int
 }
 
-func (n *node) merge(l, r node) {
-	n.longest = max(l.longest, r.longest)
-	if l.rc == r.lc {
-		n.longest = max(n.longest, l.suf+r.pref)
-	}
-
-	n.sz = l.sz + r.sz
-	n.lc, n.rc = l.lc, r.rc
-
-	if l.pref == l.sz && l.lc == r.lc {
-		n.pref = l.pref + r.pref
-	} else {
-		n.pref = l.pref
-	}
-
-	if r.suf == r.sz && r.rc == l.lc {
-		n.suf = r.suf + l.suf
-	} else {
-		n.suf = r.suf
+func newNode(m, prefSt, prefEnd, suffSt, suffEnd int) node {
+	return node{
+		max:     m,
+		prefSt:  prefSt,
+		prefEnd: prefEnd,
+		suffSt:  suffSt,
+		suffEnd: suffEnd,
 	}
 }
 
-func stSet(st []node, pos int, ch byte, i, l, r int) int {
-	if l <= pos && pos <= r {
-		if l != r {
-			m := l + (r-l)/2
-			li := 2*i + 1
-			ri := 2*i + 2
+type segmentTree struct {
+	tree []node
+	s    []byte
+}
 
-			stSet(st, pos, ch, li, l, m)
-			stSet(st, pos, ch, ri, m+1, r)
-			st[i].merge(st[li], st[ri])
-		} else {
-			st[i].lc, st[i].rc = ch, ch
-			st[i].suf, st[i].pref, st[i].longest = 1, 1, 1
+func (st *segmentTree) merge(left, right node, tl, tm, tr int) node {
+	maximum := max(left.max, right.max)
+	prefSt, prefEnd := left.prefSt, left.prefEnd
+	suffSt, suffEnd := right.suffSt, right.suffEnd
+
+	if st.s[tm] == st.s[tm+1] {
+		maximum = max(maximum, right.prefEnd-left.suffSt+1)
+		if left.prefEnd-left.prefSt+1 == tm-tl+1 {
+			prefEnd = right.prefEnd
+		}
+		if right.suffEnd-right.suffEnd+1 == tr-tm {
+			suffSt = left.suffSt
 		}
 	}
 
-	return st[i].longest
+	return newNode(maximum, prefSt, prefEnd, suffSt, suffEnd)
 }
 
-func max(a, b int) int {
-	if a > b {
-		return a
+func (st *segmentTree) build(pos, tl, tr int) {
+	if tl == tr {
+		st.tree[pos] = newNode(1, tl, tl, tr, tr)
+	} else {
+		tm := tl + (tr-tl)/2
+		st.build(2*pos+1, tl, tm)
+		st.build(2*pos+2, tm+1, tr)
+
+		st.tree[pos] = st.merge(st.tree[2*pos+1], st.tree[2*pos+2], tl, tm, tr)
 	}
-
-	return b
 }
-
-// todo 2 implement it:
-// https://leetcode.com/problems/longest-substring-of-one-repeating-character/discuss/1877448/Merge-intervals-using-map
-// notes: use bst and map for replace c++ map. Use map and maxHeap for replace c++ multiset. Implement bst with generics.

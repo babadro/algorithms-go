@@ -16,8 +16,8 @@ func Test_longestRepeating(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.s, func(t *testing.T) {
-			if got := longestRepeating(tt.s, tt.queryCharacters, tt.queryIndices); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("longestRepeating() = %v, want %v", got, tt.want)
+			if got := longestRepeating2(tt.s, tt.queryCharacters, tt.queryIndices); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("longestRepeating2() = %v, want %v", got, tt.want)
 			}
 		})
 	}
