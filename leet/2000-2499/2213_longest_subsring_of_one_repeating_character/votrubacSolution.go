@@ -1,7 +1,6 @@
 package _2213_longest_subsring_of_one_repeating_character
 
-// todo 1 https://leetcode.com/problems/longest-substring-of-one-repeating-character/discuss/1879490/Segment-Tree
-// doesn't work
+// passed https://leetcode.com/problems/longest-substring-of-one-repeating-character/discuss/1879490/Segment-Tree
 func longestRepeating2(s string, queryCharacters string, queryIndices []int) []int {
 	var res []int
 	powOf2, sz := 1, len(s)
