@@ -1,7 +1,8 @@
+// dyx. hard+
 package _2213_longest_subsring_of_one_repeating_character
 
 // https://leetcode.com/problems/longest-substring-of-one-repeating-character/discuss/1866110/Java-clean-Segment-tree-solution
-// passed. dyx. hard+
+// passed.
 func longestRepeating(s string, queryCharacters string, queryIndices []int) []int {
 	k := len(queryIndices)
 	tree := newSegmentTree(s)
