@@ -18,7 +18,7 @@ func recBruteForce(idx int, wealth []int) int {
 }
 
 func findMaxStealTopDown(wealth []int) int {
-	return recTopDown(0, make([]int, len(wealth)+1), wealth)
+	return recTopDown(0, make([]int, len(wealth)), wealth)
 }
 
 func recTopDown(idx int, dp, wealth []int) int {
