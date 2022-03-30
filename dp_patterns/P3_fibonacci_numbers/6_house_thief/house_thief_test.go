@@ -18,7 +18,7 @@ func Test_findMaxSteal(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.wealth), func(t *testing.T) {
-			if got := findMaxStealTopDown(tt.wealth); got != tt.want {
+			if got := findMaxStealBottomUpOptimized(tt.wealth); got != tt.want {
 				t.Errorf("findMaxSteal() = %v, want %v", got, tt.want)
 			}
 		})

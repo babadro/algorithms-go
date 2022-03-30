@@ -35,3 +35,33 @@ func recTopDown(idx int, dp, wealth []int) int {
 
 	return dp[idx]
 }
+
+func findMaxStealBottomUp(wealth []int) int {
+	if len(wealth) == 0 {
+		return 0
+	}
+
+	dp := make([]int, len(wealth)+1) // +1 to handle the zero house
+	dp[0], dp[1] = 0, wealth[0]
+
+	// dp[] has one extra element to handle zero house
+	for i := 1; i < len(wealth); i++ {
+		dp[i+1] = utils.Max(wealth[i]+dp[i-1], dp[i])
+	}
+
+	return dp[len(wealth)]
+}
+
+func findMaxStealBottomUpOptimized(wealth []int) int {
+	if len(wealth) == 0 {
+		return 0
+	}
+
+	n1, n2 := 0, wealth[0]
+	for i := 1; i < len(wealth); i++ {
+		res := utils.Max(wealth[i]+n1, n2)
+		n2, n1 = res, n2
+	}
+
+	return n2
+}
