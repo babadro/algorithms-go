@@ -13,7 +13,7 @@ func Test_findLPSLenBruteForce(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.st, func(t *testing.T) {
-			if got := findLPSLenTopDown(tt.st); got != tt.want {
+			if got := findLPSLenBottomUp(tt.st); got != tt.want {
 				t.Errorf("findLPSLenBruteForce() = %v, want %v", got, tt.want)
 			}
 		})

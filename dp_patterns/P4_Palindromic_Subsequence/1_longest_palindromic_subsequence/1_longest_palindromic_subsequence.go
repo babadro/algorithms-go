@@ -59,3 +59,26 @@ func findLPSLenRecTopDown(dp [][]int, st string, startIDx, endIDx int) int {
 
 	return dp[startIDx][endIDx]
 }
+
+func findLPSLenBottomUp(st string) int {
+	dp := make([][]int, len(st))
+	for i := range dp {
+		dp[i] = make([]int, len(st))
+	}
+
+	for i := 0; i < len(st); i++ {
+		dp[i][i] = 1
+	}
+
+	for startIDx := len(st) - 1; startIDx >= 0; startIDx-- {
+		for endIDx := startIDx + 1; endIDx < len(st); endIDx++ {
+			if st[startIDx] == st[endIDx] {
+				dp[startIDx][endIDx] = 2 + dp[startIDx+1][endIDx-1]
+			} else {
+				dp[startIDx][endIDx] = utils.Max(dp[startIDx+1][endIDx], dp[startIDx][endIDx-1])
+			}
+		}
+	}
+
+	return dp[0][len(st)-1]
+}
