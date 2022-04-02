@@ -60,7 +60,7 @@ func findLPSLenRecTopDown(dp [][]int, st string, startIDx, endIDx int) int {
 	return dp[startIDx][endIDx]
 }
 
-func findLPSLenBottomUp(st string) int {
+func FindLPSLenBottomUp(st string) int {
 	dp := make([][]int, len(st))
 	for i := range dp {
 		dp[i] = make([]int, len(st))
