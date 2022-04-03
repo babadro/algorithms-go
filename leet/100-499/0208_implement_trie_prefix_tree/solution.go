@@ -1,5 +1,6 @@
 package _208_implement_trie_prefix_tree
 
+// faster solution?
 type Trie2 struct {
 	children [26]*Trie2
 	isWord   bool

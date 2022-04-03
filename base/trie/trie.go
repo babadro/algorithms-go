@@ -1,12 +1,26 @@
-package _208_implement_trie_prefix_tree
+// prefix tree
+// https://leetcode.com/problems/implement-trie-prefix-tree/
+package trie
 
-// passed #medium
 type Trie struct {
-	root TrieNode
+	root Node
+}
+
+type Node struct {
+	isEnd bool
+	links []Node
+}
+
+func (tn Node) isNull() bool {
+	return tn.links == nil
+}
+
+func NewNode() Node {
+	return Node{links: make([]Node, 26)}
 }
 
 func Constructor() Trie {
-	return Trie{root: TrieNode{links: make([]TrieNode, 26)}}
+	return Trie{root: Node{links: make([]Node, 26)}}
 }
 
 func (t *Trie) Insert(word string) {
@@ -15,6 +29,7 @@ func (t *Trie) Insert(word string) {
 		if node.links[v-'a'].isNull() {
 			node.links[v-'a'] = NewNode()
 		}
+
 		if i < len(word)-1 {
 			node = node.links[v-'a']
 		} else {
@@ -31,6 +46,7 @@ func (t *Trie) Search(word string) bool {
 		}
 		node = node.links[v-'a']
 	}
+
 	return node.isEnd
 }
 
@@ -42,18 +58,6 @@ func (t *Trie) StartsWith(prefix string) bool {
 		}
 		node = node.links[v-'a']
 	}
+
 	return true
-}
-
-type TrieNode struct {
-	isEnd bool
-	links []TrieNode
-}
-
-func (tn TrieNode) isNull() bool {
-	return tn.links == nil
-}
-
-func NewNode() TrieNode {
-	return TrieNode{links: make([]TrieNode, 26)}
 }
