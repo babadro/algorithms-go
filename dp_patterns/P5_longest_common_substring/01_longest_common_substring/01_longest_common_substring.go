@@ -1,3 +1,4 @@
+// https://leetcode.com/problems/maximum-length-of-repeated-subarray/
 package _1_longest_common_substring
 
 import "github.com/babadro/algorithms-go/utils"
@@ -53,4 +54,23 @@ func recTopDown(dp [][][]int, s1, s2 string, i1, i2, count int) int {
 	}
 
 	return dp[i1][i2][count]
+}
+
+func findLCSLenBottomUp(s1, s2 string) int {
+	dp := make([][]int, len(s1)+1)
+	for i := range dp {
+		dp[i] = make([]int, len(s2)+1)
+	}
+
+	maxLen := 0
+	for i := 1; i <= len(s1); i++ {
+		for j := 1; j <= len(s2); j++ {
+			if s1[i-1] == s2[j-1] {
+				dp[i][j] = 1 + dp[i-1][j-1]
+				maxLen = utils.Max(maxLen, dp[i][j])
+			}
+		}
+	}
+
+	return maxLen
 }
