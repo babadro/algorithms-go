@@ -16,7 +16,7 @@ func Test_findLCSLen(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%s, %s", tt.s1, tt.s2), func(t *testing.T) {
-			if got := findLCSLenBottomUp(tt.s1, tt.s2); got != tt.want {
+			if got := FindLCSLenBottomUp(tt.s1, tt.s2); got != tt.want {
 				t.Errorf("findLCSLen() = %v, want %v", got, tt.want)
 			}
 		})

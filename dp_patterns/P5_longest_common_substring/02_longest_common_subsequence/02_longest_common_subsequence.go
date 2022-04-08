@@ -52,7 +52,7 @@ func recTopDown(dp [][]int, s1, s2 string, i1, i2 int) int {
 	return dp[i1][i2]
 }
 
-func findLCSLenBottomUp(s1, s2 string) int {
+func FindLCSLenBottomUp(s1, s2 string) int {
 	dp := make([][]int, len(s1)+1)
 	for i := range dp {
 		dp[i] = make([]int, len(s2)+1)
