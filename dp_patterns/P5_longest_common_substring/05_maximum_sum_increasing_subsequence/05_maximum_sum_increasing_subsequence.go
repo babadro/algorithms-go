@@ -1,8 +1,8 @@
-package _4_longest_increasing_subsequence
+package _5_maximum_sum_increasing_subsequence
 
 import "github.com/babadro/algorithms-go/utils"
 
-func findLISLenBruteForce(nums []int) int {
+func findMSISBruteForce(nums []int) int {
 	return recBruteForce(nums, 0, -1)
 }
 
@@ -13,7 +13,7 @@ func recBruteForce(nums []int, curr, prev int) int {
 
 	c1 := 0
 	if prev == -1 || nums[curr] > nums[prev] {
-		c1 = 1 + recBruteForce(nums, curr+1, curr)
+		c1 = nums[curr] + recBruteForce(nums, curr+1, curr)
 	}
 
 	c2 := recBruteForce(nums, curr+1, prev)
@@ -21,7 +21,7 @@ func recBruteForce(nums []int, curr, prev int) int {
 	return utils.Max(c1, c2)
 }
 
-func findLISTLenTopDown(nums []int) int {
+func findMSISTopDown(nums []int) int {
 	dp := make([][]int, len(nums))
 	for i := range dp {
 		dp[i] = make([]int, len(nums)+1)
@@ -41,7 +41,7 @@ func recTopDown(dp [][]int, nums []int, curr, prev int) int {
 	if dp[curr][prev+1] == -1 {
 		c1 := 0
 		if prev == -1 || nums[curr] > nums[prev] {
-			c1 = 1 + recBruteForce(nums, curr+1, curr)
+			c1 = nums[curr] + recBruteForce(nums, curr+1, curr)
 		}
 
 		c2 := recBruteForce(nums, curr+1, prev)
@@ -52,21 +52,21 @@ func recTopDown(dp [][]int, nums []int, curr, prev int) int {
 	return dp[curr][prev+1]
 }
 
-func findLISLenBottomUp(nums []int) int {
+func findMSISBottomUp(nums []int) int {
 	dp := make([]int, len(nums))
 	for i := range dp {
-		dp[i] = 1
+		dp[i] = nums[i]
 	}
 
-	maxLen := 1
+	maxSum := nums[0]
 	for i := 1; i < len(nums); i++ {
 		for j := 0; j < i; j++ {
-			if nums[i] > nums[j] && dp[i] <= dp[j]+1 {
-				dp[i] = dp[j] + 1
-				maxLen = utils.Max(maxLen, dp[i])
+			if nums[i] > nums[j] && dp[i] < dp[j]+nums[i] {
+				dp[i] = dp[j] + nums[i]
+				maxSum = utils.Max(maxSum, dp[i])
 			}
 		}
 	}
 
-	return dp[len(nums)-1]
+	return maxSum
 }
