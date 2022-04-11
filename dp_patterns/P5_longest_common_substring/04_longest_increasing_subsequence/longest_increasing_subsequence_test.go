@@ -15,7 +15,7 @@ func Test_findLISLengthBruteForce(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.nums), func(t *testing.T) {
-			if got := findLISLenBottomUp(tt.nums); got != tt.want {
+			if got := FindLISLenBottomUp(tt.nums); got != tt.want {
 				t.Errorf("findLISLen() = %v, want %v", got, tt.want)
 			}
 		})

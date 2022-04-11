@@ -52,7 +52,7 @@ func recTopDown(dp [][]int, nums []int, curr, prev int) int {
 	return dp[curr][prev+1]
 }
 
-func findLISLenBottomUp(nums []int) int {
+func FindLISLenBottomUp(nums []int) int {
 	dp := make([]int, len(nums))
 	for i := range dp {
 		dp[i] = 1
