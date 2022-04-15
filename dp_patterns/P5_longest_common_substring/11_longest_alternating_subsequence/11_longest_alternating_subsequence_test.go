@@ -17,7 +17,7 @@ func Test_findLASLen(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.nums), func(t *testing.T) {
-			if got := findLASLenTopDown3DArr(tt.nums); got != tt.want {
+			if got := findLASLenBottomUp(tt.nums); got != tt.want {
 				t.Errorf("findLASLen() = %v, want %v", got, tt.want)
 			}
 		})
@@ -76,6 +76,20 @@ func BenchmarkTopDown2DP(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		res = findLASLenTopDown2DP(input)
+	}
+	_ = res
+}
+
+func BenchmarkBottomUp(b *testing.B) {
+	var res int
+	input := make([]int, 40)
+	for i := range input {
+		input[i] = rand.Intn(10)
+	}
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		res = findLASLenBottomUp(input)
 	}
 	_ = res
 }

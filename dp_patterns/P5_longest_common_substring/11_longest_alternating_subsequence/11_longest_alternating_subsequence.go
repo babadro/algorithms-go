@@ -69,3 +69,22 @@ func recTopDown(dp map[[3]int]int, nums []int, prev, cur int, isAsc bool) int {
 
 	return dp[key]
 }
+
+func findLASLenBottomUp(nums []int) int {
+	dp := utils.Make2DArr(len(nums), 2, 0)
+	maxLen := 1
+	for i := 0; i < len(nums); i++ {
+		dp[i][0], dp[i][1] = 1, 1
+		for j := 0; j < i; j++ {
+			if nums[i] > nums[j] {
+				dp[i][0] = utils.Max(dp[i][0], 1+dp[j][1])
+				maxLen = utils.Max(maxLen, dp[i][0])
+			} else if nums[i] != nums[j] {
+				dp[i][1] = utils.Max(dp[i][1], 1+dp[j][0])
+				maxLen = utils.Max(maxLen, dp[i][1])
+			}
+		}
+	}
+
+	return maxLen
+}
