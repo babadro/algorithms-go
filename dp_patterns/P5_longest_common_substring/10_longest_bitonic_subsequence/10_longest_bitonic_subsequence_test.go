@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func Test_findLBSLenBruteForce(t *testing.T) {
+func Test_findLBSLen(t *testing.T) {
 	tests := []struct {
 		nums []int
 		want int
@@ -15,7 +15,7 @@ func Test_findLBSLenBruteForce(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.nums), func(t *testing.T) {
-			if got := findLBSLenTopDown(tt.nums); got != tt.want {
+			if got := findLBSLenBottomUp(tt.nums); got != tt.want {
 				t.Errorf("findLBSLen() = %v, want %v", got, tt.want)
 			}
 		})

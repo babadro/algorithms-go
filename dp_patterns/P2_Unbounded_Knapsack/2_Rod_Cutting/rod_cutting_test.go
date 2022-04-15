@@ -2,7 +2,7 @@ package __Rod_Cutting
 
 import "testing"
 
-func TestRodCuttingBruteForce(t *testing.T) {
+func TestRodCutting(t *testing.T) {
 	tests := []struct {
 		lengths []int
 		prices  []int

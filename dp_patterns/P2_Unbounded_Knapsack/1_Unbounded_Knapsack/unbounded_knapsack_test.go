@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func Test_knapsackBruteForce(t *testing.T) {
+func Test_knapsack(t *testing.T) {
 	tests := []struct {
 		profits  []int
 		weights  []int

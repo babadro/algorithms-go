@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func Test_findMSISBruteForce(t *testing.T) {
+func Test_findMSIS(t *testing.T) {
 	tests := []struct {
 		nums []int
 		want int

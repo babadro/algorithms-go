@@ -2,7 +2,7 @@ package __coin_change
 
 import "testing"
 
-func TestCoinChangeBruteForce(t *testing.T) {
+func TestCoinChange(t *testing.T) {
 	tests := []struct {
 		denominations []int
 		total         int

@@ -56,6 +56,38 @@ func Pow(x, y int) int {
 	return int(math.Pow(float64(x), float64(y)))
 }
 
+func Make2DArr(m, n int, defaultVal int) [][]int {
+	res := make([][]int, m)
+	for i := range res {
+		res[i] = make([]int, n)
+		if defaultVal != 0 {
+			for j := range res[i] {
+				res[i][j] = defaultVal
+			}
+		}
+	}
+
+	return res
+}
+
+func Make3DArr(d1, d2, d3 int, defaultVal int) [][][]int {
+	res := make([][][]int, d1)
+	for i := range res {
+		res[i] = make([][]int, d2)
+		for j := range res[i] {
+			res[i][j] = make([]int, d3)
+			if defaultVal != 0 {
+				for k := range res[i][j] {
+					res[i][j][k] = defaultVal
+				}
+			}
+		}
+
+	}
+
+	return res
+}
+
 // tptl
 func ModPow(base, exp, modulus int) int {
 	result := 1

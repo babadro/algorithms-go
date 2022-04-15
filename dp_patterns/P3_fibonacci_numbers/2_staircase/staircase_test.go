@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestStairsBruteForce(t *testing.T) {
+func TestStairs(t *testing.T) {
 	tests := []struct {
 		n    int
 		want int

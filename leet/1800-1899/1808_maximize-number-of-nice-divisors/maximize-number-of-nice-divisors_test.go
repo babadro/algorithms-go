@@ -31,7 +31,7 @@ func Test_maxNiceDivisors(t *testing.T) {
 	}
 }
 
-func Test_maxNiceDivisorsBruteForce(t *testing.T) {
+func Test_maxNiceDivisors(t *testing.T) {
 	for i := 1; i < 20; i++ {
 		t.Log(maxNiceDivisorsBruteForce(i))
 	}

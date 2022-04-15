@@ -2,7 +2,7 @@ package _2030_smallest_k_length_subsequence_with_occurrences_of_a_letter
 
 import "testing"
 
-func Test_smallestSubsequenceBruteForce(t *testing.T) {
+func Test_smallestSubsequence(t *testing.T) {
 	tests := []struct {
 		s          string
 		k          int

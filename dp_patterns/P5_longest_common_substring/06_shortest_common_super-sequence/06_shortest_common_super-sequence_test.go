@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func Test_findSCSLenBruteForce(t *testing.T) {
+func Test_findSCSLen(t *testing.T) {
 	tests := []struct {
 		s1   string
 		s2   string

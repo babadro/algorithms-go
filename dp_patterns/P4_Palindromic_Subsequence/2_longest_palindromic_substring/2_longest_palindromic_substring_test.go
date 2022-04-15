@@ -2,7 +2,7 @@ package __longest_palindromic_substring
 
 import "testing"
 
-func Test_findLPSLengthBruteForce(t *testing.T) {
+func Test_findLPSLength(t *testing.T) {
 	tests := []struct {
 		st   string
 		want int

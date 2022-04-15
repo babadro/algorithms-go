@@ -2,7 +2,7 @@ package _8_longest_repeating_subsequence
 
 import "testing"
 
-func Test_findLRSLenBruteForce(t *testing.T) {
+func Test_findLRSLen(t *testing.T) {
 	tests := []struct {
 		st   string
 		want int

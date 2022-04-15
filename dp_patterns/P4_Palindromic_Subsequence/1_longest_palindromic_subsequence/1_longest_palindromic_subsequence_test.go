@@ -2,7 +2,7 @@ package __longest_palindromic_subsequence
 
 import "testing"
 
-func Test_findLPSLenBruteForce(t *testing.T) {
+func Test_findLPSLen(t *testing.T) {
 	tests := []struct {
 		st   string
 		want int

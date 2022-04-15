@@ -43,7 +43,7 @@ func Test_rearrangeSticks(t *testing.T) {
 	}
 }
 
-func Test_bruteforce(t *testing.T) {
+func Test_(t *testing.T) {
 	n := 4
 	for i := 1; i <= n; i++ {
 		t.Logf("n=%d, k=%d: %d", n, i, rearrangeSticksBruteforce(n, i))

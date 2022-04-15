@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func Test_findSPMCountBruteForce(t *testing.T) {
+func Test_findSPMCount(t *testing.T) {
 	tests := []struct {
 		st   string
 		pat  string

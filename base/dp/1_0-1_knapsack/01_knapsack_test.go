@@ -14,7 +14,7 @@ func TestKnapsack(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run("", func(t *testing.T) {
-			if got := KnapsackBruteforce(tt.weights, tt.profits, tt.capacity); got != tt.want {
+			if got := Knapsack(tt.weights, tt.profits, tt.capacity); got != tt.want {
 				t.Errorf("KnapsackBruteforce() = %v, want %v", got, tt.want)
 			}
 			if got := KnapsackTopDown(tt.weights, tt.profits, tt.capacity); got != tt.want {

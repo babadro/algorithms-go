@@ -1,12 +1,13 @@
 package _1825_finding_mk_average
 
 import (
+	"testing"
+
 	"github.com/babadro/algorithms-go/leet/1800-1899/1825_finding-mk-average/tleInput"
 	"github.com/babadro/algorithms-go/leet/1800-1899/1825_finding-mk-average/tle_and_not_success_solutions"
-	"testing"
 )
 
-func TestConstructorBruteForce(t *testing.T) {
+func TestConstructor(t *testing.T) {
 	obj := tle_and_not_success_solutions.ConstructorBST(3, 1)
 	obj.AddElement(3)
 	obj.AddElement(1)

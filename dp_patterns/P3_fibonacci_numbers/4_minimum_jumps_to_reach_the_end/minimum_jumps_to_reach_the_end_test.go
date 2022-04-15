@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestCountMinJumpsBruteForce(t *testing.T) {
+func TestCountMinJumps(t *testing.T) {
 	tests := []struct {
 		jumps []int
 		want  int

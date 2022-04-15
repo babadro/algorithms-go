@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func Test_findLISLengthBruteForce(t *testing.T) {
+func Test_findLISLength(t *testing.T) {
 	tests := []struct {
 		nums []int
 		want int

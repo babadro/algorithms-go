@@ -96,6 +96,35 @@ func recTopDownReverse(dp [][]int, nums []int, curr, prev int) int {
 	return dp[curr][prev+1]
 }
 
+func findLBSLenBottomUp(nums []int) int {
+	lds, ldsReverse := make([]int, len(nums)), make([]int, len(nums))
+
+	for i := 0; i < len(nums); i++ {
+		lds[i] = 1
+		for j := i - 1; j >= 0; j-- {
+			if nums[j] < nums[i] {
+				lds[i] = utils.Max(lds[i], lds[j]+1)
+			}
+		}
+	}
+
+	for i := len(nums) - 1; i >= 0; i-- {
+		ldsReverse[i] = 1
+		for j := i + 1; j < len(nums); j++ {
+			if nums[j] < nums[i] {
+				ldsReverse[i] = utils.Max(ldsReverse[i], ldsReverse[j]+1)
+			}
+		}
+	}
+
+	maxLen := 0
+	for i := 0; i < len(nums); i++ {
+		maxLen = utils.Max(maxLen, lds[i]+ldsReverse[i]-1)
+	}
+
+	return maxLen
+}
+
 func makeDP(m, n int) [][]int {
 	res := make([][]int, m)
 	for i := range res {
