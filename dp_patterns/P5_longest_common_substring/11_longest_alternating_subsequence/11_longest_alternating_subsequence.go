@@ -79,7 +79,7 @@ func findLASLenBottomUp(nums []int) int {
 			if nums[i] > nums[j] {
 				dp[i][0] = utils.Max(dp[i][0], 1+dp[j][1])
 				maxLen = utils.Max(maxLen, dp[i][0])
-			} else if nums[i] != nums[j] {
+			} else if nums[i] < nums[j] {
 				dp[i][1] = utils.Max(dp[i][1], 1+dp[j][0])
 				maxLen = utils.Max(maxLen, dp[i][1])
 			}
