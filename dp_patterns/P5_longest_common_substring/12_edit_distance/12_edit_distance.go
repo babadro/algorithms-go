@@ -19,9 +19,9 @@ func recBruteForce(s1, s2 string, i1, i2 int) int {
 		return recBruteForce(s1, s2, i1+1, i2+1)
 	}
 
-	c1 := 1 + recBruteForce(s1, s2, i1+1, i2)
-	c2 := 1 + recBruteForce(s1, s2, i1, i2+1)
-	c3 := 1 + recBruteForce(s1, s2, i1+1, i2+1)
+	c1 := 1 + recBruteForce(s1, s2, i1+1, i2)   // delete
+	c2 := 1 + recBruteForce(s1, s2, i1, i2+1)   // insert
+	c3 := 1 + recBruteForce(s1, s2, i1+1, i2+1) // replace
 
 	return utils.Min3(c1, c2, c3)
 }
@@ -45,9 +45,9 @@ func recTopDown(dp [][]int, s1, s2 string, i1, i2 int) int {
 		if s1[i1] == s2[i2] {
 			dp[i1][i2] = recTopDown(dp, s1, s2, i1+1, i2+1)
 		} else {
-			c1 := 1 + recTopDown(dp, s1, s2, i1+1, i2)
-			c2 := 1 + recTopDown(dp, s1, s2, i1, i2+1)
-			c3 := 1 + recTopDown(dp, s1, s2, i1+1, i2+1)
+			c1 := 1 + recTopDown(dp, s1, s2, i1+1, i2)   // delete
+			c2 := 1 + recTopDown(dp, s1, s2, i1, i2+1)   // insert
+			c3 := 1 + recTopDown(dp, s1, s2, i1+1, i2+1) // replace
 
 			dp[i1][i2] = utils.Min3(c1, c2, c3)
 		}
@@ -73,8 +73,8 @@ func findMinOperationsBottomUp(s1, s2 string) int {
 				dp[i1][i2] = dp[i1-1][i2-1]
 			} else {
 				dp[i1][i2] = 1 + utils.Min3(
-					dp[i1-1][i2],   // delete
-					dp[i1][i2-1],   // insert
+					dp[i1-1][i2],   // insert
+					dp[i1][i2-1],   // delete
 					dp[i1-1][i2-1], // replace
 				)
 			}
