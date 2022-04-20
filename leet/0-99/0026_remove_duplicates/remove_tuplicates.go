@@ -5,6 +5,7 @@ import (
 	"sort"
 )
 
+// tptl. #hard for me
 func removeDuplicates(nums []int) int {
 	lastPos := 0
 	for i := 1; i < len(nums); i++ {
@@ -13,6 +14,7 @@ func removeDuplicates(nums []int) int {
 			lastPos++
 		}
 	}
+
 	return lastPos + 1
 }
 
