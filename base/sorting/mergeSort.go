@@ -46,3 +46,20 @@ func mergeSort(arr []int, l, r int) {
 		merge(arr, l, m, r)
 	}
 }
+
+func mergeSortParallel(arr []int, l, r int) {
+	if l < r {
+		done := make(chan bool)
+		m := l + (r-l)/2
+
+		go func() {
+			mergeSortParallel(arr, l, m)
+			done <- true
+		}()
+
+		mergeSortParallel(arr, m+1, r)
+		<-done
+
+		merge(arr, l, m, r)
+	}
+}

@@ -52,3 +52,43 @@ func TestMergeSort(t *testing.T) {
 		t.Log(standardCases[i])
 	}
 }
+
+func TestMergeSortParallel(t *testing.T) {
+	testFunc(t, func(nums []int) {
+		mergeSortParallel(nums, 0, len(nums)-1)
+	})
+}
+
+var input []int
+
+func BenchmarkMergeSort(b *testing.B) {
+	b.StopTimer()
+
+	for i := 0; i < b.N; i++ {
+		input = make([]int, 1_000_000)
+		for j := 0; j < len(input); j++ {
+			min, max := -1000, 1000
+			input[j] = rand.Intn(max-min) + min
+		}
+
+		b.StartTimer()
+		mergeSort(input, 0, len(input)-1)
+		b.StopTimer()
+	}
+}
+
+func BenchmarkMergeSortParallel(b *testing.B) {
+	b.StopTimer()
+
+	for i := 0; i < b.N; i++ {
+		input = make([]int, 1_000_000)
+		for j := 0; j < len(input); j++ {
+			min, max := -1000, 1000
+			input[j] = rand.Intn(max-min) + min
+		}
+
+		b.StartTimer()
+		mergeSortParallel(input, 0, len(input)-1)
+		b.StopTimer()
+	}
+}
