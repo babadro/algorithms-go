@@ -47,18 +47,24 @@ func mergeSort(arr []int, l, r int) {
 	}
 }
 
-func mergeSortParallel(arr []int, l, r int) {
+func mergeSortParallel(arr []int, l, r, level, max int) {
 	if l < r {
-		done := make(chan bool)
 		m := l + (r-l)/2
 
-		go func() {
-			mergeSortParallel(arr, l, m)
-			done <- true
-		}()
+		if level <= max {
+			done := make(chan bool)
 
-		mergeSortParallel(arr, m+1, r)
-		<-done
+			go func() {
+				mergeSortParallel(arr, l, m, level+1, max)
+				done <- true
+			}()
+
+			mergeSortParallel(arr, m+1, r, level+1, max)
+			<-done
+		} else {
+			mergeSort(arr, l, m)
+			mergeSort(arr, m+1, r)
+		}
 
 		merge(arr, l, m, r)
 	}

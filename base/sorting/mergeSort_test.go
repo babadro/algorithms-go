@@ -55,7 +55,7 @@ func TestMergeSort(t *testing.T) {
 
 func TestMergeSortParallel(t *testing.T) {
 	testFunc(t, func(nums []int) {
-		mergeSortParallel(nums, 0, len(nums)-1)
+		mergeSortParallel(nums, 0, len(nums)-1, 0, 2)
 	})
 }
 
@@ -88,7 +88,7 @@ func BenchmarkMergeSortParallel(b *testing.B) {
 		}
 
 		b.StartTimer()
-		mergeSortParallel(input, 0, len(input)-1)
+		mergeSortParallel(input, 0, len(input)-1, 0, 2)
 		b.StopTimer()
 	}
 }
