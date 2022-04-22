@@ -7,7 +7,6 @@ type ListNode struct {
 	Next *ListNode
 }
 
-// TODO 2 implement two pointers algorithm (look solutions)
 func hasCycle(head *single.ListNode) bool {
 	nodeMap := make(map[*single.ListNode]bool)
 	node := head
@@ -18,5 +17,19 @@ func hasCycle(head *single.ListNode) bool {
 		nodeMap[node] = true
 		node = node.Next
 	}
+	return false
+}
+
+// tptl. passed
+func hasCycleTwoPointers(head *single.ListNode) bool {
+	fast, slow := head, head
+	for fast != nil && fast.Next != nil {
+		fast = fast.Next.Next
+		slow = slow.Next
+		if fast == slow {
+			return true
+		}
+	}
+
 	return false
 }
