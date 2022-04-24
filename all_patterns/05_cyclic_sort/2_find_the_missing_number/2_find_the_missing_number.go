@@ -1,4 +1,4 @@
-package _2_find_the_missing_number
+package __find_the_missing_number
 
 // leetcode 286 (there is a simpler and trickier solution - look at leetcode task 286 implementation)
 func findMissingNumber(nums []int) int {

@@ -1,4 +1,4 @@
-package _2_find_the_missing_number
+package __find_the_missing_number
 
 import (
 	"fmt"
