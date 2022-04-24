@@ -1,36 +1,39 @@
 package _102_binary_tree_level_order_traversal
 
-import "github.com/babadro/algorithms-go/base/binaryTree"
+import (
+	"container/list"
 
-// 100% 66%
+	"github.com/babadro/algorithms-go/base/binaryTree"
+)
+
+// passed. tptl. 100% 47%
 func levelOrder(root *binaryTree.Node) [][]int {
 	if root == nil {
 		return nil
 	}
-	nodeArrays := [][]*binaryTree.Node{{root}}
-	for {
-		last := len(nodeArrays) - 1
-		var arr []*binaryTree.Node
-		for _, node := range nodeArrays[last] {
-			if node.Left != nil {
-				arr = append(arr, node.Left)
-			}
-			if node.Right != nil {
-				arr = append(arr, node.Right)
-			}
-		}
-		if arr == nil {
-			break
-		}
-		nodeArrays = append(nodeArrays, arr)
-	}
 
-	res := make([][]int, len(nodeArrays))
-	for i := range nodeArrays {
-		res[i] = make([]int, len(nodeArrays[i]))
-		for j := range nodeArrays[i] {
-			res[i][j] = nodeArrays[i][j].Val
+	var res [][]int
+	q := list.New()
+	q.PushBack(root)
+
+	for q.Len() != 0 {
+		level := make([]int, q.Len())
+		for i := range level {
+			node := q.Front().Value.(*binaryTree.Node)
+			q.Remove(q.Front())
+
+			level[i] = node.Val
+
+			if node.Left != nil {
+				q.PushBack(node.Left)
+			}
+
+			if node.Right != nil {
+				q.PushBack(node.Right)
+			}
 		}
+
+		res = append(res, level)
 	}
 
 	return res
