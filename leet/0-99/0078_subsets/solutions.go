@@ -1,8 +1,25 @@
 package _078_subsets
 
-// 100%, 27%
-// TODO 3 look at another approaches in solution
+// tptl passed best solution
 func subsets(nums []int) [][]int {
+	res := [][]int{{}}
+	for _, num := range nums {
+		size := len(res)
+		for i := 0; i < size; i++ {
+			set := make([]int, len(res[i])+1)
+			copy(set, res[i])
+			set[len(set)-1] = num
+
+			res = append(res, set)
+		}
+	}
+
+	return res
+}
+
+// 100%, 27% not obvious solution
+// TODO 3 look at another approaches in solution
+func subsets3(nums []int) [][]int {
 	output := [][]int{{}}
 
 	for _, num := range nums {
