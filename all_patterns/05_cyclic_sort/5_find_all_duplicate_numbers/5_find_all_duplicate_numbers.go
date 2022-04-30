@@ -4,12 +4,11 @@ package __find_all_duplicate_numbers
 func findAllDuplicates(nums []int) []int {
 	for i := 0; i < len(nums); {
 		j := nums[i] - 1
-		if i == j || nums[i] == nums[j] {
+		if nums[i] != nums[j] {
+			nums[i], nums[j] = nums[j], nums[i]
+		} else {
 			i++
-			continue
 		}
-
-		nums[i], nums[j] = nums[j], nums[i]
 	}
 
 	var res []int

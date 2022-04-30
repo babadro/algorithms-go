@@ -4,12 +4,11 @@ package _442_find_all_duplicates_in_an_array
 func findDuplicates(nums []int) []int {
 	for i := 0; i < len(nums); {
 		j := nums[i] - 1
-		if i == j || nums[i] == nums[j] {
+		if nums[i] != nums[j] {
+			nums[i], nums[j] = nums[j], nums[i]
+		} else {
 			i++
-			continue
 		}
-
-		nums[i], nums[j] = nums[j], nums[i]
 	}
 
 	var res []int
@@ -28,13 +27,16 @@ func findDuplicates2(nums []int) []int {
 	if len(nums) == 0 {
 		return result
 	}
+
 	for _, val := range nums {
 		visited := abs(val) - 1
 		if nums[visited] < 0 {
 			result = append(result, abs(val))
 		}
+
 		nums[visited] = -nums[visited]
 	}
+
 	return result
 }
 
