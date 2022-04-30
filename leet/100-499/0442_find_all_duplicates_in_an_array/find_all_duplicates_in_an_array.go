@@ -2,24 +2,46 @@ package _442_find_all_duplicates_in_an_array
 
 // tptl. passed
 func findDuplicates(nums []int) []int {
-	var res []int
+	for i := 0; i < len(nums); {
+		j := nums[i] - 1
+		if i == j || nums[i] == nums[j] {
+			i++
+			continue
+		}
 
-	for i := 0; i < len(nums); i++ {
-		j := abs(nums[i]) - 1
-		if nums[j] >= 0 {
-			nums[j] = -nums[j]
-		} else {
-			res = append(res, j+1)
+		nums[i], nums[j] = nums[j], nums[i]
+	}
+
+	var res []int
+	for i := range nums {
+		if i != nums[i]-1 {
+			res = append(res, nums[i])
 		}
 	}
 
 	return res
 }
 
-func abs(num int) int {
-	if num < 0 {
-		return -num
+// best solution
+func findDuplicates2(nums []int) []int {
+	var result []int
+	if len(nums) == 0 {
+		return result
+	}
+	for _, val := range nums {
+		visited := abs(val) - 1
+		if nums[visited] < 0 {
+			result = append(result, abs(val))
+		}
+		nums[visited] = -nums[visited]
+	}
+	return result
+}
+
+func abs(n int) int {
+	if n < 0 {
+		return -n
 	}
 
-	return num
+	return n
 }
