@@ -1,5 +1,6 @@
 package _0_introduction
 
+// find the average of all subarrays of k contiguous elements in the given array.
 func avgOfSubarrayOfSizeK(k int, arr []int) []float64 {
 	res := make([]float64, len(arr)-k+1)
 
