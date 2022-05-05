@@ -1,29 +1,25 @@
 package _904_fruit_into_baskets
 
-// todo 1
+// tptl todo 2 look for faster solution
 func totalFruit(fruits []int) int {
-	fruit1, fruit2, basket1, basket2 := -1, -1, 0, 0
-
-	maxNum := 0
-	for i := 0; i < len(fruits); i++ {
-		fruit := fruits[i]
-		if fruit != fruit1 && fruit != fruit2 {
-			if i > 0 {
-				if fruits[i-1] == fruit2 {
-					fruit1, basket1 = fruit2, basket2
-				}
+	start, maxLen := 0, 0
+	frequency := make(map[int]int, 3)
+	for i, fruit := range fruits {
+		frequency[fruit]++
+		for len(frequency) > 2 {
+			startFruit := fruits[start]
+			frequency[startFruit]--
+			if frequency[startFruit] == 0 {
+				delete(frequency, startFruit)
 			}
-			fruit2, basket2 = fruit, 1
-		} else if fruit == fruit1 {
-			basket1++
-		} else {
-			basket2++
+
+			start++
 		}
 
-		maxNum = max(maxNum, basket1+basket2)
+		maxLen = max(maxLen, i-start+1)
 	}
 
-	return maxNum
+	return maxLen
 }
 
 func max(a, b int) int {

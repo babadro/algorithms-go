@@ -9,7 +9,7 @@ func Test_findMaxNumFruits(t *testing.T) {
 	}{
 		{"ABCAC", 3},
 		{"ABCBBC", 5},
-		{"ABABABABABABCCCCCCCCC", 15},
+		{"ABABABABABABCCCCCCCCCCCC", 13},
 	}
 	for _, tt := range tests {
 		t.Run(tt.arr, func(t *testing.T) {

@@ -1,5 +1,7 @@
 package _1_pair_with_target_sum
 
+// Given an array of sorted numbers and a target sum,
+// find a pair in the array whose sum is equal to the given target.
 func search(sortedArr []int, target int) []int {
 	for i, j := 0, len(sortedArr)-1; i < j; {
 		if sum := sortedArr[i] + sortedArr[j]; sum == target {

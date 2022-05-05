@@ -2,7 +2,7 @@ package _015_3Sum
 
 import "sort"
 
-//TODO 2 this is brute force. See hint 3 and if needed solution
+// bruteforce. very slow
 func threeSum(nums []int) [][]int {
 	length := len(nums)
 	if length < 3 {

@@ -1,5 +1,7 @@
 package slices
 
+import "sort"
+
 func IntSlicesAreEqual(slice1, slice2 []int) bool {
 	length := len(slice1)
 	if length != len(slice2) {
@@ -24,4 +26,20 @@ func SliceOfIntSlicesAreEqual(slice1, slice2 [][]int) bool {
 		}
 	}
 	return true
+}
+
+func SortEach(arr [][]int) {
+	for i := range arr {
+		sort.Ints(arr[i])
+	}
+}
+
+func Less(arr1, arr2 []int) bool {
+	for i := 0; i < len(arr1) && i < len(arr2); i++ {
+		if arr1[i] != arr2[i] {
+			return arr1[i] < arr2[i]
+		}
+	}
+
+	return false
 }

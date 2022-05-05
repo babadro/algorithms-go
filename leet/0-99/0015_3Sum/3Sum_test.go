@@ -1,8 +1,11 @@
 package _015_3Sum
 
 import (
-	"github.com/babadro/algorithms-go/slices"
+	"sort"
 	"testing"
+
+	"github.com/babadro/algorithms-go/slices"
+	"github.com/stretchr/testify/require"
 )
 
 func TestThreeeSum(t *testing.T) {
@@ -12,12 +15,23 @@ func TestThreeeSum(t *testing.T) {
 	}{
 		{[]int{}, nil},
 		{[]int{-1, 0, 1, 2, -1, -4}, [][]int{{-1, 0, 1}, {-1, -1, 2}}},
+		{[]int{0}, nil},
 	}
 
-	for i, c := range cases {
-		fact := threeSum(c.nums)
-		if !slices.SliceOfIntSlicesAreEqual(fact, c.expected) {
-			t.Errorf("case#%d, want %v, got %v", i+1, c.expected, fact)
-		}
+	for _, c := range cases {
+
+		fact := threeSum2(c.nums)
+
+		slices.SortEach(fact)
+		sort.Slice(fact, func(i, j int) bool {
+			return slices.Less(fact[i], fact[j])
+		})
+
+		slices.SortEach(c.expected)
+		sort.Slice(c.expected, func(i, j int) bool {
+			return slices.Less(c.expected[i], c.expected[j])
+		})
+
+		require.Equal(t, c.expected, fact)
 	}
 }
