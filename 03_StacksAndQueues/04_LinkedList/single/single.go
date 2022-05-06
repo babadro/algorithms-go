@@ -63,3 +63,13 @@ func LinkedListRandomToArr(head *ListNodeRandom) (arr [][2]int) {
 	}
 	return arr
 }
+
+func FindNode(node *ListNode, val int) *ListNode {
+	for ; node != nil; node = node.Next {
+		if node.Val == val {
+			return node
+		}
+	}
+
+	return nil
+}

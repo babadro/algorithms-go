@@ -1,4 +1,4 @@
-package _056_merge_intervals
+package _1_merge_intervals
 
 import (
 	"fmt"
@@ -9,18 +9,15 @@ import (
 
 func Test_merge(t *testing.T) {
 	tests := []struct {
-		intervals [][]int
-		want      [][]int
+		intervals [][2]int
+		want      [][2]int
 	}{
-		{[][]int{{1, 4}, {2, 5}, {7, 9}}, [][]int{{1, 5}, {7, 9}}},
-		{[][]int{{1, 4}, {2, 6}, {3, 5}}, [][]int{{1, 6}}},
-		{[][]int{{1, 3}, {2, 6}, {8, 10}, {15, 18}}, [][]int{{1, 6}, {8, 10}, {15, 18}}},
-		{[][]int{{1, 4}, {4, 5}}, [][]int{{1, 5}}},
-		{[][]int{{2, 3}, {4, 5}, {6, 7}, {8, 9}, {1, 10}}, [][]int{{1, 10}}},
+		{[][2]int{{1, 4}, {2, 5}, {7, 9}}, [][2]int{{1, 5}, {7, 9}}},
+		{[][2]int{{1, 4}, {2, 6}, {3, 5}}, [][2]int{{1, 6}}},
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.intervals), func(t *testing.T) {
-			got := merge2(tt.intervals)
+			got := merge(tt.intervals)
 			sort.Slice(got, func(i, j int) bool {
 				return less(got[i], got[j])
 			})
@@ -36,7 +33,7 @@ func Test_merge(t *testing.T) {
 	}
 }
 
-func less(i1, i2 []int) bool {
+func less(i1, i2 [2]int) bool {
 	if i1[0] != i2[0] {
 		return i1[0] < i2[0]
 	}
