@@ -14,6 +14,7 @@ func Test_merge(t *testing.T) {
 	}{
 		{[][2]int{{1, 4}, {2, 5}, {7, 9}}, [][2]int{{1, 5}, {7, 9}}},
 		{[][2]int{{1, 4}, {2, 6}, {3, 5}}, [][2]int{{1, 6}}},
+		{[][2]int{{2, 3}, {4, 5}, {6, 7}, {8, 9}, {1, 10}}, [][2]int{{1, 10}}},
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.intervals), func(t *testing.T) {

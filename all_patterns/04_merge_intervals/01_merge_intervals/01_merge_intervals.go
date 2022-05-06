@@ -25,6 +25,7 @@ func merge(intervals [][2]int) [][2]int {
 		}
 	}
 
+	// there is a mistake
 	for i := 0; i < len(intervals); i++ {
 		last := len(intervals) - 1
 		if intervals[i][0] == -1 {
