@@ -1,4 +1,4 @@
-package minimum_subset_sum_difference
+package __minimum_subset_sum_difference
 
 import (
 	"fmt"

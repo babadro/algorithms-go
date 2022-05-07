@@ -1,4 +1,4 @@
-package count_of_subset_sum
+package __count_of_subset_sum
 
 import (
 	"fmt"

@@ -2,8 +2,27 @@ package _744_find_smallest_letter_greater_than_target
 
 import "sort"
 
-// passed. easy. tptl
+// passed. tptl
 func nextGreatestLetter(letters []byte, target byte) byte {
+	left, right := 0, len(letters)-1
+	for left <= right {
+		mid := left + (right-left)/2
+		if letters[mid] <= target {
+			left = mid + 1
+		} else {
+			right = mid - 1
+		}
+	}
+
+	if left < len(letters) {
+		return letters[left]
+	}
+
+	return letters[0]
+}
+
+// using sort.Search
+func nextGreatestLetter2(letters []byte, target byte) byte {
 	n := len(letters)
 	if target >= letters[n-1] {
 		return letters[0]
@@ -14,24 +33,4 @@ func nextGreatestLetter(letters []byte, target byte) byte {
 	})
 
 	return letters[idx]
-}
-
-// just for refresh binary search
-func nextGreatestLetter2(letters []byte, target byte) byte {
-	n := len(letters)
-	if target >= letters[n-1] {
-		return letters[0]
-	}
-
-	l, r := 0, n
-	for l < r {
-		mid := l + (r-l)/2
-		if letters[mid] <= target {
-			l = mid + 1
-		} else {
-			r = mid
-		}
-	}
-
-	return letters[l]
 }

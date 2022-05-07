@@ -1,4 +1,4 @@
-package count_of_subset_sum
+package __count_of_subset_sum
 
 func countSubsetBruteForce(nums []int, sum int) int {
 	return recBruteForce(nums, sum, 0)
