@@ -1,18 +1,28 @@
 package _202_happy_number
 
-import "fmt"
-
+// tptl passed
 func isHappy(n int) bool {
 	slow, fast := n, n
 	for {
 		slow = calcSquareSum(slow)
 		fast = calcSquareSum(calcSquareSum(fast))
-		fmt.Println(slow, " ", fast)
 		if slow == fast {
 			break
 		}
 	}
+
 	return slow == 1
+}
+
+func calcSquareSum(n int) int {
+	res := 0
+	for n > 0 {
+		digit := n % 10
+		res += digit * digit
+		n /= 10
+	}
+
+	return res
 }
 
 func isHappyNaive(n int) bool {
@@ -28,14 +38,4 @@ func isHappyNaive(n int) bool {
 		set[n] = true
 	}
 	return false
-}
-
-func calcSquareSum(n int) int {
-	res, digit := 0, 0
-	for n > 0 {
-		digit = n % 10
-		res += digit * digit
-		n = n / 10
-	}
-	return res
 }
