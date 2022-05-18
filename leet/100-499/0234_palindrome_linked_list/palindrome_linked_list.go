@@ -45,16 +45,31 @@ func reverse(head *single.ListNode) *single.ListNode {
 	return prev
 }
 
-// TODO 3 need to understand
 func isPalindromeTheBest(head *single.ListNode) bool {
-	head, slow, fast := nil, head, head
+	slow, fast := head, head
+	var prev *single.ListNode
 	for fast != nil && fast.Next != nil {
-		head, slow.Next, slow, fast = slow, head, slow.Next, fast.Next.Next
+		cur := slow
+		slow, fast = slow.Next, fast.Next.Next
+		// reverse first half of linked list
+		cur.Next, prev = prev, cur
+		// alternative implementation - todo 3 how does it work?
+		//prev, slow.Next, slow, fast = slow, prev, slow.Next, fast.Next.Next
 	}
-	if fast != nil {
+
+	if fast != nil { // len(list) is odd
 		slow = slow.Next
 	}
-	for ; head != nil && head.Val == slow.Val; head, slow = head.Next, slow.Next {
+
+	palindrome := true
+	for prev != nil {
+		if prev.Val != slow.Val {
+			palindrome = false
+		}
+
+		// reverse again to reassemble initial order
+		prev, slow = prev.Next, slow.Next
 	}
-	return head == nil
+
+	return palindrome
 }

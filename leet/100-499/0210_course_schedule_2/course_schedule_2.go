@@ -1,73 +1,100 @@
 package _210_course_schedule_2
 
-// doesn't work
-// input 3, [[0,1],[0,2],[1,2]]
-// output [2, 0, 1]
-// expected [2, 1, 0]
-func findOrder1(numCourses int, prerequisites [][]int) []int {
-	set := make(map[int]int, numCourses)
-	for _, arr := range prerequisites {
-		set[arr[0]] = arr[1]
-	}
-	var res []int
-	done := make(map[int]bool, numCourses)
-	for i := 0; i < numCourses; i++ {
-		if _, ok := set[i]; !ok {
-			res = append(res, i)
-			done[i] = true
-		}
-	}
-	if len(res) == 0 {
-		return nil
+// tptl. passed. simple
+func findOrder3(vertices int, edges [][]int) []int {
+	inDegree := make([]int, vertices)
+	for _, edge := range edges {
+		inDegree[edge[0]]++
 	}
 
-	for len(set) > 0 {
-		k, deleteKey := 0, false
-		for course, prerequisite := range set {
-			if done[prerequisite] {
-				done[course] = true
-				res = append(res, course)
-				k, deleteKey = course, true
-				break
+	// build the graph
+	g := make([][]int, vertices)
+	for _, edge := range edges {
+		src, dst := edge[1], edge[0]
+		g[src] = append(g[src], dst)
+	}
+
+	var sourcesQueue []int
+	for vertex := range g {
+		if inDegree[vertex] == 0 {
+			sourcesQueue = append(sourcesQueue, vertex)
+		}
+	}
+
+	var res []int
+	for len(sourcesQueue) > 0 {
+		src := sourcesQueue[0]
+
+		sourcesQueue = sourcesQueue[1:]
+		res = append(res, src)
+
+		for _, dst := range g[src] {
+			inDegree[dst]--
+			if inDegree[dst] == 0 {
+				sourcesQueue = append(sourcesQueue, dst)
 			}
 		}
-		if !deleteKey {
-			return nil
-		}
-		delete(set, k)
 	}
 
-	if len(res) < numCourses {
-		return nil
+	if len(res) < vertices {
+		return []int{}
 	}
+
 	return res
 }
 
-/*
+const (
+	white byte = iota
+	gray
+	black
+)
+
+// 98% 43%
 func findOrder(numCourses int, prerequisites [][]int) []int {
-	graph := make([][]int, numCourses)
-	for _, arr := range prerequisites {
-		graph[arr[0]] = append(graph[arr[0]], arr[1])
+	isPossible := true
+	color := make([]byte, numCourses)
+	adjList := make([][]int, numCourses)
+	topologicalOrder := make([]int, 0, numCourses)
+
+	for i := 0; i < len(prerequisites); i++ {
+		dest := prerequisites[i][0]
+		src := prerequisites[i][1]
+		adjList[src] = append(adjList[src], dest)
 	}
 
-	counter := 0
-	courses := make(map[int]bool)
-
-	for i, arr := range graph {
-		for _, j := range arr {
-			visited := make(map[int]bool)
-			if visited[j] {
-				return nil
-			}
-			visited[j] = true
-
+	for i := 0; i < numCourses; i++ {
+		if color[i] == white {
+			dfs(i, adjList, &isPossible, &topologicalOrder, color)
 		}
 	}
 
+	if !isPossible {
+		return nil
+	}
+
+	order := make([]int, numCourses)
+	for i := 0; i < numCourses; i++ {
+		order[i] = topologicalOrder[numCourses-i-1]
+	}
+
+	return order
 }
 
-func add(v int, res *[]int, graph [][]int, visited, courses map[int]bool) {
-	if len(graph[v]) == 0 {
-
+func dfs(node int, adjList [][]int, isPossible *bool, topologicalOrder *[]int, color []byte) {
+	if !*isPossible {
+		return
 	}
-}*/
+
+	color[node] = gray
+	for _, neighbor := range adjList[node] {
+		if color[neighbor] == white {
+			dfs(neighbor, adjList, isPossible, topologicalOrder, color)
+		} else if color[neighbor] == gray {
+			*isPossible = false
+			return
+		}
+	}
+
+	color[node] = black
+	*topologicalOrder = append(*topologicalOrder, node)
+}
