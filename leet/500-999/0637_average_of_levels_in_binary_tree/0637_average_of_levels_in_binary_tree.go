@@ -1,18 +1,21 @@
-package _103_binary_tree_zigzag_level_order_traversal
+package _637_average_of_levels_in_binary_tree
 
 import "github.com/babadro/algorithms-go/base/binaryTree"
 
-func zigzagLevelOrder3(root *binaryTree.Node) [][]int {
+// dyx. passed
+func averageOfLevels(root *binaryTree.Node) []float64 {
 	if root == nil {
 		return nil
 	}
 
-	var res [][]int
 	q := []*binaryTree.Node{root}
+	var res []float64
 	for len(q) > 0 {
-		level := make([]int, len(q))
-		for i := 0; i < len(q); i++ {
+		levelSize := len(q)
+		sum := 0
+		for i := 0; i < levelSize; i++ {
 			node := q[0]
+			q = q[1:]
 			if node.Left != nil {
 				q = append(q, node.Left)
 			}
@@ -21,11 +24,10 @@ func zigzagLevelOrder3(root *binaryTree.Node) [][]int {
 				q = append(q, node.Right)
 			}
 
-			level = append(level, node.Val)
-			q = q[1:]
+			sum += node.Val
 		}
 
-		res = append(res, level)
+		res = append(res, float64(sum)/float64(levelSize))
 	}
 
 	return res

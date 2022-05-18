@@ -2,6 +2,41 @@ package _103_binary_tree_zigzag_level_order_traversal
 
 import "github.com/babadro/algorithms-go/base/binaryTree"
 
+// dyx. passed. simplest solution. it is just level order traversal modification
+func zigzagLevelOrder3(root *binaryTree.Node) [][]int {
+	if root == nil {
+		return nil
+	}
+
+	var res [][]int
+	q := []*binaryTree.Node{root}
+	for reverse := false; len(q) > 0; reverse = !reverse {
+		level := make([]int, len(q))
+		for i := range level {
+			node := q[0]
+			q = q[1:]
+
+			if node.Left != nil {
+				q = append(q, node.Left)
+			}
+
+			if node.Right != nil {
+				q = append(q, node.Right)
+			}
+
+			if reverse {
+				level[len(level)-1-i] = node.Val
+			} else {
+				level[i] = node.Val
+			}
+		}
+
+		res = append(res, level)
+	}
+
+	return res
+}
+
 // 100% 72%
 func zigzagLevelOrder(root *binaryTree.Node) [][]int {
 	var res [][]int
