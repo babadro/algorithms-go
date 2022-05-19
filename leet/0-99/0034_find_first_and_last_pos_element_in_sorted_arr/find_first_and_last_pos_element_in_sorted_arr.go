@@ -2,11 +2,41 @@ package _034_find_first_and_last_pos_element_in_sorted_arr
 
 import "sort"
 
-// TODO 2 implement better solution. Implement custom binary search maybe?
-// Runtime: 8 ms, faster than 79.40% Memory Usage: 4.1 MB, less than 50.00%
-// Еще проблема может быть в том, что дается очень длинный кусок повторяющихся значений - и простой
-// перебор по ним дает плохой результат - нужно бинарным поиском найти и конец сегмента
-// Хотя все равно заменил на поиск и второго конца - результат тот же 8 мс и 4.1 мб
+// tptl. best solution
+func searchRange2(nums []int, target int) []int {
+	res := make([]int, 2)
+	l, r := 0, len(nums)-1
+	for l <= r {
+		mid := l + (r-l)/2
+		if nums[mid] >= target {
+			r = mid - 1
+		} else if nums[mid] < target {
+			l = mid + 1
+		}
+	}
+
+	if l == len(nums) || nums[l] != target {
+		return []int{-1, -1}
+	}
+
+	res[0] = l
+
+	l, r = 0, len(nums)-1
+	for l <= r {
+		mid := l + (r-l)/2
+		if nums[mid] > target {
+			r = mid - 1
+		} else if nums[mid] <= target {
+			l = mid + 1
+		}
+	}
+
+	res[1] = r
+
+	return res
+}
+
+// using sort.Search
 func searchRange(nums []int, target int) []int {
 	l := len(nums)
 	start := sort.Search(l, func(i int) bool {
