@@ -1,5 +1,8 @@
 package _162_find_peak_element
 
+import "math"
+
+// tptl. passed best solution
 func findPeakElementIterative(nums []int) int {
 	l, r := 0, len(nums)-1
 	for l < r {
@@ -40,4 +43,41 @@ func findPeakElement(nums []int) int {
 		}
 	}
 	return n - 1
+}
+
+// too long
+func findPeakElement3(nums []int) int {
+	l, r := 0, len(nums)-1
+	for l <= r {
+		m := l + (r-l)/2
+		if g := gradient(m, nums); g == 1 {
+			l = m + 1
+		} else if g == -1 {
+			r = m - 1
+		} else {
+			return m
+		}
+	}
+
+	return -1 // impossible
+}
+
+func gradient(idx int, nums []int) int {
+	l, m, r := val(idx-1, nums), val(idx, nums), val(idx+1, nums)
+
+	if l < m && r < m {
+		return 0 // peak
+	} else if l < r {
+		return 1 // move right
+	} else {
+		return -1 // move left
+	}
+}
+
+func val(idx int, nums []int) int {
+	if idx == -1 || idx == len(nums) {
+		return math.MinInt64
+	}
+
+	return nums[idx]
 }
