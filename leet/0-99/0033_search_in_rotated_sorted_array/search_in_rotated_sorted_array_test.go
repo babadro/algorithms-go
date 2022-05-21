@@ -21,7 +21,7 @@ func TestSearch(t *testing.T) {
 	}
 
 	for i, c := range cases {
-		if fact := search2(c.nums, c.target); fact != c.expected {
+		if fact := search3(c.nums, c.target); fact != c.expected {
 			t.Errorf("case#%d, want %d, got %d", i+1, c.expected, fact)
 		}
 	}

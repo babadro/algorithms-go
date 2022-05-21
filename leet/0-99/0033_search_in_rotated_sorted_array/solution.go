@@ -1,47 +1,39 @@
 package _033_search_in_rotated_sorted_array
 
 // tptl. passed. mine. easy to understand. best solution
-func search2(nums []int, target int) int {
-	n := len(nums)
-	start1, start2 := 0, n
-	start2 = findStart2(nums)
-
-	if target < nums[0] {
-		return binarySearch2(nums, start2, n, target)
-	}
-
-	return binarySearch2(nums, start1, start2, target)
-}
-
-func findStart2(nums []int) int {
-	l, r, res := 0, len(nums), -1
-	first, last := nums[0], nums[len(nums)-1]
-
-	for l < r {
-		mid := (l + r) / 2
-		curr := nums[mid]
-		if curr > last {
-			l = mid + 1
-		} else if curr < first {
-			res, r = mid, mid
-		} else {
-			return len(nums)
+func search3(nums []int, target int) int {
+	l, r := 0, len(nums)-1
+	if nums[l] > nums[r] {
+		// find start left part of arr
+		for l < r {
+			m := l + (r-l)/2
+			if nums[m] > nums[r] {
+				l = m + 1
+			} else {
+				r = m
+			}
 		}
+
+		starLeft := l
+		if target < nums[0] {
+			return binarySearch3(nums, starLeft, len(nums)-1, target)
+		}
+
+		return binarySearch3(nums, 0, starLeft-1, target)
 	}
 
-	return res
+	return binarySearch3(nums, 0, len(nums)-1, target)
 }
 
-func binarySearch2(nums []int, left, right, target int) int {
-	for left < right {
-		mid := (left + right) / 2
-		curr := nums[mid]
-		if target > curr {
-			left = mid + 1
-		} else if target < curr {
-			right = mid
+func binarySearch3(nums []int, l, r, target int) int {
+	for l <= r {
+		m := l + (r-l)/2
+		if nums[m] > target {
+			r = m - 1
+		} else if nums[m] < target {
+			l = m + 1
 		} else {
-			return mid
+			return m
 		}
 	}
 
