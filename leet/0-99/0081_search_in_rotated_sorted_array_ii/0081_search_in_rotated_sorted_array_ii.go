@@ -1,8 +1,9 @@
 package _081_search_in_rotated_sorted_array_ii
 
+// todo 1
 func search(nums []int, target int) bool {
 	l, r := 0, len(nums)-1
-	if nums[l] > nums[r] {
+	if nums[l] >= nums[r] {
 		for l < r {
 			m := l + (r-l)/2
 			if nums[m] <= nums[r] {
@@ -13,13 +14,15 @@ func search(nums []int, target int) bool {
 		}
 
 		startLeft := l
+		if startLeft == 0 { // arr of equal numbers like [1,1,1,1,1]
+			return target == nums[0]
+		}
+
 		if target < nums[0] {
 			return binarySearch(nums, startLeft, len(nums)-1, target)
 		}
 
 		return binarySearch(nums, 0, startLeft-1, target)
-	} else if nums[l] == nums[r] {
-		return nums[0] == target
 	}
 
 	return binarySearch(nums, 0, len(nums)-1, target)
