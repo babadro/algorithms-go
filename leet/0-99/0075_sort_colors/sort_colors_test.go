@@ -4,11 +4,14 @@ import (
 	"math/rand"
 	"sort"
 	"testing"
+
+	"github.com/stretchr/testify/require"
 )
 
 func TestSetColors(t *testing.T) {
 	cases := [][]int{
 		{1},
+		{1, 2},
 		{1, 2, 1, 2, 1, 2},
 		{2, 1, 0, 2, 1, 0},
 		{0, 1, 0, 1, 0, 1, 0, 2, 2, 0, 0, 0},
@@ -32,9 +35,8 @@ func TestSetColors(t *testing.T) {
 		sortedArr := make([]int, len(cases[i]))
 		copy(sortedArr, cases[i])
 		sortColors(sortedArr)
-		if !sort.IntsAreSorted(sortedArr) {
-			t.Errorf("case#%d, input %v, output %v, seed %d", i+1, cases[i], sortedArr, seed)
-			break
-		}
+
+		sort.Ints(cases[i])
+		require.Equal(t, cases[i], sortedArr)
 	}
 }

@@ -1,21 +1,18 @@
 package _075_sort_colors
 
+// tptl. passed. medium
 func sortColors(nums []int) {
-	if len(nums) == 0 {
-		return
-	}
-	j, k := 0, len(nums)-1
-	i := 0
-	for i <= k {
+	low, high := 0, len(nums)-1
+	for i := 0; i <= high; {
 		if nums[i] == 0 {
-			nums[i], nums[j] = nums[j], nums[i]
-			j++
+			nums[i], nums[low] = nums[low], nums[i]
 			i++
-		} else if nums[i] == 2 {
-			nums[i], nums[k] = nums[k], nums[i]
-			k--
-		} else {
+			low++
+		} else if nums[i] == 1 {
 			i++
+		} else { // nums[i] == 2
+			nums[i], nums[high] = nums[high], nums[i]
+			high--
 		}
 	}
 }
