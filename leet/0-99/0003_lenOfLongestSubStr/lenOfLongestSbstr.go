@@ -1,72 +1,49 @@
 package _003_lenOfLongestSubStr
 
-// SlidingWindow
-func lengthOfLongestSubstring(s string) int {
-	runes := []rune(s)
-	n := len(runes)
-	set := make(map[int32]bool)
-	ans, i, j := 0, 0, 0
-	for i < n && j < n {
-		if !set[runes[j]] {
-			set[runes[j]] = true
-			j++
-			if res := j - i; res > ans {
-				ans = res
-			}
+// tptl passed. best solution. sliding window without frequency map
+func lengthOfLongestSubstring3(s string) int {
+	chars := [256]bool{}
+	left, right, maxLen := 0, 0, 0
+	for left < len(s) && right < len(s) {
+		rightChar := s[right]
+		if !chars[rightChar] {
+			chars[rightChar] = true
+			right++
+			maxLen = max(maxLen, right-left)
 		} else {
-			set[runes[i]] = false
-			i++
+			chars[s[left]] = false
+			left++
 		}
 	}
-	return ans
+
+	return maxLen
 }
 
-func lengthOfLongestSubstringOptimizedWindow(s string) int {
-	runes := []rune(s)
-	n := len(runes)
-	ans := 0
-	dict := make(map[int32]int)
-	for j, i := 0, 0; j < n; j++ {
-		if val, ok := dict[runes[j]]; ok {
-			if val > i {
-				i = val
+// sliding window with freq map. easy to understand
+func lengthOfLongestSubstring2(s string) int {
+	m := make(map[byte]int)
+	left := 0
+	maxLen := 0
+	for i := range s {
+		m[s[i]]++
+		for ; left < i && len(m) < i-left+1; left++ {
+			leftChar := s[left]
+			m[leftChar]--
+			if m[leftChar] == 0 {
+				delete(m, leftChar)
 			}
 		}
-		if res := j - i + 1; res > ans {
-			ans = res
-		}
-		dict[runes[j]] = j + 1
+
+		maxLen = max(maxLen, i-left+1)
 	}
-	return ans
+
+	return maxLen
 }
 
-func lengthOfLongestSubstringNaive(s string) int {
-	myMap := make(map[int32]bool)
-	counter := 0
-	max := 0
-	runes := []rune(s)
-	i := 0
-	last := 0
-	for i < len(runes) {
-		letter := runes[i]
-		if _, ok := myMap[letter]; ok {
-			if max < counter {
-				max = counter
-			}
-			counter = 0
-			for k := range myMap {
-				delete(myMap, k)
-			}
-			last++
-			i = last
-		} else {
-			myMap[letter] = true
-			counter++
-			i++
-		}
+func max(a, b int) int {
+	if a > b {
+		return a
 	}
-	if counter > max {
-		return counter
-	}
-	return max
+
+	return b
 }

@@ -15,7 +15,7 @@ func TestLengthOfLongestSubstring(t *testing.T) {
 	}
 
 	for i, c := range cases {
-		if fact := lengthOfLongestSubstring(c.input); fact != c.expected {
+		if fact := lengthOfLongestSubstring3(c.input); fact != c.expected {
 			t.Errorf("case#%d error. want %d, got %d", i+1, c.expected, fact)
 		}
 	}
