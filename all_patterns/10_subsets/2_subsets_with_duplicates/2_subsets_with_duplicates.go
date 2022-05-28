@@ -2,6 +2,8 @@ package __subsets_with_duplicates
 
 import "sort"
 
+// Given a set of numbers that might contain duplicates, find all of its distinct subsets.
+// see leetcode 90
 func findSubsetsWithDuplicates(nums []int) [][]int {
 	sort.Ints(nums)
 	res := [][]int{{}}
