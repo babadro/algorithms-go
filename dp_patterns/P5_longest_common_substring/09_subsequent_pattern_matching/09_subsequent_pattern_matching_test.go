@@ -15,7 +15,7 @@ func Test_findSPMCount(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.st+"_"+tt.pat, func(t *testing.T) {
-			if got := findSPMCountBottomUp(tt.st, tt.pat); got != tt.want {
+			if got := findSPMCountTopDown(tt.st, tt.pat); got != tt.want {
 				t.Errorf("findSPMCount() = %v, want %v", got, tt.want)
 			}
 		})

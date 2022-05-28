@@ -47,10 +47,10 @@ func recTopDown(dp [][]int, st, pat string, i1, i2 int) int {
 	if dp[i1][i2] == -1 {
 		res := 0
 		if st[i1] == pat[i2] {
-			res += recBruteForce(st, pat, i1+1, i2+1)
+			res += recTopDown(dp, st, pat, i1+1, i2+1)
 		}
 
-		res += recBruteForce(st, pat, i1+1, i2)
+		res += recTopDown(dp, st, pat, i1+1, i2)
 
 		dp[i1][i2] = res
 	}
