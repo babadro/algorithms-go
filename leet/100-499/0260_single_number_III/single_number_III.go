@@ -7,22 +7,19 @@ func singleNumber(nums []int) []int {
 		xor ^= num
 	}
 
-	var bit int
-	for i := 0; i < 64; i++ {
-		if xor&(1<<i) != 0 {
-			bit = 1 << i
-			break
-		}
+	firstDiffBit := 1
+	for firstDiffBit&xor == 0 {
+		firstDiffBit <<= 1
 	}
 
-	var x, y int
+	num1, num2 := 0, 0
 	for _, num := range nums {
-		if num&bit != 0 {
-			x ^= num
+		if num&firstDiffBit == 0 {
+			num1 ^= num
 		} else {
-			y ^= num
+			num2 ^= num
 		}
 	}
 
-	return []int{x, y}
+	return []int{num1, num2}
 }
