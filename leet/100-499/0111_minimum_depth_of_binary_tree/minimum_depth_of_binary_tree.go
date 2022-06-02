@@ -6,7 +6,7 @@ import (
 	"github.com/babadro/algorithms-go/base/binaryTree"
 )
 
-// passed iterative.
+// tptl passed iterative.
 func minDepth3(root *binaryTree.Node) int {
 	if root == nil {
 		return 0
