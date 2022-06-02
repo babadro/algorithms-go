@@ -1,8 +1,10 @@
 package _111_minimum_depth_of_binary_tree
 
 import (
-	"github.com/babadro/algorithms-go/base/binaryTree"
 	"testing"
+
+	"github.com/babadro/algorithms-go/base/binaryTree"
+	"github.com/stretchr/testify/require"
 )
 
 func Test_minDepth(t *testing.T) {
@@ -37,4 +39,26 @@ func Test_minDepth2(t *testing.T) {
 	n5.Left = n6
 
 	t.Log(minDepth(n2))
+}
+
+func Test3(t *testing.T) {
+	n1, n2, n3, n4, n5 := n(1), n(2), n(3), n(4), n(5)
+	n1.Left, n1.Right = n2, n3
+
+	n3.Left, n3.Right = n4, n5
+
+	require.Equal(t, 2, minDepth3(n1))
+}
+
+func Test4(t *testing.T) {
+	n1, n2, n3, n4, n5 := n(1), n(2), n(3), n(4), n(5)
+	n1.Left, n1.Right = n2, n3
+
+	n2.Left, n2.Right = n4, n5
+
+	require.Equal(t, 2, minDepth2(n1))
+}
+
+func n(val int) *binaryTree.Node {
+	return &binaryTree.Node{Val: val}
 }
