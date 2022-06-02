@@ -6,8 +6,7 @@ import (
 	"github.com/babadro/algorithms-go/base/binaryTree"
 )
 
-// iterative.
-// [1,2,3,4,5] test case failed
+// passed iterative.
 func minDepth3(root *binaryTree.Node) int {
 	if root == nil {
 		return 0
@@ -38,7 +37,7 @@ func minDepth3(root *binaryTree.Node) int {
 	return res
 }
 
-// passed. iterative. easy to understand
+// passed. recursive. easy to understand
 func minDepth2(root *binaryTree.Node) int {
 	if root == nil {
 		return 0
