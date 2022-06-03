@@ -18,7 +18,7 @@ func Test_eraseOverlapIntervals(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.intervals), func(t *testing.T) {
-			if got := eraseOverlapIntervals(tt.intervals); got != tt.want {
+			if got := eraseOverlapIntervals2(tt.intervals); got != tt.want {
 				t.Errorf("eraseOverlapIntervals() = %v, want %v", got, tt.want)
 			}
 		})

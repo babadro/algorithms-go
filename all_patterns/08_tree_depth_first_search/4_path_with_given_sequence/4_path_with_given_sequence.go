@@ -12,7 +12,7 @@ func preOrder(node *binaryTree.Node, idx int, seq []int) bool {
 		return idx == len(seq)
 	}
 
-	if seq[idx] != node.Val {
+	if node.Val != seq[idx] {
 		return false
 	}
 

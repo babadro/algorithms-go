@@ -1,5 +1,22 @@
 package _003_lenOfLongestSubStr
 
+// tptl. another one best solution
+func lengthOfLongestSubstring4(s string) int {
+	start, maxLen := 0, 0
+	indexes := make(map[byte]int, 256)
+	for end := 0; end < len(s); end++ {
+		right := s[end]
+		if idx, ok := indexes[right]; ok {
+			start = max(start, idx+1)
+		}
+
+		indexes[right] = end
+		maxLen = max(maxLen, end-start+1)
+	}
+
+	return maxLen
+}
+
 // tptl passed. best solution. sliding window without frequency map
 func lengthOfLongestSubstring3(s string) int {
 	chars := [256]bool{}
