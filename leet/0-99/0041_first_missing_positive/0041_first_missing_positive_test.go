@@ -10,8 +10,11 @@ func Test_firstMissingPositive(t *testing.T) {
 		nums []int
 		want int
 	}{
-		//{[]int{1, 2, 0}, 3},
+		{[]int{1, 2, 0}, 3},
 		{[]int{3, 4, -1, 1}, 2},
+		{[]int{7, 8, 9, 11, 12}, 1},
+		{[]int{1}, 2},
+		{[]int{1, 1}, 2},
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.nums), func(t *testing.T) {

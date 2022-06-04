@@ -1,11 +1,15 @@
 package _041_first_missing_positive
 
+// tptl. passed. hard
 func firstMissingPositive(nums []int) int {
 	for i := range nums {
-		for nums[i] > 0 && nums[i] < len(nums) && nums[i] != i+1 {
-			tmp := nums[i]
-			nums[i] = nums[nums[i]-1]
-			nums[tmp-1] = nums[tmp]
+		for nums[i] > 0 && nums[i] < len(nums) {
+			idx := nums[i] - 1
+			if nums[i] == nums[idx] {
+				break
+			}
+
+			nums[i], nums[idx] = nums[idx], nums[i]
 		}
 	}
 
@@ -15,13 +19,5 @@ func firstMissingPositive(nums []int) int {
 		}
 	}
 
-	return -1
+	return len(nums) + 1
 }
-
-//for i := 0; i < len(nums); i++ {
-//for nums[i] != i+1 {
-//tmp := nums[i]
-//nums[i] = nums[nums[i]-1]
-//nums[tmp-1] = tmp
-//}
-//}
