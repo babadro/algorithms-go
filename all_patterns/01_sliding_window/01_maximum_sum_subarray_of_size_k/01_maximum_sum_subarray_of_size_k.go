@@ -2,6 +2,8 @@ package _1_maximum_sum_subarray_of_size_k
 
 import "github.com/babadro/algorithms-go/utils"
 
+// leetcode similar task 560
+
 // tptl
 // Given an array of positive numbers and a positive number ‘k,’
 // find the maximum sum of any contiguous subarray of size ‘k’.
