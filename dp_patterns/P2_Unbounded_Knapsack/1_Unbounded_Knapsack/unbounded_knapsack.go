@@ -1,20 +1,20 @@
 package __Unbounded_Knapsack
 
 func knapsackBruteForce(profits, weights []int, capacity int) int {
-	return recBruteForce(profits, weights, capacity, 0, 0)
+	return recBruteForce(profits, weights, capacity, 0)
 }
 
-func recBruteForce(profits, weights []int, capacity, curProfit, idx int) int {
+func recBruteForce(profits, weights []int, capacity, idx int) int {
 	if capacity <= 0 || idx == len(profits) {
-		return curProfit
+		return 0
 	}
 
 	var profit1, profit2 int
 	if weights[idx] <= capacity {
-		profit1 = recBruteForce(profits, weights, capacity-weights[idx], curProfit+profits[idx], idx)
+		profit1 = profits[idx] + recBruteForce(profits, weights, capacity-weights[idx], idx)
 	}
 
-	profit2 = recBruteForce(profits, weights, capacity, curProfit, idx+1)
+	profit2 = recBruteForce(profits, weights, capacity, idx+1)
 
 	return max(profit1, profit2)
 }
@@ -28,21 +28,21 @@ func knapsackTopDown(profits, weights []int, capacity int) int {
 		}
 	}
 
-	return recTopDown(dp, profits, weights, capacity, 0, 0)
+	return recTopDown(dp, profits, weights, capacity, 0)
 }
 
-func recTopDown(dp [][]int, profits, weights []int, capacity, curProfit, idx int) int {
+func recTopDown(dp [][]int, profits, weights []int, capacity, idx int) int {
 	if capacity <= 0 || idx == len(profits) {
-		return curProfit
+		return 0
 	}
 
 	if dp[idx][capacity] == -1 {
 		var profit1, profit2 int
 		if weights[idx] <= capacity {
-			profit1 = recBruteForce(profits, weights, capacity-weights[idx], curProfit+profits[idx], idx)
+			profit1 = profits[idx] + recTopDown(dp, profits, weights, capacity-weights[idx], idx)
 		}
 
-		profit2 = recBruteForce(profits, weights, capacity, curProfit, idx+1)
+		profit2 = recTopDown(dp, profits, weights, capacity, idx+1)
 
 		dp[idx][capacity] = max(profit1, profit2)
 	}

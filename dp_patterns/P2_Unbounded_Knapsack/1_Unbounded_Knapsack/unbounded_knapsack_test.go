@@ -12,14 +12,14 @@ func Test_knapsack(t *testing.T) {
 		capacity int
 		want     int
 	}{
-		//{[]int{15, 20, 50}, []int{1, 2, 3}, 5, 80},
+		{[]int{15, 20, 50}, []int{1, 2, 3}, 5, 80},
 		{[]int{10, 9, 8}, []int{1, 1, 1}, 3, 30},
-		//{[]int{15, 20, 50, 4, 5, 6, 7, 8}, []int{1, 2, 3, 4, 5, 6, 7, 8}, 130, 2165},
+		{[]int{15, 20, 50, 4, 5, 6, 7, 8}, []int{1, 2, 3, 4, 5, 6, 7, 8}, 130, 2165},
 	}
 	for _, tt := range tests {
 		t.Run("", func(t *testing.T) {
-			if got := knapsackBottomUp(tt.profits, tt.weights, tt.capacity); got != tt.want {
-				t.Errorf("knapsackBruteForce() = %v, want %v", got, tt.want)
+			if got := knapsackTopDown(tt.profits, tt.weights, tt.capacity); got != tt.want {
+				t.Errorf("knapsack() = %v, want %v", got, tt.want)
 			}
 		})
 	}
