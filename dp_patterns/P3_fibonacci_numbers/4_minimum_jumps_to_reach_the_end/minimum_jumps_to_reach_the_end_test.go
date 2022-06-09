@@ -18,8 +18,8 @@ func TestCountMinJumps(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.jumps), func(t *testing.T) {
-			if got := CountMinJumpsBottomUp(tt.jumps); got != tt.want {
-				t.Errorf("CountMinJumpsBruteForce() = %v, want %v", got, tt.want)
+			if got := CountMinJumpsTopDown(tt.jumps); got != tt.want {
+				t.Errorf("CountMinJumps() = %v, want %v", got, tt.want)
 			}
 		})
 	}

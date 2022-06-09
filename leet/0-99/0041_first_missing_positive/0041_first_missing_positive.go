@@ -3,7 +3,7 @@ package _041_first_missing_positive
 // tptl. passed. hard
 func firstMissingPositive(nums []int) int {
 	for i := range nums {
-		for nums[i] > 0 && nums[i] < len(nums) {
+		for nums[i] > 0 && nums[i] <= len(nums) {
 			idx := nums[i] - 1
 			if nums[i] == nums[idx] {
 				break

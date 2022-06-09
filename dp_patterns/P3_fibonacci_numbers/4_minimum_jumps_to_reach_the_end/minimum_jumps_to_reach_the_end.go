@@ -35,7 +35,7 @@ func min(a, b int) int {
 }
 
 func CountMinJumpsTopDown(jumps []int) int {
-	dp := make([]int, len(jumps)+1)
+	dp := make([]int, len(jumps))
 	for i := range dp {
 		dp[i] = -1
 	}
