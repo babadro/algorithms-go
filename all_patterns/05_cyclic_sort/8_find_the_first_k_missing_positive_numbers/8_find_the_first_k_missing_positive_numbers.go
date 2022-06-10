@@ -4,8 +4,6 @@ package __find_the_first_k_missing_positive_numbers
 
 // Given an unsorted array containing numbers and a number ‘k’,
 // find the first ‘k’ missing positive numbers in the array.
-
-// todo doesn't work
 func findNumbers(nums []int, k int) []int {
 	for i := range nums {
 		for nums[i] > 0 && nums[i] <= len(nums) {
@@ -20,15 +18,19 @@ func findNumbers(nums []int, k int) []int {
 	}
 
 	var res []int
-	for i := 0; i < len(nums) && k > 0; i++ {
+	extraNumbers := make(map[int]bool)
+	for i := 0; i < len(nums) && len(res) < k; i++ {
 		if nums[i] != i+1 {
 			res = append(res, i+1)
-			k--
+			extraNumbers[nums[i]] = true
 		}
 	}
 
-	for j := len(nums) + 1; j < len(nums)+1+k; j++ {
-		res = append(res, j)
+	for i := 1; len(res) < k; i++ {
+		candidateNum := i + len(nums)
+		if !extraNumbers[candidateNum] {
+			res = append(res, candidateNum)
+		}
 	}
 
 	return res

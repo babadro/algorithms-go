@@ -12,7 +12,7 @@ func Test_findNumbers(t *testing.T) {
 		k    int
 		want []int
 	}{
-		//{[]int{3, -1, 4, 5, 5}, 3, []int{1, 2, 6}},
+		{[]int{3, -1, 4, 5, 5}, 3, []int{1, 2, 6}},
 		{[]int{2, 3, 4}, 3, []int{1, 5, 6}},
 	}
 	for _, tt := range tests {
