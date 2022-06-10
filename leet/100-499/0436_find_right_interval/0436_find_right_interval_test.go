@@ -16,10 +16,11 @@ func Test_findRightInterval(t *testing.T) {
 		{[][]int{{1, 2}}, []int{-1}},
 		{[][]int{{3, 4}, {2, 3}, {1, 2}}, []int{-1, 0, 1}},
 		{[][]int{{1, 4}, {2, 3}, {3, 4}}, []int{-1, 2, -1}},
+		{[][]int{{1, 12}, {2, 9}, {3, 10}, {13, 14}, {15, 16}, {16, 17}}, []int{3, 3, 3, 4, 5, -1}},
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.intervals), func(t *testing.T) {
-			if got := findRightInterval(tt.intervals); !reflect.DeepEqual(got, tt.want) {
+			if got := findRightInterval2(tt.intervals); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("findRightInterval() = %v, want %v", got, tt.want)
 			}
 		})
