@@ -4,7 +4,8 @@ import (
 	"container/heap"
 )
 
-// todo doesn't work. fix it
+// tptl. passed.
+// todo 2 it's slow. find faster solution
 func findRightInterval(intervals [][]int) []int {
 	startH, endH := startMaxHeap{intervals: intervals}, endMaxHeap{intervals: intervals}
 	for i := range intervals {
@@ -15,14 +16,12 @@ func findRightInterval(intervals [][]int) []int {
 	res := make([]int, len(intervals))
 	for _ = range intervals {
 		topEnd := heap.Pop(&endH).(int)
-		res[topEnd] = -1
-		if intervals[startH.indexes[0]][0] >= intervals[topEnd][1] {
-			topStart := heap.Pop(&startH).(int)
-			for startH.Len() > 0 && intervals[startH.indexes[0]][0] >= intervals[topEnd][1] {
-				topStart = heap.Pop(&startH).(int)
-			}
-
-			res[topEnd] = topStart
+		topStart := -1
+		for startH.Len() > 0 && intervals[startH.indexes[0]][0] >= intervals[topEnd][1] {
+			topStart = heap.Pop(&startH).(int)
+		}
+		res[topEnd] = topStart
+		if topStart != -1 {
 			heap.Push(&startH, topStart)
 		}
 	}
@@ -35,8 +34,10 @@ type startMaxHeap struct {
 	indexes   []int
 }
 
-func (h startMaxHeap) Len() int            { return len(h.indexes) }
-func (h startMaxHeap) Less(i, j int) bool  { return h.intervals[i][0] > h.intervals[j][0] }
+func (h startMaxHeap) Len() int { return len(h.indexes) }
+func (h startMaxHeap) Less(i, j int) bool {
+	return h.intervals[h.indexes[i]][0] > h.intervals[h.indexes[j]][0]
+}
 func (h startMaxHeap) Swap(i, j int)       { h.indexes[i], h.indexes[j] = h.indexes[j], h.indexes[i] }
 func (h *startMaxHeap) Push(v interface{}) { (*h).indexes = append((*h).indexes, v.(int)) }
 func (h *startMaxHeap) Pop() interface{} {
@@ -52,8 +53,10 @@ type endMaxHeap struct {
 	indexes   []int
 }
 
-func (h endMaxHeap) Len() int            { return len(h.indexes) }
-func (h endMaxHeap) Less(i, j int) bool  { return h.intervals[i][1] > h.intervals[j][1] }
+func (h endMaxHeap) Len() int { return len(h.indexes) }
+func (h endMaxHeap) Less(i, j int) bool {
+	return h.intervals[h.indexes[i]][1] > h.intervals[h.indexes[j]][1]
+}
 func (h endMaxHeap) Swap(i, j int)       { h.indexes[i], h.indexes[j] = h.indexes[j], h.indexes[i] }
 func (h *endMaxHeap) Push(v interface{}) { (*h).indexes = append((*h).indexes, v.(int)) }
 func (h *endMaxHeap) Pop() interface{} {
