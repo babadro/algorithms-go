@@ -1,6 +1,6 @@
 package _287_find_the_duplicate_number
 
-// 31% 13% - it's ok for two floyd cycle solytion
+// 31% 13% - it's ok for two floyd cycle solution
 func findDuplicate(nums []int) int {
 	slow, fast := nums[0], nums[0]
 	for {
@@ -16,5 +16,6 @@ func findDuplicate(nums []int) int {
 		slow = nums[slow]
 		fast = nums[fast]
 	}
+
 	return fast
 }

@@ -2,6 +2,7 @@ package __palindromic_partitioning
 
 import "github.com/babadro/algorithms-go/utils"
 
+// see leetcode 132
 func findMPPCuts(st string) int {
 	return recBruteForce(st, 0, len(st)-1)
 }

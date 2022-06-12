@@ -1,45 +1,58 @@
 package _378_kth_smallest_element_in_sorted_matrix
 
-import (
-	"math"
-	"sort"
-)
+import "container/heap"
 
-// doesn't work
-func kthSmallest2(matrix [][]int, k int) int {
-	sqrt := math.Sqrt(float64(k))
-
-	rounded := int(sqrt)
-	if sqrt-float64(rounded) == 0 {
-		return matrix[rounded-1][rounded-1]
+// tptl passed. heaps solution
+func kthSmallest(matrix [][]int, k int) int {
+	h := minHeap{matrix: matrix}
+	for i := 0; i < len(matrix) && i < k; i++ {
+		heap.Push(&h, element{y: i, x: 0})
 	}
 
-	n := rounded
+	numberCount, res := 0, 0
+	for h.Len() > 0 {
+		el := heap.Pop(&h).(element)
+		res = matrix[el.y][el.x]
+		numberCount++
+		if numberCount == k {
+			break
+		}
 
-	arr := make([]int, 0, n+n-1)
-
-	for x := 0; x < len(matrix); x++ {
-		arr = append(arr, matrix[n][x])
-	}
-
-	for y := 0; y < len(matrix)-1; y++ {
-		arr = append(arr, matrix[y][n])
-	}
-
-	sort.Ints(arr)
-
-	return arr[k-n*n-1]
-}
-
-// it works
-func kthSmallestBruteForce(matrix [][]int, k int) int {
-	arr := make([]int, 0, len(matrix)*len(matrix[0]))
-	for y := 0; y < len(matrix); y++ {
-		for x := 0; x < len(matrix[0]); x++ {
-			arr = append(arr, matrix[y][x])
+		el.x++
+		if len(matrix[0]) > el.x {
+			heap.Push(&h, el)
 		}
 	}
 
-	sort.Ints(arr)
-	return arr[k-1]
+	return res
+}
+
+type element struct {
+	y, x int
+}
+
+type minHeap struct {
+	elements []element
+	matrix   [][]int
+}
+
+func (a minHeap) Len() int {
+	return len(a.elements)
+}
+func (a minHeap) Less(i, j int) bool {
+	yI, xI, yJ, xJ := a.elements[i].y, a.elements[i].x, a.elements[j].y, a.elements[j].x
+	return a.matrix[yI][xI] < a.matrix[yJ][xJ]
+}
+func (a minHeap) Swap(i, j int) {
+	a.elements[i], a.elements[j] = a.elements[j], a.elements[i]
+}
+func (a *minHeap) Push(v interface{}) {
+	(*a).elements = append((*a).elements, v.(element))
+}
+func (a *minHeap) Pop() interface{} {
+	last := len(a.elements) - 1
+	res := (*a).elements[last]
+	(*a).elements = (*a).elements[:last]
+
+	return res
 }

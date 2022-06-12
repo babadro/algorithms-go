@@ -23,6 +23,6 @@ func kthSmallestBestSolution(matrix [][]int, k int) int {
 			r = m
 		}
 	}
-	return l
 
+	return l
 }
