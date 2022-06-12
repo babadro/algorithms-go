@@ -47,12 +47,12 @@ func (a minHeap) Swap(i, j int) {
 	a.elements[i], a.elements[j] = a.elements[j], a.elements[i]
 }
 func (a *minHeap) Push(v interface{}) {
-	(*a).elements = append((*a).elements, v.(element))
+	a.elements = append(a.elements, v.(element))
 }
 func (a *minHeap) Pop() interface{} {
 	last := len(a.elements) - 1
-	res := (*a).elements[last]
-	(*a).elements = (*a).elements[:last]
+	res := a.elements[last]
+	a.elements = a.elements[:last]
 
 	return res
 }
