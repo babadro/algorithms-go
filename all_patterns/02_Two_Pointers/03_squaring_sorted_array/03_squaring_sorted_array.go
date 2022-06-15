@@ -1,5 +1,6 @@
 package _3_squaring_sorted_array
 
+// see leetcode 977
 // todo 2 can I do it in place?
 func makeSquares(arr []int) []int {
 	n := len(arr)

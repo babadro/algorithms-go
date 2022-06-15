@@ -16,11 +16,12 @@ func TestThreeeSum(t *testing.T) {
 		{[]int{}, nil},
 		{[]int{-1, 0, 1, 2, -1, -4}, [][]int{{-1, 0, 1}, {-1, -1, 2}}},
 		{[]int{0}, nil},
+		{[]int{-1, 0, 1}, [][]int{{-1, 0, 1}}},
 	}
 
 	for _, c := range cases {
 
-		fact := threeSum2(c.nums)
+		fact := threeSum(c.nums)
 
 		slices.SortEach(fact)
 		sort.Slice(fact, func(i, j int) bool {
