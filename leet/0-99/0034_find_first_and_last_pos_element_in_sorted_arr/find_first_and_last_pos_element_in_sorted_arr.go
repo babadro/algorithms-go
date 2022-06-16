@@ -4,13 +4,12 @@ import "sort"
 
 // tptl. best solution
 func searchRange2(nums []int, target int) []int {
-	res := make([]int, 2)
 	l, r := 0, len(nums)-1
 	for l <= r {
 		mid := l + (r-l)/2
 		if nums[mid] >= target {
 			r = mid - 1
-		} else if nums[mid] < target {
+		} else {
 			l = mid + 1
 		}
 	}
@@ -19,21 +18,19 @@ func searchRange2(nums []int, target int) []int {
 		return []int{-1, -1}
 	}
 
-	res[0] = l
+	leftRes := l
 
 	l, r = 0, len(nums)-1
 	for l <= r {
 		mid := l + (r-l)/2
 		if nums[mid] > target {
 			r = mid - 1
-		} else if nums[mid] <= target {
+		} else {
 			l = mid + 1
 		}
 	}
 
-	res[1] = r
-
-	return res
+	return []int{leftRes, r}
 }
 
 // using sort.Search
