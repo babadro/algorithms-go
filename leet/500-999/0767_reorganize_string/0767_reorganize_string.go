@@ -18,10 +18,10 @@ func reorganizeString(s string) string {
 	heap.Init(&h)
 
 	res := make([]byte, 0, len(s))
-	prev := byte('_') // dummy letter
-	for h.Len() > 0 {
+	var prev byte
+	for i := 0; h.Len() > 0; i++ {
 		cur := heap.Pop(&h).(byte)
-		if freq[prev] > 0 {
+		if i > 0 && freq[prev] > 0 {
 			heap.Push(&h, prev)
 		}
 

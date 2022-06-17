@@ -1,6 +1,47 @@
 package _347_top_k_frequent_elements
 
-import "sort"
+import (
+	"container/heap"
+	"sort"
+)
+
+// tptl. passed
+func topKFrequent2(nums []int, k int) []int {
+	freq := make(map[int]int)
+	for _, num := range nums {
+		freq[num]++
+	}
+
+	h := minHeap{freq: freq}
+	for num, count := range freq {
+		if h.Len() < k || freq[h.arr[0]] < count {
+			heap.Push(&h, num)
+
+			if h.Len() > k {
+				heap.Pop(&h)
+			}
+		}
+	}
+
+	return h.arr
+}
+
+type minHeap struct {
+	freq map[int]int
+	arr  []int
+}
+
+func (h minHeap) Len() int            { return len(h.arr) }
+func (h minHeap) Less(i, j int) bool  { return h.freq[h.arr[i]] < h.freq[h.arr[j]] }
+func (h minHeap) Swap(i, j int)       { h.arr[i], h.arr[j] = h.arr[j], h.arr[i] }
+func (h *minHeap) Push(v interface{}) { (*h).arr = append((*h).arr, v.(int)) }
+func (h *minHeap) Pop() interface{} {
+	last := len(h.arr) - 1
+	res := h.arr[last]
+	(*h).arr = (*h).arr[:last]
+
+	return res
+}
 
 // bruteforce 93% 5%
 func topKFrequent(nums []int, k int) []int {
