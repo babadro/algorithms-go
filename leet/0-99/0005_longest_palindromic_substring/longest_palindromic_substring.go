@@ -29,3 +29,29 @@ func isPalindrome(s string, left, right int) bool {
 
 	return true
 }
+
+func longestPalindrome3(s string) string {
+	dp := make([][]bool, len(s))
+	for i := 0; i < len(s); i++ {
+		dp[i] = make([]bool, len(s))
+	}
+	for i := 0; i < len(s); i++ {
+		dp[i][i] = true
+	}
+
+	start := 0
+	end := 0
+	for j := 1; j < len(s); j++ {
+		for i := j - 1; i >= 0; i-- {
+			if s[i] == s[j] && (j-i < 2 || dp[i+1][j-1]) {
+				dp[i][j] = true
+				if j-i+1 > end-start+1 {
+					start = i
+					end = j
+				}
+			}
+		}
+	}
+
+	return s[start : end+1]
+}

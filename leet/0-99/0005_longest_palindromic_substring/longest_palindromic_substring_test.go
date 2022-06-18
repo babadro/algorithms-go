@@ -20,7 +20,7 @@ func TestLongestPalindrome(t *testing.T) {
 	}
 
 	for i, c := range cases {
-		if fact := longestPalindrome(c.input); fact != c.expected {
+		if fact := longestPalindrome3(c.input); fact != c.expected {
 			t.Errorf("case#%d, want %s, got %s", i+1, c.expected, fact)
 		}
 	}
