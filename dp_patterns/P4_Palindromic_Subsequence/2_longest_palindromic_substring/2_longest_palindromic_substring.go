@@ -2,6 +2,7 @@ package __longest_palindromic_substring
 
 import "github.com/babadro/algorithms-go/utils"
 
+// see leetcode 5
 func findLPSLenBruteForce(st string) int {
 	return recBruteForce(st, 0, len(st)-1)
 }
@@ -52,14 +53,14 @@ func recTopDown(st string, dp [][]int, startIDx, endIDx int) int {
 	if dp[startIDx][endIDx] == -1 {
 		if st[startIDx] == st[endIDx] {
 			remainingLen := endIDx - startIDx - 1
-			if remainingLen == recBruteForce(st, startIDx+1, endIDx-1) {
+			if remainingLen == recTopDown(st, dp, startIDx+1, endIDx-1) {
 				dp[startIDx][endIDx] = remainingLen + 2
 				return dp[startIDx][endIDx]
 			}
 		}
 
-		c1 := recBruteForce(st, startIDx+1, endIDx)
-		c2 := recBruteForce(st, startIDx, endIDx-1)
+		c1 := recTopDown(st, dp, startIDx+1, endIDx)
+		c2 := recTopDown(st, dp, startIDx, endIDx-1)
 		dp[startIDx][endIDx] = utils.Max(c1, c2)
 	}
 

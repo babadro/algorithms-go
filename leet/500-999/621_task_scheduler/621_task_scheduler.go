@@ -1,59 +1,58 @@
 package _621_task_scheduler
 
-import (
-	"container/heap"
-	"fmt"
-)
+import "container/heap"
 
-// doesn't work
+// tptl. passed
 func leastInterval(tasks []byte, n int) int {
-	m := make(map[byte]int)
-	for _, b := range tasks {
-		m[b]++
+	freq := make(map[byte]int)
+	for _, task := range tasks {
+		freq[task]++
 	}
 
-	h := &minHeap{now: 0}
-
-	for char, count := range m {
-		h.arr = append(h.arr, [3]int{0, count, int(char)})
+	h := maxHeap{freq: freq}
+	for task := range freq {
+		heap.Push(&h, task)
 	}
 
-	heap.Init(h)
-
-	for h.arr[0][1] > 0 {
-		if h.arr[0][0] <= h.now {
-			h.arr[0][0] = h.now + 1 + n
-			h.arr[0][1]--
-
-			fmt.Printf("%s\n", string(byte(h.arr[0][2])))
-		} else {
-			fmt.Println("idle")
+	var waitList []byte
+	res := 0
+	for h.Len() > 0 {
+		waitList = waitList[:0]
+		j := n + 1
+		for ; j > 0 && h.Len() > 0; j-- {
+			res++
+			curr := heap.Pop(&h).(byte)
+			if freq[curr] > 1 {
+				freq[curr]--
+				waitList = append(waitList, curr)
+			}
 		}
 
-		h.now++
-		heap.Init(h)
+		for _, task := range waitList {
+			heap.Push(&h, task)
+		}
+
+		if h.Len() > 0 {
+			res += j // idle
+		}
 	}
 
-	return h.now
+	return res
 }
 
-type minHeap struct {
-	arr [][3]int
-	now int
+type maxHeap struct {
+	freq map[byte]int
+	arr  []byte
 }
 
-func (h minHeap) Len() int { return len(h.arr) }
-func (h minHeap) Less(i, j int) bool {
-	ok1, ok2 := h.now-h.arr[i][0] >= 0, h.now-h.arr[j][0] >= 0
-	if ok1 == ok2 {
-		return h.arr[i][1] > h.arr[j][1]
-	}
+func (h maxHeap) Len() int            { return len(h.arr) }
+func (h maxHeap) Less(i, j int) bool  { return h.freq[h.arr[i]] > h.freq[h.arr[j]] }
+func (h maxHeap) Swap(i, j int)       { h.arr[i], h.arr[j] = h.arr[j], h.arr[i] }
+func (h *maxHeap) Push(v interface{}) { (*h).arr = append((*h).arr, v.(byte)) }
+func (h *maxHeap) Pop() interface{} {
+	last := len(h.arr) - 1
+	res := h.arr[last]
+	(*h).arr = (*h).arr[:last]
 
-	return ok1
-}
-func (h minHeap) Swap(i, j int)       { h.arr[i], h.arr[j] = h.arr[j], h.arr[i] }
-func (h *minHeap) Push(x interface{}) { h.arr = append(h.arr, x.([3]int)) }
-func (h *minHeap) Pop() (v interface{}) {
-	h.arr, v = (h.arr)[:len(h.arr)-1], (h.arr)[len(h.arr)-1]
-	return
+	return res
 }

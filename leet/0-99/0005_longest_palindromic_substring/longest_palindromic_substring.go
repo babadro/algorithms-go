@@ -2,29 +2,30 @@ package _005_longest_palindromic_substring
 
 // TODO 2 this is brute force. Implement good solution (in description maybe)
 func longestPalindrome(s string) string {
-	runes := []rune(s)
 	maxPalindromeLen := 0
-	var current []rune
-	for i := range runes {
-		for j := len(runes); j > i; j-- {
+	var left, right int
+	for i := range s {
+		for j := len(s); j > i; j-- {
 			if currLen := j - i; currLen > maxPalindromeLen {
-				candidate := runes[i:j]
-				if isPalindrome(candidate) {
+				if isPalindrome(s, i, j) {
 					maxPalindromeLen = currLen
-					current = candidate
+					left, right = i, j
 				}
+			} else {
+				break
 			}
 		}
 	}
-	return string(current)
+
+	return s[left:right]
 }
 
-func isPalindrome(runes []rune) bool {
-	l := len(runes)
-	for i := 0; i < l/2; i++ {
-		if runes[i] != runes[l-1-i] {
+func isPalindrome(s string, left, right int) bool {
+	for i, j := left, right-1; i < j; i, j = i+1, j-1 {
+		if s[i] != s[j] {
 			return false
 		}
 	}
+
 	return true
 }
