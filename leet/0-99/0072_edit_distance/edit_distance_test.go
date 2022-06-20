@@ -18,7 +18,7 @@ func Test_minDistance(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.word1+"_"+tt.word2, func(t *testing.T) {
-			if got := minDistance(tt.word1, tt.word2); got != tt.want {
+			if got := minDistance2(tt.word1, tt.word2); got != tt.want {
 				t.Errorf("minDistance() = %v, want %v", got, tt.want)
 			}
 		})
