@@ -2,6 +2,7 @@ package _2_edit_distance
 
 import "github.com/babadro/algorithms-go/utils"
 
+// see leetcode 72
 func findMinOperationsBruteForce(s1, s2 string) int {
 	return recBruteForce(s1, s2, 0, 0)
 }

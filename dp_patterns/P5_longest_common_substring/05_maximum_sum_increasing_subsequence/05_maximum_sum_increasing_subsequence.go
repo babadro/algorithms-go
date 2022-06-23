@@ -3,7 +3,7 @@ package _5_maximum_sum_increasing_subsequence
 import "github.com/babadro/algorithms-go/utils"
 
 // leetcode 1626? https://leetcode.com/problems/best-team-with-no-conflicts/discuss/899452/C%2B%2B-DP-with-comments-Find-the-maximum-sum-of-increasing-subsequence
-// leetcode 300?
+// leetcode 300
 func findMSISBruteForce(nums []int) int {
 	return recBruteForce(nums, 0, -1)
 }
@@ -43,10 +43,10 @@ func recTopDown(dp [][]int, nums []int, curr, prev int) int {
 	if dp[curr][prev+1] == -1 {
 		c1 := 0
 		if prev == -1 || nums[curr] > nums[prev] {
-			c1 = nums[curr] + recBruteForce(nums, curr+1, curr)
+			c1 = nums[curr] + recTopDown(dp, nums, curr+1, curr)
 		}
 
-		c2 := recBruteForce(nums, curr+1, prev)
+		c2 := recTopDown(dp, nums, curr+1, prev)
 
 		dp[curr][prev+1] = utils.Max(c1, c2)
 	}

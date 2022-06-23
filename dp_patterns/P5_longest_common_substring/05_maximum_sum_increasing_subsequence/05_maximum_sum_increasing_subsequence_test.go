@@ -15,7 +15,7 @@ func Test_findMSIS(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.nums), func(t *testing.T) {
-			if got := findMSISBottomUp(tt.nums); got != tt.want {
+			if got := findMSISTopDown(tt.nums); got != tt.want {
 				t.Errorf("findMSIS() = %v, want %v", got, tt.want)
 			}
 		})

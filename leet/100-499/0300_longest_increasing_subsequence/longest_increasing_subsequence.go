@@ -48,3 +48,42 @@ func lengthOfLISDP(nums []int) int {
 
 	return max
 }
+
+// passed. top down dp
+func lengthOfLIS2(nums []int) int {
+	dp := make([][]int, len(nums))
+	for i := range dp {
+		dp[i] = make([]int, len(nums)+1)
+		for j := range dp[i] {
+			dp[i][j] = -1
+		}
+	}
+
+	return rec(dp, nums, 0, -1)
+}
+
+func rec(dp [][]int, nums []int, cur, prev int) int {
+	if cur == len(nums) {
+		return 0
+	}
+
+	if dp[cur][prev+1] == -1 {
+		var res1, res2 int
+		if prev == -1 || nums[cur] > nums[prev] {
+			res1 = 1 + rec(dp, nums, cur+1, cur)
+		}
+
+		res2 = rec(dp, nums, cur+1, prev)
+		dp[cur][prev+1] = max(res1, res2)
+	}
+
+	return dp[cur][prev+1]
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+
+	return b
+}

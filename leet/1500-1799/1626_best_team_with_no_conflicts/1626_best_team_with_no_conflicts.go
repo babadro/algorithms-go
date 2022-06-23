@@ -39,10 +39,10 @@ func bestTeamScoreTopDown(scores []int, ages []int) int {
 		}
 	}
 
-	return recTopDown(dp, scores, ages, 0, -1)
+	return recTopDown(dp, scores, 0, -1)
 }
 
-func recTopDown(dp [][]int, scores, ages []int, curr, prev int) int {
+func recTopDown(dp [][]int, scores []int, curr, prev int) int {
 	if curr == len(scores) {
 		return 0
 	}
@@ -50,10 +50,10 @@ func recTopDown(dp [][]int, scores, ages []int, curr, prev int) int {
 	if dp[curr][prev+1] == -1 {
 		res1 := 0
 		if prev == -1 || scores[curr] >= scores[prev] {
-			res1 = scores[curr] + recTopDown(dp, scores, ages, curr+1, curr)
+			res1 = scores[curr] + recTopDown(dp, scores, curr+1, curr)
 		}
 
-		res2 := recTopDown(dp, scores, ages, curr+1, prev)
+		res2 := recTopDown(dp, scores, curr+1, prev)
 
 		dp[curr][prev+1] = max(res1, res2)
 	}
