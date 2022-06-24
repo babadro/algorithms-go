@@ -4,7 +4,41 @@ import (
 	"math"
 )
 
-// tptl. passed but slow
+// tptl.  bottom up
+func minFallingPathSum2(matrix [][]int) int {
+	dp := make([][]int, 2)
+	for i := range dp {
+		dp[i] = make([]int, len(matrix))
+	}
+
+	for row := len(matrix) - 1; row >= 0; row-- {
+		for col := 0; col < len(matrix[0]); col++ {
+			var minRes int
+			if len(matrix[0]) == 1 {
+				minRes = dp[1][col]
+			} else if col == 0 {
+				minRes = min(dp[1][col], dp[1][col+1])
+			} else if col == len(matrix[0])-1 {
+				minRes = min(dp[1][col-1], dp[1][col])
+			} else {
+				minRes = min3(dp[1][col-1], dp[1][col], dp[1][col+1])
+			}
+
+			dp[0][col] = minRes + matrix[row][col]
+		}
+
+		dp[0], dp[1] = dp[1], dp[0]
+	}
+
+	res := math.MaxInt64
+	for _, num := range dp[1] {
+		res = min(res, num)
+	}
+
+	return res
+}
+
+// tptl. top down. passed but slow
 func minFallingPathSum(matrix [][]int) int {
 	res := math.MaxInt64
 	dp := make(map[[2]int]int)
