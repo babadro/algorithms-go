@@ -1,6 +1,6 @@
 package _005_longest_palindromic_substring
 
-// TODO 2 this is brute force. Implement good solution (in description maybe)
+// passed
 func longestPalindrome(s string) string {
 	maxPalindromeLen := 0
 	var left, right int
@@ -30,6 +30,7 @@ func isPalindrome(s string, left, right int) bool {
 	return true
 }
 
+// bottom up
 func longestPalindrome3(s string) string {
 	dp := make([][]bool, len(s))
 	for i := 0; i < len(s); i++ {
