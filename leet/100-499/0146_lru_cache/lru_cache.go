@@ -1,78 +1,72 @@
 package _146_lru_cache
 
-// Doesn't work
-// TODO 3 try to find out what's wrong. Find the fail submission and that test case
-type item struct {
-	payload, lastUsage int
+type LRUCache struct {
+	Head *Node
+	Tail *Node
+	HT   map[int]*Node
+	Cap  int
 }
 
-type LRUCache2 struct {
-	newest       int
-	counterToKey map[int]int
-	storage      map[int]item
-	oldest       int
-	size         int
-	capacity     int
+type Node struct {
+	Key  int
+	Val  int
+	Prev *Node
+	Next *Node
 }
 
-func Constructor2(capacity int) LRUCache2 {
-	return LRUCache2{counterToKey: make(map[int]int, capacity), storage: make(map[int]item, capacity), capacity: capacity}
+func Constructor(capacity int) LRUCache {
+	return LRUCache{HT: make(map[int]*Node), Cap: capacity}
 }
 
-func (this *LRUCache2) Get(key int) int {
-	if it, ok := this.storage[key]; ok {
-		delete(this.counterToKey, it.lastUsage)
-		this.newest++
-		this.counterToKey[this.newest] = key
-		if this.oldest == it.lastUsage {
-			this.findNextOldest()
-		}
-		this.storage[key] = item{payload: it.payload, lastUsage: this.newest}
-		return it.payload
+func (this *LRUCache) Get(key int) int {
+	node, ok := this.HT[key]
+	if ok {
+		this.Remove(node)
+		this.Add(node)
+		return node.Val
 	}
 	return -1
 }
 
-func (this *LRUCache2) Put(key int, value int) {
-	flag := false
-	if oldValue, ok := this.storage[key]; ok {
-		if oldValue.lastUsage == this.oldest {
-			delete(this.counterToKey, this.oldest)
-			flag = true
-		}
-	} else if this.size == this.capacity {
-		keyToDelete := this.counterToKey[this.oldest]
-		delete(this.storage, keyToDelete)
-		delete(this.counterToKey, this.oldest)
-		flag = true
+func (this *LRUCache) Put(key int, value int) {
+	node, ok := this.HT[key]
+	if ok {
+		node.Val = value
+		this.Remove(node)
+		this.Add(node)
+		return
 	} else {
-		if this.size == 0 {
-			this.oldest = 1
-			this.counterToKey[1] = key
-		}
-		this.size++
+		node = &Node{Key: key, Val: value}
+		this.HT[key] = node
+		this.Add(node)
 	}
-
-	this.newest++
-	this.storage[key] = item{payload: value, lastUsage: this.newest}
-	this.counterToKey[this.newest] = key
-	if flag {
-		this.findNextOldest()
+	if len(this.HT) > this.Cap {
+		delete(this.HT, this.Tail.Key)
+		this.Remove(this.Tail)
 	}
 }
 
-func (this *LRUCache2) findNextOldest() {
-	for {
-		this.oldest++
-		if _, ok := this.counterToKey[this.oldest]; ok {
-			break
-		}
+func (this *LRUCache) Add(node *Node) {
+	node.Prev = nil
+	node.Next = this.Head
+	if this.Head != nil {
+		this.Head.Prev = node
+	}
+	this.Head = node
+	if this.Tail == nil {
+		this.Tail = node
 	}
 }
 
-/**
- * Your LRUCache2 object will be instantiated and called as such:
- * obj := Constructor2(capacity);
- * param_1 := obj.Get(key);
- * obj.Put(key,item);
- */
+func (this *LRUCache) Remove(node *Node) {
+	if node != this.Head {
+		node.Prev.Next = node.Next
+	} else {
+		this.Head = node.Next
+	}
+	if node != this.Tail {
+		node.Next.Prev = node.Prev
+	} else {
+		this.Tail = node.Prev
+	}
+}

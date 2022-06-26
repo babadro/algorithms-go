@@ -3,7 +3,7 @@ package _146_lru_cache
 import "testing"
 
 func TestLruCache(t *testing.T) {
-	cache := Constructor2(2)
+	cache := Constructor4(2)
 	cache.Put(1, 1)
 	cache.Put(2, 2)
 	t.Log(cache.Get(1)) // returns 1
@@ -14,7 +14,7 @@ func TestLruCache(t *testing.T) {
 	t.Log(cache.Get(3)) // returns 3
 }
 func TestLruCache2(t *testing.T) {
-	cache := Constructor2(1)
+	cache := Constructor3(1)
 	cache.Put(1, 1)
 	cache.Put(2, 2)
 	t.Log(cache.Get(1)) // returns -1
@@ -27,7 +27,7 @@ func TestLruCache2(t *testing.T) {
 }
 
 func TestLruCache3(t *testing.T) {
-	cache := Constructor2(2)
+	cache := Constructor4(2)
 	cache.Put(2, 1)
 	cache.Put(2, 2)
 	t.Log(cache.Get(2)) // returns 2

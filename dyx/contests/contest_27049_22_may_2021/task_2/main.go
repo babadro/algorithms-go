@@ -48,7 +48,7 @@ func lastDayOfInterval(inType string, curDay, finish time.Time) bool {
 
 	switch inType {
 	case "WEEK":
-		return curDay.Weekday() == time.Sunday
+		return nextDay.Weekday() == time.Monday
 	case "MONTH":
 		return nextDay.Day() == 1
 	case "QUARTER":
@@ -58,7 +58,7 @@ func lastDayOfInterval(inType string, curDay, finish time.Time) bool {
 				nextDay.Month() == time.July ||
 				nextDay.Month() == time.October)
 	case "YEAR":
-		return curDay.Day() == 1 && curDay.Month() == time.January
+		return nextDay.Day() == 1 && nextDay.Month() == time.January
 	case "REVIEW":
 		return nextDay.Day() == 1 && (nextDay.Month() == time.April || nextDay.Month() == time.October)
 	}
