@@ -1,5 +1,6 @@
 package _146_lru_cache
 
+// passed. fastest solution
 type LRUCache struct {
 	Head *Node
 	Tail *Node
@@ -23,8 +24,10 @@ func (this *LRUCache) Get(key int) int {
 	if ok {
 		this.Remove(node)
 		this.Add(node)
+
 		return node.Val
 	}
+
 	return -1
 }
 
@@ -34,12 +37,14 @@ func (this *LRUCache) Put(key int, value int) {
 		node.Val = value
 		this.Remove(node)
 		this.Add(node)
+
 		return
-	} else {
-		node = &Node{Key: key, Val: value}
-		this.HT[key] = node
-		this.Add(node)
 	}
+
+	node = &Node{Key: key, Val: value}
+	this.HT[key] = node
+	this.Add(node)
+
 	if len(this.HT) > this.Cap {
 		delete(this.HT, this.Tail.Key)
 		this.Remove(this.Tail)
@@ -52,6 +57,7 @@ func (this *LRUCache) Add(node *Node) {
 	if this.Head != nil {
 		this.Head.Prev = node
 	}
+
 	this.Head = node
 	if this.Tail == nil {
 		this.Tail = node
@@ -64,6 +70,7 @@ func (this *LRUCache) Remove(node *Node) {
 	} else {
 		this.Head = node.Next
 	}
+
 	if node != this.Tail {
 		node.Next.Prev = node.Prev
 	} else {

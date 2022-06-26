@@ -2,7 +2,8 @@ package _146_lru_cache
 
 import "container/heap"
 
-type item3 struct {
+// passed, but slow
+type item struct {
 	key, value, timestamp int
 }
 
@@ -19,7 +20,7 @@ func Constructor3(capacity int) LRUCache3 {
 		timestamp: 0,
 		h: minHeap{
 			keyToIDx: keyToIdx,
-			items:    make([]item3, 0, capacity),
+			items:    make([]item, 0, capacity),
 		},
 	}
 }
@@ -32,11 +33,11 @@ func (this *LRUCache3) Get(key int) int {
 
 	this.timestamp++
 
-	cacheItem := this.h.items[idx]
-	cacheItem.timestamp = this.timestamp
+	this.h.items[idx].timestamp = this.timestamp
+	val := this.h.items[idx].value
 	heap.Fix(&this.h, idx)
 
-	return cacheItem.value
+	return val
 }
 
 func (this *LRUCache3) Put(key int, value int) {
@@ -50,7 +51,7 @@ func (this *LRUCache3) Put(key int, value int) {
 		return
 	}
 
-	heap.Push(&this.h, item3{key: key, value: value, timestamp: this.timestamp})
+	heap.Push(&this.h, item{key: key, value: value, timestamp: this.timestamp})
 	if this.h.Len() > this.capacity {
 		_ = heap.Pop(&this.h)
 	}
@@ -58,7 +59,7 @@ func (this *LRUCache3) Put(key int, value int) {
 
 type minHeap struct {
 	keyToIDx map[int]int
-	items    []item3
+	items    []item
 }
 
 func (h minHeap) Len() int { return len(h.items) }
@@ -72,7 +73,7 @@ func (h minHeap) Swap(i, j int) {
 	h.items[i], h.items[j] = h.items[j], h.items[i]
 }
 func (h *minHeap) Push(v interface{}) {
-	cacheItem := v.(item3)
+	cacheItem := v.(item)
 	h.keyToIDx[cacheItem.key] = len(h.items)
 	h.items = append(h.items, cacheItem)
 }
