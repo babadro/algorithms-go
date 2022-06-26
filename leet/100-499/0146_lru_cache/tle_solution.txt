@@ -1,0 +1,82 @@
+package _146_lru_cache
+
+import "container/heap"
+
+// tle
+type LRUCache struct {
+	h         minHeap
+	m         map[int][2]int
+	capacity  int
+	timestamp int
+}
+
+func Constructor(capacity int) LRUCache {
+	m := make(map[int][2]int, capacity)
+	return LRUCache{
+		capacity:  capacity,
+		timestamp: 0,
+		m:         m,
+		h: minHeap{
+			m:    m,
+			keys: make([]int, 0, capacity),
+		},
+	}
+}
+
+func (this *LRUCache) Get(key int) int {
+	item, ok := this.m[key]
+	if !ok {
+		return -1
+	}
+
+	this.timestamp++
+
+	item[1] = this.timestamp
+	this.m[key] = item
+
+	return item[0]
+}
+
+func (this *LRUCache) Put(key int, value int) {
+	this.timestamp++
+
+	item, ok := this.m[key]
+	if ok {
+		item[0], item[1] = value, this.timestamp
+		this.m[key] = item
+
+		return
+	}
+
+	this.h.keys = append(this.h.keys, key)
+	this.m[key] = [2]int{value, this.timestamp}
+
+	if this.h.Len() > this.capacity {
+		heap.Init(&this.h)
+		delete(this.m, this.h.keys[0])
+		_ = heap.Pop(&this.h)
+	}
+}
+
+type minHeap struct {
+	m    map[int][2]int
+	keys []int
+}
+
+func (h minHeap) Len() int { return len(h.keys) }
+func (h minHeap) Less(i, j int) bool {
+	return h.m[h.keys[i]][1] < h.m[h.keys[j]][1]
+}
+func (h minHeap) Swap(i, j int) {
+	h.keys[i], h.keys[j] = h.keys[j], h.keys[i]
+}
+func (h *minHeap) Push(v interface{}) {
+	h.keys = append(h.keys, v.(int))
+}
+func (h *minHeap) Pop() interface{} {
+	last := len(h.keys) - 1
+	res := h.keys[last]
+	h.keys = h.keys[:last]
+
+	return res
+}
