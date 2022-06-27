@@ -1,6 +1,9 @@
 package _3_pubsub
 
-import "math/rand"
+import (
+	"math/rand"
+	"time"
+)
 
 type Message struct {
 	TopicName string
@@ -29,12 +32,7 @@ type Broker struct {
 func (b *Broker) Subscribe(id, groupName, topicName string) chan Message {
 	ch := make(chan Message)
 
-	if _, ok := b.topics[topicName]; !ok {
-		b.topics[topicName] = topic{
-			publisherIDs: make(map[string]bool),
-			groups:       make(map[string]group),
-		}
-	}
+	b.createTopicIfNotExists(topicName)
 
 	newSubscriber := Subscriber{
 		ID: id,
@@ -52,33 +50,68 @@ func (b *Broker) Subscribe(id, groupName, topicName string) chan Message {
 func (b *Broker) Unsubscribe(id, topicName, groupName string) {
 	gr := b.topics[topicName].groups[groupName]
 	for i := range gr.subscribers {
-		subs := gr.subscribers[i]
-		if gr.subscribers[i].ID == id {
+		sub := gr.subscribers[i]
+		if sub.ID == id {
 			last := len(gr.subscribers) - 1
-			subs[i], subs[last] = subs[last], subs[i]
-			subs = subs[:last]
+			gr.subscribers[i], gr.subscribers[last] = gr.subscribers[last], gr.subscribers[i]
+			gr.subscribers = gr.subscribers[:last]
 
-			b.topics[topicName][groupName] = subs
+			if len(gr.subscribers) == 0 {
+				delete(b.topics[topicName].groups, groupName)
+			}
+
+			b.deleteTopicIfEmpty(topicName)
 
 			return
 		}
 	}
 }
 
-func (b *Broker) NewPublisher(id, topicName string) {
+func (b *Broker) RegisterPublisher(id, topicName string) chan<- Message {
+	b.createTopicIfNotExists(topicName)
+	t := b.topics[topicName]
+	t.publisherIDs[id] = true
 
+	return b.input
+}
+
+func (b *Broker) UnregisterPublisher(id, topicName string) {
+	delete(b.topics[topicName].publisherIDs, id)
+
+	b.deleteTopicIfEmpty(topicName)
+}
+
+func (b *Broker) createTopicIfNotExists(topicName string) {
+	if _, ok := b.topics[topicName]; !ok {
+		b.topics[topicName] = topic{
+			publisherIDs: make(map[string]bool),
+			groups:       make(map[string]group),
+		}
+	}
+}
+
+func (b *Broker) deleteTopicIfEmpty(topicName string) {
+	t := b.topics[topicName]
+	if len(t.groups) == 0 && len(t.publisherIDs) == 0 {
+		delete(b.topics, topicName)
+	}
 }
 
 func (b *Broker) Run() {
 	for msg := range b.input {
-		if groups, ok := b.topics[msg.TopicName]; !ok {
-			b.topics[msg.TopicName] = make(map[string][]Subscriber)
-		} else {
-			for _, group := range groups {
-				sub := group[rand.Intn(len(group))]
+		t, ok := b.topics[msg.TopicName]
+		if !ok {
+			continue // skip non-existing topic
+		}
+
+	Loop:
+		for _, gr := range t.groups {
+			for _ = range gr.subscribers {
+				subIDx := rand.Intn(len(gr.subscribers))
 				select {
-				case sub.CH <- msg:
-				default: // skip sending
+				case gr.subscribers[subIDx].CH <- msg:
+					continue Loop
+				case <-time.After(10 * time.Millisecond):
 				}
 			}
 		}
