@@ -19,6 +19,7 @@ func Test_backspaceCompare(t *testing.T) {
 		{"7", "sadf1", "sadf2", false},
 		{"8", "sadf1", "sadf2", false},
 		{"9", "y#fo##f", "y#f#o##f", true},
+		{"", "#", "#", true},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
