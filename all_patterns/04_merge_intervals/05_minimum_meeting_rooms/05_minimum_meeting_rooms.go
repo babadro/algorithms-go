@@ -11,10 +11,6 @@ import (
 // https://leetcode.com/problems/meeting-rooms-ii/
 // tptl
 func findMinimumMeetingRooms(meetings [][]int) int {
-	if len(meetings) == 0 {
-		return 0
-	}
-
 	sort.Slice(meetings, func(i, j int) bool {
 		return meetings[i][0] < meetings[j][0]
 	})
