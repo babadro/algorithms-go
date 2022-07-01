@@ -1,5 +1,6 @@
 package _424_longest_repeating_character_replacement
 
+// tptl. passed. medium (hard for me)
 func characterReplacement(s string, k int) int {
 	freq := [26]int{}
 	left, mostFreq, res := 0, 0, 0

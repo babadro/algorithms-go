@@ -16,7 +16,7 @@ func findMinimumMeetingRooms(meetings [][]int) int {
 	}
 
 	sort.Slice(meetings, func(i, j int) bool {
-		return meetings[i][0] < meetings[j][1]
+		return meetings[i][0] < meetings[j][0]
 	})
 
 	minRooms := 0
