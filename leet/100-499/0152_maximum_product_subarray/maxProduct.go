@@ -34,8 +34,48 @@ func min(a, b int) int {
 	return b
 }
 
-// caterpillar 100% 77%
+// the same as above. just another modification
 func maxProduct2(nums []int) int {
+	res, curMin, curMax := nums[0], nums[0], nums[0]
+	for _, num := range nums[1:] {
+		tmpMax := curMax
+		curMax = max3(curMax*num, curMin*num, num)
+		curMin = min3(tmpMax*num, curMin*num, num)
+
+		res = max(res, curMax)
+	}
+
+	return res
+}
+
+func max3(a, b, c int) int {
+	res := a
+	if b > res {
+		res = b
+	}
+
+	if c > res {
+		res = c
+	}
+
+	return res
+}
+
+func min3(a, b, c int) int {
+	res := a
+	if b < res {
+		res = b
+	}
+
+	if c < res {
+		res = c
+	}
+
+	return res
+}
+
+// caterpillar 100% 77%
+func maxProduct3(nums []int) int {
 	front, maxProduct := 0, nums[0]
 	for front < len(nums) {
 		if nums[front] == 0 {
