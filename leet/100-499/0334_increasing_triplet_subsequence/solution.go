@@ -5,6 +5,7 @@ import "math"
 // 91% 100%
 // best solution
 // https://leetcode.com/problems/increasing-triplet-subsequence/discuss/822326/Go-O(N)-with-math-import-for-an-easy-max-value
+// tptl medium (hard for me)
 func increasingTriplet(nums []int) bool {
 	firstNum, secondNum := math.MaxInt64, math.MaxInt64
 
