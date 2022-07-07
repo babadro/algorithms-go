@@ -1,42 +1,42 @@
 package _079_word_search
 
-// 96% 84%
+// passed
 func exist(board [][]byte, word string) bool {
-	m, n := len(board), len(board[0])
-	totalCount := m * n
-	if len(word) > totalCount {
-		return false
-	}
 	for y := range board {
 		for x := range board[y] {
-			if success := search(y, x, m, n, 0, word, board); success {
+			if rec(board, y, x, 0, word) {
 				return true
 			}
 		}
 	}
+
 	return false
 }
 
-func search(y, x, m, n, idx int, word string, board [][]byte) bool {
-	if y < 0 || y >= m || x < 0 || x >= n {
-		return false
-	}
-	char := word[idx]
-	if board[y][x] != char {
-		return false
-	}
-	idx++
-	if idx == len(word) {
+func rec(board [][]byte, y, x, i int, word string) bool {
+	if i == len(word) {
 		return true
 	}
-	board[y][x] = 0
-	result := search(y-1, x, m, n, idx, word, board) ||
-		search(y+1, x, m, n, idx, word, board) ||
-		search(y, x-1, m, n, idx, word, board) ||
-		search(y, x+1, m, n, idx, word, board)
 
-	if !result {
-		board[y][x] = char
+	if y == len(board) || y < 0 || x == len(board[0]) || x < 0 {
+		return false
 	}
-	return result
+
+	char := board[y][x]
+	if word[i] != char {
+		return false
+	}
+
+	board[y][x] = '0'
+
+	i++
+
+	res := rec(board, y+1, x, i, word) ||
+		rec(board, y, x+1, i, word) ||
+		rec(board, y-1, x, i, word) ||
+		rec(board, y, x-1, i, word)
+
+	board[y][x] = char
+
+	return res
 }
