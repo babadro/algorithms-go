@@ -5,7 +5,7 @@ import (
 	"sort"
 )
 
-// passed. tptl. todo 2 find shorter or more effective solution, probably backtracking\iterative if possible. + benchmarks
+// passed. easy to understand
 func closestCost2(baseCosts []int, toppingCosts []int, target int) int {
 	allToppings := append(toppingCosts, toppingCosts...)
 	closestPrice := 0

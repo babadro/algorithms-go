@@ -22,7 +22,7 @@ func Test_closestCost(t *testing.T) {
 	for _, tt := range tests {
 		name := fmt.Sprintf("%v %v %d", tt.baseCosts, tt.toppingCosts, tt.target)
 		t.Run(name, func(t *testing.T) {
-			if got := closestCost2(tt.baseCosts, tt.toppingCosts, tt.target); got != tt.want {
+			if got := closestCost3(tt.baseCosts, tt.toppingCosts, tt.target); got != tt.want {
 				t.Errorf("closestCost() = %v, want %v", got, tt.want)
 			}
 		})
