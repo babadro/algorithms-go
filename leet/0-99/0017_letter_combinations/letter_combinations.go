@@ -4,6 +4,37 @@ import (
 	"math"
 )
 
+var arr = [10]string{"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"}
+
+// simple recursive
+func letterCombinations2(digits string) []string {
+	if len(digits) == 0 {
+		return nil
+	}
+
+	cur := make([]byte, len(digits))
+	var res []string
+
+	rec(digits, cur, 0, &res)
+
+	return res
+}
+
+func rec(digits string, cur []byte, i int, res *[]string) {
+	if i == len(digits) {
+		*res = append(*res, string(cur))
+		return
+	}
+
+	d := digits[i]
+	letters := arr[d-'0']
+
+	for j := range letters {
+		cur[i] = letters[j]
+		rec(digits, cur, i+1, res)
+	}
+}
+
 var dict = [10][]byte{
 	2: {'a', 'b', 'c'},
 	3: {'d', 'e', 'f'},

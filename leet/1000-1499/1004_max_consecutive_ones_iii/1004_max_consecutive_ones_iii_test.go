@@ -17,7 +17,7 @@ func Test_longestOnes(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.nums), func(t *testing.T) {
-			if got := longestOnes(tt.nums, tt.k); got != tt.want {
+			if got := longestOnes2(tt.nums, tt.k); got != tt.want {
 				t.Errorf("longestOnes() = %v, want %v", got, tt.want)
 			}
 		})

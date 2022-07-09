@@ -1,6 +1,6 @@
 package _1004_max_consecutive_ones_iii
 
-// tptl passed medium
+// tptl passed medium. best solution
 func longestOnes(nums []int, k int) int {
 	start, ones, res := 0, 0, 0
 	for end := range nums {
