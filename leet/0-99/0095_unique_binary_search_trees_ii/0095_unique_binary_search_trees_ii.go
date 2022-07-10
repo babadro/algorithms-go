@@ -2,7 +2,7 @@ package _095_unique_binary_search_trees_ii
 
 import "github.com/babadro/algorithms-go/base/binaryTree"
 
-// dyx passed. todo 2 fix unit tests
+// dyx passed. medium (hard for me)
 func generateTrees(n int) []*binaryTree.Node {
 	return rec(1, n)
 }

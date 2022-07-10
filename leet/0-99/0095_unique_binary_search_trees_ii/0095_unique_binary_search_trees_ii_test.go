@@ -22,15 +22,15 @@ func Test_generateTrees(t *testing.T) {
 
 	n1, n2, n3 = n(1), n(2), n(3)
 	n2.Left, n2.Right = n1, n3
-	res[2] = n1
+	res[2] = n2
 
 	n1, n2, n3 = n(1), n(2), n(3)
 	n3.Left, n2.Left = n2, n1
-	res[3] = n1
+	res[3] = n3
 
 	n1, n2, n3 = n(1), n(2), n(3)
 	n3.Left, n1.Right = n1, n2
-	res[4] = n1
+	res[4] = n3
 
 	tests := []struct {
 		n    int
