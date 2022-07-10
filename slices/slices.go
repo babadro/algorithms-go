@@ -43,3 +43,9 @@ func Less(arr1, arr2 []int) bool {
 
 	return false
 }
+
+func Sort2DSlice(arr [][]int) {
+	sort.Slice(arr, func(i, j int) bool {
+		return Less(arr[i], arr[j])
+	})
+}

@@ -24,15 +24,43 @@ func allOrders(tasks int, prerequisites [][]int) [][]int {
 	}
 
 	var sortedOrder []int
-	return getAllTopologicalSorts(graph, inDegree, sources, &sortedOrder)
+	var res [][]int
+	rec(graph, inDegree, sources, &sortedOrder, &res)
+
+	return res
 }
 
-func getAllTopologicalSorts(graph [][]int, inDegree []int, sources []int, sortedOrder *[]int) [][]int {
+func rec(graph [][]int, inDegree []int, sources []int, sortedOrder *[]int, res *[][]int) {
 	if len(sources) > 0 {
-		for _, vertex := range sources {
+		for i, vertex := range sources {
 			*sortedOrder = append(*sortedOrder, vertex)
-			sourcesForNextCall := make([]int, len(sources))
-			copy(sourcesForNextCall, sources)
+
+			sourcesForNextCall := make([]int, len(sources)-1)
+			copy(sourcesForNextCall, sources[:i])
+			copy(sourcesForNextCall[i:], sources[i+1:])
+
+			children := graph[vertex]
+			for _, child := range children {
+				inDegree[child]--
+				if inDegree[child] == 0 {
+					sourcesForNextCall = append(sourcesForNextCall, child)
+				}
+			}
+
+			rec(graph, inDegree, sourcesForNextCall, sortedOrder, res)
+
+			*sortedOrder = (*sortedOrder)[:len(*sortedOrder)-1]
+
+			for _, child := range children {
+				inDegree[child]++
+			}
 		}
+	}
+
+	if len(*sortedOrder) == len(inDegree) {
+		resArr := make([]int, len(*sortedOrder))
+		copy(resArr, *sortedOrder)
+
+		*res = append(*res, resArr)
 	}
 }
