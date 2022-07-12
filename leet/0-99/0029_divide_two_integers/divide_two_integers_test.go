@@ -1,6 +1,9 @@
 package _029_divide_two_integers
 
-import "testing"
+import (
+	"math"
+	"testing"
+)
 
 func TestDivide(t *testing.T) {
 	cases := []struct {
@@ -26,4 +29,9 @@ func TestDivide(t *testing.T) {
 			t.Errorf("case#%d, want %d, got %d", i+1, c.expected, fact)
 		}
 	}
+}
+
+func Test(t *testing.T) {
+	minusOne := int8(math.MinInt8)
+	t.Logf("%b", uint8(minusOne))
 }

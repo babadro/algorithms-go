@@ -57,6 +57,7 @@ func rec(graph [][]int, inDegree []int, sources []int, sortedOrder *[]int, res *
 		}
 	}
 
+	// we don't know if the graph has a cycle (in this case topological sort doesn't exist)
 	if len(*sortedOrder) == len(inDegree) {
 		resArr := make([]int, len(*sortedOrder))
 		copy(resArr, *sortedOrder)

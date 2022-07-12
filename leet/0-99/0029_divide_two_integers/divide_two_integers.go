@@ -2,41 +2,43 @@ package _029_divide_two_integers
 
 import "math"
 
-// TODO 2 This is brute force (37% cpu and 100% memory). Implement best solution
+// tptl. passed
+// https://leetcode.com/problems/divide-two-integers/discuss/1007005/Simple-code-simple-explanation
 func divide(dividend int, divisor int) int {
-	res := 0
-	var signed bool
-	if divisor == 1 {
-		return checkOverflow(dividend)
-	} else if divisor == -1 {
-		return checkOverflow(-dividend)
+	negative := false
+	if (dividend < 0 && divisor > 0) ||
+		(dividend > 0 && divisor < 0) {
+		negative = true
 	}
-	if dividend < 0 {
-		dividend *= -1
-		if divisor < 0 {
-			divisor *= -1
-		} else {
-			signed = true
-		}
-	} else if divisor < 0 {
-		divisor *= -1
-		signed = true
-	}
+
+	dividend, divisor = abs(dividend), abs(divisor)
+	var res int
 	for dividend >= divisor {
-		dividend -= divisor
-		res += 1
+		tempDivisor, count := divisor, 1
+		for dividend >= tempDivisor<<1 {
+			tempDivisor <<= 1
+			count <<= 1
+		}
+
+		dividend -= tempDivisor
+		res += count
 	}
-	if signed {
+
+	if negative {
 		return -res
 	}
-	return checkOverflow(res)
+
+	if res > math.MaxInt32 {
+		return math.MaxInt32
+	}
+
+	return res
 }
 
-func checkOverflow(input int) int {
-	if input > math.MaxInt32 {
-		return math.MaxInt32
-	} else if input < math.MinInt32 {
-		return math.MinInt32
+func abs(a int) int {
+	if a < 0 {
+		return -a
 	}
-	return input
+
+	return a
 }
