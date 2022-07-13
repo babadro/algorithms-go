@@ -3,7 +3,9 @@ package _0220_contains_duplicate_iii
 import "sort"
 
 // passed. tptl hard for me
-// todo 2 implement singel pass solution like this: https://leetcode.com/problems/contains-duplicate-iii/discuss/432954/Go-4ms-solution-with-comment
+// todo 2 implement singel pass solution like:
+// https://leetcode.com/problems/contains-duplicate-iii/discuss/432954/Go-4ms-solution-with-comment
+// or https://leetcode.com/problems/contains-duplicate-iii/discuss/566281/C%2B%2B-short-using-set
 func containsNearbyAlmostDuplicate(nums []int, k int, t int) bool {
 	ids := make([]int, len(nums))
 	for i := range ids {
@@ -31,4 +33,17 @@ func abs(a int) int {
 	}
 
 	return a
+}
+
+// bruteforce (passed, but slow)
+func containsNearbyAlmostDuplicate2(nums []int, k int, t int) bool {
+	for i := range nums {
+		for j := i + 1; j < len(nums); j++ {
+			if abs(nums[i]-nums[j]) <= t && abs(i-j) <= k {
+				return true
+			}
+		}
+	}
+
+	return false
 }

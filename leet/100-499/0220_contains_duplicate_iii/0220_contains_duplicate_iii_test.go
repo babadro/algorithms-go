@@ -17,7 +17,7 @@ func Test_containsNearbyAlmostDuplicate(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run("", func(t *testing.T) {
-			if got := containsNearbyAlmostDuplicate(tt.nums, tt.k, tt.t); got != tt.want {
+			if got := containsNearbyAlmostDuplicate2(tt.nums, tt.k, tt.t); got != tt.want {
 				t.Errorf("containsNearbyAlmostDuplicate() = %v, want %v", got, tt.want)
 			}
 		})
