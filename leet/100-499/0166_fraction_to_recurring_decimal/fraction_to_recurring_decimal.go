@@ -4,16 +4,15 @@ import (
 	"strconv"
 )
 
-// 100% 100%
+// 100% 100% tptl. passed hard for me
 func fractionToDecimal(numerator int, denominator int) string {
 	b := make([]byte, 0, 18)
 	if (numerator > 0 && denominator < 0) || (numerator < 0 && denominator > 0) {
 		b = append(b, '-')
 	}
-	numerator, denominator = abs(numerator), abs(denominator)
 
-	leftPart := numerator / denominator
-	b = strconv.AppendInt(b, int64(leftPart), 10)
+	numerator, denominator = abs(numerator), abs(denominator)
+	b = strconv.AppendInt(b, int64(numerator/denominator), 10)
 
 	remainder := numerator % denominator
 	if remainder == 0 {
