@@ -10,12 +10,7 @@ func fractionToDecimal(numerator int, denominator int) string {
 	if (numerator > 0 && denominator < 0) || (numerator < 0 && denominator > 0) {
 		b = append(b, '-')
 	}
-	if numerator < 0 {
-		numerator = -numerator
-	}
-	if denominator < 0 {
-		denominator = -denominator
-	}
+	numerator, denominator = abs(numerator), abs(denominator)
 
 	leftPart := numerator / denominator
 	b = strconv.AppendInt(b, int64(leftPart), 10)
@@ -27,26 +22,27 @@ func fractionToDecimal(numerator int, denominator int) string {
 
 	b = append(b, '.')
 
-	m := make(map[int]int, 10)
+	m := make(map[int]int)
 	idx, ok := 0, false
-	numerator = remainder
-	for {
+	for numerator = remainder; ; numerator %= denominator {
 		if numerator == 0 {
 			return string(b)
 		}
+
 		if idx, ok = m[numerator]; ok {
 			break
 		}
+
 		m[numerator] = len(b)
 		numerator = numerator * 10
 		for numerator < denominator {
 			b = append(b, '0')
 			numerator *= 10
 		}
-		num := numerator / denominator
-		b = strconv.AppendInt(b, int64(num), 10)
-		numerator = numerator % denominator
+
+		b = strconv.AppendInt(b, int64(numerator/denominator), 10)
 	}
+
 	periodLen := len(b) - idx
 	period := make([]byte, periodLen)
 	copy(period, b[idx:])
@@ -56,6 +52,14 @@ func fractionToDecimal(numerator int, denominator int) string {
 	b = append(b, ')')
 
 	return string(b)
+}
+
+func abs(a int) int {
+	if a < 0 {
+		return -a
+	}
+
+	return a
 }
 
 // doesn't work
