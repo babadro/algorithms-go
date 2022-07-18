@@ -3,6 +3,7 @@ package _1871_jump_game_vii
 import "github.com/babadro/algorithms-go/utils"
 
 // tptl. passed. best solution. medium (this solution hard for me)
+// todo 2 look at sliding window solution
 func canReach(s string, minJump int, maxJump int) bool {
 	b := []byte(s)
 	n := len(b)

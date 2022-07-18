@@ -49,3 +49,41 @@ func checkPossibility2(nums []int) bool {
 
 	return counter <= 1
 }
+
+// another one long solution
+func checkPossibility3(nums []int) bool {
+	if len(nums) == 1 {
+		return true
+	}
+
+	modifications := 0
+	for i, num := range nums {
+		if i == 0 {
+			if num > nums[i+1] {
+				nums[i] = nums[i+1]
+				modifications = 1
+			}
+		} else if i == len(nums)-1 {
+			if num < nums[i-1] {
+				nums[i] = nums[i-1]
+				modifications++
+			}
+		} else {
+			if nums[i-1] > nums[i+1] {
+				nums[i+1] = num
+				modifications++
+			}
+
+			if num < nums[i-1] || num > nums[i+1] {
+				nums[i] = nums[i-1]
+				modifications++
+			}
+		}
+
+		if modifications > 1 {
+			return false
+		}
+	}
+
+	return true
+}
