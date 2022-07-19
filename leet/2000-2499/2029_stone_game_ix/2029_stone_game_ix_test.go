@@ -10,6 +10,10 @@ func Test_stoneGameIX(t *testing.T) {
 		{[]int{2, 1}, true},
 		{[]int{2}, false},
 		{[]int{5, 1, 2, 4, 3}, false},
+		{[]int{3, 3}, false},
+		{[]int{3, 2}, false},
+		{[]int{1}, false},
+		{[]int{1, 1}, false},
 	}
 	for _, tt := range tests {
 		t.Run("", func(t *testing.T) {

@@ -1,8 +1,31 @@
 package _2029_stone_game_ix
 
+// tptl passed medium (hard for me)
+// explanation is needed
+func stoneGameIX(stones []int) bool {
+	count := [3]int{}
+	for _, stone := range stones {
+		count[stone%3]++
+	}
+
+	if count[0]%2 == 1 {
+		return abs(count[1]-count[2]) > 2
+	}
+
+	return count[1] != 0 && count[2] != 0
+}
+
+func abs(a int) int {
+	if a < 0 {
+		return -a
+	}
+
+	return a
+}
+
 // todo 2 read math solution with explanation.
 // tptl passed medium (hard for me) #dfs #stone
-func stoneGameIX(stones []int) bool {
+func stoneGameIXDFS(stones []int) bool {
 	r := [3]int{}
 	for _, s := range stones {
 		r[s%3]++
