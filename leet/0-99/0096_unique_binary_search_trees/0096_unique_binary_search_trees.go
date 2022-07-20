@@ -17,19 +17,3 @@ func numTrees(n int) int {
 
 	return dp[n]
 }
-
-func rec(start, end int) int {
-	if start > end {
-		return 1
-	}
-
-	res := 0
-	for i := start; i <= end; i++ {
-		leftCount := rec(i, start-1)
-		rightCount := rec(i+1, end)
-
-		res += leftCount * rightCount
-	}
-
-	return res
-}
