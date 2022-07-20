@@ -8,12 +8,11 @@ func generateTrees(n int) []*binaryTree.Node {
 }
 
 func rec(start, end int) []*binaryTree.Node {
-	var res []*binaryTree.Node
 	if start > end {
-		res = append(res, nil)
-		return res
+		return []*binaryTree.Node{nil}
 	}
 
+	var res []*binaryTree.Node
 	for i := start; i <= end; i++ {
 		leftSubTrees := rec(start, i-1)
 		rightSubtrees := rec(i+1, end)
