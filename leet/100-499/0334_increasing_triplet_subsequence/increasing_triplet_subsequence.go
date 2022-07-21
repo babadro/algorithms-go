@@ -10,11 +10,11 @@ func increasingTriplet(nums []int) bool {
 	firstNum, secondNum := math.MaxInt64, math.MaxInt64
 
 	for i := 0; i < len(nums); i++ {
-		if nums[i] < firstNum {
+		if nums[i] <= firstNum {
 			firstNum = nums[i]
-		} else if nums[i] < secondNum {
+		} else if nums[i] <= secondNum {
 			secondNum = nums[i]
-		} else if nums[i] > secondNum {
+		} else {
 			return true
 		}
 	}
