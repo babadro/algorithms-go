@@ -1,22 +1,22 @@
 package _334_increasing_triplet_subsequence
 
-// Doesn't work
-func increasingTripletFail(nums []int) bool {
-	i := 0
+import "math"
 
-Loop:
-	for i < len(nums) {
-		for idx := i + 1; idx < i+3; idx++ {
-			if idx == len(nums) {
-				return false
-			}
-			if nums[idx] <= nums[idx-1] {
-				i = idx
-				continue Loop
-			}
+// 91% 100%
+// best solution
+// https://leetcode.com/problems/increasing-triplet-subsequence/discuss/822326/Go-O(N)-with-math-import-for-an-easy-max-value
+// tptl medium (hard for me)
+func increasingTriplet(nums []int) bool {
+	firstNum, secondNum := math.MaxInt64, math.MaxInt64
+
+	for i := 0; i < len(nums); i++ {
+		if nums[i] < firstNum {
+			firstNum = nums[i]
+		} else if nums[i] < secondNum {
+			secondNum = nums[i]
+		} else if nums[i] > secondNum {
+			return true
 		}
-
-		return true
 	}
 
 	return false
