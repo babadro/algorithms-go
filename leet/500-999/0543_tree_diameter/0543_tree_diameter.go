@@ -15,11 +15,11 @@ func rec(node *binaryTree.Node, res *int) int {
 		return 0
 	}
 
-	leftRes, rightRes := rec(node.Left, res), rec(node.Right, res)
-	diameter := leftRes + rightRes
-	*res = max(*res, diameter)
+	left, right := rec(node.Left, res), rec(node.Right, res)
 
-	return 1 + max(leftRes, rightRes)
+	*res = max(*res, left+right)
+
+	return max(left, right) + 1
 }
 
 func max(a, b int) int {

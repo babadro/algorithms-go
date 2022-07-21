@@ -2,22 +2,21 @@ package _1004_max_consecutive_ones_iii
 
 // tptl passed medium. best solution
 func longestOnes(nums []int, k int) int {
-	start, ones, res := 0, 0, 0
-	for end := range nums {
-		if nums[end] == 1 {
-			ones++
+	left, res, zeroes := 0, 0, 0
+	for right := range nums {
+		if nums[right] == 0 {
+			zeroes++
 		}
 
-		if end-start+1-ones > k {
-			if nums[start] == 1 {
-				ones--
+		if zeroes > k {
+			if nums[left] == 0 {
+				zeroes--
 			}
 
-			start++
-		} else {
-			res = max(res, end-start+1)
+			left++
 		}
 
+		res = max(res, right-left+1)
 	}
 
 	return res
