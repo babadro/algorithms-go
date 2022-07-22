@@ -2,6 +2,8 @@ package _373_find_k_pairs_with_smalles_sums
 
 import "container/heap"
 
+// tptl. passed. medium (hard for me)
+// todo 2 find solution without heap - it should be faster
 func kSmallestPairs(nums1 []int, nums2 []int, k int) [][]int {
 	var h maxHeap
 
@@ -16,6 +18,7 @@ func kSmallestPairs(nums1 []int, nums2 []int, k int) [][]int {
 					break
 				}
 
+				heap.Pop(&h)
 				heap.Push(&h, []int{num1, num2})
 			}
 		}
