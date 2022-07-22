@@ -4,27 +4,29 @@ import "github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single
 
 // tptl. passed. todo2 look two pointer solution
 func rotateRight(head *single.ListNode, k int) *single.ListNode {
-	n := 1
-	tail := head
-	for tail != nil && tail.Next != nil {
-		n++
-		tail = tail.Next
+	if head == nil {
+		return nil
 	}
 
-	j := k % n
-	if j == 0 {
+	length := 1
+	oldTail := head
+	for ; oldTail.Next != nil; oldTail, length = oldTail.Next, length+1 {
+	}
+
+	k %= length
+	if k == 0 {
 		return head
 	}
 
 	newTail := head
-	for i := 0; i < n-j-1; i++ {
+	for i := 0; i < length-1-k; i++ {
 		newTail = newTail.Next
 	}
 
 	newHead := newTail.Next
 
 	newTail.Next = nil
-	tail.Next = head
+	oldTail.Next = head
 
 	return newHead
 }
