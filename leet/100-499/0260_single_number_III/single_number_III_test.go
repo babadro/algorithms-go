@@ -18,7 +18,7 @@ func Test_singleNumber(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.nums), func(t *testing.T) {
-			got := singleNumber(tt.nums)
+			got := singleNumber2(tt.nums)
 			sort.Ints(got)
 			sort.Ints(tt.want)
 			if !reflect.DeepEqual(got, tt.want) {

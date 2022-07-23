@@ -14,6 +14,7 @@ func Test_bitwiseComplement(t *testing.T) {
 		{7, 0},
 		{10, 5},
 		{0, 1},
+		{3, 0},
 	}
 	for _, tt := range tests {
 		t.Run(strconv.FormatInt(int64(tt.n), 2), func(t *testing.T) {
