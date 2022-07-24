@@ -1,6 +1,6 @@
 package _130_surrounded_regions
 
-// 96% 83%
+// 96% 83% tptl. medium (hard for me)
 func solve(board [][]byte) {
 	height := len(board)
 	if height == 0 {
@@ -9,7 +9,7 @@ func solve(board [][]byte) {
 	width := len(board[0])
 	for y := 0; y < height; y++ {
 		for x := 0; x < width; x++ {
-			if (y == 0 || y == height-1 || x == 0 || x == width-1) && board[y][x] == 'O' {
+			if y == 0 || y == height-1 || x == 0 || x == width-1 {
 				crawl(board, x, y)
 			}
 		}
@@ -30,7 +30,9 @@ func crawl(board [][]byte, x, y int) {
 	if x >= len(board[0]) || x < 0 || y >= len(board) || y < 0 || board[y][x] != 'O' {
 		return
 	}
+
 	board[y][x] = 'N'
+
 	crawl(board, x-1, y)
 	crawl(board, x+1, y)
 	crawl(board, x, y-1)

@@ -18,7 +18,7 @@ func Test_permute(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.nums), func(t *testing.T) {
-			got := permute2(tt.nums)
+			got := permute3(tt.nums)
 			sort.Slice(got, func(i, j int) bool {
 				return slices.Less(got[i], got[j])
 			})
