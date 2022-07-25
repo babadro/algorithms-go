@@ -27,7 +27,7 @@ func Test_reverseBetween(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.inputArr), func(t *testing.T) {
 			head := single.ArrToLinkedList(tt.inputArr)
-			got := single.LinkedListToArr(reverseBetween2(head, tt.left, tt.right))
+			got := single.LinkedListToArr(reverseBetween(head, tt.left, tt.right))
 
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("reverseBetween() = %v, want %v", got, tt.want)

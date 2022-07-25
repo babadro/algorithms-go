@@ -3,7 +3,7 @@ package _092_reverse_linked_list_ii
 import "github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
 
 // tptl. passed. medium #linkedlist
-func reverseBetween2(head *single.ListNode, left int, right int) *single.ListNode {
+func reverseBetween(head *single.ListNode, left int, right int) *single.ListNode {
 	leftNode := head
 	var prevLeft *single.ListNode
 	for i := 1; i < left; i++ {
@@ -29,6 +29,40 @@ func reverseBetween2(head *single.ListNode, left int, right int) *single.ListNod
 	}
 
 	rightNode.Next = nextRight
+
+	return head
+}
+
+// looks more complicated
+func reverseBetween2(head *single.ListNode, left int, right int) *single.ListNode {
+	var leftNode, rightNode, prevLeft, nextRight, prev *single.ListNode
+	for cur, i := head, 1; ; i++ {
+		if i == left {
+			leftNode, prevLeft = cur, prev
+		}
+
+		next := cur.Next
+
+		if i > left { // reverse
+			cur.Next = prev
+		}
+
+		if i == right {
+			rightNode, nextRight = cur, next
+
+			break
+		}
+
+		prev, cur = cur, next
+	}
+
+	if prevLeft != nil {
+		prevLeft.Next = rightNode
+	} else {
+		head = rightNode
+	}
+
+	leftNode.Next = nextRight
 
 	return head
 }
