@@ -1,46 +1,37 @@
 package _210_course_schedule_2
 
 // tptl. passed. simple
-func findOrder3(vertices int, edges [][]int) []int {
-	inDegree := make([]int, vertices)
-	for _, edge := range edges {
-		inDegree[edge[0]]++
-	}
+func findOrder(numCourses int, prerequisites [][]int) []int {
+	g, inDegree := make([][]int, numCourses), make([]int, numCourses)
 
-	// build the graph
-	g := make([][]int, vertices)
-	for _, edge := range edges {
-		src, dst := edge[1], edge[0]
+	for _, pr := range prerequisites {
+		src, dst := pr[1], pr[0]
 		g[src] = append(g[src], dst)
+		inDegree[dst]++
 	}
 
-	var sourcesQueue []int
-	for vertex := range g {
-		if inDegree[vertex] == 0 {
-			sourcesQueue = append(sourcesQueue, vertex)
+	var sources []int
+	for v, degree := range inDegree {
+		if degree == 0 {
+			sources = append(sources, v)
 		}
 	}
 
-	var res []int
-	for len(sourcesQueue) > 0 {
-		src := sourcesQueue[0]
-
-		sourcesQueue = sourcesQueue[1:]
-		res = append(res, src)
-
+	for i := 0; i < len(sources); i++ {
+		src := sources[i]
 		for _, dst := range g[src] {
 			inDegree[dst]--
 			if inDegree[dst] == 0 {
-				sourcesQueue = append(sourcesQueue, dst)
+				sources = append(sources, dst)
 			}
 		}
 	}
 
-	if len(res) < vertices {
-		return []int{}
+	if len(sources) < numCourses {
+		return nil
 	}
 
-	return res
+	return sources
 }
 
 const (
@@ -50,7 +41,7 @@ const (
 )
 
 // 98% 43%
-func findOrder(numCourses int, prerequisites [][]int) []int {
+func findOrder2(numCourses int, prerequisites [][]int) []int {
 	isPossible := true
 	color := make([]byte, numCourses)
 	adjList := make([][]int, numCourses)
