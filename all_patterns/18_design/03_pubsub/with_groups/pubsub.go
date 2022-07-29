@@ -1,4 +1,4 @@
-package _3_pubsub
+package with_groups
 
 import (
 	"math/rand"
