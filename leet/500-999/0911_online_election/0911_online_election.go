@@ -1,20 +1,20 @@
 package _911_online_election
 
-type TopVotedCandidate struct {
+type TopVotedCandidate2 struct {
 	votes map[int][]int
 }
 
-func Constructor(persons []int, times []int) TopVotedCandidate {
+func Constructor2(persons []int, times []int) TopVotedCandidate2 {
 	votes := make(map[int][]int)
 	for i := range persons {
 		person := persons[i]
 		votes[person] = append(votes[person], times[i])
 	}
 
-	return TopVotedCandidate{votes: votes}
+	return TopVotedCandidate2{votes: votes}
 }
 
-func (this *TopVotedCandidate) Q(t int) int {
+func (this *TopVotedCandidate2) Q(t int) int {
 	maxVotes := 0
 	var winners [][2]int
 	for person, votes := range this.votes {

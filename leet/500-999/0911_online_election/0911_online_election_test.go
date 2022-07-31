@@ -32,7 +32,7 @@ func Test_binarySearch(t *testing.T) {
 }
 
 func TestConstructor(t *testing.T) {
-	v := Constructor([]int{0, 1, 1, 0, 0, 1, 0}, []int{0, 5, 10, 15, 20, 25, 30})
+	v := Constructor2([]int{0, 1, 1, 0, 0, 1, 0}, []int{0, 5, 10, 15, 20, 25, 30})
 
 	input := []int{3, 12, 25, 15, 24, 8}
 	output := []int{0, 1, 1, 0, 0, 1}
