@@ -5,7 +5,7 @@ type TopVotedCandidate struct {
 }
 
 func Constructor(persons []int, times []int) TopVotedCandidate {
-	var A [][2]int
+	var A [][][2]int
 	count := make(map[int]int)
 	for i := range persons {
 		person, time := persons[i], times[i]
@@ -14,10 +14,10 @@ func Constructor(persons []int, times []int) TopVotedCandidate {
 		count[person]++
 
 		for len(A) <= c {
-			A = append(A, [][2]int{}...)
+			A = append(A, nil...)
 		}
 
-		A[c] = [2]int{person, time}
+		A[c] = append(A[c], [2]int{person, time})
 	}
 }
 
