@@ -20,8 +20,15 @@ func Test_canReach(t *testing.T) {
 		{tleString3, tle3minJump, tle3MaxJump, false},
 	}
 	for _, tt := range tests {
-		t.Run(tt.s, func(t *testing.T) {
-			if got := canReachSlow(tt.s, tt.minJump, tt.maxJump); got != tt.want {
+		var name string
+		if len(tt.s) > 10 {
+			name = tt.s[:10]
+		} else {
+			name = tt.s
+		}
+
+		t.Run(name, func(t *testing.T) {
+			if got := canReach(tt.s, tt.minJump, tt.maxJump); got != tt.want {
 				t.Errorf("canReach() = %v, want %v", got, tt.want)
 			}
 		})

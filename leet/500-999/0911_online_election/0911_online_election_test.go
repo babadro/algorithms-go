@@ -32,14 +32,33 @@ func Test_binarySearch(t *testing.T) {
 }
 
 func TestConstructor(t *testing.T) {
-	v := Constructor2([]int{0, 1, 1, 0, 0, 1, 0}, []int{0, 5, 10, 15, 20, 25, 30})
+	tests := []struct {
+		persons, times, input, output []int
+	}{
+		{
+			persons: []int{0, 1, 1, 0, 0, 1, 0},
+			times:   []int{0, 5, 10, 15, 20, 25, 30},
+			input:   []int{3, 12, 25, 15, 24, 8},
+			output:  []int{0, 1, 1, 0, 0, 1},
+		},
+		{
+			persons: []int{0, 0, 1, 1, 2},
+			times:   []int{0, 67, 69, 74, 87},
+			input:   []int{4, 62, 100, 88, 70, 73, 22, 75, 29, 10},
+			output:  []int{0, 0, 1, 1, 0, 0, 0, 1, 0, 0},
+		},
+	}
 
-	input := []int{3, 12, 25, 15, 24, 8}
-	output := []int{0, 1, 1, 0, 0, 1}
+	for _, tt := range tests {
+		t.Run(fmt.Sprintf("%v", tt.persons), func(t *testing.T) {
+			v := Constructor(tt.persons, tt.times)
+			var gotOutput []int
 
-	for i := range input {
-		res := v.Q(input[i])
+			for i := range tt.input {
+				gotOutput = append(gotOutput, v.Q(tt.input[i]))
+			}
 
-		require.Equal(t, output[i], res)
+			require.Equal(t, tt.output, gotOutput)
+		})
 	}
 }
