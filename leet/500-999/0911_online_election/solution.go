@@ -8,7 +8,7 @@ type vote struct {
 	person, time int
 }
 
-// todo 1 doesn't work fix bug (second testcase failed)
+// faster solution. tptl. todo 2 look precompiled solution in solution section
 func Constructor(persons []int, times []int) TopVotedCandidate {
 	totalToLastVotes := make([][]vote, 1)
 	count := make(map[int]int)
@@ -34,26 +34,26 @@ func Constructor(persons []int, times []int) TopVotedCandidate {
 
 func (this *TopVotedCandidate) Q(t int) int {
 	l, r := 1, len(this.totalToLastVotes)-1
-	for l < r {
+	for l <= r {
 		m := l + (r-l)/2
 		if this.totalToLastVotes[m][0].time > t {
-			r = m
+			r = m - 1
 		} else {
 			l = m + 1
 		}
 	}
 
-	votes := this.totalToLastVotes[l-1]
+	votes := this.totalToLastVotes[r]
 
 	l, r = 0, len(votes)-1
-	for l < r {
+	for l <= r {
 		m := l + (r-l)/2
 		if votes[m].time > t {
-			r = m
+			r = m - 1
 		} else {
 			l = m + 1
 		}
 	}
 
-	return votes[l-1].person
+	return votes[r].person
 }

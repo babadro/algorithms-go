@@ -4,6 +4,7 @@ type TopVotedCandidate2 struct {
 	votes map[int][]int
 }
 
+// passed, but slow
 func Constructor2(persons []int, times []int) TopVotedCandidate2 {
 	votes := make(map[int][]int)
 	for i := range persons {
