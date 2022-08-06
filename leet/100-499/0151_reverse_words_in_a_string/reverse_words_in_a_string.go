@@ -2,31 +2,39 @@ package _151_reverse_words_in_a_string
 
 // passed. medium. #string
 func reverseWords(s string) string {
-	arr := make([][2]int, 0)
-	start := -1
-	for i := 0; i <= len(s); i++ {
-		if i == len(s) || s[i] == ' ' {
-			if start == -1 {
-				continue
-			}
+	b := []byte(s)
 
-			arr = append(arr, [2]int{start, i})
-			start = -1
-		} else if start == -1 {
-			start = i
+	i := 0
+	for j := 0; j < len(b); j++ {
+		if b[j] == ' ' && (i == 0 || b[i-1] == ' ') {
+			continue
 		}
+
+		b[i] = b[j]
+		i++
+	}
+	b = b[:i]
+
+	if b[len(b)-1] == ' ' {
+		b = b[:len(b)-1]
 	}
 
-	b := make([]byte, 0, len(arr))
-	for i := 0; i < len(arr); i++ {
-		pair := arr[len(arr)-1-i]
-		if i > 0 {
-			b = append(b, ' ')
-		}
+	// reverse the whole string
+	reverse(b, 0, len(b)-1)
 
-		begin, end := pair[0], pair[1]
-		b = append(b, s[begin:end]...)
+	start := 0
+	for i := range b {
+		if i+1 == len(b) || b[i+1] == ' ' {
+			reverse(b, start, i)
+			start = i + 2
+		}
 	}
 
 	return string(b)
+}
+
+func reverse(b []byte, i, j int) {
+	for ; i < j; i, j = i+1, j-1 {
+		b[i], b[j] = b[j], b[i]
+	}
 }

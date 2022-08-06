@@ -15,11 +15,12 @@ func Test_reverseWords(t *testing.T) {
 		{"a", "a"},
 		{"  a   ", "a"},
 		{"a       b", "b a"},
+		{"EPY2giL", "EPY2giL"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.s, func(t *testing.T) {
-			if got := reverseWords(tt.s); got != tt.want {
-				t.Errorf("reverseWords() = %v, want %v", got, tt.want)
+			if got := reverseWords2(tt.s); got != tt.want {
+				t.Errorf("reverseWords() = %q, want %q", got, tt.want)
 			}
 		})
 	}
