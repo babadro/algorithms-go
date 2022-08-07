@@ -2,7 +2,7 @@ package _1818_min_absolute_sum_difference
 
 import "github.com/babadro/algorithms-go/utils"
 
-// passed. tptl. medium
+// todo 1 doesn't work
 func minAbsoluteSumDiff(nums1 []int, nums2 []int) int {
 	n := len(nums1)
 	distances := make([]int, n)

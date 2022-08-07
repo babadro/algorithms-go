@@ -33,10 +33,11 @@ func Test_minAbsoluteSumDiff(t *testing.T) {
 			nums2: []int{5},
 			want:  3,
 		},
+		{nums1: []int{1, 28, 21}, nums2: []int{9, 21, 20}, want: 9},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := minAbsoluteSumDiff(tt.nums1, tt.nums2); got != tt.want {
+			if got := minAbsoluteSumDiff2(tt.nums1, tt.nums2); got != tt.want {
 				t.Errorf("minAbsoluteSumDiff() = %v, want %v", got, tt.want)
 			}
 		})
