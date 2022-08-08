@@ -4,25 +4,21 @@ import (
 	"sort"
 )
 
-// tptl. passed, but slow (23.8%). todo 2 find faster solution
+// tptl. passed. fast. todo 3 can be improved further maybe
 func minAbsoluteSumDiff(nums1 []int, nums2 []int) int {
-	ids := make([]int, len(nums1))
-	for i := range ids {
-		ids[i] = i
-	}
+	copyNums1 := make([]int, len(nums1))
+	copy(copyNums1, nums1)
 
-	sort.Slice(ids, func(i, j int) bool {
-		return nums1[ids[i]] < nums1[ids[j]]
-	})
+	sort.Ints(copyNums1)
 
-	bestImprovement, oldIDx, newIDx := 0, -1, -1
+	bestImprovement, targetIDx, num := 0, -1, 0
 	for i := range nums1 {
 		num2 := nums2[i]
 
-		l, r := 0, len(ids)-1
+		l, r := 0, len(nums1)-1
 		for l < r {
 			m := l + (r-l)/2
-			num1 := nums1[ids[m]]
+			num1 := copyNums1[m]
 			if num1 >= num2 {
 				r = m
 			} else {
@@ -32,19 +28,19 @@ func minAbsoluteSumDiff(nums1 []int, nums2 []int) int {
 
 		for _, idx := range [2]int{l, l - 1} {
 			if idx >= 0 {
-				diffBefore, diffAfter := abs(nums1[i]-num2), abs(nums1[ids[idx]]-num2)
+				diffBefore, diffAfter := abs(nums1[i]-num2), abs(copyNums1[idx]-num2)
 				if diffBefore > diffAfter {
 					improvement := diffBefore - diffAfter
 					if improvement > bestImprovement {
-						bestImprovement, newIDx, oldIDx = improvement, ids[idx], i
+						bestImprovement, num, targetIDx = improvement, copyNums1[idx], i
 					}
 				}
 			}
 		}
 	}
 
-	if newIDx != -1 {
-		nums1[oldIDx] = nums1[newIDx]
+	if targetIDx != -1 {
+		nums1[targetIDx] = num
 	}
 
 	res := 0
