@@ -1,32 +1,65 @@
 package _1818_min_absolute_sum_difference
 
-import "github.com/babadro/algorithms-go/utils"
+import (
+	"sort"
+)
 
-// todo 1 doesn't work
+// tptl. passed, but slow (23.8%). todo 2 find faster solution
 func minAbsoluteSumDiff(nums1 []int, nums2 []int) int {
-	n := len(nums1)
-	distances := make([]int, n)
+	ids := make([]int, len(nums1))
+	for i := range ids {
+		ids[i] = i
+	}
 
-	sum := 0
-	maxDistIdx := -1
-	for i := 0; i < n; i++ {
-		dist := utils.Abs(nums1[i] - nums2[i])
-		distances[i] = dist
-		sum += dist
+	sort.Slice(ids, func(i, j int) bool {
+		return nums1[ids[i]] < nums1[ids[j]]
+	})
 
-		if maxDistIdx == -1 || dist > distances[maxDistIdx] {
-			maxDistIdx = i
+	bestImprovement, oldIDx, newIDx := 0, -1, -1
+	for i := range nums1 {
+		num2 := nums2[i]
+
+		l, r := 0, len(ids)-1
+		for l < r {
+			m := l + (r-l)/2
+			num1 := nums1[ids[m]]
+			if num1 >= num2 {
+				r = m
+			} else {
+				l = m + 1
+			}
+		}
+
+		for _, idx := range [2]int{l, l - 1} {
+			if idx >= 0 {
+				diffBefore, diffAfter := abs(nums1[i]-num2), abs(nums1[ids[idx]]-num2)
+				if diffBefore > diffAfter {
+					improvement := diffBefore - diffAfter
+					if improvement > bestImprovement {
+						bestImprovement, newIDx, oldIDx = improvement, ids[idx], i
+					}
+				}
+			}
 		}
 	}
 
-	minDiffSum := sum
-	for i := 0; i < n; i++ {
-		curr := sum - distances[maxDistIdx] + utils.Abs(nums1[i]-nums2[maxDistIdx])
-
-		if curr < minDiffSum {
-			minDiffSum = curr
-		}
+	if newIDx != -1 {
+		nums1[oldIDx] = nums1[newIDx]
 	}
 
-	return minDiffSum % 1_000_000_007
+	res := 0
+	for i := range nums1 {
+		res += abs(nums1[i] - nums2[i])
+		res %= 1_000_000_007
+	}
+
+	return res
+}
+
+func abs(a int) int {
+	if a < 0 {
+		return -a
+	}
+
+	return a
 }
