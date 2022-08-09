@@ -36,7 +36,7 @@ func canConstruct(originalSeq []int, sequences [][]int) bool {
 	// todo 3 can be optimized, we don't really need to store the whole sources arr here
 	for i := 0; i < len(sources); i++ {
 		// more than one remaining sources mean, there is more than one way to reconstruct the sequence
-		if len(sources)-i > 1 {
+		if i != len(sources)-1 {
 			return false
 		}
 
