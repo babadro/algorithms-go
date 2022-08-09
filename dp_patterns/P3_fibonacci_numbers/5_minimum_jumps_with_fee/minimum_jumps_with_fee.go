@@ -4,6 +4,8 @@ import (
 	"github.com/babadro/algorithms-go/utils"
 )
 
+// see leetcode 746 (very similar)
+
 func findMinFeeBruteForce(fee []int) int {
 	return recBruteForce(fee, 0)
 }

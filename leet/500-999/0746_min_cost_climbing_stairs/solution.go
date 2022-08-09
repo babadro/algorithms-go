@@ -49,10 +49,10 @@ func recTopDown(dp, cost []int, idx int) int {
 func minCostClimbingStairsBottomUp(cost []int) int {
 	dp := make([]int, len(cost)+1)
 
-	dp[0], dp[1], dp[2] = 0, cost[0], cost[0]
+	dp[0], dp[1] = 0, 0
 
-	for i := 2; i < len(cost); i++ {
-		dp[i+1] = min(dp[i]+cost[i], dp[i-1]+cost[i-1])
+	for i := 2; i <= len(cost); i++ {
+		dp[i] = min(dp[i-1]+cost[i-1], dp[i-2]+cost[i-2])
 	}
 
 	return dp[len(cost)]
