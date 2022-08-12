@@ -18,11 +18,14 @@ func TestNumDecodings(t *testing.T) {
 		{"20101", 1},
 		{"230", 0},
 		{"17", 2},
-		//{"22634212112312111234212311211231131112123112121232", 3},
+		{"1090", 0},
+		{"102", 1},
+		{"22634212112312111234212311211231131112123112121232", 3},
+		{"111111111111111111111111111111111111111111111", 1836311903},
 	}
 
 	for i, c := range cases {
-		if fact := numDecodings(c.s); fact != c.expected {
+		if fact := numDecodings2(c.s); fact != c.expected {
 			t.Errorf("case#%d, want %d, got %d", i+1, c.expected, fact)
 		}
 	}
