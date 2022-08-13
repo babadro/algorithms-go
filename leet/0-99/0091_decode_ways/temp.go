@@ -42,26 +42,24 @@ func rec(dp [][]int, s string, i int, prev bool) int {
 
 // bruteforce. tle
 func numDecodings3(s string) int {
-	var res int
-	rec3(s, 0, 0, &res)
-
-	return res
+	return rec3(s, 0, 0)
 }
 
-func rec3(s string, i int, prev byte, res *int) {
+func rec3(s string, i int, prev byte) int {
 	num := prev*10 + (s[i] - '0')
 
 	if num == 0 || num > 26 {
-		return
+		return 0
 	}
 
 	if i == len(s)-1 {
-		*res++
-		return
+		return 1
 	}
 
-	rec3(s, i+1, 0, res)
+	res := rec3(s, i+1, 0)
 	if prev == 0 {
-		rec3(s, i+1, s[i]-'0', res)
+		res += rec3(s, i+1, s[i]-'0')
 	}
+
+	return res
 }

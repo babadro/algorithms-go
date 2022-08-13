@@ -25,7 +25,7 @@ func TestNumDecodings(t *testing.T) {
 	}
 
 	for i, c := range cases {
-		if fact := numDecodings2(c.s); fact != c.expected {
+		if fact := numDecodings3(c.s); fact != c.expected {
 			t.Errorf("case#%d, want %d, got %d", i+1, c.expected, fact)
 		}
 	}
