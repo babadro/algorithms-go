@@ -3,11 +3,9 @@ package _0581_shortest_unsorted_continuous_subarray
 import (
 	"math"
 	"sort"
-
-	"github.com/babadro/algorithms-go/utils"
 )
 
-// todo 1 doesn't work
+// tptl passed. medium
 func findUnsortedSubarray(nums []int) int {
 	l, r := 0, len(nums)-1
 	for l < len(nums)-1 && nums[l] <= nums[l+1] {
@@ -22,10 +20,10 @@ func findUnsortedSubarray(nums []int) int {
 		r--
 	}
 
-	minNum, maxNum := math.MaxInt64, math.MaxInt64
+	minNum, maxNum := math.MaxInt64, math.MinInt64
 	for i := l; i <= r; i++ {
 		num := nums[i]
-		minNum, maxNum = utils.Min(minNum, num), utils.Max(maxNum, num)
+		minNum, maxNum = min(minNum, num), max(maxNum, num)
 	}
 
 	for l > 0 && nums[l-1] > minNum {
@@ -36,7 +34,23 @@ func findUnsortedSubarray(nums []int) int {
 		r++
 	}
 
-	return r - l
+	return r - l + 1
+}
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+
+	return b
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+
+	return b
 }
 
 // naive, but works
