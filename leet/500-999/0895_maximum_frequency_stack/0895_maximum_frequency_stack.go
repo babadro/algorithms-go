@@ -22,14 +22,14 @@ func (this *FreqStack) Pop() int {
 	count := len(this.h.arr[0].ids)
 	count--
 	this.h.arr[0].ids = this.h.arr[0].ids[:count]
-	e := this.h.arr[0]
+	num := this.h.arr[0].num
 	if count == 0 {
 		heap.Pop(&this.h)
 	} else {
 		heap.Fix(&this.h, 0)
 	}
 
-	return e.num
+	return num
 }
 
 type el struct {
