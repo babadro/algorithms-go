@@ -26,7 +26,7 @@ func (this *FreqStack) Pop() int {
 	if count == 0 {
 		heap.Pop(&this.h)
 	} else {
-		heap.Fix(&this.h, this.h.numToHeapIDx[e.num])
+		heap.Fix(&this.h, 0)
 	}
 
 	return e.num
