@@ -24,7 +24,7 @@ func TestFreqStack(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			require.Equal(t, len(tt.ops), len(tt.want))
 
-			stack := Constructor()
+			stack := Constructor2()
 			for i := 1; i < len(tt.want); i++ {
 				if tt.ops[i] == nil {
 					// pop

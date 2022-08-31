@@ -3,7 +3,6 @@ package _895_maximum_frequency_stack
 import "container/heap"
 
 // tptl. passed. hard.
-// todo 2 investigate alternative solutions
 type FreqStack struct {
 	h maxHeap
 }
