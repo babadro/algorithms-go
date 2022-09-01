@@ -9,11 +9,11 @@ import (
 func findKthSmallest(lists [][]int, k int) int {
 	numIDxes := make([]int, len(lists))
 	h := make(arrItems, 0, len(lists))
-	for arrIDx, numIDx := range numIDxes {
+	for arrIDx := range numIDxes {
 		arr := lists[arrIDx]
-		if numIDx < len(arr) {
-			h = append(h, [2]int{arr[numIDx], arrIDx})
-			numIDxes[arrIDx]++
+		if len(arr) > 0 {
+			h = append(h, [2]int{arr[0], arrIDx})
+			numIDxes[arrIDx] = 1
 		}
 	}
 
