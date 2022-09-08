@@ -64,12 +64,10 @@ func binarySearch(arr []int, target int) int {
 	for l < r {
 		m := l + (r-l)/2
 		num := arr[m]
-		if num > target {
+		if num >= target {
 			r = m
 		} else if num < target {
 			l = m + 1
-		} else {
-			return m
 		}
 	}
 
