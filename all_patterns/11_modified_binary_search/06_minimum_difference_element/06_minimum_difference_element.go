@@ -1,36 +1,29 @@
 package _6_minimum_difference_element
 
+import "github.com/babadro/algorithms-go/utils"
+
 // tptl
 func searchMinDiffElement(arr []int, key int) int {
-	if key < arr[0] {
-		return arr[0]
-	} else if key > arr[len(arr)-1] {
-		return arr[len(arr)-1]
-	}
-
 	l, r := 0, len(arr)-1
-	for l <= r {
+	for l < r {
 		m := l + (r-l)/2
-		if arr[m] > key {
-			r = m - 1
-		} else if arr[m] < key {
+		if num := arr[m]; num > key {
+			r = m
+		} else if num < key {
 			l = m + 1
 		} else {
-			return arr[m]
+			return num
 		}
 	}
 
-	if diff(arr[l], key) < diff(arr[r], key) {
+	if l-1 < 0 {
 		return arr[l]
 	}
 
-	return arr[r]
-}
-
-func diff(a, b int) int {
-	if a > b {
-		return a - b
+	num1, num2 := arr[l-1], arr[l]
+	if utils.Abs(num2-key) < utils.Abs(num1-key) {
+		return num2
 	}
 
-	return b - a
+	return num1
 }
