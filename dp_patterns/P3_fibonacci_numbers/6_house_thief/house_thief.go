@@ -2,6 +2,8 @@ package __house_thief
 
 import "github.com/babadro/algorithms-go/utils"
 
+// see leetcode 198
+
 func findMaxSteal(wealth []int) int {
 	return recBruteForce(0, wealth)
 }
@@ -46,7 +48,8 @@ func findMaxStealBottomUp(wealth []int) int {
 
 	// dp[] has one extra element to handle zero house
 	for i := 1; i < len(wealth); i++ {
-		dp[i+1] = utils.Max(wealth[i]+dp[i-1], dp[i])
+		dpIDx := i + 1
+		dp[dpIDx] = utils.Max(wealth[i]+dp[dpIDx-2], dp[dpIDx-1])
 	}
 
 	return dp[len(wealth)]

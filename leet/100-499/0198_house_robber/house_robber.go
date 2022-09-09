@@ -1,24 +1,51 @@
 package _198_house_robber
 
-// tptl. passed. array.
-func rob(nums []int) int {
-	l := len(nums)
-	if l == 0 {
+// todo2 bottom up
+
+func robBruteForce(nums []int) int {
+	return recBruteForce(nums, 0)
+}
+
+func recBruteForce(nums []int, i int) int {
+	if i >= len(nums) {
 		return 0
 	}
-	if l == 1 {
-		return nums[0]
+
+	res1 := nums[i] + recBruteForce(nums, i+2)
+	res2 := recBruteForce(nums, i+1)
+
+	return max(res1, res2)
+}
+
+// tptl. passed
+func robTopDown(nums []int) int {
+	dp := make([]int, len(nums))
+	for i := range nums {
+		dp[i] = -1
 	}
-	nums[1] = max(nums[0], nums[1])
-	for i := 2; i < l; i++ {
-		nums[i] = max(nums[i-1], nums[i-2]+nums[i])
+
+	return recTopDown(dp, nums, 0)
+}
+
+func recTopDown(dp, nums []int, i int) int {
+	if i >= len(nums) {
+		return 0
 	}
-	return nums[l-1]
+
+	if dp[i] == -1 {
+		res1 := nums[i] + recTopDown(dp, nums, i+2)
+		res2 := recTopDown(dp, nums, i+1)
+
+		dp[i] = max(res1, res2)
+	}
+
+	return dp[i]
 }
 
 func max(a, b int) int {
 	if a > b {
 		return a
 	}
+
 	return b
 }
