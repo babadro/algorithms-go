@@ -1,5 +1,7 @@
 package _376_wiggle_subsequence
 
+// todo 2 Follow up: Could you solve this in O(n) time?
+
 type key struct {
 	prev, cur int
 	asc       bool
