@@ -2,7 +2,7 @@ package _376_wiggle_subsequence
 
 type key struct {
 	prev, cur int
-	bigger    bool
+	asc       bool
 }
 
 func wiggleMaxLengthTopDown(nums []int) int {
