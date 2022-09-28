@@ -18,7 +18,7 @@ func Test_nextGreatestLetter(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(string(tt.letters)+"_"+string(tt.target), func(t *testing.T) {
-			if got := nextGreatestLetter(tt.letters, tt.target); got != tt.want {
+			if got := nextGreatestLetter3(tt.letters, tt.target); got != tt.want {
 				t.Errorf("nextGreatestLetter() = %s, want %s", string(got), string(tt.want))
 			}
 		})

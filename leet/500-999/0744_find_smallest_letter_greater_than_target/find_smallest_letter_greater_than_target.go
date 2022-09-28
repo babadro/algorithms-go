@@ -4,21 +4,21 @@ import "sort"
 
 // passed. tptl
 func nextGreatestLetter(letters []byte, target byte) byte {
-	left, right := 0, len(letters)-1
-	for left <= right {
-		mid := left + (right-left)/2
-		if letters[mid] <= target {
-			left = mid + 1
+	l, r := 0, len(letters)-1
+	for l < r {
+		m := l + (r-l)/2
+		if letters[m] <= target {
+			l = m + 1
 		} else {
-			right = mid - 1
+			r = m
 		}
 	}
 
-	if left < len(letters) {
-		return letters[left]
+	if letters[r] <= target {
+		return letters[0]
 	}
 
-	return letters[0]
+	return letters[r]
 }
 
 // using sort.Search
