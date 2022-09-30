@@ -8,22 +8,19 @@ func reverseEvenLengthGroups(head *single.ListNode) *single.ListNode {
 		return nil
 	}
 
-	prev, cur := (*single.ListNode)(nil), head
+	cur, prev := head, head
 	for groupSize := 1; cur != nil; groupSize++ {
-		tmpPrev, tmpCur, actualSize := prev, cur, 0
-		for ; actualSize < groupSize && cur != nil; actualSize++ {
-			prev = cur
-			cur = cur.Next
-		}
+		if groupSize%2 == 1 {
+			for i := 0; i < groupSize && cur != nil; i++ {
+				prev = cur
+				cur = cur.Next
+			}
 
-		if actualSize%2 == 1 {
 			continue
 		}
 
-		prev, cur = tmpPrev, tmpCur
-
 		left, start := prev, cur
-		for i := 0; i < actualSize; i++ {
+		for i := 0; i < groupSize && cur != nil; i++ {
 			next := cur.Next
 			cur.Next = prev
 			prev = cur
