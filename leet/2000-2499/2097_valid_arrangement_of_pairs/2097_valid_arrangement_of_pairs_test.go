@@ -16,7 +16,7 @@ func Test_validArrangement(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run("", func(t *testing.T) {
-			got := validArrangement(tt.pairs)
+			got := validArrangement2(tt.pairs)
 			t.Log(got)
 		})
 	}
