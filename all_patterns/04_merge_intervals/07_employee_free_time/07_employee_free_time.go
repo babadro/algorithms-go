@@ -1,80 +1,64 @@
 package _7_employee_free_time
 
-import (
-	"container/heap"
-	"math"
+import "container/heap"
 
-	"github.com/babadro/algorithms-go/utils"
-)
-
-// leetcode premium https://leetcode.com/problems/employee-free-time/
-// todo  check solution with more test cases
-func findEmployeeFreeTime(schedule [][]int) [][]int {
-	minTime, maxTime := math.MaxInt64, math.MinInt64
-	for _, emp := range schedule {
-		minTime = utils.Min(minTime, emp[0])
-		maxTime = utils.Max(maxTime, emp[len(emp)-1])
-	}
-
-	var freeIntervals minHeap
-	for _, emp := range schedule {
-		if minTime < emp[0] {
-			freeIntervals = append(freeIntervals, []int{minTime, emp[0]})
-		}
-
-		if maxTime > emp[len(emp)-1] {
-			freeIntervals = append(freeIntervals, []int{emp[len(emp)-1], maxTime})
-		}
-
-		for i := 1; i < len(emp)-1; i += 2 {
-			freeIntervals = append(freeIntervals, []int{emp[i], emp[i+1]})
-		}
-	}
-
-	heap.Init(&freeIntervals)
-
-	counter := 0
-	empCount := len(schedule)
-	var res [][]int
-	var cur []int
-	for len(freeIntervals) > 0 {
-		intv := freeIntervals[0]
-		_ = heap.Pop(&freeIntervals)
-
-		if counter == 0 || cur[1] <= intv[0] {
-			cur = intv
-			counter = 1
-		} else {
-			cur[0] = intv[0]
-			if cur[1] < intv[1] {
-				heap.Push(&freeIntervals, []int{cur[1], intv[1]})
-			} else if cur[1] > intv[1] {
-				heap.Push(&freeIntervals, []int{intv[1], cur[1]})
-			}
-
-			cur[1] = utils.Min(cur[1], intv[1])
-			counter++
-		}
-
-		if counter == empCount {
-			res = append(res, cur)
-			counter = 0
-		}
-	}
-
-	return res
+type interval struct {
+	empIDx, intvIDx int
 }
 
-type minHeap [][]int
+// todo 1 tests
+func findEmployeeFreeTime(schedule [][][]int) [][]int {
+	var result [][]int
 
-func (h minHeap) Len() int            { return len(h) }
-func (h minHeap) Less(i, j int) bool  { return h[i][0] < h[j][0] }
-func (h minHeap) Swap(i, j int)       { h[i], h[j] = h[j], h[i] }
-func (h *minHeap) Push(v interface{}) { *h = append(*h, v.([]int)) }
+	// PriorityQueue to store one interval from each employee
+	h := minHeap{schedule: schedule}
+
+	// insert the first interval of each employee to the queue
+	for i := range schedule {
+		h.intervals = append(h.intervals, interval{i, 0})
+	}
+
+	p := h.intervals[0]
+	prev := schedule[p.empIDx][p.intvIDx]
+	for h.Len() > 0 {
+		t := heap.Pop(&h).(interval)
+		top := schedule[t.empIDx][t.intvIDx]
+
+		// if previousInterval is not overlapping with the next interval, insert a free interval
+		if prev[1] < top[0] {
+			result = append(result, []int{prev[1], top[0]})
+			prev = top
+		} else { // overlapping intervals, update the previousInterval if needed
+			if prev[1] < top[1] {
+				prev = top
+			}
+		}
+
+		empSchedule := schedule[t.empIDx]
+		if len(empSchedule) > t.intvIDx+1 {
+			heap.Push(&h, []int{t.empIDx, t.intvIDx + 1})
+		}
+	}
+
+	return result
+}
+
+type minHeap struct {
+	intervals []interval
+	schedule  [][][]int
+}
+
+func (h minHeap) Len() int { return len(h.intervals) }
+func (h minHeap) Less(i, j int) bool {
+	intI, intJ := h.intervals[i], h.intervals[j]
+	return h.schedule[intI.empIDx][intI.intvIDx][0] < h.schedule[intJ.empIDx][intJ.intvIDx][0]
+}
+func (h minHeap) Swap(i, j int)       { h.intervals[i], h.intervals[j] = h.intervals[j], h.intervals[i] }
+func (h *minHeap) Push(v interface{}) { h.intervals = append(h.intervals, v.(interval)) }
 func (h *minHeap) Pop() interface{} {
-	last := len(*h) - 1
-	res := (*h)[last]
-	*h = (*h)[:last]
+	last := len(h.intervals) - 1
+	res := h.intervals[last]
+	h.intervals = h.intervals[:last]
 
 	return res
 }
