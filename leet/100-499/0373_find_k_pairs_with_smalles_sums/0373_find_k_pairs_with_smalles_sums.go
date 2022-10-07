@@ -9,12 +9,12 @@ func kSmallestPairs(nums1 []int, nums2 []int, k int) [][]int {
 
 	for i := 0; i < len(nums1) && i < k; i++ {
 		for j := 0; j < len(nums2) && j < k; j++ {
+			num1, num2 := nums1[i], nums2[j]
 			if h.Len() < k {
-				heap.Push(&h, []int{nums1[i], nums2[j]})
+				heap.Push(&h, []int{num1, num2})
 			} else {
 				top := h[0]
-				num1, num2 := nums1[i], nums2[j]
-				if num1+num2 > top[0]+top[1] {
+				if num1+num2 >= top[0]+top[1] {
 					break
 				}
 
