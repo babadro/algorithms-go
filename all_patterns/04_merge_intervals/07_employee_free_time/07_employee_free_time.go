@@ -6,7 +6,6 @@ type interval struct {
 	empIDx, intvIDx int
 }
 
-// todo 1 tests
 func findEmployeeFreeTime(schedule [][][]int) [][]int {
 	var result [][]int
 
@@ -36,7 +35,7 @@ func findEmployeeFreeTime(schedule [][][]int) [][]int {
 
 		empSchedule := schedule[t.empIDx]
 		if len(empSchedule) > t.intvIDx+1 {
-			heap.Push(&h, []int{t.empIDx, t.intvIDx + 1})
+			heap.Push(&h, interval{t.empIDx, t.intvIDx + 1})
 		}
 	}
 
