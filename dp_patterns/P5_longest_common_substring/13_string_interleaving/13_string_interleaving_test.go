@@ -16,12 +16,15 @@ func Test_findSIBruteForce(t *testing.T) {
 		{"abc", "def", "abdccf", false},
 		{"abcdef", "mnop", "mnaobcdepf", true},
 		{"aba", "aba", "abaaba", true},
+		{"aba", "aba", "aabbaa", true},
 		{"aba", "aba", "aba", false},
 		{"aaaaaaaaaaaa", "bbbbbbbbbbbb", "abababababababababababab", true},
+		{"aabcc", "dbbca", "aadbbcbcac", true},
+		{"a", "b", "a", false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.m+"_"+tt.n+"_"+tt.p, func(t *testing.T) {
-			if got := findSIBottomUp(tt.m, tt.n, tt.p); got != tt.want {
+			if got := findSITopDown(tt.m, tt.n, tt.p); got != tt.want {
 				t.Errorf("findSI() = %v, want %v", got, tt.want)
 			}
 		})
