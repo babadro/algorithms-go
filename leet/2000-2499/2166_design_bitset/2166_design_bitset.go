@@ -5,11 +5,11 @@ import "math"
 const leftBit = uint64(1) << 63
 
 type Bitset struct {
-	arr          []uint64
-	size         int
-	lastItemMask uint64
-	strBuf       []byte
-	bitCount     int
+	arr, flipArr           []uint64
+	size                   int
+	lastItemMask           uint64
+	strBuf, flipStrBuf     []byte
+	bitCount, flipBitCount int
 }
 
 func Constructor(size int) Bitset {
@@ -26,62 +26,78 @@ func Constructor(size int) Bitset {
 		lastItemMask = math.MaxUint64
 	}
 
-	strBuf := make([]byte, size)
+	strBuf, flipStrBUf := make([]byte, size), make([]byte, size)
 	for i := range strBuf {
 		strBuf[i] = '0'
+		flipStrBUf[i] = '1'
+	}
+
+	arr, flipArr := make([]uint64, arrLen), make([]uint64, arrLen)
+	for i := range flipArr {
+		flipArr[i] = math.MaxUint64
 	}
 
 	return Bitset{
-		arr:          make([]uint64, arrLen),
+		arr:          arr,
+		flipArr:      flipArr,
 		size:         size,
 		lastItemMask: lastItemMask,
 		strBuf:       strBuf,
+		flipStrBuf:   flipStrBUf,
+		bitCount:     0,
+		flipBitCount: size,
 	}
 }
 
 func (this *Bitset) Fix(idx int) {
+	this.fix(idx, false)
+	this.unfix(idx, true)
+}
+
+func (this *Bitset) fix(idx int, flip bool) {
 	bucketIDx, shift := getIDs(idx)
 	bit := leftBit >> shift
 
-	if this.strBuf[idx] == '0' {
-		this.bitCount++
+	bitCount, arr, str := &this.bitCount, this.arr, this.strBuf
+	if flip {
+		bitCount, arr, str = &this.flipBitCount, this.flipArr, this.flipStrBuf
 	}
 
-	this.strBuf[idx] = '1'
-	this.arr[bucketIDx] |= bit
+	if str[idx] == '0' {
+		*bitCount++
+	}
+
+	str[idx] = '1'
+	arr[bucketIDx] |= bit
 }
 
 func (this *Bitset) Unfix(idx int) {
-	if this.strBuf[idx] == '1' {
-		this.bitCount--
+	this.unfix(idx, false)
+	this.fix(idx, true)
+}
+
+func (this *Bitset) unfix(idx int, flip bool) {
+	bitCount, arr, str := &this.bitCount, this.arr, this.strBuf
+	if flip {
+		bitCount, arr, str = &this.flipBitCount, this.flipArr, this.flipStrBuf
 	}
 
-	this.strBuf[idx] = '0'
+	if str[idx] == '1' {
+		*bitCount--
+	}
+
+	str[idx] = '0'
 
 	bucketIDx, shift := getIDs(idx)
 	mask := math.MaxUint64 ^ (leftBit >> shift)
 
-	this.arr[bucketIDx] &= mask
+	arr[bucketIDx] &= mask
 }
 
 func (this *Bitset) Flip() {
-	this.bitCount = this.size - this.bitCount
-
-	for i, ch := range this.strBuf {
-		if ch == '0' {
-			this.strBuf[i] = '1'
-		} else {
-			this.strBuf[i] = '0'
-		}
-	}
-
-	for i, num := range this.arr {
-		if i == len(this.arr)-1 {
-			this.arr[i] = num ^ this.lastItemMask
-		} else {
-			this.arr[i] = num ^ math.MaxUint64
-		}
-	}
+	this.arr, this.flipArr = this.flipArr, this.arr
+	this.strBuf, this.flipStrBuf = this.flipStrBuf, this.strBuf
+	this.bitCount, this.flipBitCount = this.flipBitCount, this.bitCount
 }
 
 func (this *Bitset) All() bool {
