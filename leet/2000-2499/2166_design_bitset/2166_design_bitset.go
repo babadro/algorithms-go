@@ -3,18 +3,18 @@ package _2166_design_bitset
 // tptl. passed
 type Bitset struct {
 	strBuf, flipStrBuf []byte
-	dict, flipDict     map[int]bool
+	dict, flipDict     map[int]struct{}
 }
 
 func Constructor(size int) Bitset {
 	str, flipStr := make([]byte, size), make([]byte, size)
-	dict, flipDict := make(map[int]bool), make(map[int]bool)
+	dict, flipDict := make(map[int]struct{}), make(map[int]struct{})
 
 	for i := range str {
 		str[i] = '0'
 		flipStr[i] = '1'
 
-		flipDict[i] = true
+		flipDict[i] = struct{}{}
 	}
 
 	return Bitset{
@@ -27,7 +27,7 @@ func Constructor(size int) Bitset {
 
 func (this *Bitset) Fix(idx int) {
 	if _, ok := this.dict[idx]; !ok {
-		this.dict[idx] = true
+		this.dict[idx] = struct{}{}
 		this.strBuf[idx] = '1'
 
 		delete(this.flipDict, idx)
@@ -40,7 +40,7 @@ func (this *Bitset) Unfix(idx int) {
 		delete(this.dict, idx)
 		this.strBuf[idx] = '0'
 
-		this.flipDict[idx] = true
+		this.flipDict[idx] = struct{}{}
 		this.flipStrBuf[idx] = '1'
 	}
 }
