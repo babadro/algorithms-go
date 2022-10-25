@@ -1,141 +1,67 @@
 package _2166_design_bitset
 
-import "math"
-
-const leftBit = uint64(1) << 63
-
+// tptl. passed
 type Bitset struct {
-	arr, flipArr           []uint64
-	size                   int
-	lastItemMask           uint64
-	strBuf, flipStrBuf     []byte
-	bitCount, flipBitCount int
+	strBuf, flipStrBuf []byte
+	dict, flipDict     map[int]bool
 }
 
 func Constructor(size int) Bitset {
-	arrLen := size / 64
-	remainder := size % 64
-	var lastItemMask uint64
-	if remainder != 0 {
-		for i := 0; i < remainder; i++ {
-			lastItemMask |= leftBit >> i
-		}
+	str, flipStr := make([]byte, size), make([]byte, size)
+	dict, flipDict := make(map[int]bool), make(map[int]bool)
 
-		arrLen++
-	} else {
-		lastItemMask = math.MaxUint64
-	}
+	for i := range str {
+		str[i] = '0'
+		flipStr[i] = '1'
 
-	strBuf, flipStrBUf := make([]byte, size), make([]byte, size)
-	for i := range strBuf {
-		strBuf[i] = '0'
-		flipStrBUf[i] = '1'
-	}
-
-	arr, flipArr := make([]uint64, arrLen), make([]uint64, arrLen)
-	for i := range flipArr {
-		flipArr[i] = math.MaxUint64
+		flipDict[i] = true
 	}
 
 	return Bitset{
-		arr:          arr,
-		flipArr:      flipArr,
-		size:         size,
-		lastItemMask: lastItemMask,
-		strBuf:       strBuf,
-		flipStrBuf:   flipStrBUf,
-		bitCount:     0,
-		flipBitCount: size,
+		strBuf:     str,
+		flipStrBuf: flipStr,
+		dict:       dict,
+		flipDict:   flipDict,
 	}
 }
 
 func (this *Bitset) Fix(idx int) {
-	this.fix(idx, false)
-	this.unfix(idx, true)
-}
+	if _, ok := this.dict[idx]; !ok {
+		this.dict[idx] = true
+		this.strBuf[idx] = '1'
 
-func (this *Bitset) fix(idx int, flip bool) {
-	bucketIDx, shift := getIDs(idx)
-	bit := leftBit >> shift
-
-	bitCount, arr, str := &this.bitCount, this.arr, this.strBuf
-	if flip {
-		bitCount, arr, str = &this.flipBitCount, this.flipArr, this.flipStrBuf
+		delete(this.flipDict, idx)
+		this.flipStrBuf[idx] = '0'
 	}
-
-	if str[idx] == '0' {
-		*bitCount++
-	}
-
-	str[idx] = '1'
-	arr[bucketIDx] |= bit
 }
 
 func (this *Bitset) Unfix(idx int) {
-	this.unfix(idx, false)
-	this.fix(idx, true)
-}
+	if _, ok := this.dict[idx]; ok {
+		delete(this.dict, idx)
+		this.strBuf[idx] = '0'
 
-func (this *Bitset) unfix(idx int, flip bool) {
-	bitCount, arr, str := &this.bitCount, this.arr, this.strBuf
-	if flip {
-		bitCount, arr, str = &this.flipBitCount, this.flipArr, this.flipStrBuf
+		this.flipDict[idx] = true
+		this.flipStrBuf[idx] = '1'
 	}
-
-	if str[idx] == '1' {
-		*bitCount--
-	}
-
-	str[idx] = '0'
-
-	bucketIDx, shift := getIDs(idx)
-	mask := math.MaxUint64 ^ (leftBit >> shift)
-
-	arr[bucketIDx] &= mask
 }
 
 func (this *Bitset) Flip() {
-	this.arr, this.flipArr = this.flipArr, this.arr
 	this.strBuf, this.flipStrBuf = this.flipStrBuf, this.strBuf
-	this.bitCount, this.flipBitCount = this.flipBitCount, this.bitCount
+	this.dict, this.flipDict = this.flipDict, this.dict
 }
 
 func (this *Bitset) All() bool {
-	for i, num := range this.arr {
-		allOnesMask := uint64(math.MaxUint64)
-		if i == len(this.arr)-1 {
-			allOnesMask = this.lastItemMask
-		}
-
-		if num != allOnesMask {
-			return false
-		}
-	}
-
-	return true
+	return len(this.dict) == len(this.strBuf)
 }
 
 func (this *Bitset) One() bool {
-	for _, num := range this.arr {
-		if num != 0 {
-			return true
-		}
-	}
-
-	return false
+	return len(this.dict) > 0
 }
 
 func (this *Bitset) Count() int {
-	return this.bitCount
+	return len(this.dict)
 }
 
 func (this *Bitset) ToString() string {
 	return string(this.strBuf)
-}
-
-func getIDs(idx int) (int, int) {
-	bucketIDx := idx / 64
-	remainder := idx % 64
-
-	return bucketIDx, remainder
 }
