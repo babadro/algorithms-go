@@ -1,72 +1,61 @@
 package _2069_walking_robot_simulation_ii
 
-const (
-	east byte = iota
-	north
-	west
-	south
-)
-
+// tptl. passed
 type Robot struct {
-	direction byte
-	x, y      int
+	started   bool
+	circleLen int
+	currPoint int
 	w, h      int
 }
 
 func Constructor(width int, height int) Robot {
+	circleLen := 2*width + (height-2)*2
+
 	return Robot{
-		direction: east,
-		x:         0,
-		y:         height - 1,
+		started:   false,
+		circleLen: circleLen,
+		currPoint: 0,
 		w:         width,
 		h:         height,
 	}
 }
 
-func (this *Robot) Step(num int) {
-	for num > 0 {
-		nextX, nextY := next(this.direction, this.x, this.y)
-		if nextY == -1 || nextY == this.h || nextX == -1 || nextX == this.w {
-			this.direction = (this.direction + 1) % 4
-			continue
-		}
+func (r *Robot) Step(num int) {
+	if num > 0 {
+		r.started = true
+	}
 
-		this.x, this.y = nextX, nextY
+	r.currPoint = (r.currPoint + num) % r.circleLen
+}
 
-		num--
+func (r *Robot) GetPos() []int {
+	switch {
+	case r.currPoint < r.w:
+		return []int{r.currPoint, 0}
+	case r.currPoint < r.w+r.h-2:
+		return []int{r.w - 1, r.currPoint - r.w + 1}
+	case r.currPoint < 2*r.w+r.h-2:
+		return []int{r.w - (r.currPoint - r.w - (r.h - 2) + 1), r.h - 1}
+	default:
+		return []int{0, r.h - (r.currPoint - 2*r.w - (r.h - 2) + 2)}
 	}
 }
 
-func (this *Robot) GetPos() []int {
-	return []int{this.x, this.h - 1 - this.y}
-}
-
-func (this *Robot) GetDir() string {
-	switch this.direction {
-	case north:
-		return "North"
-	case east:
+func (r *Robot) GetDir() string {
+	if !r.started {
 		return "East"
-	case south:
+	}
+
+	switch {
+	case r.currPoint == 0:
 		return "South"
-	case west:
+	case r.currPoint < r.w:
+		return "East"
+	case r.currPoint < r.w+r.h-1:
+		return "North"
+	case r.currPoint < 2*r.w+r.h-2:
 		return "West"
+	default:
+		return "South"
 	}
-
-	return ""
-}
-
-func next(direction byte, x, y int) (int, int) {
-	switch direction {
-	case east:
-		return x + 1, y
-	case north:
-		return x, y - 1
-	case west:
-		return x - 1, y
-	case south:
-		return x, y + 1
-	}
-
-	return -1, -1
 }
