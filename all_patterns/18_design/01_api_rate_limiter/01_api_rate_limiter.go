@@ -7,7 +7,11 @@ func limiter(userLimit, serviceLimit, duration int, requests [][2]int) (response
 	serviceRequests := list.New()
 	for i, req := range requests {
 		userID, now := req[0], req[1]
-		uRequests := userRequests[userID]
+		uRequests, ok := userRequests[userID]
+		if !ok {
+			uRequests = list.New()
+		}
+
 		if !check(now, userLimit, duration, uRequests) {
 			responses[i] = 429
 			continue

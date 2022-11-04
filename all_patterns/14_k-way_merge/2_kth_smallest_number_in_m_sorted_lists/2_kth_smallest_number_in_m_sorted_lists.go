@@ -22,8 +22,7 @@ func findKthSmallest(lists [][]int, k int) int {
 	}
 	heap.Init(&h)
 
-	i := 0
-	for ; len(h) > 0; i++ {
+	for i := 0; len(h) > 0; i++ {
 		minItem := heap.Pop(&h).([2]int)
 		num, arrIDx := minItem[0], minItem[1]
 
