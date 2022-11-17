@@ -1,7 +1,7 @@
 package _567_permutation_in_string
 
 // passed. medium. best solution (universal), without nested loop
-func checkInclusion2(s1 string, s2 string) bool {
+func checkInclusion3(s1 string, s2 string) bool {
 	matched := 0
 	freq := make(map[byte]int)
 	for i := range s1 {
@@ -31,6 +31,43 @@ func checkInclusion2(s1 string, s2 string) bool {
 
 				freq[startChar]++
 			}
+		}
+	}
+
+	return false
+}
+
+// passed. easy to understand
+func checkInclusion2(s1, s2 string) bool {
+	dict, freq := [26]int{}, [26]int{}
+	for i := range s1 {
+		dict[s1[i]-'a']++
+	}
+
+	start, total := 0, 0
+	for end := range s2 {
+		endChar := s2[end] - 'a'
+		count := dict[endChar]
+		if count == 0 {
+			for ; start < end; start++ {
+				freq[s2[start]-'a']--
+				total--
+			}
+
+			start = end + 1
+			continue
+		}
+
+		freq[endChar]++
+		total++
+
+		for ; freq[endChar] > count; start++ {
+			freq[s2[start]-'a']--
+			total--
+		}
+
+		if total == len(s1) {
+			return true
 		}
 	}
 
