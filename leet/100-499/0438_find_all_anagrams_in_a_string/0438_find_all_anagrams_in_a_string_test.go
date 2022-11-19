@@ -14,12 +14,12 @@ func Test_findAnagrams(t *testing.T) {
 	}{
 		{"cbaebabacd", "abc", []int{0, 6}},
 		{"abab", "ab", []int{0, 1, 2}},
-		{"a", "b", nil},
+		{"a", "b", []int{}},
 		{"a", "a", []int{0}},
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%s %s", tt.s, tt.p), func(t *testing.T) {
-			if got := findAnagrams(tt.s, tt.p); !reflect.DeepEqual(got, tt.want) {
+			if got := findAnagrams2(tt.s, tt.p); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("findAnagrams() = %v, want %v", got, tt.want)
 			}
 		})
