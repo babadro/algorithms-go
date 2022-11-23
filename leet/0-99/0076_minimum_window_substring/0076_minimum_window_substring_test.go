@@ -14,7 +14,7 @@ func Test_minWindow(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run("", func(t *testing.T) {
-			if got := minWindow(tt.s, tt.t); got != tt.want {
+			if got := minWindow3(tt.s, tt.t); got != tt.want {
 				t.Errorf("minWindow() = %v, want %v", got, tt.want)
 			}
 		})

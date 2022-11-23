@@ -49,6 +49,48 @@ func minWindow(s string, t string) string {
 	return s[subStrStart : subStrStart+minLen]
 }
 
+// also good solution. easy to understand.
+func minWindow3(s string, t string) string {
+	freq, dict := make(map[byte]int), make(map[byte]int)
+	for i := range t {
+		dict[t[i]]++
+	}
+
+	left, minLen, matched, start, end := 0, math.MaxInt64, 0, 0, 0
+	for right := range s {
+		rightChar := s[right]
+		if count := dict[rightChar]; count > 0 {
+			freq[rightChar]++
+			if freq[rightChar] == count {
+				matched++
+			}
+		}
+
+		for ; left <= right; left++ {
+			leftChar := s[left]
+			count := dict[leftChar]
+			if count == 0 {
+				continue
+			}
+
+			if freq[leftChar] <= count {
+				break
+			}
+
+			freq[leftChar]--
+		}
+
+		if matched == len(dict) {
+			if curLen := right - left + 1; curLen < minLen {
+				minLen = curLen
+				start, end = left, right+1
+			}
+		}
+	}
+
+	return s[start:end]
+}
+
 // passed. hard. 20%, 22% - slow solution
 func minWindow2(s string, t string) string {
 	pattern, remainingChars := make(map[byte]int, 26), make(map[byte]int, 26)
