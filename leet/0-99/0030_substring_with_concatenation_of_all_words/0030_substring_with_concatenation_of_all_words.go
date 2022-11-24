@@ -1,6 +1,7 @@
 package _030_substring_with_concatenation_of_all_words
 
-// tptl. passed
+// tptl. passed, but not the best.
+// todo 2 check fastest solution
 func findSubstring(s string, words []string) []int {
 	freq := make(map[string]int)
 
