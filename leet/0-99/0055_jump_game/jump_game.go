@@ -8,6 +8,7 @@ func canJumpGreedy(nums []int) bool {
 			lastPos = i
 		}
 	}
+
 	return lastPos == 0
 }
 
