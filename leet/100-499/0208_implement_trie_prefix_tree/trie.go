@@ -1,59 +1,63 @@
 package _208_implement_trie_prefix_tree
 
-// passed #medium
+// tptl. passed
+type node struct {
+	children [26]*node
+	endWord  bool
+}
+
 type Trie struct {
-	root TrieNode
+	root *node
 }
 
+/** Initialize your data structure here. */
 func Constructor() Trie {
-	return Trie{root: TrieNode{links: make([]TrieNode, 26)}}
+	return Trie{root: new(node)}
 }
 
-func (t *Trie) Insert(word string) {
-	node := t.root
-	for i, v := range word {
-		if node.links[v-'a'].isNull() {
-			node.links[v-'a'] = NewNode()
+/** Inserts a word into the trie. */
+func (this *Trie) Insert(word string) {
+	cur := this.root
+	for i := range word {
+		ch := word[i] - 'a'
+		if cur.children[ch] == nil {
+			cur.children[ch] = new(node)
 		}
-		if i < len(word)-1 {
-			node = node.links[v-'a']
-		} else {
-			node.links[v-'a'].isEnd = true
-		}
+
+		cur = cur.children[ch]
 	}
+
+	cur.endWord = true
 }
 
-func (t *Trie) Search(word string) bool {
-	node := t.root
-	for _, v := range word {
-		if node.links[v-'a'].isNull() {
+/** Returns if the word is in the trie. */
+func (this *Trie) Search(word string) bool {
+	cur := this.root
+	for i := range word {
+		ch := word[i] - 'a'
+
+		if cur.children[ch] == nil {
 			return false
 		}
-		node = node.links[v-'a']
+
+		cur = cur.children[ch]
 	}
-	return node.isEnd
+
+	return cur.endWord
 }
 
-func (t *Trie) StartsWith(prefix string) bool {
-	node := t.root
-	for _, v := range prefix {
-		if node.links[v-'a'].isNull() {
+/** Returns if there is any word in the trie that starts with the given prefix. */
+func (this *Trie) StartsWith(prefix string) bool {
+	cur := this.root
+	for i := range prefix {
+		ch := prefix[i] - 'a'
+
+		if cur.children[ch] == nil {
 			return false
 		}
-		node = node.links[v-'a']
+
+		cur = cur.children[ch]
 	}
+
 	return true
-}
-
-type TrieNode struct {
-	isEnd bool
-	links []TrieNode
-}
-
-func (tn TrieNode) isNull() bool {
-	return tn.links == nil
-}
-
-func NewNode() TrieNode {
-	return TrieNode{links: make([]TrieNode, 26)}
 }

@@ -6,11 +6,11 @@ import (
 )
 
 func TestTrie(t *testing.T) {
-	trie := Constructor()
-	trie.Insert("apple")
-	log.Println(trie.Search("apple"))
-	log.Println(trie.Search("app"))
-	log.Println(trie.StartsWith("app"))
-	trie.Insert("app")
-	log.Println(trie.Search("app"))
+	trie3 := Constructor()
+	trie3.Insert("apple")
+	log.Println(trie3.Search("apple"))
+	log.Println(trie3.Search("app"))
+	log.Println(trie3.StartsWith("app"))
+	trie3.Insert("app")
+	log.Println(trie3.Search("app"))
 }
