@@ -1,5 +1,6 @@
 package _128_longest_consecutive_sequence
 
+// tptl. passed
 type uf struct {
 	ids  []int
 	size []int
@@ -29,17 +30,17 @@ func (u *uf) root(i int) int {
 }
 
 func (u *uf) union(i, j int) {
-	i, j = u.root(i), u.root(j)
-	if i == j {
+	iRoot, jRoot := u.root(i), u.root(j)
+	if iRoot == jRoot {
 		return
 	}
 
-	if u.size[i] > u.size[j] {
-		u.ids[j] = i
-		u.size[i] += u.size[j]
+	if u.size[iRoot] > u.size[jRoot] {
+		u.ids[iRoot] = jRoot
+		u.size[jRoot] += u.size[iRoot]
 	} else {
-		u.ids[i] = j
-		u.size[j] += u.size[i]
+		u.ids[jRoot] = iRoot
+		u.size[iRoot] += u.size[jRoot]
 	}
 }
 
@@ -77,4 +78,33 @@ func max(a, b int) int {
 	}
 
 	return b
+}
+
+// tptl. passed. best solution. elegant and fast
+func longestConsecutive2(nums []int) int {
+	numToSeqLen, ans := make(map[int]int), 0
+
+	for _, num := range nums {
+		if _, ok := numToSeqLen[num]; ok {
+			continue
+		}
+
+		nextLen, nextOk := numToSeqLen[num+1]
+		prevLen, prevOk := numToSeqLen[num-1]
+
+		length := nextLen + prevLen + 1
+		numToSeqLen[num] = length
+
+		if nextOk {
+			numToSeqLen[num+nextLen] = length
+		}
+
+		if prevOk {
+			numToSeqLen[num-prevLen] = length
+		}
+
+		ans = max(ans, length)
+	}
+
+	return ans
 }
