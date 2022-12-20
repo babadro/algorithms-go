@@ -22,12 +22,12 @@ func threeSum(nums []int) [][]int {
 func findTriplet(num int, nums []int, triplets *[][]int) {
 	left, right := 0, len(nums)-1
 	for left < right {
-		if left > 0 && left < right && nums[left] == nums[left-1] {
+		if left > 0 && nums[left] == nums[left-1] {
 			left++
 			continue
 		}
 
-		if right < len(nums)-1 && right > left && nums[right] == nums[right+1] {
+		if right < len(nums)-1 && nums[right] == nums[right+1] {
 			right--
 			continue
 		}
