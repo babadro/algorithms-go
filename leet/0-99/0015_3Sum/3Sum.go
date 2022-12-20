@@ -3,42 +3,46 @@ package _015_3Sum
 import "sort"
 
 // tptl
-func threeSum(arr []int) [][]int {
-	sort.Ints(arr)
-	var triplets [][]int
-	for i := 0; i < len(arr)-2; i++ {
-		if i > 0 && arr[i] == arr[i-1] { // skip duplicates
+func threeSum(nums []int) [][]int {
+	sort.Ints(nums)
+
+	var res [][]int
+
+	for i := 0; i < len(nums)-2; i++ {
+		if i > 0 && nums[i] == nums[i-1] {
 			continue
 		}
 
-		triplets = searchPair(arr, -arr[i], i+1, triplets)
+		findTriplet(nums[i], nums[i+1:], &res)
 	}
 
-	return triplets
+	return res
 }
 
-func searchPair(arr []int, targetSum, left int, triplets [][]int) [][]int {
-	right := len(arr) - 1
+func findTriplet(num int, nums []int, triplets *[][]int) {
+	left, right := 0, len(nums)-1
 	for left < right {
-		currSum := arr[left] + arr[right]
-		if currSum == targetSum {
-			triplets = append(triplets, []int{-targetSum, arr[left], arr[right]})
+		if left > 0 && left < right && nums[left] == nums[left-1] {
 			left++
+			continue
+		}
+
+		if right < len(nums)-1 && right > left && nums[right] == nums[right+1] {
 			right--
+			continue
+		}
 
-			for left < right && arr[left] == arr[left-1] {
-				left++
-			}
+		sum := nums[left] + nums[right] + num
 
-			for left < right && arr[right] == arr[right+1] {
-				right--
-			}
-		} else if targetSum > currSum {
+		if sum > 0 {
+			right--
+		} else if sum < 0 {
 			left++
 		} else {
+			*triplets = append(*triplets, []int{num, nums[left], nums[right]})
+
+			left++
 			right--
 		}
 	}
-
-	return triplets
 }
