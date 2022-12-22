@@ -8,20 +8,25 @@ import (
 // tptl. passed. medium
 func threeSumClosest(nums []int, target int) int {
 	sort.Ints(nums)
+
 	minDiff := math.MaxInt64
+	var sum int
 	for i := 0; i < len(nums)-2; i++ {
 		left, right := i+1, len(nums)-1
 		for left < right {
-			targetDiff := target - nums[i] - nums[left] - nums[right]
-			if targetDiff == 0 {
-				return target
+			curSum := nums[i] + nums[left] + nums[right]
+			diff := curSum - target
+
+			if diff == 0 {
+				return curSum
 			}
 
-			if abs(targetDiff) < abs(minDiff) {
-				minDiff = targetDiff
+			if absDiff := abs(diff); absDiff < minDiff {
+				minDiff = absDiff
+				sum = curSum
 			}
 
-			if targetDiff > 0 {
+			if diff < 0 {
 				left++
 			} else {
 				right--
@@ -29,7 +34,7 @@ func threeSumClosest(nums []int, target int) int {
 		}
 	}
 
-	return target - minDiff
+	return sum
 }
 
 func abs(a int) int {
