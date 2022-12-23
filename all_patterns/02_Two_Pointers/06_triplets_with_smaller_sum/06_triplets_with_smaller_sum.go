@@ -2,7 +2,7 @@ package _6_triplets_with_smaller_sum
 
 import "sort"
 
-// leetcode (premium) https://leetcode.com/problems/3sum-smaller/
+// leetcode (premium) 259 https://leetcode.com/problems/3sum-smaller/
 func searchTriplets(arr []int, target int) (res int) {
 	sort.Ints(arr)
 	for i := 0; i < len(arr)-2; i++ {
