@@ -21,7 +21,7 @@ func Test_fourSum(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.nums), func(t *testing.T) {
-			got := fourSum(tt.nums, tt.target)
+			got := fourSum2(tt.nums, tt.target)
 			slices.SortEach(tt.want)
 			slices.SortEach(got)
 
