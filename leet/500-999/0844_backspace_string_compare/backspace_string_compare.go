@@ -1,7 +1,7 @@
 package _844_backspace_string_compare
 
 // tptl. best solution. passed. O(N) and O(1)
-func backspaceCompare2(S string, T string) bool {
+func backspaceCompare(S string, T string) bool {
 	i, j := len(S)-1, len(T)-1
 	skipS, skipT := 0, 0
 
@@ -17,6 +17,7 @@ func backspaceCompare2(S string, T string) bool {
 				break
 			}
 		}
+
 		for j >= 0 {
 			if T[j] == '#' {
 				skipT++
@@ -28,12 +29,15 @@ func backspaceCompare2(S string, T string) bool {
 				break
 			}
 		}
+
 		if i >= 0 && j >= 0 && S[i] != T[j] {
 			return false
 		}
+
 		if (i >= 0) != (j >= 0) {
 			return false
 		}
+
 		i--
 		j--
 	}
@@ -42,7 +46,7 @@ func backspaceCompare2(S string, T string) bool {
 }
 
 // brutforce. passed.
-func backspaceCompare(S string, T string) bool {
+func backspaceCompare2(S string, T string) bool {
 	var resS []rune
 	var resT []rune
 
