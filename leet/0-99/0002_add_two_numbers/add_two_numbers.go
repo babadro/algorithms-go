@@ -1,47 +1,42 @@
 package _002_add_two_numbers
 
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
+import "github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
 
-func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
-	mem := 0
-	res := &ListNode{}
-	var prevNode *ListNode
-	val1, val2 := 0, 0
-	val1 = l1.Val
-	val2 = l2.Val
-	sum := val1 + val2
-	if sum < 10 {
-		res.Val = sum
-	} else {
-		res.Val = sum % 10
-		mem = 1
-	}
-	prevNode = res
-	l1, l2 = l1.Next, l2.Next
-	for l1 != nil || l2 != nil || mem != 0 {
-		newNode := &ListNode{}
-		prevNode.Next = newNode
-		val1, val2 := 0, 0
-		if l1 != nil {
-			val1 = l1.Val
-			l1 = l1.Next
+func addTwoNumbers(l1 *single.ListNode, l2 *single.ListNode) *single.ListNode {
+	var head, prev *single.ListNode
+	node1, node2 := l1, l2
+	carry := false
+	for node1 != nil || node2 != nil || carry {
+		sum := 0
+		if node1 != nil {
+			sum += node1.Val
+			node1 = node1.Next
 		}
-		if l2 != nil {
-			val2 = l2.Val
-			l2 = l2.Next
+
+		if node2 != nil {
+			sum += node2.Val
+			node2 = node2.Next
 		}
-		sum := val1 + val2 + mem
-		if sum < 10 {
-			newNode.Val = sum
-			mem = 0
+
+		if carry {
+			sum += 1
+		}
+
+		if sum > 9 {
+			sum %= 10
+			carry = true
 		} else {
-			newNode.Val = sum % 10
-			mem = 1
+			carry = false
 		}
-		prevNode = newNode
+
+		if head == nil {
+			prev = &single.ListNode{Val: sum}
+			head = prev
+		} else {
+			prev.Next = &single.ListNode{Val: sum}
+			prev = prev.Next
+		}
 	}
-	return res
+
+	return head
 }

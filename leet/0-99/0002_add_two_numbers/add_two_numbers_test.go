@@ -3,6 +3,8 @@ package _002_add_two_numbers
 import (
 	"strconv"
 	"testing"
+
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
 )
 
 func TestAddTwoNumbers(t *testing.T) {
@@ -36,18 +38,18 @@ func TestLinkedListFromString(t *testing.T) {
 	}
 }
 
-func StringToLinkedList(input string) *ListNode {
-	res := &ListNode{Val: int(input[len(input)-1]) - 48}
+func StringToLinkedList(input string) *single.ListNode {
+	res := &single.ListNode{Val: int(input[len(input)-1]) - 48}
 	prevNode := res
 	for i := len(input) - 2; i >= 0; i-- {
-		newNode := &ListNode{Val: int(input[i] - 48)}
+		newNode := &single.ListNode{Val: int(input[i] - 48)}
 		prevNode.Next = newNode
 		prevNode = newNode
 	}
 	return res
 }
 
-func LinkedListToString(node *ListNode) string {
+func LinkedListToString(node *single.ListNode) string {
 	res := make([]byte, 0)
 	for node != nil {
 		res = append(res, strconv.Itoa(node.Val)...)

@@ -33,7 +33,7 @@ func TestHasCycle(t *testing.T) {
 			node = node.Next
 		}
 		expected := c.pos > -1
-		if fact := hasCycleTwoPointers(head); fact != expected {
+		if fact := hasCycle(head); fact != expected {
 			t.Errorf("case#%d, want %t, got %t", i+1, expected, fact)
 		}
 	}
