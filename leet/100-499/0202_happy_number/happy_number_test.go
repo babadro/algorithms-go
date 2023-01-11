@@ -13,6 +13,7 @@ func Test_isHappy(t *testing.T) {
 		{19, true},
 		{2, false},
 		{1, true},
+		{10, true},
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%d", tt.n), func(t *testing.T) {
@@ -23,10 +24,6 @@ func Test_isHappy(t *testing.T) {
 	}
 }
 
-func TestCalcSquareSum(t *testing.T) {
-	t.Log(replace(123467))
-}
-
 func TestIsHappy(t *testing.T) {
-	t.Log(isHappy2(12))
+	t.Log(isHappy(12))
 }
