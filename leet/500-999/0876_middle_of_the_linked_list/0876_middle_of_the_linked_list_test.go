@@ -19,7 +19,7 @@ func Test_middleNode(t *testing.T) {
 	for _, tt := range tests {
 		t.Run("", func(t *testing.T) {
 			head := single.ArrToLinkedList(tt.arr)
-			got := middleNode2(head)
+			got := middleNode(head)
 
 			want := single.ArrToLinkedList(tt.want)
 			if !reflect.DeepEqual(got, want) {

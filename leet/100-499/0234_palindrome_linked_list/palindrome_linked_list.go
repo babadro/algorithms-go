@@ -32,15 +32,44 @@ func isPalindrome(head *single.ListNode) bool {
 	return palindrome
 }
 
-func reverse(head *single.ListNode) *single.ListNode {
-	node := head
-	var prev, next *single.ListNode
+func reverse(node *single.ListNode) *single.ListNode {
+	var prev *single.ListNode
 	for node != nil {
-		next = node.Next
+		next := node.Next
 		node.Next = prev
 		prev = node
 		node = next
 	}
 
 	return prev
+}
+
+// with slice allocation
+func isPalindrome3(head *single.ListNode) bool {
+	var arr []int
+	slow, fast := head, head
+	for fast != nil && fast.Next != nil {
+		fast = fast.Next.Next
+
+		arr = append(arr, slow.Val)
+		slow = slow.Next
+	}
+
+	if len(arr) == 0 {
+		return true
+	}
+
+	if fast != nil { // list len is odd
+		slow = slow.Next
+	}
+
+	for i := len(arr) - 1; i >= 0; i-- {
+		if arr[i] != slow.Val {
+			return false
+		}
+
+		slow = slow.Next
+	}
+
+	return true
 }

@@ -4,29 +4,32 @@ import "github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single
 
 // tptl. best solution. fast
 func reorderList(head *single.ListNode) {
-	fast, slow := head, head
-	for fast.Next != nil && fast.Next.Next != nil {
-		slow, fast = slow.Next, fast.Next.Next
+	slow, fast := head, head
+	for fast != nil && fast.Next != nil {
+		slow = slow.Next
+		fast = fast.Next.Next
 	}
 
-	secondHead := slow.Next
-	slow.Next = nil
+	left, right := head, reverse(slow)
+	for left != nil && right != nil && left.Next != right {
+		leftNext, rightNext := left.Next, right.Next
+		left.Next = right
+		right.Next = leftNext
 
-	// reverse second half
-	prev, cur := (*single.ListNode)(nil), secondHead
-	for cur != nil {
-		next := cur.Next
-		cur.Next = prev
-		prev, cur = cur, next
+		left, right = leftNext, rightNext
+	}
+}
+
+func reverse(node *single.ListNode) *single.ListNode {
+	var prev *single.ListNode
+	for node != nil {
+		next := node.Next
+		node.Next = prev
+		prev = node
+		node = next
 	}
 
-	// reorder
-	for cur1, cur2 := head, prev; cur1 != nil && cur2 != nil; {
-		next1, next2 := cur1.Next, cur2.Next
-		cur1.Next = cur2
-		cur2.Next = next1
-		cur1, cur2 = next1, next2
-	}
+	return prev
 }
 
 // bruteforce. passed, but slow
