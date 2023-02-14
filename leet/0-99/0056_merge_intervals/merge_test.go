@@ -20,7 +20,7 @@ func Test_merge(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.intervals), func(t *testing.T) {
-			got := merge2(tt.intervals)
+			got := merge(tt.intervals)
 			sort.Slice(got, func(i, j int) bool {
 				return less(got[i], got[j])
 			})
