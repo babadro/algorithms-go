@@ -1,13 +1,10 @@
 package _0057_insert_interval
 
 // tptl. passed.
-// todo 2 reuse intervals for returning result
+// todo 2 reuse intervals for returning result, binary search?
 func insert(intervals [][]int, newInterval []int) [][]int {
-	if len(intervals) == 0 {
-		return [][]int{newInterval}
-	}
-
 	res := make([][]int, 0, len(intervals)+1)
+
 	i := 0
 	for ; i < len(intervals) && intervals[i][1] < newInterval[0]; i++ {
 		res = append(res, intervals[i])
