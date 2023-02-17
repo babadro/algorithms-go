@@ -26,7 +26,7 @@ func Test_intervalIntersection(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v_%v", tt.firstList, tt.secondList), func(t *testing.T) {
-			require.Equal(t, tt.want, intervalIntersection2(tt.firstList, tt.secondList))
+			require.Equal(t, tt.want, intervalIntersection(tt.firstList, tt.secondList))
 		})
 	}
 }

@@ -1,7 +1,7 @@
 package _986_interval_list_intersection
 
-// tptl. passed.
-func intervalIntersection2(firstList [][]int, secondList [][]int) [][]int {
+// tptl. passed. best solution
+func intervalIntersection(firstList [][]int, secondList [][]int) [][]int {
 	var res [][]int
 	for i, j := 0, 0; i < len(firstList) && j < len(secondList); {
 		a, b := firstList[i], secondList[j]
@@ -20,7 +20,7 @@ func intervalIntersection2(firstList [][]int, secondList [][]int) [][]int {
 }
 
 // passed
-func intervalIntersection(firstList [][]int, secondList [][]int) [][]int {
+func intervalIntersection2(firstList [][]int, secondList [][]int) [][]int {
 	var res [][]int
 	for i, j := 0, 0; i < len(firstList) && j < len(secondList); {
 		a, b := firstList[i], secondList[j]
