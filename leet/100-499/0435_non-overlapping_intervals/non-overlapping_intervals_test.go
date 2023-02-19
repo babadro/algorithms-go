@@ -14,11 +14,12 @@ func Test_eraseOverlapIntervals(t *testing.T) {
 		{[][]int{{1, 2}, {1, 2}, {1, 2}}, 2},
 		{[][]int{{1, 2}, {2, 3}}, 0},
 		{[][]int{{1, 2}, {2, 3}, {3, 4}, {-100, -2}, {5, 7}}, 0},
+		{[][]int{{0, 1}, {1, 5}, {1, 2}, {2, 3}, {3, 4}, {4, 5}}, 1},
 		{tleInput1, 187},
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.intervals), func(t *testing.T) {
-			if got := eraseOverlapIntervals2(tt.intervals); got != tt.want {
+			if got := eraseOverlapIntervals(tt.intervals); got != tt.want {
 				t.Errorf("eraseOverlapIntervals() = %v, want %v", got, tt.want)
 			}
 		})

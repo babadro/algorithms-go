@@ -7,6 +7,8 @@ import (
 	"github.com/babadro/algorithms-go/utils"
 )
 
+// Given an array of meeting time intervals as input, find the minimum number
+// of meeting rooms needed to hold these meetings.
 // leetcode premium https://leetcode.com/problems/meeting-rooms/
 // https://leetcode.com/problems/meeting-rooms-ii/
 // tptl
