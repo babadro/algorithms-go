@@ -6,6 +6,11 @@ type interval struct {
 	empIDx, intvIDx int
 }
 
+// leetcode premium: https://leetcode.com/problems/employee-free-time/
+// We are given a list scheduleof employees, which represents the working time for each employee.
+// Each employee has a list of non-overlapping Intervals, and these intervals are in sorted order.
+// Return the list of finite intervals representing common, positive-length free time for all employees,
+// also in sorted order.
 func findEmployeeFreeTime(schedule [][][]int) [][]int {
 	var result [][]int
 

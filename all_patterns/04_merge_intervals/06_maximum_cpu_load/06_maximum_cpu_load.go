@@ -8,6 +8,10 @@ import (
 )
 
 // no leetcode example
+// Given an array of jobs with different time requirements,
+// where each job consists of start time, end time and CPU load.
+// The task is to find the maximum CPU load at any time if all jobs
+// are running on the same machine.
 func findMaxCPULoad(jobs [][3]int) int {
 	sort.Slice(jobs, func(i, j int) bool {
 		return jobs[i][0] < jobs[j][0]
