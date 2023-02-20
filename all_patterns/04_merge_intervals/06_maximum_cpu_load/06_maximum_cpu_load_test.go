@@ -13,7 +13,7 @@ func Test_findMaxCPULoad(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run("", func(t *testing.T) {
-			if got := findMaxCPULoad2(tt.jobs); got != tt.want {
+			if got := findMaxCPULoad(tt.jobs); got != tt.want {
 				t.Errorf("findMaxCPULoad() = %v, want %v", got, tt.want)
 			}
 		})
