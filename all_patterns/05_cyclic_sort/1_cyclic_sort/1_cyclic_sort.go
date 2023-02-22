@@ -9,3 +9,13 @@ func cyclicSort(nums []int) {
 		}
 	}
 }
+
+func cyclicSort2(nums []int) {
+	for i := 0; i < len(nums); {
+		if j := nums[i] - 1; j != i {
+			nums[i], nums[j] = nums[j], nums[i]
+		} else {
+			i++
+		}
+	}
+}

@@ -1,6 +1,9 @@
 package _7_employee_free_time
 
-import "container/heap"
+import (
+	"container/heap"
+	"sort"
+)
 
 type interval struct {
 	empIDx, intvIDx int
@@ -11,7 +14,35 @@ type interval struct {
 // Each employee has a list of non-overlapping Intervals, and these intervals are in sorted order.
 // Return the list of finite intervals representing common, positive-length free time for all employees,
 // also in sorted order.
+
+// tptl best solution
+// https://aaronice.gitbook.io/lintcode/sweep-line/employee-free-time
 func findEmployeeFreeTime(schedule [][][]int) [][]int {
+	var result, timeLine [][]int
+
+	for _, emp := range schedule {
+		timeLine = append(timeLine, emp...)
+	}
+
+	sort.Slice(timeLine, func(i, j int) bool {
+		return timeLine[i][0] < timeLine[j][0]
+	})
+
+	temp := timeLine[0]
+	for _, tInterval := range timeLine {
+		if temp[1] < tInterval[0] {
+			result = append(result, []int{temp[1], tInterval[0]})
+			temp = tInterval
+		} else if temp[1] < tInterval[1] {
+			temp = tInterval
+		}
+	}
+
+	return result
+}
+
+// overcomplicated
+func findEmployeeFreeTime2(schedule [][][]int) [][]int {
 	var result [][]int
 
 	// PriorityQueue to store one interval from each employee

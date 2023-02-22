@@ -17,7 +17,7 @@ func Test_sort(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.nums), func(t *testing.T) {
-			cyclicSort(tt.nums)
+			cyclicSort2(tt.nums)
 
 			require.True(t, sort.IntsAreSorted(tt.nums))
 		})
