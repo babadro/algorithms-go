@@ -1,6 +1,6 @@
 package __find_the_missing_number
 
-// leetcode 268 (there is a simpler and trickier solution - look at leetcode task 286 implementation)
+// leetcode 268 (there is a simpler and trickier solution - look at leetcode task 268 implementation)
 func findMissingNumber(nums []int) int {
 	for i := 0; i < len(nums); i++ {
 		for nums[i] < len(nums) && nums[i] != i {
