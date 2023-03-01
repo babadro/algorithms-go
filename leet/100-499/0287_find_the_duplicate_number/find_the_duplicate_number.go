@@ -1,6 +1,7 @@
 package _287_find_the_duplicate_number
 
 // 31% 13% - it's ok for two floyd cycle solution
+// https://medium.com/@simrangarg0501/finding-the-duplicate-number-using-floyds-tortoise-and-hare-algorithm-618ced80e98e
 func findDuplicate(nums []int) int {
 	slow, fast := 0, 0
 	for {

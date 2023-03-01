@@ -26,9 +26,6 @@ func findDuplicates(nums []int) []int {
 // best solution
 func findDuplicates2(nums []int) []int {
 	var result []int
-	if len(nums) == 0 {
-		return result
-	}
 
 	for _, val := range nums {
 		visited := abs(val) - 1

@@ -18,7 +18,7 @@ func Test_findDuplicates(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprint(tt.nums), func(t *testing.T) {
-			got := findDuplicates(tt.nums)
+			got := findDuplicates2(tt.nums)
 			sort.Ints(got)
 			sort.Ints(tt.want)
 			if !reflect.DeepEqual(got, tt.want) {

@@ -15,7 +15,7 @@ func Test_findDuplicate(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.nums), func(t *testing.T) {
-			if got := findDuplicate(tt.nums); got != tt.want {
+			if got := findDuplicate4(tt.nums); got != tt.want {
 				t.Errorf("findDuplicate2() = %v, want %v", got, tt.want)
 			}
 		})
