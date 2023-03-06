@@ -3,15 +3,14 @@ package _206_reverse_linked_list
 import "github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
 
 func reverseList(head *single.ListNode) *single.ListNode {
-	node := head
 	var prev *single.ListNode
-	var next *single.ListNode
-	for node != nil {
-		next = node.Next
-		node.Next = prev
-		prev = node
-		node = next
+	for head != nil {
+		next := head.Next
+		head.Next = prev
+		prev = head
+		head = next
 	}
+
 	return prev
 }
 
