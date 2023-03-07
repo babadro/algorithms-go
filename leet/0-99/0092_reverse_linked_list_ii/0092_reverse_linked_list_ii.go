@@ -66,3 +66,49 @@ func reverseBetween2(head *single.ListNode, left int, right int) *single.ListNod
 
 	return head
 }
+
+// slower, but easy to understand
+func reverseBetween3(head *single.ListNode, left int, right int) *single.ListNode {
+	var headSegmentEnd, tailSegmentStart, leftNode, rightNode *single.ListNode
+
+	for i, cur, prev := 1, head, (*single.ListNode)(nil); cur != nil; {
+		if i == left {
+			headSegmentEnd = prev
+			leftNode = cur
+		}
+
+		if i == right {
+			tailSegmentStart = cur.Next
+			rightNode = cur
+
+			break
+		}
+
+		i++
+		prev, cur = cur, cur.Next
+	}
+
+	rightNode.Next = nil
+
+	reversed := reverse(leftNode)
+	if headSegmentEnd != nil {
+		headSegmentEnd.Next = reversed
+	} else {
+		head = reversed
+	}
+
+	leftNode.Next = tailSegmentStart
+
+	return head
+}
+
+func reverse(node *single.ListNode) *single.ListNode {
+	var prev *single.ListNode
+	for node != nil {
+		next := node.Next
+		node.Next = prev
+		prev, node = node, next
+	}
+
+	return prev
+}
