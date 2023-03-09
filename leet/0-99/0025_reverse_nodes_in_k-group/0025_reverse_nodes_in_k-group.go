@@ -4,6 +4,38 @@ import "github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single
 
 // tptl. passed. hard
 func reverseKGroup(head *single.ListNode, k int) *single.ListNode {
+	var prev *single.ListNode
+	for cur := head; cur != nil; {
+		reversed, next, ok := reverse(cur, k)
+		if !ok {
+			reversed, next, _ = reverse(reversed, k)
+		}
+
+		if prev != nil {
+			prev.Next = reversed
+		} else {
+			head = reversed
+		}
+
+		prev, cur = cur, next
+	}
+
+	return head
+}
+
+func reverse(node *single.ListNode, k int) (head, next *single.ListNode, ok bool) {
+	var prev *single.ListNode
+	for ; node != nil && k > 0; k-- {
+		next = node.Next
+		node.Next = prev
+		prev, node = node, next
+	}
+
+	return prev, next, k == 0
+}
+
+// longer and slower
+func reverseKGroup2(head *single.ListNode, k int) *single.ListNode {
 	if k == 1 {
 		return head
 	}

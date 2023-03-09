@@ -24,7 +24,7 @@ func Test_reverseKGroup(t *testing.T) {
 		t.Run(fmt.Sprintf("%v", tt.input), func(t *testing.T) {
 			head := single.ArrToLinkedList(tt.input)
 
-			got := single.LinkedListToArr(reverseKGroup(head, tt.k))
+			got := single.LinkedListToArr(reverseKGroup2(head, tt.k))
 
 			require.Equal(t, tt.want, got)
 		})
