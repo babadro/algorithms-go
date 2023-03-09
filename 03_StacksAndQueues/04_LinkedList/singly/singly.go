@@ -1,4 +1,4 @@
-package single
+package singly
 
 type ListNode struct {
 	Val  int

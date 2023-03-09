@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
 )
 
 func Test_reverseLinkedList(t *testing.T) {
@@ -18,8 +18,8 @@ func Test_reverseLinkedList(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.input), func(t *testing.T) {
-			head := single.ArrToLinkedList(tt.input)
-			got := single.LinkedListToArr(reverseLinkedList(head))
+			head := singly.ArrToLinkedList(tt.input)
+			got := singly.LinkedListToArr(reverseLinkedList(head))
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("reverseLinkedList() = %v, want %v", got, tt.want)
 			}

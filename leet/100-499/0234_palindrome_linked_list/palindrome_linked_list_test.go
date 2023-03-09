@@ -3,7 +3,7 @@ package _234_palindrome_linked_list
 import (
 	"testing"
 
-	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
 )
 
 func TestIsPalindrome(t *testing.T) {
@@ -21,7 +21,7 @@ func TestIsPalindrome(t *testing.T) {
 	}
 
 	for i, c := range cases {
-		head := single.ArrToLinkedList(c.input)
+		head := singly.ArrToLinkedList(c.input)
 		if fact := isPalindrome(head); fact != c.expected {
 			t.Errorf("case#%d, want %t, got %t", i+1, c.expected, fact)
 		}

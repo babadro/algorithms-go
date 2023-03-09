@@ -1,9 +1,11 @@
 package _234_palindrome_linked_list
 
-import "github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+import (
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
+)
 
 // tptl. passed. easy to understand
-func isPalindrome(head *single.ListNode) bool {
+func isPalindrome(head *singly.ListNode) bool {
 	if head == nil || head.Next == nil {
 		return true
 	}
@@ -32,8 +34,8 @@ func isPalindrome(head *single.ListNode) bool {
 	return palindrome
 }
 
-func reverse(node *single.ListNode) *single.ListNode {
-	var prev *single.ListNode
+func reverse(node *singly.ListNode) *singly.ListNode {
+	var prev *singly.ListNode
 	for node != nil {
 		next := node.Next
 		node.Next = prev
@@ -45,7 +47,7 @@ func reverse(node *single.ListNode) *single.ListNode {
 }
 
 // with slice allocation
-func isPalindrome3(head *single.ListNode) bool {
+func isPalindrome3(head *singly.ListNode) bool {
 	var arr []int
 	slow, fast := head, head
 	for fast != nil && fast.Next != nil {

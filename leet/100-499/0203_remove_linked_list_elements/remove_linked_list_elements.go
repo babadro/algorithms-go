@@ -1,10 +1,12 @@
 package _203_remove_linked_list_elements
 
-import "github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+import (
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
+)
 
 // tptl. best solution
-func removeElements2(head *single.ListNode, val int) *single.ListNode {
-	dummy := &single.ListNode{}
+func removeElements2(head *singly.ListNode, val int) *singly.ListNode {
+	dummy := &singly.ListNode{}
 	head, dummy.Next = dummy, head
 	for dummy.Next != nil {
 		if dummy.Next.Val == val {
@@ -25,7 +27,7 @@ func removeElements2(head *single.ListNode, val int) *single.ListNode {
  * }
  */
 // passed, but it has too many lines of code.
-func removeElements(head *single.ListNode, val int) *single.ListNode {
+func removeElements(head *singly.ListNode, val int) *singly.ListNode {
 	node := head
 	for node != nil && node.Val == val {
 		node = node.Next

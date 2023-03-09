@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
 )
 
 func Test_rotateRight(t *testing.T) {
@@ -25,8 +25,8 @@ func Test_rotateRight(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			head := single.ArrToLinkedList(tt.input)
-			got := single.LinkedListToArr(rotateRight(head, tt.k))
+			head := singly.ArrToLinkedList(tt.input)
+			got := singly.LinkedListToArr(rotateRight(head, tt.k))
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("rotateRight() = %v, want %v", got, tt.want)
 			}

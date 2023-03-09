@@ -4,32 +4,32 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
 )
 
 func Test_detectCycle(t *testing.T) {
-	head1 := single.ArrToLinkedList([]int{1, 2, 3, 4, 5, 6})
-	single.FindNode(head1, 6).Next = single.FindNode(head1, 3)
+	head1 := singly.ArrToLinkedList([]int{1, 2, 3, 4, 5, 6})
+	singly.FindNode(head1, 6).Next = singly.FindNode(head1, 3)
 
-	head2 := single.ArrToLinkedList([]int{1, 2, 3, 4, 5, 6})
-	single.FindNode(head2, 6).Next = single.FindNode(head2, 4)
+	head2 := singly.ArrToLinkedList([]int{1, 2, 3, 4, 5, 6})
+	singly.FindNode(head2, 6).Next = singly.FindNode(head2, 4)
 
-	head3 := single.ArrToLinkedList([]int{1, 2, 3, 4, 5, 6})
-	single.FindNode(head3, 6).Next = single.FindNode(head3, 1)
+	head3 := singly.ArrToLinkedList([]int{1, 2, 3, 4, 5, 6})
+	singly.FindNode(head3, 6).Next = singly.FindNode(head3, 1)
 
-	head4 := single.ArrToLinkedList([]int{1, 2})
-	single.FindNode(head4, 2).Next = single.FindNode(head4, 1)
+	head4 := singly.ArrToLinkedList([]int{1, 2})
+	singly.FindNode(head4, 2).Next = singly.FindNode(head4, 1)
 
-	noCycle := single.ArrToLinkedList([]int{1, 2, 3, 4, 5, 6})
+	noCycle := singly.ArrToLinkedList([]int{1, 2, 3, 4, 5, 6})
 
 	tests := []struct {
-		head *single.ListNode
-		want *single.ListNode
+		head *singly.ListNode
+		want *singly.ListNode
 	}{
-		{head1, single.FindNode(head1, 3)},
-		{head2, single.FindNode(head2, 4)},
-		{head3, single.FindNode(head3, 1)},
-		{head4, single.FindNode(head4, 1)},
+		{head1, singly.FindNode(head1, 3)},
+		{head2, singly.FindNode(head2, 4)},
+		{head3, singly.FindNode(head3, 1)},
+		{head4, singly.FindNode(head4, 1)},
 		{noCycle, nil},
 	}
 	for _, tt := range tests {

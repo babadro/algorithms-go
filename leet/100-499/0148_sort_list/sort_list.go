@@ -1,9 +1,11 @@
 package _148_sort_list
 
-import "github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+import (
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
+)
 
 // Not mine. Good solution. 83% 100%
-func sortList(head *single.ListNode) *single.ListNode {
+func sortList(head *singly.ListNode) *singly.ListNode {
 	if head == nil || head.Next == nil {
 		return head
 	}
@@ -20,8 +22,8 @@ func sortList(head *single.ListNode) *single.ListNode {
 	return merge(sortList(head), sortList(rightHead))
 }
 
-func merge(list1 *single.ListNode, list2 *single.ListNode) *single.ListNode {
-	result := &single.ListNode{Val: 0}
+func merge(list1 *singly.ListNode, list2 *singly.ListNode) *singly.ListNode {
+	result := &singly.ListNode{Val: 0}
 	current := result
 	for list1 != nil && list2 != nil {
 		if list1.Val < list2.Val {

@@ -1,18 +1,20 @@
 package _138_copy_list_with_random_pointer
 
-import "github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+import (
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
+)
 
 // 100% 80%
-func copyRandomList(head *single.ListNodeRandom) *single.ListNodeRandom {
+func copyRandomList(head *singly.ListNodeRandom) *singly.ListNodeRandom {
 	if head == nil {
 		return nil
 	}
-	var copyNodes []*single.ListNodeRandom
+	var copyNodes []*singly.ListNodeRandom
 
 	node := head
 	idx := 0
 	for node != nil {
-		copyNodes = append(copyNodes, &single.ListNodeRandom{Val: node.Val})
+		copyNodes = append(copyNodes, &singly.ListNodeRandom{Val: node.Val})
 		node.Val = idx
 		idx++
 		node = node.Next

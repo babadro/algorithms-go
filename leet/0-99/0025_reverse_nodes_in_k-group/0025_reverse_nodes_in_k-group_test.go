@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
 	"github.com/stretchr/testify/require"
 )
 
@@ -22,9 +22,9 @@ func Test_reverseKGroup(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.input), func(t *testing.T) {
-			head := single.ArrToLinkedList(tt.input)
+			head := singly.ArrToLinkedList(tt.input)
 
-			got := single.LinkedListToArr(reverseKGroup2(head, tt.k))
+			got := singly.LinkedListToArr(reverseKGroup2(head, tt.k))
 
 			require.Equal(t, tt.want, got)
 		})

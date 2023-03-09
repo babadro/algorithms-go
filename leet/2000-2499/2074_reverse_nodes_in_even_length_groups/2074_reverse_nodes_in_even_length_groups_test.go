@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
 	"github.com/stretchr/testify/require"
 )
 
@@ -25,9 +25,9 @@ func Test_reverseEvenLengthGroups(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.input), func(t *testing.T) {
-			head := single.ArrToLinkedList(tt.input)
+			head := singly.ArrToLinkedList(tt.input)
 			got := reverseEvenLengthGroups(head)
-			gotArr := single.LinkedListToArr(got)
+			gotArr := singly.LinkedListToArr(got)
 
 			require.Equal(t, tt.want, gotArr)
 		})

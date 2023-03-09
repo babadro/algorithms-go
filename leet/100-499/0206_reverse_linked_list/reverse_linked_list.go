@@ -1,9 +1,11 @@
 package _206_reverse_linked_list
 
-import "github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+import (
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
+)
 
-func reverseList(head *single.ListNode) *single.ListNode {
-	var prev *single.ListNode
+func reverseList(head *singly.ListNode) *singly.ListNode {
+	var prev *singly.ListNode
 	for head != nil {
 		next := head.Next
 		head.Next = prev
@@ -14,7 +16,7 @@ func reverseList(head *single.ListNode) *single.ListNode {
 	return prev
 }
 
-func reverseListRecursive(head *single.ListNode) *single.ListNode {
+func reverseListRecursive(head *singly.ListNode) *singly.ListNode {
 	if head == nil || head.Next == nil {
 		return head
 	}

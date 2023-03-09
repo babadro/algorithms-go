@@ -1,11 +1,13 @@
 package _234_palindrome_linked_list
 
-import "github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+import (
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
+)
 
 // todo 1 doesn't reassemble the order
-func isPalindromeTheBest(head *single.ListNode) bool {
+func isPalindromeTheBest(head *singly.ListNode) bool {
 	slow, fast := head, head
-	var prev *single.ListNode
+	var prev *singly.ListNode
 	for fast != nil && fast.Next != nil {
 		cur := slow
 		slow, fast = slow.Next, fast.Next.Next
@@ -35,7 +37,7 @@ func isPalindromeTheBest(head *single.ListNode) bool {
 }
 
 // todo 1 doesn't reassemble last node.
-func isPalindrome2(head *single.ListNode) bool {
+func isPalindrome2(head *singly.ListNode) bool {
 	mid, end := head, head
 	for end != nil && end.Next != nil {
 		mid = mid.Next
@@ -48,7 +50,7 @@ func isPalindrome2(head *single.ListNode) bool {
 	}
 
 	// reverse
-	var prev *single.ListNode
+	var prev *singly.ListNode
 	cur := mid
 	for cur != nil {
 		next := cur.Next

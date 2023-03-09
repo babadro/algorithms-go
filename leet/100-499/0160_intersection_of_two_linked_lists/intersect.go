@@ -1,14 +1,16 @@
 package _160_intersection_of_two_linked_lists
 
-import "github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+import (
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
+)
 
-func getIntersectionNode(headA, headB *single.ListNode) *single.ListNode {
+func getIntersectionNode(headA, headB *singly.ListNode) *singly.ListNode {
 	if headA == nil || headB == nil {
 		return nil
 	}
 	node1 := headA
 	node2 := headB
-	var lastA, lastB *single.ListNode
+	var lastA, lastB *singly.ListNode
 	for node1 != node2 {
 		if lastA != nil && lastB != nil && lastA != lastB {
 			return nil

@@ -3,11 +3,11 @@ package _1_linked_list_cycle
 import (
 	"testing"
 
-	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
 )
 
 func Test_hasCycle(t *testing.T) {
-	var nilHead *single.ListNode
+	var nilHead *singly.ListNode
 
 	singleNode := n(1)
 
@@ -28,7 +28,7 @@ func Test_hasCycle(t *testing.T) {
 	cycle6.Next = cycle3
 
 	tests := []struct {
-		node *single.ListNode
+		node *singly.ListNode
 		want bool
 	}{
 		{nilHead, false},
@@ -46,7 +46,7 @@ func Test_hasCycle(t *testing.T) {
 }
 
 func Test_findCycleLen(t *testing.T) {
-	var nilHead *single.ListNode
+	var nilHead *singly.ListNode
 
 	singleNode := n(1)
 
@@ -67,7 +67,7 @@ func Test_findCycleLen(t *testing.T) {
 	cycle6.Next = cycle3
 
 	tests := []struct {
-		node *single.ListNode
+		node *singly.ListNode
 		want int
 	}{
 		{nilHead, 0},
@@ -84,6 +84,6 @@ func Test_findCycleLen(t *testing.T) {
 	}
 }
 
-func n(val int) *single.ListNode {
-	return &single.ListNode{Val: val}
+func n(val int) *singly.ListNode {
+	return &singly.ListNode{Val: val}
 }

@@ -1,17 +1,19 @@
 package _092_reverse_linked_list_ii
 
-import "github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+import (
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
+)
 
 // tptl. passed. medium #linkedlist
-func reverseBetween(head *single.ListNode, left int, right int) *single.ListNode {
+func reverseBetween(head *singly.ListNode, left int, right int) *singly.ListNode {
 	leftNode := head
-	var prevLeft *single.ListNode
+	var prevLeft *singly.ListNode
 	for i := 1; i < left; i++ {
 		prevLeft, leftNode = leftNode, leftNode.Next
 	}
 
 	// reverse
-	var prev *single.ListNode
+	var prev *singly.ListNode
 	cur := leftNode
 	for i := left; i <= right; i++ {
 		next := cur.Next
@@ -34,8 +36,8 @@ func reverseBetween(head *single.ListNode, left int, right int) *single.ListNode
 }
 
 // looks more complicated
-func reverseBetween2(head *single.ListNode, left int, right int) *single.ListNode {
-	var leftNode, rightNode, prevLeft, nextRight, prev *single.ListNode
+func reverseBetween2(head *singly.ListNode, left int, right int) *singly.ListNode {
+	var leftNode, rightNode, prevLeft, nextRight, prev *singly.ListNode
 	for cur, i := head, 1; ; i++ {
 		if i == left {
 			leftNode, prevLeft = cur, prev
@@ -68,10 +70,10 @@ func reverseBetween2(head *single.ListNode, left int, right int) *single.ListNod
 }
 
 // slower, but easy to understand
-func reverseBetween3(head *single.ListNode, left int, right int) *single.ListNode {
-	var headSegmentEnd, tailSegmentStart, leftNode, rightNode *single.ListNode
+func reverseBetween3(head *singly.ListNode, left int, right int) *singly.ListNode {
+	var headSegmentEnd, tailSegmentStart, leftNode, rightNode *singly.ListNode
 
-	for i, cur, prev := 1, head, (*single.ListNode)(nil); cur != nil; {
+	for i, cur, prev := 1, head, (*singly.ListNode)(nil); cur != nil; {
 		if i == left {
 			headSegmentEnd = prev
 			leftNode = cur
@@ -102,8 +104,8 @@ func reverseBetween3(head *single.ListNode, left int, right int) *single.ListNod
 	return head
 }
 
-func reverse(node *single.ListNode) *single.ListNode {
-	var prev *single.ListNode
+func reverse(node *singly.ListNode) *singly.ListNode {
+	var prev *singly.ListNode
 	for node != nil {
 		next := node.Next
 		node.Next = prev

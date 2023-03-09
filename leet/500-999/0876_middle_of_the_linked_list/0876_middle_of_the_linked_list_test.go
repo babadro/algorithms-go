@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
 )
 
 func Test_middleNode(t *testing.T) {
@@ -18,10 +18,10 @@ func Test_middleNode(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run("", func(t *testing.T) {
-			head := single.ArrToLinkedList(tt.arr)
+			head := singly.ArrToLinkedList(tt.arr)
 			got := middleNode(head)
 
-			want := single.ArrToLinkedList(tt.want)
+			want := singly.ArrToLinkedList(tt.want)
 			if !reflect.DeepEqual(got, want) {
 				t.Errorf("middleNode() = %v, want %v", got, want)
 			}

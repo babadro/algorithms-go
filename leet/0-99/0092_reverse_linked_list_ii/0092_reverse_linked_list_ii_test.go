@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
 )
 
 func Test_reverseBetween(t *testing.T) {
@@ -26,8 +26,8 @@ func Test_reverseBetween(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.inputArr), func(t *testing.T) {
-			head := single.ArrToLinkedList(tt.inputArr)
-			got := single.LinkedListToArr(reverseBetween3(head, tt.left, tt.right))
+			head := singly.ArrToLinkedList(tt.inputArr)
+			got := singly.LinkedListToArr(reverseBetween3(head, tt.left, tt.right))
 
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("reverseBetween() = %v, want %v", got, tt.want)

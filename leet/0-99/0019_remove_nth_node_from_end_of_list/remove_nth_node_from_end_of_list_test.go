@@ -1,9 +1,10 @@
 package _019_remove_nth_node_from_end_of_list
 
 import (
-	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
-	"github.com/babadro/algorithms-go/slices"
 	"testing"
+
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
+	"github.com/babadro/algorithms-go/slices"
 )
 
 func TestRemoveNthFromEnd(t *testing.T) {
@@ -20,9 +21,9 @@ func TestRemoveNthFromEnd(t *testing.T) {
 	}
 
 	for i, c := range cases {
-		head := single.ArrToLinkedList(c.input)
+		head := singly.ArrToLinkedList(c.input)
 		head = removeNthFromEnd(head, c.n)
-		fact := single.LinkedListToArr(head)
+		fact := singly.LinkedListToArr(head)
 		if !slices.IntSlicesAreEqual(fact, c.expected) {
 			t.Errorf("case#%d, want %v, got %v", i+1, c.expected, fact)
 		}

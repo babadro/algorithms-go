@@ -1,10 +1,12 @@
 package _025_reverse_nodes_in_k_group
 
-import "github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+import (
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
+)
 
 // tptl. passed. hard
-func reverseKGroup(head *single.ListNode, k int) *single.ListNode {
-	var prev *single.ListNode
+func reverseKGroup(head *singly.ListNode, k int) *singly.ListNode {
+	var prev *singly.ListNode
 	for cur := head; cur != nil; {
 		reversed, next, ok := reverse(cur, k)
 		if !ok {
@@ -23,8 +25,8 @@ func reverseKGroup(head *single.ListNode, k int) *single.ListNode {
 	return head
 }
 
-func reverse(node *single.ListNode, k int) (head, next *single.ListNode, ok bool) {
-	var prev *single.ListNode
+func reverse(node *singly.ListNode, k int) (head, next *singly.ListNode, ok bool) {
+	var prev *singly.ListNode
 	for ; node != nil && k > 0; k-- {
 		next = node.Next
 		node.Next = prev
@@ -35,12 +37,12 @@ func reverse(node *single.ListNode, k int) (head, next *single.ListNode, ok bool
 }
 
 // longer and slower
-func reverseKGroup2(head *single.ListNode, k int) *single.ListNode {
+func reverseKGroup2(head *singly.ListNode, k int) *singly.ListNode {
 	if k == 1 {
 		return head
 	}
 
-	var l, r *single.ListNode
+	var l, r *singly.ListNode
 	start, end := head, head
 	for {
 		for count := 1; count < k; count++ {

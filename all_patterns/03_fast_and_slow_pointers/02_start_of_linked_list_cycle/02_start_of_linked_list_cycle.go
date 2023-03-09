@@ -1,9 +1,11 @@
 package _2_start_of_linked_list_cycle
 
-import "github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+import (
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
+)
 
 // leetcode 142
-func findCycleStart(head *single.ListNode) *single.ListNode {
+func findCycleStart(head *singly.ListNode) *singly.ListNode {
 	fast, slow := head, head
 	for {
 		if fast == nil || fast.Next == nil {

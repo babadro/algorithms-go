@@ -1,9 +1,10 @@
-package single
+package singly
 
 import (
 	"fmt"
-	"github.com/babadro/algorithms-go/slices"
 	"testing"
+
+	"github.com/babadro/algorithms-go/slices"
 )
 
 func TestArrToLinkedList(t *testing.T) {

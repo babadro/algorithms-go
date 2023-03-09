@@ -1,16 +1,17 @@
 package _138_copy_list_with_random_pointer
 
 import (
-	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
+
 	"testing"
 )
 
 func TestCopyRandomList(t *testing.T) {
 	originArr := [][2]int{{7, -1}, {13, 0}, {11, 4}, {10, 2}, {1, 0}}
-	originList := single.ArrToLinkedListRandom(originArr)
+	originList := singly.ArrToLinkedListRandom(originArr)
 	copyList := copyRandomList(originList)
 
-	originSlice, copySlice := single.LinkedListRandomToArr(single.ArrToLinkedListRandom(originArr)), single.LinkedListRandomToArr(copyList)
+	originSlice, copySlice := singly.LinkedListRandomToArr(singly.ArrToLinkedListRandom(originArr)), singly.LinkedListRandomToArr(copyList)
 	if !sliceOfArraysAreEqual(originSlice, copySlice) {
 		t.Errorf("not equal %v %v", originSlice, copySlice)
 	}

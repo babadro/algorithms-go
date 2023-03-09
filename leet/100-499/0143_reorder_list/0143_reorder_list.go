@@ -1,9 +1,11 @@
 package _143_reorder_list
 
-import "github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+import (
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
+)
 
 // tptl. best solution. fast
-func reorderList(head *single.ListNode) {
+func reorderList(head *singly.ListNode) {
 	slow, fast := head, head
 	for fast != nil && fast.Next != nil {
 		slow = slow.Next
@@ -20,8 +22,8 @@ func reorderList(head *single.ListNode) {
 	}
 }
 
-func reverse(node *single.ListNode) *single.ListNode {
-	var prev *single.ListNode
+func reverse(node *singly.ListNode) *singly.ListNode {
+	var prev *singly.ListNode
 	for node != nil {
 		next := node.Next
 		node.Next = prev
@@ -33,8 +35,8 @@ func reverse(node *single.ListNode) *single.ListNode {
 }
 
 // bruteforce. passed, but slow
-func reorderList2(head *single.ListNode) {
-	cur, prevTail, tail := head, (*single.ListNode)(nil), head
+func reorderList2(head *singly.ListNode) {
+	cur, prevTail, tail := head, (*singly.ListNode)(nil), head
 	for {
 		for tail.Next != nil {
 			prevTail, tail = tail, tail.Next

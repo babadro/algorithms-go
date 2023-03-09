@@ -1,9 +1,11 @@
 package _142_start_linked_list_cycle
 
-import "github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+import (
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
+)
 
 // tptl. bes solution. floyd algorithm
-func detectCycle(head *single.ListNode) *single.ListNode {
+func detectCycle(head *singly.ListNode) *singly.ListNode {
 	fast, slow := head, head
 	for {
 		if fast == nil || fast.Next == nil {
@@ -28,7 +30,7 @@ func detectCycle(head *single.ListNode) *single.ListNode {
 }
 
 // tptl passed. medium
-func detectCycle2(head *single.ListNode) *single.ListNode {
+func detectCycle2(head *singly.ListNode) *singly.ListNode {
 	fast, slow := head, head
 	for {
 		if fast == nil || fast.Next == nil {

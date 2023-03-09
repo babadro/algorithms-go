@@ -3,7 +3,7 @@ package _141_linked_list_cycle
 import (
 	"testing"
 
-	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
 )
 
 func TestHasCycle(t *testing.T) {
@@ -20,8 +20,8 @@ func TestHasCycle(t *testing.T) {
 	}
 
 	for i, c := range cases {
-		head := single.ArrToLinkedList(c.nodes)
-		var nodeTo, node *single.ListNode
+		head := singly.ArrToLinkedList(c.nodes)
+		var nodeTo, node *singly.ListNode
 		node = head
 		for i := 0; i < len(c.nodes); i++ {
 			if nodeTo == nil && i == c.pos {

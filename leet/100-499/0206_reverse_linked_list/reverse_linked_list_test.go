@@ -3,7 +3,7 @@ package _206_reverse_linked_list
 import (
 	"testing"
 
-	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
 	"github.com/babadro/algorithms-go/slices"
 )
 
@@ -19,9 +19,9 @@ func TestReverseList(t *testing.T) {
 	}
 
 	for i, c := range cases {
-		head := single.ArrToLinkedList(c.input)
+		head := singly.ArrToLinkedList(c.input)
 		reverseList := reverseList(head)
-		fact := single.LinkedListToArr(reverseList)
+		fact := singly.LinkedListToArr(reverseList)
 		if !slices.IntSlicesAreEqual(fact, c.expected) {
 			t.Errorf("case#%d, want %v, got %v", i+1, c.expected, fact)
 		}

@@ -1,9 +1,9 @@
 package _019_remove_nth_node_from_end_of_list
 
-import "github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+import "github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
 
 // TODO 2 implement One Pass algorithm (in solutions)
-func removeNthFromEnd(head *single.ListNode, n int) *single.ListNode {
+func removeNthFromEnd(head *singly.ListNode, n int) *singly.ListNode {
 	length := 0
 	node := head
 	for node != nil {

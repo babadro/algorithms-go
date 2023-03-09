@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
 )
 
 func Test_mergeSortedLists(t *testing.T) {
@@ -19,12 +19,12 @@ func Test_mergeSortedLists(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.input), func(t *testing.T) {
-			lists := make([]*single.ListNode, len(tt.input))
+			lists := make([]*singly.ListNode, len(tt.input))
 			for i := range tt.input {
-				lists[i] = single.ArrToLinkedList(tt.input[i])
+				lists[i] = singly.ArrToLinkedList(tt.input[i])
 			}
 
-			got := single.LinkedListToArr(mergeSortedLists(lists))
+			got := singly.LinkedListToArr(mergeSortedLists(lists))
 
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("mergeSortedLists() = %v, want %v", got, tt.want)

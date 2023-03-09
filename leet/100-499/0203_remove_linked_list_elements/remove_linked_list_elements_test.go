@@ -1,7 +1,8 @@
 package _203_remove_linked_list_elements
 
 import (
-	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
+
 	"reflect"
 	"testing"
 )
@@ -23,8 +24,8 @@ func Test_removeElements(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			head := single.ArrToLinkedList(tt.input)
-			if got := removeElements2(head, tt.val); !reflect.DeepEqual(single.LinkedListToArr(got), tt.want) {
+			head := singly.ArrToLinkedList(tt.input)
+			if got := removeElements2(head, tt.val); !reflect.DeepEqual(singly.LinkedListToArr(got), tt.want) {
 				t.Errorf("removeElements() = %v, want %v", got, tt.want)
 			}
 		})

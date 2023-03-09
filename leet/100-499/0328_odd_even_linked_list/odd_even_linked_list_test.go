@@ -1,7 +1,8 @@
 package _328_odd_even_linked_list
 
 import (
-	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
+
 	"reflect"
 	"testing"
 )
@@ -22,9 +23,9 @@ func Test_oddEvenList(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			head := single.ArrToLinkedList(tt.arr)
+			head := singly.ArrToLinkedList(tt.arr)
 			gotLinkedList := oddEvenList(head)
-			resultArr := single.LinkedListToArr(gotLinkedList)
+			resultArr := singly.LinkedListToArr(gotLinkedList)
 			if !reflect.DeepEqual(resultArr, tt.want) {
 				t.Errorf("resultArr = %v, want %v", resultArr, tt.want)
 			}

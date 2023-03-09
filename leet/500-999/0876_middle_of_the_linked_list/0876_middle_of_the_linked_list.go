@@ -1,9 +1,11 @@
 package _876_middle_of_the_linked_list
 
-import "github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+import (
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
+)
 
 // tptl. passed. fast and slow pointers. best solution
-func middleNode(head *single.ListNode) *single.ListNode {
+func middleNode(head *singly.ListNode) *singly.ListNode {
 	fast, slow := head, head
 	for fast != nil && fast.Next != nil {
 		fast = fast.Next.Next
@@ -13,7 +15,7 @@ func middleNode(head *single.ListNode) *single.ListNode {
 	return slow
 }
 
-func middleNode2(head *single.ListNode) *single.ListNode {
+func middleNode2(head *singly.ListNode) *singly.ListNode {
 	l := 0
 	for node := head; node != nil; node = node.Next {
 		l++

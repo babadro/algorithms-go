@@ -1,9 +1,11 @@
 package _2074_reverse_nodes_in_even_length_groups
 
-import "github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+import (
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
+)
 
 // tptl. passed
-func reverseEvenLengthGroups(head *single.ListNode) *single.ListNode {
+func reverseEvenLengthGroups(head *singly.ListNode) *singly.ListNode {
 	if head == nil {
 		return nil
 	}

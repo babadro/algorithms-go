@@ -1,9 +1,11 @@
 package _002_add_two_numbers
 
-import "github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/single"
+import (
+	"github.com/babadro/algorithms-go/03_StacksAndQueues/04_LinkedList/singly"
+)
 
-func addTwoNumbers(l1 *single.ListNode, l2 *single.ListNode) *single.ListNode {
-	var head, prev *single.ListNode
+func addTwoNumbers(l1 *singly.ListNode, l2 *singly.ListNode) *singly.ListNode {
+	var head, prev *singly.ListNode
 	node1, node2 := l1, l2
 	carry := false
 	for node1 != nil || node2 != nil || carry {
@@ -30,10 +32,10 @@ func addTwoNumbers(l1 *single.ListNode, l2 *single.ListNode) *single.ListNode {
 		}
 
 		if head == nil {
-			prev = &single.ListNode{Val: sum}
+			prev = &singly.ListNode{Val: sum}
 			head = prev
 		} else {
-			prev.Next = &single.ListNode{Val: sum}
+			prev.Next = &singly.ListNode{Val: sum}
 			prev = prev.Next
 		}
 	}
