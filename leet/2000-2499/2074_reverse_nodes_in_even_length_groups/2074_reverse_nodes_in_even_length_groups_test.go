@@ -26,7 +26,7 @@ func Test_reverseEvenLengthGroups(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.input), func(t *testing.T) {
 			head := singly.ArrToLinkedList(tt.input)
-			got := reverseEvenLengthGroups(head)
+			got := reverseEvenLengthGroups2(head)
 			gotArr := singly.LinkedListToArr(got)
 
 			require.Equal(t, tt.want, gotArr)
