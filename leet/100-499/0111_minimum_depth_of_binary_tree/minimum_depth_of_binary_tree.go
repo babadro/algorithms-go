@@ -4,7 +4,25 @@ import (
 	"math"
 
 	"github.com/babadro/algorithms-go/base/binaryTree"
+	"github.com/babadro/algorithms-go/utils"
 )
+
+// simplest recursive
+func minDepth4(root *binaryTree.Node) int {
+	if root == nil {
+		return 0
+	}
+
+	if root.Left == nil {
+		return 1 + minDepth4(root.Right)
+	}
+
+	if root.Right == nil {
+		return 1 + minDepth4(root.Left)
+	}
+
+	return 1 + utils.Min(minDepth4(root.Left), minDepth4(root.Right))
+}
 
 // tptl passed iterative.
 func minDepth3(root *binaryTree.Node) int {
@@ -37,7 +55,7 @@ func minDepth3(root *binaryTree.Node) int {
 	return res
 }
 
-// passed. recursive. easy to understand
+// passed
 func minDepth2(root *binaryTree.Node) int {
 	if root == nil {
 		return 0
@@ -75,7 +93,7 @@ func min(a, b int) int {
 	return b
 }
 
-//  passed.
+// passed.
 func minDepth(root *binaryTree.Node) int {
 	if root != nil {
 		left := minDepth(root.Left)

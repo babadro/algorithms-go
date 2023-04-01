@@ -47,7 +47,7 @@ func Test3(t *testing.T) {
 
 	n3.Left, n3.Right = n4, n5
 
-	require.Equal(t, 2, minDepth3(n1))
+	require.Equal(t, 2, minDepth4(n1))
 }
 
 func Test4(t *testing.T) {
@@ -56,7 +56,18 @@ func Test4(t *testing.T) {
 
 	n2.Left, n2.Right = n4, n5
 
-	require.Equal(t, 2, minDepth2(n1))
+	require.Equal(t, 2, minDepth4(n1))
+}
+
+func Test4_2(t *testing.T) {
+	n2, n3, n4, n5, n6 := n(2), n(3), n(4), n(5), n(6)
+
+	n2.Right = n3
+	n3.Right = n4
+	n4.Right = n5
+	n5.Right = n6
+
+	require.Equal(t, 5, minDepth4(n2))
 }
 
 func n(val int) *binaryTree.Node {
