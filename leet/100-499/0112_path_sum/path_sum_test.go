@@ -1,8 +1,9 @@
 package _112_path_sum
 
 import (
-	"github.com/babadro/algorithms-go/base/binaryTree"
 	"testing"
+
+	"github.com/babadro/algorithms-go/base/binaryTree"
 )
 
 func Test_hasPathSum(t *testing.T) {
@@ -22,6 +23,7 @@ func Test_hasPathSum(t *testing.T) {
 		{"9", []int{1, 2}, 3, true},
 		{"10", []int{1, 2, binaryTree.Null, binaryTree.Null, 3}, 3, false},
 		{"11", []int{-2, binaryTree.Null, -3}, -5, true},
+		{"12", []int{}, 0, false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
