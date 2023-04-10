@@ -4,7 +4,6 @@ import "github.com/babadro/algorithms-go/base/binaryTree"
 
 // dyx. passed.
 // todo 2 iterative solution
-// todo 3 optimize cur array for reusing in recursive solution
 func pathSum(root *binaryTree.Node, targetSum int) [][]int {
 	var res [][]int
 	preOrder(root, 0, targetSum, nil, &res)
@@ -28,4 +27,36 @@ func preOrder(node *binaryTree.Node, sum, target int, cur []int, res *[][]int) {
 			preOrder(node.Right, sum, target, cur, res)
 		}
 	}
+}
+
+// version with optimized cur array for reusing in recursive solution
+func pathSum2(root *binaryTree.Node, targetSum int) [][]int {
+	var res [][]int
+
+	rec(root, &[]int{}, &res, 0, targetSum)
+
+	return res
+}
+
+func rec(node *binaryTree.Node, arr *[]int, res *[][]int, arrLen, target int) {
+	if node == nil {
+		return
+	}
+
+	target -= node.Val
+	*arr = append((*arr)[:arrLen], node.Val)
+	arrLen++
+
+	if node.Left == nil && node.Right == nil {
+		if target == 0 {
+			arrCopy := make([]int, len(*arr))
+			copy(arrCopy, *arr)
+			*res = append(*res, arrCopy)
+		}
+
+		return
+	}
+
+	rec(node.Left, arr, res, arrLen, target)
+	rec(node.Right, arr, res, arrLen, target)
 }

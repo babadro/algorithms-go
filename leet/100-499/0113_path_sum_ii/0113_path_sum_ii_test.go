@@ -37,7 +37,7 @@ func Test_pathSum(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run("", func(t *testing.T) {
-			if got := pathSum(tt.root, tt.targetSum); !reflect.DeepEqual(got, tt.want) {
+			if got := pathSum2(tt.root, tt.targetSum); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("pathSum() = %v, want %v", got, tt.want)
 			}
 		})
