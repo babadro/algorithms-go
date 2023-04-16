@@ -18,11 +18,19 @@ func NewNode(t int) Node {
 	}
 }
 
-func NewBTree(t int) Node {
+type BTree struct {
+	root Node
+	T    int
+}
+
+func NewBTree(t int) BTree {
 	root := NewNode(t)
 	root.Leaf = true
 
-	return root
+	return BTree{
+		root: root,
+		T:    t,
+	}
 }
 
 func (x *Node) Search(key int) *Node {
@@ -44,6 +52,19 @@ func (x *Node) Search(key int) *Node {
 	}
 
 	return x.Child[i].Search(key)
+}
+
+func (bt *BTree) Insert(key int) {
+	r := bt.root
+	if r.keyCnt < 2*bt.T-1 {
+		r.insert(key)
+		return
+	}
+
+	s := NewNode(bt.T)
+	bt.root = s
+	s.Child[0] = r
+	s.split(0)
 }
 
 func (x *Node) insert(k int) {
