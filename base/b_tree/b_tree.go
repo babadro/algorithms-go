@@ -19,7 +19,7 @@ func NewNode(t int) Node {
 }
 
 type BTree struct {
-	root Node
+	Root Node
 	T    int
 }
 
@@ -28,7 +28,7 @@ func NewBTree(t int) BTree {
 	root.Leaf = true
 
 	return BTree{
-		root: root,
+		Root: root,
 		T:    t,
 	}
 }
@@ -55,14 +55,14 @@ func (x *Node) Search(key int) *Node {
 }
 
 func (bt *BTree) Insert(key int) {
-	r := bt.root
+	r := bt.Root
 	if r.keyCnt < 2*bt.T-1 {
 		r.insert(key)
 		return
 	}
 
 	s := NewNode(bt.T)
-	bt.root = s
+	bt.Root = s
 	s.Child[0] = r
 	s.split(0)
 }
