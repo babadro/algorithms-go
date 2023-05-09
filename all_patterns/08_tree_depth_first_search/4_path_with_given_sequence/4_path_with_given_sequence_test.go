@@ -23,13 +23,20 @@ func Test_findPath(t *testing.T) {
 	n2_1.Left, n2_1.Right = n3_6, n3_5
 	root2 := rootWrapper{root: n1_1}
 
+	n1_1, n2_7, n2_9, n3_9 = n(1), n(7), n(9), n(9)
+	n1_1.Left, n1_1.Right = n2_7, n2_9
+	n2_9.Right = n3_9
+	root3 := rootWrapper{root: n1_1}
+
 	tests := []struct {
 		root rootWrapper
 		seq  []int
 		want bool
 	}{
 		{root1, []int{1, 9, 9}, true},
+		{root1, []int{1, 9, 9, 5}, false},
 		{root2, []int{1, 1, 6}, true},
+		{root3, []int{1, 9}, false},
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.seq), func(t *testing.T) {

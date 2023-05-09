@@ -3,20 +3,17 @@ package __path_with_given_sequence
 import "github.com/babadro/algorithms-go/base/binaryTree"
 
 // probably leetcode 1430 (premium)
-func findPath(root *binaryTree.Node, seq []int) bool {
-	return preOrder(root, 0, seq)
-}
-
-func preOrder(node *binaryTree.Node, idx int, seq []int) bool {
-	if node == nil {
-		return idx == len(seq)
-	}
-
-	if node.Val != seq[idx] {
+// Check If a String Is a Valid Sequence from Root
+// to Leaves Path in a Binary Tree
+// https://leetcode.ca/all/1430.html
+func findPath(node *binaryTree.Node, seq []int) bool {
+	if node == nil || len(seq) == 0 || node.Val != seq[0] {
 		return false
 	}
 
-	idx++
+	if node.Left == nil && node.Right == nil {
+		return len(seq) == 1
+	}
 
-	return preOrder(node.Left, idx, seq) || preOrder(node.Right, idx, seq)
+	return findPath(node.Left, seq[1:]) || findPath(node.Right, seq[1:])
 }
