@@ -3,7 +3,6 @@ package _129_sum_root_to_leaf_numbers
 import "github.com/babadro/algorithms-go/base/binaryTree"
 
 // passed. dyx.
-// todo 2 return value from preOrder instead of using pointer
 func sumNumbers(root *binaryTree.Node) int {
 	sum := 0
 	preOrder(root, 0, &sum)
@@ -23,4 +22,22 @@ func preOrder(node *binaryTree.Node, cur int, sum *int) {
 			preOrder(node.Right, cur, sum)
 		}
 	}
+}
+
+func sumNumbers2(root *binaryTree.Node) int {
+	return preOrder2(root, 0)
+}
+
+func preOrder2(node *binaryTree.Node, cur int) int {
+	if node == nil {
+		return 0
+	}
+
+	cur = cur*10 + node.Val
+
+	if node.Left == nil && node.Right == nil {
+		return cur
+	}
+
+	return preOrder2(node.Left, cur) + preOrder2(node.Right, cur)
 }
