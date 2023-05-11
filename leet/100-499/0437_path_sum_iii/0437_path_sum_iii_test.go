@@ -54,7 +54,7 @@ func Test_pathSum(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := pathSum2(tt.args.root, tt.args.targetSum); got != tt.want {
+			if got := pathSum3(tt.args.root, tt.args.targetSum); got != tt.want {
 				t.Errorf("pathSum() = %v, want %v", got, tt.want)
 			}
 		})
