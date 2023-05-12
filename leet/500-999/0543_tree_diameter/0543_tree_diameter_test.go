@@ -26,6 +26,12 @@ func Test_diameterOfBinaryTree(t *testing.T) {
 	}{
 		{args: args1, want: 3},
 		{args2, 1},
+		{
+			args: args{
+				root: constructTree([]interface{}{4, -7, -3, nil, nil, -9, -3, 9, -7, -4, nil, 6, nil, -6, -6, nil, nil, 0, 6, 5, nil, 9, nil, nil, -1, -4, nil, nil, nil, -2}),
+			},
+			want: 8,
+		},
 	}
 	for _, tt := range tests {
 		t.Run("", func(t *testing.T) {
@@ -38,4 +44,31 @@ func Test_diameterOfBinaryTree(t *testing.T) {
 
 func n(val int) *binaryTree.Node {
 	return &binaryTree.Node{Val: val}
+}
+
+func constructTree(nums []interface{}) *binaryTree.Node {
+	if nums[0] == nil {
+		return nil
+	}
+
+	root := &binaryTree.Node{Val: nums[0].(int)}
+	queue := []*binaryTree.Node{root}
+	i := 1
+	for i < len(nums) {
+		node := queue[0]
+		queue = queue[1:]
+		if nums[i] != nil {
+			node.Left = &binaryTree.Node{Val: nums[i].(int)}
+			queue = append(queue, node.Left)
+		}
+		i++
+
+		if i < len(nums) && nums[i] != nil {
+			node.Right = &binaryTree.Node{Val: nums[i].(int)}
+			queue = append(queue, node.Right)
+		}
+		i++
+	}
+
+	return root
 }
