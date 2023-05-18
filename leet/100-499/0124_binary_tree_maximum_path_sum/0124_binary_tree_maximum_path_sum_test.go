@@ -30,7 +30,7 @@ func Test_maxPathSum(t *testing.T) {
 		{args: args1, want: 6},
 		{args2, 42},
 		{args3, -3},
-		{args: args{root: binaryTree.InterfacesArrToBinaryTree([]interface{}{2, -1})}, want: 2},
+		{args: args{root: binaryTree.InterfacesArrToBinaryTree(2, -1)}, want: 2},
 	}
 	for _, tt := range tests {
 		t.Run("", func(t *testing.T) {

@@ -37,7 +37,7 @@ func ArrayToBinaryTree(nums []int) *Node {
 	return root
 }
 
-func InterfacesArrToBinaryTree(nums []interface{}) *Node {
+func InterfacesArrToBinaryTree(nums ...interface{}) *Node {
 	if nums[0] == nil {
 		return nil
 	}
