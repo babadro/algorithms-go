@@ -79,6 +79,10 @@ func (this *RangeModule) RemoveRange(left, right int) {
 	for ; i < len(this.intervals); i++ {
 		in = this.intervals[i]
 
+		if in.left >= right {
+			break
+		}
+
 		if right < in.right {
 			this.intervals[i].left = right
 
@@ -98,7 +102,7 @@ func (this *RangeModule) insert(idx int, in interval) {
 }
 
 func (this *RangeModule) shiftLeft(startIDx, shift int) {
-	if startIDx == len(this.intervals) || shift == 0 {
+	if shift == 0 {
 		return
 	}
 
