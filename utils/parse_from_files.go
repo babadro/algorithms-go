@@ -52,6 +52,25 @@ func ParseNullableNums[T int | int32 | int64 | float32 | float64](filePath strin
 	return result
 }
 
+func ParseArrFromFile[T any](filePath string) []*T {
+	byteValue := bytesFromPath(filePath)
+	var arr []*T
+	if err := json.Unmarshal(byteValue, &arr); err != nil {
+		panic(err)
+	}
+
+	return arr
+}
+
+func ParseArr[T any](val string) []*T {
+	var arr []*T
+	if err := json.Unmarshal([]byte(val), &arr); err != nil {
+		panic(err)
+	}
+
+	return arr
+}
+
 func bytesFromPath(filePath string) []byte {
 	file, err := os.Open(filePath)
 	if err != nil {

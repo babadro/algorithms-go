@@ -129,3 +129,7 @@ func Log(b, x int) (pow int) {
 		x /= b
 	}
 }
+
+func Ptr[T any](v T) *T {
+	return &v
+}
