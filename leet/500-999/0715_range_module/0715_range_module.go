@@ -18,25 +18,17 @@ func Constructor() RangeModule {
 
 func (this *RangeModule) AddRange(left, right int) {
 	idx := this.search(left)
-
 	if idx == len(this.intervals) || this.intervals[idx].left > right {
 		this.insert(idx, interval{left, right})
 		return
 	}
 
 	i := idx
-	for ; i < len(this.intervals); i++ {
-		in := this.intervals[i]
-
-		if in.left > right {
-			break
-		}
-
-		left, right = min(in.left, left), max(in.right, right)
+	for ; i < len(this.intervals) && this.intervals[i].left <= right; i++ {
+		left, right = min(this.intervals[i].left, left), max(this.intervals[i].right, right)
 	}
 
 	this.intervals[idx] = interval{left, right}
-
 	this.shiftLeft(i, i-idx-1)
 }
 
@@ -57,35 +49,24 @@ func (this *RangeModule) QueryRange(left, right int) bool {
 
 func (this *RangeModule) RemoveRange(left, right int) {
 	idx := this.search(left)
-
 	if idx == len(this.intervals) || this.intervals[idx].left >= right {
 		return
 	}
 
 	in := this.intervals[idx]
-
 	if left > in.left {
 		this.intervals[idx].right = left
-
 		if right < in.right {
 			this.insert(idx+1, interval{right, in.right})
 			return
 		}
-
 		idx++
 	}
 
 	i := idx
-	for ; i < len(this.intervals); i++ {
-		in = this.intervals[i]
-
-		if in.left >= right {
-			break
-		}
-
-		if right < in.right {
+	for ; i < len(this.intervals) && this.intervals[i].left < right; i++ {
+		if right < this.intervals[i].right {
 			this.intervals[i].left = right
-
 			break
 		}
 	}
