@@ -12,6 +12,8 @@ type RangeModule struct {
 	intervals []interval
 }
 
+// #bnsrg
+// todo 2 check segment tree solution
 func Constructor() RangeModule {
 	return RangeModule{}
 }
@@ -60,6 +62,7 @@ func (this *RangeModule) RemoveRange(left, right int) {
 			this.insert(idx+1, interval{right, in.right})
 			return
 		}
+
 		idx++
 	}
 
@@ -67,6 +70,7 @@ func (this *RangeModule) RemoveRange(left, right int) {
 	for ; i < len(this.intervals) && this.intervals[i].left < right; i++ {
 		if right < this.intervals[i].right {
 			this.intervals[i].left = right
+
 			break
 		}
 	}
