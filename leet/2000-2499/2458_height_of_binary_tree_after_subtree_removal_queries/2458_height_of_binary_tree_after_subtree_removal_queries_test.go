@@ -30,7 +30,7 @@ func Test_treeQueries(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run("", func(t *testing.T) {
-			if got := treeQueries(tt.root, tt.queries); !reflect.DeepEqual(got, tt.want) {
+			if got := treeQueries2(tt.root, tt.queries); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("treeQueries() = %v, want %v", got, tt.want)
 			}
 		})
