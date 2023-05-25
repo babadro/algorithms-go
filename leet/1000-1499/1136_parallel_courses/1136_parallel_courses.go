@@ -21,12 +21,11 @@ func minimumSemesters(n int, relations [][]int) int {
 		}
 	}
 
-	semestersNum := 0
-	for i := 0; i < len(sources); {
-		coursesInSemester := len(sources) - i
-		semestersNum++
+	semestersNum, coursesNum := 0, 0
+	for ; len(sources) > 0; semestersNum++ {
+		coursesInSemester := len(sources)
 		for j := 0; j < coursesInSemester; j++ {
-			src := sources[j+i]
+			src := sources[j]
 			for _, dst := range g[src] {
 				inDegree[dst]--
 				if inDegree[dst] == 0 {
@@ -35,10 +34,11 @@ func minimumSemesters(n int, relations [][]int) int {
 			}
 		}
 
-		i += coursesInSemester
+		coursesNum += coursesInSemester
+		sources = sources[coursesInSemester:]
 	}
 
-	if len(sources) < n {
+	if coursesNum < n {
 		return -1
 	}
 
