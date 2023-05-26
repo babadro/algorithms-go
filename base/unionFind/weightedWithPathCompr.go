@@ -39,6 +39,10 @@ func (qu *WQUPC) Union(p, q int) {
 	i := qu.Root(p)
 	j := qu.Root(q)
 
+	if i == j {
+		return
+	}
+
 	if qu.size[i] < qu.size[j] {
 		qu.id[i] = qu.id[j]
 		qu.size[j] += qu.size[i]
