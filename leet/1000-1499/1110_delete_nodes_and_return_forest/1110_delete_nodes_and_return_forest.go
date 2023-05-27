@@ -3,7 +3,6 @@ package _1110_delete_nodes_and_return_forest
 import "github.com/babadro/algorithms-go/base/binaryTree"
 
 // #bnsrg
-// todo 2 find shorter soluiton?
 func delNodes(root *binaryTree.Node, to_delete []int) []*binaryTree.Node {
 	toDelete := make(map[int]bool, len(to_delete))
 	for _, val := range to_delete {
@@ -11,7 +10,7 @@ func delNodes(root *binaryTree.Node, to_delete []int) []*binaryTree.Node {
 	}
 
 	valToPtr := make(map[int]*binaryTree.Node)
-	rec(root, valToPtr)
+	rec(root, valToPtr, toDelete)
 
 	resM := map[int]bool{root.Val: true}
 
@@ -22,22 +21,12 @@ func delNodes(root *binaryTree.Node, to_delete []int) []*binaryTree.Node {
 
 		node := valToPtr[val]
 
-		if node.Left != nil && !toDelete[node.Left.Val] {
+		if node.Left != nil {
 			resM[node.Left.Val] = true
 		}
 
-		if node.Right != nil && !toDelete[node.Right.Val] {
+		if node.Right != nil {
 			resM[node.Right.Val] = true
-		}
-	}
-
-	for _, node := range valToPtr {
-		if node.Left != nil && toDelete[node.Left.Val] {
-			node.Left = nil
-		}
-
-		if node.Right != nil && toDelete[node.Right.Val] {
-			node.Right = nil
 		}
 	}
 
@@ -49,13 +38,21 @@ func delNodes(root *binaryTree.Node, to_delete []int) []*binaryTree.Node {
 	return res
 }
 
-func rec(node *binaryTree.Node, m map[int]*binaryTree.Node) {
+func rec(node *binaryTree.Node, m map[int]*binaryTree.Node, toDelete map[int]bool) {
 	if node == nil {
 		return
 	}
 
 	m[node.Val] = node
 
-	rec(node.Left, m)
-	rec(node.Right, m)
+	rec(node.Left, m, toDelete)
+	rec(node.Right, m, toDelete)
+
+	if node.Left != nil && toDelete[node.Left.Val] {
+		node.Left = nil
+	}
+
+	if node.Right != nil && toDelete[node.Right.Val] {
+		node.Right = nil
+	}
 }
