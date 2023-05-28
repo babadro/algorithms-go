@@ -2,16 +2,11 @@ package _1254_number_of_closed_islands
 
 // #bnsrg
 func closedIsland(grid [][]int) int {
-	counter, ok := 0, false
+	counter := 0
 	for y := range grid {
 		for x := range grid[y] {
-			if grid[y][x] == 0 {
-				ok = true
-				crawl(x, y, grid, &ok)
-
-				if ok {
-					counter++
-				}
+			if grid[y][x] == 0 && crawl(x, y, grid) {
+				counter++
 			}
 		}
 	}
@@ -19,19 +14,21 @@ func closedIsland(grid [][]int) int {
 	return counter
 }
 
-func crawl(x, y int, grid [][]int, ok *bool) {
-	if y < 0 || y == len(grid) || x < 0 || x == len(grid[y]) || grid[y][x] != 0 {
-		return
+func crawl(x, y int, grid [][]int) bool {
+	if y < 0 || y == len(grid) || x < 0 || x == len(grid[y]) {
+		return false
+	}
+
+	if grid[y][x] != 0 {
+		return true
 	}
 
 	grid[y][x] = 2
 
-	if y == 0 || y == len(grid)-1 || x == 0 || x == len(grid[y])-1 {
-		*ok = false
-	}
+	res1 := crawl(x+1, y, grid)
+	res2 := crawl(x-1, y, grid)
+	res3 := crawl(x, y+1, grid)
+	res4 := crawl(x, y-1, grid)
 
-	crawl(x-1, y, grid, ok)
-	crawl(x+1, y, grid, ok)
-	crawl(x, y-1, grid, ok)
-	crawl(x, y+1, grid, ok)
+	return res1 && res2 && res3 && res4
 }
