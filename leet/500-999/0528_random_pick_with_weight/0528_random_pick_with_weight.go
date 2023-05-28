@@ -10,6 +10,7 @@ type Solution struct {
 	num          int
 }
 
+// #bnsrg
 func Constructor(w []int) Solution {
 	num := 0
 	intervals := make([]int, len(w))
