@@ -1,5 +1,6 @@
 package queue
 
+// Queue is a FIFO data structure
 type Queue struct {
 	array  []int
 	head   int
