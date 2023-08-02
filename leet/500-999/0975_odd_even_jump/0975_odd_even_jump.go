@@ -1,72 +1,42 @@
 package _975_odd_even_jump
 
-import "math"
-
-const (
-	goodOdd  = byte(1) << 0
-	goodEven = byte(1) << 1
+import (
+	"math"
+	"sort"
 )
 
+// bnsrg #hard #ntu
 func oddEvenJumps(arr []int) int {
-	counter := 1
+	n := len(arr)
+	l := []int{n, n - 1, n + 1}
+	arr = append(arr, math.MinInt32, math.MaxInt32)
+	evenOK := make([]uint8, n+2)
+	oddOK := make([]uint8, n+2)
+	evenOK[n-1] = 1
+	oddOK[n-1] = 1
 
-	indices := make([]byte, len(arr))
-	indices[len(indices)-1] = goodEven | goodOdd
+	res := 1
+	for i := n - 2; i >= 0; i-- {
+		j := sort.Search(len(l), func(k int) bool {
+			return arr[l[k]] >= arr[i]
+		})
+		// A later element is equal to the current
+		// Same target for even and odd jumps
+		if arr[l[j]] == arr[i] {
+			evenOK[i] = oddOK[l[j]]
+			oddOK[i] = evenOK[l[j]]
+			l[j] = i
+		} else {
+			// Element is larger than the current
+			evenOK[i] = oddOK[l[j-1]]
+			oddOK[i] = evenOK[l[j]]
 
-	for i := len(arr) - 2; i >= 0; i-- {
-		idx := oddJump(i, arr)
-		if idx != -1 && indices[idx]&goodEven != 0 {
-			indices[i] = goodOdd
-			counter++
+			// Make space and insert into sorted list
+			l = append(l, 0)
+			copy(l[j+1:], l[j:])
+			l[j] = i
 		}
-
-		idx = evenJump(i, arr)
-		if idx != -1 && indices[idx]&goodOdd != 0 {
-			indices[i] |= goodEven
-		}
+		res += int(oddOK[i])
 	}
-
-	return counter
-}
-
-func oddJump(i int, arr []int) int {
-	res := -1
-	jumpFrom := arr[i]
-	diff := math.MaxInt64 - jumpFrom
-	for i = i + 1; i < len(arr); i++ {
-		num := arr[i]
-		if num < jumpFrom {
-			continue
-		}
-
-		if d := num - jumpFrom; d < diff {
-			res = i
-			diff = d
-		}
-
-		if diff == 0 {
-			break
-		}
-	}
-
-	return res
-}
-
-func evenJump(i int, arr []int) int {
-	res := -1
-	jumpFrom := arr[i]
-	diff := -1
-	for i = i + 1; i < len(arr); i++ {
-		num := arr[i]
-		if num > jumpFrom {
-			continue
-		}
-
-		if d := jumpFrom - num; d > diff {
-			res = i
-			diff = d
-		}
-	}
-
 	return res
 }

@@ -13,7 +13,8 @@ func Test_oddEvenJumps(t *testing.T) {
 		{[]int{10, 13, 12, 14, 15}, 2},
 		{[]int{2, 3, 1, 1, 4}, 3},
 		{[]int{5, 1, 3, 4, 2}, 3},
-		{[]int{81, 54, 96, 60, 58}, 2}, // todo doesn't work
+		{[]int{81, 54, 96, 60, 58}, 2},
+		{tleInput, 15366},
 	}
 	for _, tt := range tests {
 		limit := len(tt.arr)
