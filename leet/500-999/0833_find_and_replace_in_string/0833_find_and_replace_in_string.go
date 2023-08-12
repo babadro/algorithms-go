@@ -6,6 +6,7 @@ type replacement struct {
 }
 
 // bnsrg. medium passed
+// todo 2 find shorter and faster solution
 func findReplaceString(s string, indices []int, sources []string, targets []string) string {
 	replacements := make([]replacement, len(s))
 
