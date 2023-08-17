@@ -5,8 +5,13 @@ import (
 	"sort"
 )
 
-// bnsrg todo doesn't work
+// bnsrg
+// passed, but not so fast. todo 2 find faster solution, probably without sorting
 func findOriginalArray(changed []int) []int {
+	if len(changed)%2 != 0 {
+		return nil
+	}
+
 	sort.Ints(changed)
 
 	m := make(map[int]int)
@@ -17,18 +22,22 @@ func findOriginalArray(changed []int) []int {
 	}
 
 	var res []int
-	for i, num := range changed {
+	for _, num := range changed {
 		if num == math.MaxInt64 {
 			continue
 		}
 
+		if num == 0 {
+			m[0]++
+		}
+
 		twice := num * 2
 		idx, ok := m[twice]
-		if !ok || changed[idx] != twice {
+		if !ok || idx >= len(changed) || changed[idx] != twice {
 			return nil
 		}
 
-		changed[idx], changed[i] = math.MaxInt64, math.MaxInt64
+		changed[idx] = math.MaxInt64
 		m[twice]++
 
 		res = append(res, num)
