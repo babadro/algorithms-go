@@ -7,44 +7,42 @@ type Interval struct {
 	End   int
 }
 
-type iterator struct {
-	arrIDx int
-	next   int
-}
-
 const inf = math.MaxInt64
 
 // bnsrg todo 1
 func employeeFreeTime(schedule [][]*Interval) []*Interval {
-	min, idx := math.MaxInt64, -1
+	minStart, idx := math.MaxInt64, -1
 
 	for i, in := range schedule {
-		if end := in[0].End; end < min {
-			min, idx = end, i
+		if end := in[0].End; end < minStart {
+			minStart, idx = end, i
 		}
 	}
 
 	schedule[idx], schedule[0] = schedule[0], schedule[idx]
 
-	iterators := make([]iterator, len(schedule))
-	for i := range iterators {
-		iterators[i].arrIDx = i
-	}
+	iterators := make([]int, len(schedule))
 
 	left, right := schedule[0][0].End, inf
 	if len(schedule) > 1 {
 		right = schedule[0][1].Start
 	}
 
-	for i := 1; ; i = (i + 1) % len(iterators) {
-		it := &iterators[i]
-		interval := schedule[it.arrIDx][it.next]
+	counter := 0
+	for i := 1; ; i = (i + 1) % len(schedule) {
+		for ; iterators[i] < len(schedule[i]); iterators[i]++ {
+			interval := schedule[i][iterators[i]]
 
-		for ; interval.End <= left; it.next++ {
-			if it.next == len(schedule[it.arrIDx]) {
+			if interval.End <= left {
+				continue
+			}
+
+			if interval.Start > left {
+				right = min(right, interval.Start)
 				break
 			}
 
+			left = max(left, interval.End)
 		}
 
 	}
