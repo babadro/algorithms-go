@@ -8,7 +8,19 @@ type Robot struct {
 // Returns true if the cell in front is open and robot moves into the cell.
 // Returns false if the cell in front is blocked and robot stays in the current cell.
 func (robot *Robot) Move() bool {
-	return false
+	newX := realX + deltaX
+	if newX < 0 || newX == len(matrix[0]) {
+		return false
+	}
+
+	newY := realY + deltaY
+	if newY < 0 || newY == len(matrix) {
+		return false
+	}
+
+	realX, realY = newX, newY
+
+	return true
 }
 
 // Robot will stay in the same cell after calling TurnLeft/TurnRight.
@@ -17,7 +29,9 @@ func (robot *Robot) TurnLeft()  {}
 func (robot *Robot) TurnRight() {}
 
 // Clean the current cell.
-func (robot *Robot) Clean() {}
+func (robot *Robot) Clean() {
+	matrix[realY][realX] = 2
+}
 
 var directions = [][2]int{{1, 0}, {0, 1}, {-1, 0}, {0, -1}}
 
@@ -25,38 +39,38 @@ var visited map[[2]int]bool
 
 var matrix [][]int
 
+var relativeX, relativeY, realX, realY, deltaY, deltaX, directionIDx int
+
 type robotWrapper struct {
-	x, y         int
-	directionIDx int
-	r            *Robot
+	r *Robot
 }
 
 func (r *robotWrapper) rotate180() {
-	r.directionIDx = (r.directionIDx + 2) % 4
+	directionIDx = (directionIDx + 2) % 4
 	r.r.TurnRight()
 	r.r.TurnRight()
 }
 
 func (r *robotWrapper) turnLeft() {
-	if r.directionIDx == 0 {
-		r.directionIDx = 3
+	if directionIDx == 0 {
+		directionIDx = 3
 	} else {
-		r.directionIDx--
+		directionIDx--
 	}
 
 	r.r.TurnLeft()
 }
 
 func (r *robotWrapper) turnRight() {
-	r.directionIDx = (r.directionIDx + 1) % 4
+	directionIDx = (directionIDx + 1) % 4
 
 	r.r.TurnRight()
 }
 
 func (r *robotWrapper) move(checkVisited bool) bool {
-	direction := directions[r.directionIDx]
-	deltaY, deltaX := direction[0], direction[1]
-	newY, newX := r.y+deltaY, r.x+deltaX
+	direction := directions[directionIDx]
+	deltaY, deltaX = direction[0], direction[1]
+	newY, newX := relativeY+deltaY, relativeX+deltaX
 
 	key := [2]int{newY, newX}
 	if (checkVisited && visited[key]) || !r.r.Move() {
@@ -67,7 +81,7 @@ func (r *robotWrapper) move(checkVisited bool) bool {
 		visited[key] = true
 	}
 
-	r.y, r.x = newY, newX
+	relativeY, relativeX = newY, newX
 
 	return true
 }
@@ -99,6 +113,7 @@ func (r *robotWrapper) walk() {
 
 func cleanRoom(robot *Robot) {
 	visited = make(map[[2]int]bool)
+	relativeX, relativeY, directionIDx = 0, -1, 0
 
 	r := robotWrapper{r: robot}
 
