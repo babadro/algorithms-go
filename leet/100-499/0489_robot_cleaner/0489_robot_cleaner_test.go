@@ -12,7 +12,17 @@ func Test_cleanRoom(t *testing.T) {
 		startX, startY int
 	}{
 		{
-			[][]int{{0}}, 0, 0,
+			[][]int{{1}}, 0, 0,
+		},
+		{[][]int{{1, 1, 1, 1}}, 0, 0},
+		{
+			[][]int{
+				{1, 1, 1, 1, 1, 0, 1, 1},
+				{1, 1, 1, 1, 1, 0, 1, 1},
+				{1, 0, 1, 1, 1, 1, 1, 1},
+				{0, 0, 0, 1, 0, 0, 0, 0},
+				{1, 1, 1, 1, 1, 1, 1, 1},
+			}, 1, 3,
 		},
 	}
 	for _, tt := range tests {
@@ -20,12 +30,12 @@ func Test_cleanRoom(t *testing.T) {
 		realX, realY = tt.startX, tt.startY
 
 		t.Run("", func(t *testing.T) {
-			cleanRoom(&Robot{})
+			cleanRoom2(&Robot{})
 
 			for y := range matrix {
 				for x := range matrix[y] {
 					val := matrix[y][x]
-					require.True(t, val == 1 || val == 2)
+					require.True(t, val == 0 || val == 2)
 				}
 			}
 		})

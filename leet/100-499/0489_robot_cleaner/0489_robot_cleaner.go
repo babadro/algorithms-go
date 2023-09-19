@@ -1,45 +1,31 @@
 package _489_robot_cleaner
 
-// This is the robot's control interface.
-// You should not implement it, or speculate about its implementation
-type Robot struct {
-}
+// bnsrg #hard passed
+// todo 2 find shorter solution - there are a lot of them
+func cleanRoom2(robot *Robot) {
+	visited = make(map[[2]int]bool)
+	relativeX, relativeY, directionIDx = 0, 0, 0
 
-// Returns true if the cell in front is open and robot moves into the cell.
-// Returns false if the cell in front is blocked and robot stays in the current cell.
-func (robot *Robot) Move() bool {
-	newX := realX + deltaX
-	if newX < 0 || newX == len(matrix[0]) {
-		return false
-	}
+	r := robotWrapper{r: robot}
+	r.clean()
 
-	newY := realY + deltaY
-	if newY < 0 || newY == len(matrix) {
-		return false
-	}
+	r.walk()
+	r.turnRight()
 
-	realX, realY = newX, newY
+	r.walk()
+	r.turnRight()
 
-	return true
-}
+	r.walk()
+	r.turnRight()
 
-// Robot will stay in the same cell after calling TurnLeft/TurnRight.
-// Each turn will be 90 degrees.
-func (robot *Robot) TurnLeft()  {}
-func (robot *Robot) TurnRight() {}
-
-// Clean the current cell.
-func (robot *Robot) Clean() {
-	matrix[realY][realX] = 2
+	r.walk()
 }
 
 var directions = [][2]int{{1, 0}, {0, 1}, {-1, 0}, {0, -1}}
 
 var visited map[[2]int]bool
 
-var matrix [][]int
-
-var relativeX, relativeY, realX, realY, deltaY, deltaX, directionIDx int
+var relativeX, relativeY, deltaY, deltaX, directionIDx int
 
 type robotWrapper struct {
 	r *Robot
@@ -88,12 +74,14 @@ func (r *robotWrapper) move(checkVisited bool) bool {
 
 func (r *robotWrapper) clean() { r.r.Clean() }
 
+// robot always returns to the same cell after walk having opposite direction
 func (r *robotWrapper) walk() {
 	if r.move(true) {
 		r.clean()
 		r.walk()
 	} else {
 		r.rotate180()
+		return
 	}
 
 	// robot always returns from walk having opposite direction
@@ -109,17 +97,4 @@ func (r *robotWrapper) walk() {
 
 	// go back
 	r.move(false)
-}
-
-func cleanRoom(robot *Robot) {
-	visited = make(map[[2]int]bool)
-	relativeX, relativeY, directionIDx = 0, -1, 0
-
-	r := robotWrapper{r: robot}
-
-	r.walk()
-	r.rotate180()
-	r.move(false)
-	r.rotate180()
-	r.walk()
 }
