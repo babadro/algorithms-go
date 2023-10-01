@@ -5,27 +5,32 @@ func countPyramids(grid [][]int) int {
 
 	for row := range grid {
 		for col := range grid[0] {
-
-		Loop1:
-			for rowLen, y, startX := 3, row+1, col-1; ; rowLen, y, startX = rowLen+2, y+1, startX-1 {
-				for x := startX; x < rowLen+startX; x++ {
-					if y == len(grid) || x < 0 || x == len(grid[0]) || grid[y][x] == 0 {
-						break Loop1
+			if y := row + 1; y < len(grid) {
+				flag := true
+				for x := col - 1; x < col+2; x++ {
+					if x < 0 || x == len(grid[0]) || grid[y][x] == 0 {
+						flag = false
+						break
 					}
 				}
 
-				counter++
+				if flag {
+					counter++
+				}
 			}
 
-		Loop2:
-			for rowLen, y, startX := 3, row-1, col-1; ; rowLen, y, startX = rowLen+2, y-1, startX-1 {
-				for x := startX; x < rowLen+startX; x++ {
-					if y < 0 || x < 0 || x == len(grid[0]) || grid[y][x] == 0 {
-						break Loop2
+			if y := row - 1; y >= 0 {
+				flag := true
+				for x := col - 1; x < col+2; x++ {
+					if x < 0 || x == len(grid[0]) || grid[y][x] == 0 {
+						flag = false
+						break
 					}
 				}
 
-				counter++
+				if flag {
+					counter++
+				}
 			}
 		}
 	}
