@@ -1,10 +1,15 @@
 package _2088_count_fertile_piramyds_in_a_land
 
+// bnsrg #hard passed but very slow
+// todo 2 find faster solution
 func countPyramids(grid [][]int) int {
 	counter := 0
 
 	for row := range grid {
 		for col := range grid[0] {
+			if grid[row][col] == 0 {
+				continue
+			}
 
 		Loop1:
 			for rowLen, y, startX := 3, row+1, col-1; ; rowLen, y, startX = rowLen+2, y+1, startX-1 {
