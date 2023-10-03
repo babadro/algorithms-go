@@ -44,6 +44,23 @@ func Min3(a, b, c int) int {
 	return res
 }
 
+func Min4(a, b, c, d int) int {
+	res := a
+	if b < res {
+		res = b
+	}
+
+	if c < res {
+		res = c
+	}
+
+	if d < res {
+		res = d
+	}
+
+	return res
+}
+
 func Abs(a int) int {
 	if a >= 0 {
 		return a
