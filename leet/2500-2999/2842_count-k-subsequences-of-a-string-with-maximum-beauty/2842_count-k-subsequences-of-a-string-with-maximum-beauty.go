@@ -51,10 +51,7 @@ func countKSubsequencesWithMaxBeauty(s string, subSeqLen int) int {
 
 	n := i - lastIDxBeforeFreqChange - 1
 
-	if lastIDxBeforeFreqChange != -1 {
-		//res = lastResBeforeFreqChange * k % mod
-		res = lastResBeforeFreqChange * freq % mod
-	}
+	res = lastResBeforeFreqChange * freq % mod
 
 	// n!/((n-k)!*k!)
 	numberOfCombinations := combinationNOverKMod(n, k)

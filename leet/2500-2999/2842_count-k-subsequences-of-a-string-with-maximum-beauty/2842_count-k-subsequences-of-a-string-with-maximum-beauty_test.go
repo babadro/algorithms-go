@@ -15,6 +15,7 @@ func Test_countKSubsequencesWithMaxBeauty(t *testing.T) {
 		{"fkp", 2, 3},
 		{"kjojr", 3, 6},
 		{"chrbbazyupvfdjuqdyb", 3, 36},
+		{"jyuhiyzjuk", 2, 12},
 	}
 	for _, tt := range tests {
 		t.Run(tt.s, func(t *testing.T) {
