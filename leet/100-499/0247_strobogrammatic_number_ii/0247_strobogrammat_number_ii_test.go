@@ -1,10 +1,11 @@
-package _249_strobogrammat_number_2
+package _247_strobogrammatic_number_2
 
 import (
-	"github.com/stretchr/testify/require"
 	"sort"
 	"strconv"
 	"testing"
+
+	"github.com/stretchr/testify/require"
 )
 
 func Test_findStrobogrammatic(t *testing.T) {
