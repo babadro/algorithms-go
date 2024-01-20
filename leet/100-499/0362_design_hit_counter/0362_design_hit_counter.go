@@ -1,6 +1,6 @@
 package _362_design_hit_counter
 
-// #bnsrg passed
+// #bnsrg medium passed
 type hit struct {
 	timestamp, count int
 }
