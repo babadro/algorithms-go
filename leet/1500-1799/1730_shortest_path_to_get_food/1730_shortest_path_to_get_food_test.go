@@ -63,6 +63,10 @@ func Test_getFood(t *testing.T) {
 		{
 			grid: tle, want: -1,
 		},
+		{
+			grid: tle2, want: 1,
+		},
+		{grid: tle3, want: 198},
 	}
 	for _, tt := range tests {
 		t.Run("", func(t *testing.T) {

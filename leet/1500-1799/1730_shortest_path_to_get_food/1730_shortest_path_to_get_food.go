@@ -28,11 +28,11 @@ func traverse(y, x, counter int, grid [][]byte, visited map[[2]int]int, res *int
 
 	if y < 0 || y == len(grid) ||
 		x < 0 || x == len(grid[y]) ||
-		grid[y][x] == 'X' {
+		grid[y][x] == 'X' || *res <= counter {
 		return
 	}
 
-	if cnt, ok := visited[key]; ok && cnt <= counter+1 {
+	if cnt, ok := visited[key]; ok && cnt <= counter {
 		return
 	}
 
@@ -42,7 +42,7 @@ func traverse(y, x, counter int, grid [][]byte, visited map[[2]int]int, res *int
 		return
 	}
 
-	visited[key] = counter + 1
+	visited[key] = counter
 
 	traverse(y-1, x, counter+1, grid, visited, res)
 	traverse(y+1, x, counter+1, grid, visited, res)
