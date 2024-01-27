@@ -7,13 +7,17 @@ var directions = [][2]int{
 	{1, 0},
 }
 
+// #bnsrg medium. passed but slow - 11%, 5,5%
+// todo 2 find shorter and faster solution
 func hasPath(maze [][]int, start []int, destination []int) bool {
 	var res bool
 
 	y, x := start[0], start[1]
 	visited := make(map[[3]int]bool)
 
-	rec(maze, destination, y, x, 0, &res, visited)
+	for i, d := range directions {
+		rec(maze, destination, y+d[0], x+d[1], i, &res, visited)
+	}
 
 	return res
 }
@@ -45,10 +49,6 @@ func rec(maze [][]int, destination []int, y, x int, dir int, res *bool, visited 
 	}
 
 	for i, d := range directions {
-		if i == dir {
-			continue
-		}
-
 		rec(maze, destination, y+d[0], x+d[1], i, res, visited)
 	}
 
