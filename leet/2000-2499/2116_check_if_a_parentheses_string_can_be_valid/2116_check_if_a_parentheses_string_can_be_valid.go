@@ -1,50 +1,35 @@
 package _2116_check_if_a_parentheses_string_can_be_valid
 
-func canBeValid(s string, locked string) bool {
-	var stack []int
+// #bnsrg passed
+// todo2 check right-to-left and left-to-righ solution:
+// https://leetcode.com/problems/check-if-a-parentheses-string-can-be-valid/solutions/1646594/left-to-right-and-right-to-left/
+func canBeValid(s string, lock string) bool {
+	var openParentheses, unlocked []int
 
 	for i := range s {
-		lock := locked[i] == '1'
-
-		if !lock {
-			stack = append(stack, i)
-			continue
-		}
-
-		ch := s[i]
-
-		if ch == '(' {
-			stack = append(stack, i)
-			continue
-		}
-
-		if len(stack) == 0 {
-			return false
-		}
-
-		last := len(stack) - 1
-
-		prevIDx := stack[last]
-
-		prevLock := locked[prevIDx] == '1'
-		if !prevLock {
-			stack = stack[:last]
-			continue
-		}
-
-		if s[prevIDx] == '(' {
-			stack = stack[:last]
-			continue
-		}
-
-		return false
-	}
-
-	for i := range stack {
-		if locked[stack[i]] == '1' {
+		switch {
+		case lock[i] == '0':
+			unlocked = append(unlocked, i)
+		case s[i] == '(':
+			openParentheses = append(openParentheses, i)
+		case len(openParentheses) > 0:
+			openParentheses = openParentheses[:len(openParentheses)-1]
+		case len(unlocked) > 0:
+			unlocked = unlocked[:len(unlocked)-1]
+		default:
 			return false
 		}
 	}
 
-	return len(stack)%2 == 0
+	for len(openParentheses) > 0 {
+		lastUnlocked, lastOpenParentheses := len(unlocked)-1, len(openParentheses)-1
+		if len(unlocked) == 0 || openParentheses[lastOpenParentheses] > unlocked[lastUnlocked] {
+			return false
+		}
+
+		unlocked = unlocked[:lastUnlocked]
+		openParentheses = openParentheses[:lastOpenParentheses]
+	}
+
+	return len(openParentheses) == 0 && len(unlocked)%2 == 0
 }
