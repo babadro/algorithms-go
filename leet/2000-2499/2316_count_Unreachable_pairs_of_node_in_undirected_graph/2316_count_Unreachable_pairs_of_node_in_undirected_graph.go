@@ -1,12 +1,9 @@
 package _2316_count_Unreachable_pairs_of_node_in_undirected_graph
 
-// #bnsrg medium todo 1 - tle
+// #bnsrg medium passed
+// todo 2 check faster solution (union find)
 func countPairs(n int, edges [][]int) int64 {
-	graph := make(map[int][]int)
-
-	for i := 0; i < n; i++ {
-		graph[i] = nil
-	}
+	graph := make([][]int, n)
 
 	for _, edge := range edges {
 		src, dst := edge[0], edge[1]
@@ -15,9 +12,10 @@ func countPairs(n int, edges [][]int) int64 {
 		graph[dst] = append(graph[dst], src)
 	}
 
-	var connectedGraphLenghts []int
-
 	visited := make(map[int]bool)
+
+	res := 0
+	remainingNodes := n
 
 	for vertex := range graph {
 		prevCount := len(visited)
@@ -28,22 +26,17 @@ func countPairs(n int, edges [][]int) int64 {
 
 		dfs(graph, vertex, visited)
 
-		connectedGraphLen := len(visited) - prevCount
+		componentSize := len(visited) - prevCount
 
-		connectedGraphLenghts = append(connectedGraphLenghts, connectedGraphLen)
-	}
+		remainingNodes -= componentSize
 
-	res := 0
-	for i := 0; i < len(connectedGraphLenghts)-1; i++ {
-		for j := i + 1; j < len(connectedGraphLenghts); j++ {
-			res += connectedGraphLenghts[i] * connectedGraphLenghts[j]
-		}
+		res += componentSize * remainingNodes
 	}
 
 	return int64(res)
 }
 
-func dfs(graph map[int][]int, vertex int, visited map[int]bool) {
+func dfs(graph [][]int, vertex int, visited map[int]bool) {
 	if visited[vertex] {
 		return
 	}
