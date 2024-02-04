@@ -31,7 +31,7 @@ func Test_findAllRecipes(t *testing.T) {
 		},
 		{
 			recipes: recipes1, ingredients: ingredients1, supplies: supplies1,
-			want: []string{"fzjnm", "ju"},
+			want: []string{"fzjnm", "ju", "q"},
 		},
 	}
 	for _, tt := range tests {
