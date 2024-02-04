@@ -1,5 +1,8 @@
 package _2115_find_all_possible_recipes_from_given_suppliers
 
+// #bnsrg medium passed
+// todo 1 i don't know why it works this way
+// todo 2 - check queue solutions
 func findAllRecipes(recipes []string, ingredients [][]string, supplies []string) []string {
 	availableIngredients := make(map[string]bool, len(supplies))
 
@@ -29,15 +32,16 @@ func possible(
 	availableIngredients map[string]bool,
 	visited map[string]bool,
 ) bool {
+	if ok, keyExists := availableIngredients[recipe]; keyExists {
+		return ok
+	}
+
+	// todo why can I check it first, before above check?
 	if visited[recipe] {
 		return false
 	}
 
 	visited[recipe] = true
-
-	if ok, keyExists := availableIngredients[recipe]; keyExists {
-		return ok
-	}
 
 	idx, keyExists := recipeToIDx[recipe]
 	if !keyExists {
