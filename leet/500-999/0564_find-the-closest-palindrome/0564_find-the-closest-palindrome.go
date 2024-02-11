@@ -8,55 +8,65 @@ import (
 func nearestPalindromic(n string) string {
 	b := []byte(n)
 
-	if len(b)%2 == 0 {
-		return strconv.Itoa(makePalindrome(b))
+	candidate1, candidate2, candidate3 := math.MinInt64, math.MinInt64, math.MinInt64
+
+	if !isPalindrome(b) {
+		candidate1 = makePalindromeFromLeftSide(b)
 	}
 
-	candidate1 := makePalindrome(b)
-
-	candidate2, candidate3 := math.MinInt64, math.MinInt64
-
-	mid := len(b) / 2
-
-	// increment middle
-	if b[mid] == '9' {
-		b[mid] = '0'
-
-		for i := mid - 1; i >= 0; i-- {
-			if b[i] < '9' {
-				b[i]++
-				break
-			}
-
-			b[i] = '0'
-		}
-	} else {
-		b[mid]++
+	leftLen, rightLen := len(n)/2, len(n)/2
+	if len(n)%2 == 1 {
+		leftLen += 1
 	}
 
-	if b[0] == '0' {
-		candidate2 = makePalindrome(b)
+	leftPart, err := strconv.Atoi(n[:leftLen])
+	if err != nil {
+		panic(err)
 	}
 
-	// decrement middle
-	b = []byte(n)
+	incremented, decremented := strconv.Itoa(leftPart+1), strconv.Itoa(leftPart-1)
 
-	if b[mid] == '0' {
-		b[mid] = '9'
+	candidate2 = makePalindromeFromLeftSide(append([]byte(incremented), make([]byte, rightLen)...))
 
-		for i := mid - 1; i >= 0; i-- {
-			if b[i] > '0' {
-				b[i]--
-				break
-			}
+	candidate3 = makePalindromeFromLeftSide(append([]byte(decremented), make([]byte, rightLen)...))
 
-			b[i] = '9'
-		}
+	var res int
+
+	num, err := strconv.Atoi(n)
+	if err != nil {
+		panic(err)
 	}
 
+	diff1, diff2, diff3 := diff(num, candidate1), diff(num, candidate2), diff(num, candidate3)
+
+	switch {
+	case diff1 < diff2:
+		res = candidate1
+	case diff1 == diff2:
+		res = min(candidate1, candidate2)
+	default:
+		res = candidate2
+	}
+
+	diffRes := diff(num, res)
+	if diffRes == diff3 {
+		res = min(res, candidate3)
+	} else if diff3 < diffRes {
+		res = candidate3
+	}
+
+	return strconv.Itoa(res)
 }
 
-func makePalindrome(b []byte) int {
+func diff(a, b int) int {
+	if d := a - b; d < 0 {
+		return -d
+	} else {
+		return d
+	}
+}
+
+func makePalindromeFromLeftSide(b []byte) int {
 	for i, j := 0, len(b)-1; i < j; i, j = i+1, j-1 {
 		b[j] = b[i]
 	}
@@ -67,4 +77,14 @@ func makePalindrome(b []byte) int {
 	}
 
 	return num
+}
+
+func isPalindrome(b []byte) bool {
+	for i, j := 0, len(b)-1; i < j; i, j = i+1, j-1 {
+		if b[i] != b[j] {
+			return false
+		}
+	}
+
+	return true
 }
