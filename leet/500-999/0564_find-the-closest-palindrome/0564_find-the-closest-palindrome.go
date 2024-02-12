@@ -5,7 +5,13 @@ import (
 	"strconv"
 )
 
+// #bnsrg hard passed
+// todo 2 find shorter solution
 func nearestPalindromic(n string) string {
+	if len(n) <= 2 {
+		return bruteForce(n)
+	}
+
 	b := []byte(n)
 
 	candidate1, candidate2, candidate3 := math.MinInt64, math.MinInt64, math.MinInt64
@@ -71,6 +77,10 @@ func makePalindromeFromLeftSide(b []byte) int {
 		b[j] = b[i]
 	}
 
+	if mid := len(b) / 2; b[mid] == 0 {
+		b[mid] = b[0]
+	}
+
 	num, err := strconv.Atoi(string(b))
 	if err != nil {
 		panic(err)
@@ -87,4 +97,27 @@ func isPalindrome(b []byte) bool {
 	}
 
 	return true
+}
+
+var palindromes = []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 33, 44, 55, 66, 77, 88, 99, 101}
+
+func bruteForce(n string) string {
+	num, err := strconv.Atoi(n)
+	if err != nil {
+		panic(err)
+	}
+
+	minDiff, res := math.MaxInt64, 0
+	for _, palindrome := range palindromes {
+		d := diff(num, palindrome)
+		if d == 0 {
+			continue
+		} else if d < minDiff {
+			minDiff, res = d, palindrome
+		} else if d == minDiff {
+			res = min(res, palindrome)
+		}
+	}
+
+	return strconv.Itoa(res)
 }
