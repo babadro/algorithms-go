@@ -7,9 +7,10 @@ func Test_minimumReplacement(t *testing.T) {
 		nums []int
 		want int64
 	}{
-		//{[]int{3, 9, 3}, 2},
-		//{[]int{1, 2, 3, 4, 5}, 0},
+		{[]int{3, 9, 3}, 2},
+		{[]int{1, 2, 3, 4, 5}, 0},
 		{[]int{12, 9, 7, 6, 17, 19, 21}, 6},
+		{[]int{12, 10, 7, 6, 17, 19, 21}, 9},
 	}
 	for _, tt := range tests {
 		t.Run("", func(t *testing.T) {
