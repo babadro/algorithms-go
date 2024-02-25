@@ -106,25 +106,6 @@ func Make3DArr(d1, d2, d3 int, defaultVal int) [][][]int {
 }
 
 // tptl
-func ModPow(base, exp, modulus int) int {
-	result := 1
-	base %= modulus
-	if base == 0 {
-		return 0
-	}
-
-	for ; exp > 0; exp >>= 1 {
-		if (exp & 1) == 1 {
-			result = (result * base) % modulus
-		}
-
-		base = (base * base) % modulus // because a^(m*n) = (a^m)^n
-	}
-
-	return result
-}
-
-// tptl
 func GCD(a, b int) int {
 	for b != 0 {
 		t := b
@@ -149,4 +130,46 @@ func Log(b, x int) (pow int) {
 
 func Ptr[T any](v T) *T {
 	return &v
+}
+
+const mod = 1_000_000_007
+
+func PowerMod(x, y int) int {
+	res := 1
+	base := x % mod
+
+	for y > 0 {
+		if y%2 == 1 {
+			res = res * base % mod
+		}
+
+		base = base * base % mod
+
+		y /= 2
+	}
+
+	return res
+}
+
+func FactorialMod(n int) int {
+	res := 1
+
+	for i := 2; i <= n; i++ {
+		res = res * i % mod
+	}
+
+	return res
+}
+
+// n!/((n-k)!*k!)
+func CombinationNOverKMod(n, k int) int {
+	if k > n {
+		return 0
+	}
+
+	num := FactorialMod(n)
+
+	den := FactorialMod(k) * FactorialMod(n-k) % mod
+
+	return num * PowerMod(den, mod-2) % mod
 }
