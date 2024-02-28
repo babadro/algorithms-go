@@ -4,6 +4,8 @@ import "sort"
 
 const mod = 1_000_000_007
 
+// #bnsrg passed
+// todo 2 study solution.go file - it doesn't use complicated formula
 func countKSubsequencesWithMaxBeauty(s string, subSeqLen int) int {
 	freqMap := make(map[byte]int)
 	for i := range s {
@@ -19,44 +21,43 @@ func countKSubsequencesWithMaxBeauty(s string, subSeqLen int) int {
 		freqArr = append(freqArr, freq)
 	}
 
+	freqFreq := make(map[int]int)
+	for _, freq := range freqArr {
+		freqFreq[freq]++
+	}
+
 	sort.Slice(freqArr, func(i, j int) bool {
 		return freqArr[i] > freqArr[j]
 	})
 
-	res := 1
-	lastResBeforeFreqChange := 1
-	lastIDxBeforeFreqChange := -1
+	minFreq := freqArr[subSeqLen-1]
 
-	i := 0
-	for ; i < subSeqLen; i++ {
-		if i > 0 && freqArr[i] != freqArr[i-1] {
-			lastResBeforeFreqChange = res
-			lastIDxBeforeFreqChange = i - 1
+	minFreqCount := freqFreq[minFreq]
+
+	res := 1
+	for i := 0; i < subSeqLen; i++ {
+		freq := freqArr[i]
+
+		if freq != minFreq {
+			res = res * freq % mod
+
+			continue
 		}
 
-		res = res * freqArr[i] % mod
-	}
+		remainingFreqs := subSeqLen - i
 
-	if i == len(freqArr) || freqArr[i] != freqArr[i-1] {
+		for j := 0; j < remainingFreqs; j++ {
+			res = res * freq % mod
+		}
+
+		c := combinationNOverKMod(minFreqCount, remainingFreqs)
+
+		res = res * c % mod
+
 		return res
 	}
 
-	k := i - lastIDxBeforeFreqChange - 1
-
-	freq := freqArr[i]
-
-	for i < len(freqArr) && freqArr[i] == freqArr[i-1] {
-		i++
-	}
-
-	n := i - lastIDxBeforeFreqChange - 1
-
-	res = lastResBeforeFreqChange * freq % mod
-
-	// n!/((n-k)!*k!)
-	numberOfCombinations := combinationNOverKMod(n, k)
-
-	return res * numberOfCombinations % mod
+	return res
 }
 
 func powerMod(x, y int) int {
