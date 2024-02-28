@@ -1,6 +1,13 @@
 package _834_sum_of_distances_in_tree
 
 // #bnsrg hard passed
+// Principle:
+// ansX = sumX + sumY + countY
+// ansY = sumY + sumX + countX
+//
+// ansX - ansY = countY - countX
+//
+// ansX = countY + ansY - countX = N - countX + ansY - countX = N - 2*countX + ansY
 func sumOfDistancesInTree(n int, edges [][]int) []int {
 	graph := make([][]int, n)
 
