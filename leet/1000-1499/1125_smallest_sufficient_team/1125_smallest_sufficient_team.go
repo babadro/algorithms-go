@@ -1,75 +1,32 @@
 package _1125_smallest_sufficient_team
 
 func smallestSufficientTeam(req_skills []string, people [][]string) []int {
-	var bestRes []int
+	n, m := len(people), len(req_skills)
 
-	reqSkills := make(map[string]bool)
-	for _, skill := range req_skills {
-		reqSkills[skill] = true
+	skillID := make(map[string]int)
+
+	for i := 0; i < m; i++ {
+		skillID[skills[i]] = i
 	}
 
-	rec(reqSkills, -1, nil, &bestRes, people)
-
-	return bestRes
-}
-
-func rec(reqSkills map[string]bool, idx int, curr []int, bestRes *[]int, people [][]string) {
-	if idx != -1 {
-		if len(*bestRes) > 0 && len(curr)+1 == len(*bestRes) {
-			return
-		}
-
-		for _, skill := range people[idx] {
-			delete(reqSkills, skill)
-		}
-
-		curr = append(curr, idx)
-	}
-
-	if len(reqSkills) == 0 {
-		*bestRes = make([]int, len(curr))
-		copy(*bestRes, curr)
-
-		if idx != -1 {
-			for _, skill := range people[idx] {
-				reqSkills[skill] = true
-			}
-		}
-
-		return
-	}
-
-	var bestPeople []int
-	maxSkillset := 0
-
-	for i, p := range people {
-		skillCount := 0
-
-		for _, skill := range p {
-			if reqSkills[skill] {
-				skillCount++
-			}
-		}
-
-		if skillCount == 0 {
-			continue
-		}
-
-		if skillCount == maxSkillset {
-			bestPeople = append(bestPeople, i)
-		} else if skillCount > maxSkillset {
-			bestPeople = []int{i}
-			maxSkillset = skillCount
+	skillsMaskOfPerson := make([]int, n)
+	for i := range skillsMaskOfPerson {
+		for _, skill := range people[i] {
+			skillsMaskOfPerson[i] = skillsMaskOfPerson[i] | skillID[skill]
 		}
 	}
 
-	for _, peopleIDx := range bestPeople {
-		rec(reqSkills, peopleIDx, curr, bestRes, people)
+	dp := make([]int, 1<<m)
+
+	for i := range dp {
+		dp[i] = 1<<n - 1
 	}
 
-	if idx != -1 {
-		for _, skill := range people[idx] {
-			reqSkills[skill] = true
+	dp[0] = 0
+
+	for skillMask := 1; skillMask < len(dp); skillMask++ {
+		for i := 0; i < n; i++ {
+			smallerSkillsMask := skillMask / skillsMaskOfPerson[i]
 		}
 	}
 }
